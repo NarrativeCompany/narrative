@@ -1,0 +1,84 @@
+enum ElectionType {
+  NICHE_MODERATOR
+  TRIBUNAL
+  COMMITTEE
+}
+
+enum ElectionStatus {
+  NOMINATING
+  VOTING
+  CANCELED
+  COMPLETED
+}
+
+enum NomineeStatus {
+  PENDING
+  CONFIRMED
+  WITHDRAWN
+  DECLINED
+}
+
+type Election {
+   oid: String!
+   type: ElectionType!
+   status: ElectionStatus!
+   nominationStartDatetime: String!
+   availableSlots: Int!
+   nomineeCount: Int!
+ }
+
+type ElectionNominee {
+  oid: String!
+  nominee: User!
+  status: NomineeStatus!
+  personalStatement: String
+}
+
+type ElectionDetail {
+  oid: String!
+  election: Election!
+  currentUserNominee: ElectionNominee
+}
+
+type NicheModeratorElection {
+ oid: String!
+ election: Election!
+ niche: Niche!
+}
+
+type NicheModeratorElectionDetail {
+  oid: String!
+  election: ElectionDetail!
+  niche: Niche!
+}
+
+type NicheModeratorElectionPayload {
+  items: [NicheModeratorElection!]!
+  info: PageInfo!
+}
+
+type ElectionNomineesPayload {
+  items: [ElectionNominee!]
+  hasMoreItems: Boolean!
+  lastItemConfirmationDatetime: String
+}
+
+input ElectionNomineesQueryInput {
+  confirmedBefore: String
+  count: Int
+}
+
+input NominateCurrentUserInput {
+  personalStatement: String
+}
+
+type Query {
+  getNicheModeratorElections (size: Int, page: Int): NicheModeratorElectionPayload!
+  getNicheModeratorElectionDetail (electionOid: String!): NicheModeratorElectionDetail!
+  getElectionNominees (input: ElectionNomineesQueryInput, electionOid: String!): ElectionNomineesPayload!
+}
+
+type Mutation {
+  nominateCurrentUser (input: NominateCurrentUserInput, electionOid: String!): ElectionDetail!
+  removeCurrentUserNomination (electionOid: String!): ElectionDetail!
+}

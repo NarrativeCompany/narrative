@@ -1,0 +1,56 @@
+version: '3'
+volumes:
+    mysql_data: {}
+    solr_data: {}
+services:
+  narrative-web-front-end:
+    image: narrativecompany/narrative-web-front-end:dev-latest
+    ports:
+      - 127.0.0.1:81:80
+  narrative-core: 
+    depends_on:
+      - mysql
+      - redis
+      - solr
+    environment:
+      - SPRING_PROFILES_ACTIVE=default,docker,secret
+      - SPRING_CONFIG_ADDITIONAL-LOCATION=file:./,file:./secret/
+    image: narrativecompany/narrative-core:dev-latest
+    ports:
+      - 127.0.0.1:82:8080
+    volumes:
+      - ./docker/narrative-core/config/application-docker.properties:/opt/narrative-core/docker/application-docker.properties
+      - ./docker/narrative-core/secret/application-secret.properties:/opt/narrative-core/secret/application-secret.properties
+  nginx:
+    depends_on:
+      - narrative-web-front-end
+      - narrative-core
+    image: nginx
+    ports: 
+      - 127.0.0.1:80:80
+    volumes:
+      - ./nginx/docker.conf:/etc/nginx/conf.d/docker.conf:ro
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - mysql_data:/var/lib/mysql
+  redis:
+    #GCP is on a crusty old Redis 3.1 - as close as we can get
+    image: redis:3.2
+    ports:
+      - "6379:6379"
+  solr:
+    entrypoint:
+      - /opt/launcher.sh
+      - solr-foreground
+    image: solr:7.4
+    ports:
+      - 127.0.0.1:8983:8983
+    volumes:
+      - ./src/solr/config/schema.xml:/opt/narrative/schema.xml
+      - ../src/solr/config/solrconfig.xml:/opt/narrative/solrconfig.xml
+      - ./solr/launcher.sh:/opt/launcher.sh
+      - solr_data:/opt/solr/server/solr/mycores

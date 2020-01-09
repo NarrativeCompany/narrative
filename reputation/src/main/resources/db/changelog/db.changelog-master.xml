@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <!-- Install changelogs.  These will activate when the 'install' context is active -->
+    <include file="install/001-create-tables.xml" relativeToChangelogFile="true"/>
+    <include file="install/002-create-views.xml" relativeToChangelogFile="true"/>
+    <include file="install/003-create-functions.xml" relativeToChangelogFile="true"/>
+    <include file="install/004-create-spring-batch-schema.xml" relativeToChangelogFile="true"/>
+
+    <!--
+        #############################################################################
+        ### Warning!!!                                                            ###
+        ###                                                                       ###
+        ### Do NOT use includeAll for including change sets as this results       ###
+        ### in inconsistent DATABASECHANGELOG paths depending on whether executed ###
+        ### from Maven or Spring Boot.  Just don't do it.                         ###
+        #############################################################################
+    -->
+
+    <!-- Update changelogs  These will activate when the 'update' context is active -->
+    <include file="update/releases/0.6.0/001-add-negativeConductStartTimestamp.xml" relativeToChangelogFile="true"/>
+    <include file="update/releases/0.6.0/002-remove-conductstatus-severity-add-status-enum.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

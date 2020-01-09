@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java/sun/com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+
+    <persistence-unit name="globalPartition">
+        <class>org.narrative.network.core.versioning.AppliedPatch</class>
+        <class>org.narrative.network.core.versioning.AppVersion</class>
+        <class>org.narrative.network.core.cluster.partition.Partition</class>
+        <class>org.narrative.network.core.area.base.Area</class>
+        <class>org.narrative.network.core.area.base.AreaStats</class>
+        <class>org.narrative.network.core.area.user.AreaUser</class>
+        <class>org.narrative.network.core.area.user.AreaUserStats</class>
+        <class>org.narrative.network.core.security.area.community.advanced.AreaCircle</class>
+        <class>org.narrative.network.core.security.area.community.advanced.AreaCircleUser</class>
+        <class>org.narrative.network.core.security.area.community.advanced.AreaCirclePermission</class>
+        <class>org.narrative.network.core.security.area.community.advanced.AreaResource</class>
+        <class>org.narrative.network.core.user.User</class>
+        <class>org.narrative.network.core.user.EmailAddress</class>
+        <class>org.narrative.network.customizations.narrative.reputation.UserReputation</class>
+        <class>org.narrative.network.customizations.narrative.reputation.UserReputationHistory</class>
+        <class>org.narrative.network.core.user.UserAuth</class>
+        <class>org.narrative.network.core.user.UserStats</class>
+        <class>org.narrative.network.core.fileondisk.base.FileOnDisk</class>
+        <class>org.narrative.network.core.fileondisk.base.FileOnDiskStats</class>
+        <class>org.narrative.network.core.fileondisk.image.ImageOnDisk</class>
+        <class>org.narrative.network.core.fileondisk.audio.AudioOnDisk</class>
+        <class>org.narrative.network.core.fileondisk.video.VideoOnDisk</class>
+        <class>org.narrative.network.core.propertyset.base.PropertySet</class>
+        <class>org.narrative.network.core.propertyset.base.Property</class>
+        <class>org.narrative.network.core.narrative.wallet.WalletTransaction</class>
+        <class>org.narrative.network.core.narrative.wallet.Wallet</class>
+        <class>org.narrative.network.core.narrative.wallet.NeoWallet</class>
+        <class>org.narrative.network.core.narrative.wallet.NeoTransaction</class>
+        <class>org.narrative.network.core.narrative.wallet.NeoTransactionId</class>
+        <class>org.narrative.network.core.user.UserKyc</class>
+        <class>org.narrative.network.core.user.UserKycEvent</class>
+        <class>org.narrative.network.core.area.base.RoleContentPageView</class>
+
+        <!-- all of the old realm partition classes here -->
+        <class>org.narrative.network.core.area.base.AreaRlm</class>
+        <class>org.narrative.network.core.area.user.AreaUserRlm</class>
+        <class>org.narrative.network.core.area.user.AreaCredentials</class>
+        <class>org.narrative.network.core.content.base.Content</class>
+        <class>org.narrative.network.core.content.base.ContentStats</class>
+        <class>org.narrative.network.core.content.base.TrendingContent</class>
+        <class>org.narrative.network.core.content.base.FutureContent</class>
+        <class>org.narrative.network.core.moderation.ModeratedContent</class>
+        <class>org.narrative.network.core.propertyset.area.AreaPropertySet</class>
+        <class>org.narrative.network.core.propertyset.area.AreaPropertyOverride</class>
+        <class>org.narrative.network.core.area.portfolio.Portfolio</class>
+        <class>org.narrative.network.core.area.user.SandboxedAreaUser</class>
+        <class>org.narrative.network.core.area.user.WatchedUser</class>
+        <class>org.narrative.network.core.area.base.ItemHourTrendingStats</class>
+        <class>org.narrative.network.customizations.narrative.niches.niche.Niche</class>
+        <class>org.narrative.network.customizations.narrative.niches.niche.NicheOfInterest</class>
+        <class>org.narrative.network.customizations.narrative.niches.nicheassociation.NicheUserAssociation</class>
+        <class>org.narrative.network.customizations.narrative.niches.referendum.Referendum</class>
+        <class>org.narrative.network.customizations.narrative.channels.FollowedChannel</class>
+        <class>org.narrative.network.customizations.narrative.niches.referendum.ReferendumVote</class>
+        <class>org.narrative.network.customizations.narrative.niches.nicheauction.NicheAuction</class>
+        <class>org.narrative.network.customizations.narrative.niches.nicheauction.NicheAuctionBid</class>
+        <class>org.narrative.network.customizations.narrative.niches.nicheauction.NicheAuctionInvoice</class>
+        <class>org.narrative.network.customizations.narrative.niches.nicheauction.NicheAuctionSecurityDeposit</class>
+        <class>org.narrative.network.customizations.narrative.invoices.Invoice</class>
+        <class>org.narrative.network.customizations.narrative.invoices.NrvePayment</class>
+        <class>org.narrative.network.customizations.narrative.invoices.FiatPayment</class>
+        <class>org.narrative.network.customizations.narrative.niches.tribunal.TribunalIssue</class>
+        <class>org.narrative.network.customizations.narrative.niches.tribunal.TribunalIssueReport</class>
+        <class>org.narrative.network.customizations.narrative.niches.ledgerentries.LedgerEntry</class>
+        <class>org.narrative.network.customizations.narrative.elections.Election</class>
+        <class>org.narrative.network.customizations.narrative.elections.ElectionNominee</class>
+        <class>org.narrative.network.customizations.narrative.niches.elections.NicheModeratorElection</class>
+        <class>org.narrative.network.customizations.narrative.reputation.EventMessage</class>
+        <class>org.narrative.network.customizations.narrative.channels.Channel</class>
+        <class>org.narrative.network.customizations.narrative.channels.ChannelUser</class>
+        <class>org.narrative.network.customizations.narrative.channels.ChannelDomain</class>
+        <class>org.narrative.network.customizations.narrative.channels.DeletedChannel</class>
+        <class>org.narrative.network.customizations.narrative.personaljournal.PersonalJournal</class>
+        <class>org.narrative.network.customizations.narrative.posts.ChannelContent</class>
+        <class>org.narrative.network.customizations.narrative.publications.Publication</class>
+        <class>org.narrative.network.customizations.narrative.publications.PublicationInvoice</class>
+        <class>org.narrative.network.customizations.narrative.publications.PublicationWaitListEntry</class>
+        <class>org.narrative.network.core.narrative.rewards.RewardPeriod</class>
+        <class>org.narrative.network.core.narrative.rewards.NarrativeCompanyReward</class>
+        <class>org.narrative.network.core.narrative.rewards.UserTribunalReward</class>
+        <class>org.narrative.network.core.narrative.rewards.UserElectorateReward</class>
+        <class>org.narrative.network.core.narrative.rewards.UserActivityReward</class>
+        <class>org.narrative.network.core.narrative.rewards.UserActivityRewardEvent</class>
+        <class>org.narrative.network.core.narrative.rewards.PublicationReward</class>
+        <class>org.narrative.network.core.narrative.rewards.NicheReward</class>
+        <class>org.narrative.network.core.narrative.rewards.NicheOwnerReward</class>
+        <class>org.narrative.network.core.narrative.rewards.NicheModeratorReward</class>
+        <class>org.narrative.network.core.narrative.rewards.ContentReward</class>
+        <class>org.narrative.network.core.narrative.rewards.RoleContentReward</class>
+        <class>org.narrative.network.core.narrative.rewards.NicheContentReward</class>
+        <class>org.narrative.network.core.narrative.rewards.ProratedMonthRevenue</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    </persistence-unit>
+
+    <persistence-unit name="compositionPartition">
+        <class>org.narrative.network.core.composition.base.Composition</class>
+        <class>org.narrative.network.core.composition.base.CompositionStats</class>
+        <class>org.narrative.network.core.composition.base.CompositionMentions</class>
+        <class>org.narrative.network.core.composition.base.Reply</class>
+        <class>org.narrative.network.core.composition.base.ReplyMentions</class>
+        <class>org.narrative.network.core.composition.base.ReplyStats</class>
+        <class>org.narrative.network.core.composition.files.FilePointer</class>
+        <class>org.narrative.network.core.composition.files.FilePointerSet</class>
+        <class>org.narrative.network.customizations.narrative.posts.NarrativePostContent</class>
+
+        <class>org.narrative.network.core.rating.model.UserQualityRatedComposition</class>
+        <class>org.narrative.network.core.rating.model.UserQualityRatedReply</class>
+        <class>org.narrative.network.core.rating.model.UserAgeRatedComposition</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    </persistence-unit>
+</persistence>

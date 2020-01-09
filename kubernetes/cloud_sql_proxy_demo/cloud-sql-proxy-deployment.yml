@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: cloud-sql-proxy
+  name: cloud-sql-proxy
+  namespace: dev
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cloud-sql-proxy
+      name: cloud-sql-proxy
+    spec:
+      containers:
+      - name: ubuntu
+        image: ubuntu:18.04
+        command: ["/bin/bash",
+                  "-c",
+                  "sleep infinity"]
+        resources:
+          requests:
+            cpu: .1
+            memory: 128M
+          limits:
+            cpu: 1
+            memory: 512M
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.11
+        command: ["/cloud_sql_proxy",
+                  "-instances=sandbox-narrative:us-east1:dev-master=tcp:3306",
+                  "-credential_file=/opt/cloud-sql-proxy/sandbox-sql.json"]
+        resources:
+          requests:
+            cpu: .1
+            memory: 128M
+          limits:
+            cpu: 1
+            memory: 512M
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        # [END cloudsql_security_context]
+        volumeMounts:
+          - name: cloud-sql-proxy
+            mountPath: /opt/cloud-sql-proxy
+            readOnly: true
+      volumes:
+        - name: cloud-sql-proxy
+          secret:
+            secretName: cloud-sql-proxy

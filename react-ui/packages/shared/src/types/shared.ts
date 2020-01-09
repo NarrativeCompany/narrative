@@ -1,0 +1,30 @@
+import { PageInfo } from './generated';
+
+export interface Error {
+  field: string;
+  message: string;
+}
+
+export enum ErrorType {
+  UNKNOWN_ERROR = 'UNKNOWN_ERROR',
+  JWT_INVALID = 'JWT_INVALID',
+  JWT_2FA_EXPIRED = 'JWT_2FA_EXPIRED',
+  NOT_FOUND = 'NOT_FOUND',
+  LOGIN_REQUIRED = 'LOGIN_REQUIRED',
+  ACCESS_DENIED = 'ACCESS_DENIED',
+  TOS_AGREEMENT_REQUIRED = 'TOS_AGREEMENT_REQUIRED',
+  EMAIL_VERIFICATION_REQUIRED = 'EMAIL_VERIFICATION_REQUIRED',
+  ACTIVITY_RATE_LIMIT_EXCEEDED = 'ACTIVITY_RATE_LIMIT_EXCEEDED',
+  EXPIRED_PUBLICATION = 'EXPIRED_PUBLICATION',
+
+  // Client-only error types
+  UNDEFINED = 'UNDEFINED',
+  SERVER_UNREACHABLE = 'SERVER_UNREACHABLE',
+  LOGIN_REQ_EMAIL_VERIFIED = 'LOGIN_REQ_EMAIL_VERIFIED'
+}
+
+export interface ExtractedPageableProps {
+  loading: boolean;
+  pageSize: number;
+  pageInfo: PageInfo;
+}

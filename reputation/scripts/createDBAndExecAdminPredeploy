@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+scriptDir=$(cd "$(dirname "$0")"; pwd)
+pushd $scriptDir/..
+
+. $scriptDir/setEnv
+
+res="$( which mvn )"
+if [  -z  "$res" ]; then
+    echo Error - you must have Maven on your path
+    exit -1
+fi
+
+echo -e
+warnMessage "#########################################################################"
+warnMessage "### Execution of this script will destroy your existing reputation DB ###"
+warnMessage "#########################################################################"
+promptConfirm "Do you wish to continue?" || exit 0
+
+echo -e
+host=$(askForValue 'MySQL host' '127.0.0.1')
+port=$(askForValue 'MySQL port' '3306')
+user=$(askForValue 'MySQL user - must have CREATE DATABASE grant' 'root')
+pass=$(askForValue 'MySQL password' 'password' 'true')
+echo -e
+repUserPass=$(askForValue 'reputation_user password' 'password' 'true')
+
+url="jdbc:mysql://${host}:${port}"
+
+# Create the schema
+mkdir -p target
+mysql -h$host -P${port} -u${user} -p$pass < src/main/resources/db/admin/ddl/createdb.sql > target/createdb.sql.out
+
+# Execute pre-deploy Liquibase scripts
+args="-Dliquibase.username=$user \
+-Dliquibase.changelogfile=db/admin/changelog-admin-master.xml \
+-Dliquibase.contexts=predeploy"
+
+mvn process-resources liquibase:update@update -Dliquibase.url="${url}" -Dliquibase.password="${pass}" -Dreputation_user_password="${repUserPass}" ${args}
+
+popd

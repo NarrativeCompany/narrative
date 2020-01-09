@@ -1,0 +1,8061 @@
+    input.form_css,
+textarea.form_css,
+select.form_css{
+    background-color:#f7f9ff;1;
+        border: 1px solid #333333;
+    color: #333333;              font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    padding: 4px;
+}
+
+input.form_css,
+select.form_css{
+    line-height: normal;
+}
+
+input.form_css.datePickerInvalid {
+    background-color: #FFF0F0;
+}
+
+textarea{
+    resize:both;
+}
+
+input, textarea, select {
+
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
+
+input.bigInput,
+select.bigInput  {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 26px;
+    letter-spacing: 1px;
+    padding: 7px;
+}
+
+input.bigInput,
+select.bigInput{
+    color: #333333;
+    background-color:#f7f9ff;1;   border: 1px solid #333333;
+}
+
+input.bigInput,
+select.bigInput {
+    line-height: normal;
+}
+
+.wideInput {
+    width: 100%;
+}
+
+input#chatPostingSubmit {
+    padding:7px;
+}
+
+input.form_small {
+    font-size: 10px;
+    line-height:normal;
+    padding:1px;
+}
+
+input.noBorder {
+    border:none;
+    color: transparent;
+    background-color:transparent;
+}
+
+.errorLabel {font-style:italic; color:red;}
+.checkboxErrorLabel {color:red; }
+.required {color:red;}
+
+.label,
+.errorLabel,
+.requiredLabel,
+.wwInfoLeft{
+    position: absolute;
+    width:200px;
+}
+
+.div_popup .label,
+.div_popup .errorLabel,
+.div_popup .requiredLabel,
+.div_popup .wwInfoLeft {
+    display: block;
+    float: left;
+    width:150px;
+    position:static;
+}
+
+.div_popup .brokenRadioOptions {
+    margin-left: 150px;
+}
+
+
+.div_popup #forwardContentFormId label {width:150px;}
+.div_popup #forwardContentFormId .wwlbl_top label {width:500px;}
+.div_popup #addEditForum label,
+.wideLabel label,
+.div_popup .wideLabel label {
+    width:250px;
+}
+
+.extraWideLabel label,
+.div_popup .extraWideLabel label {
+    width:325px;
+}
+
+#manageGroups_socialGroupStatus_label {
+width:300px;
+}
+
+#manageGroups_socialGroupStatus {
+   margin-left: 300px;
+}
+
+#manageGroups_nameFilter {margin-left:100px;}
+
+.requiredLabel,
+.errorLabel,
+.div_popup .requiredLabel,
+.div_popup  .errorLabel {
+    font-weight:bold;
+}
+
+.div_popup .wwctrl_error input,
+.div_popup .wwctrl_error textarea,
+.div_popup .wwctrl input,
+.div_popup .wwctrl textarea,
+.div_popup .wwctrl_error select,
+.div_popup .wwctrl select,
+.div_popup .wwInfoRight{
+    margin-left: 0;
+}
+
+
+.wwctrl .noLabel,
+.wwctrl_on .noLabel,
+.wwctrl_error .noLabel,
+* .noLabel
+
+{
+    margin-left:0;
+    text-align:left;
+}
+
+.wwlbl_top label,
+.wwlbl_top .label,
+.wwlbl_top .errorLabel,
+.wwlbl_top .requiredLabel,
+.wwlbl_top .checkboxLabel,
+#registerForm #registerForm_location_label{
+    width:500px;
+    position: inherit;
+}
+
+.checkboxLabel,
+.checkboxErrorLabel {
+    padding-left:5px;
+}
+
+#edit_public .wwlbl_top .errorLabel,
+#edit_public .wwlbl_top .requiredLabel,
+#edit_public .wwlbl_top .label,
+#preferences .wwlbl_top .errorLabel,
+#preferences .wwlbl_top .requiredLabel,
+#preferences .wwlbl_top .label,
+#wwlbl_preferences_formatPreferences_shortDateFormat label,
+#memberSearchDiv label,
+#myManagePreferences .wwlbl_top .errorLabel,
+#myManagePreferences .wwlbl_top .requiredLabel,
+#myManagePreferences .wwlbl_top .label,
+#login .wwlbl_top .errorLabel,
+#login .wwlbl_top .requiredLabel,
+#login .wwlbl_top .label,
+#subject_label{
+    width:200px;
+}
+
+#editSiteSettingsFormId_enableForum_label,
+#editSiteSettingsFormId_defaultStartPage_label {
+    width:200px;
+}
+
+
+#lostPasswordEmail_label {width:300px;}
+
+
+.errorMessage {
+    text-align:left;
+}
+
+.errorMessage a {
+    color: #194e84 !important;
+}
+
+.errorMessage a:visited {
+    color: #194e84 !important;
+}
+
+.errorMessageContainer {
+    background: #fae1e2;1 !important;
+    color: #333333 !important;
+    margin: 0 0 10px 0;
+    padding: 15px;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.errorMessageContainerTitle{
+    padding-left: 15px;
+    font-weight:bold;
+}
+
+.wwctrl_on label {
+    font-weight:bold;
+}
+
+.wwgrp {
+    padding:5px 0px;
+}
+
+.wwlbl {
+    display:inline;
+    float:left;
+}
+
+
+b.header {
+    font-size:16pt;
+}
+
+#createContent {
+    width:100%;
+}
+
+#posting_opts {
+  padding:5px 0px;
+}
+
+#subject .wwgrp {
+    padding:0px;
+}
+
+.tableCellHeader {
+     padding:2px 0px 2px 3px;
+     text-align:left;
+     font-size:11px;
+     border-top:1px solid #b8b8b8;
+     border-right:1px solid #b8b8b8;
+     background-color:#cedebd;
+}
+
+div.fileInfo {
+    position :relative;
+    border   :1px solid black;
+    width: 275px;
+    font-size:11px;
+    height   :200px;
+    background-color: #adba8c;
+}
+
+span.fileName {
+    position :absolute;
+    top:30px;
+    display  :block;
+    font-size:14px;
+    font-weight:bold;
+    color: white;
+    margin-top:15px;
+    text-align:center;
+    width: 298px;
+}
+
+span.fileDate {
+    position :absolute;
+    top:50px;
+    display  :block;
+    font-size:14px;
+    font-weight:bold;
+    color: white;
+    margin-top:15px;
+    text-align:center;
+    width: 298px;
+}
+
+span.fileSize {
+    position :absolute;
+    top:70px;
+    display  :block;
+    font-size:14px;
+    font-weight:bold;
+    color: white;
+    margin-top:15px;
+    text-align:center;
+    width: 298px;
+}
+
+
+
+form.masterCreate {
+    padding:0px;
+}
+
+
+#createOptions1 {
+    border-right:1px solid #9A9A9B;}
+
+.wwctrl_error textarea#createTOPIC_extract,
+.wwctrl textarea#createTOPIC_extract {margin-left:0px}
+
+
+
+
+
+input.wwcheck_main_toggle_on {
+    color:#009A07;
+}
+
+.createOption {
+    padding:2px;
+
+}
+
+
+
+#extract {
+    margin-left:0px;
+}
+
+input.ww_radio {margin-left:100px;}
+
+.paddedRadioLabel {
+    padding-right: 15px;
+}
+
+.file_chooser_wizard {
+    position:absolute; top:30px; left:10px; visibility:hidden;   z-index:85;
+}
+
+#primaryPicture {
+    position:absolute; top:20px; left:20px; visibility:hidden; width:600px;  z-index:85;
+}
+
+.file_chooser_file_header,
+#primaryPicture_header {
+    text-align:center;
+    background-color:#EAEAEA;
+    color:#666666;
+    font-weight:bold;
+    width:125px;
+    z-index:2;
+    position:relative;
+    top:1px;
+    cursor:pointer;
+}
+
+.file_chooser_file_header_padding,
+#primaryPicture_header_padding{
+    padding:3px
+}
+
+#primaryPicture_header {
+    width:150px;
+}
+
+.file_chooser_file_container,
+#primaryPicture_container {
+    border: 1px solid #8C8C8B;
+    background-color:#EAEAEA;
+    padding:7px;
+    width:100%;
+}
+
+.file_chooser_file_content,
+#primaryPicture_content{
+    background-color:#ffffff;
+}
+
+.file_chooser_file_padding,
+#primaryPicture_padding {
+    padding:10px;
+}
+
+
+
+#create_options td {
+    width:50%;
+    padding:3px;
+}
+
+
+
+.createBubble {
+    background-color:#E9E9E9;
+    margin:10px 0px;
+    margin-bottom:15px;
+}
+
+.createBubblePadding {
+    padding:15px;
+}
+
+.separator {
+    border-top:1px solid #D6D6D6;
+}
+.bodyTable TD {
+    padding:5px;
+    vertical-align:top;
+}
+#primaryAvatarImageSelectorImageSelectorLinkId IMG{
+    border:1px solid #000000;
+}
+
+#wwctrl_body textarea {
+    margin:0px;
+}
+
+#wwgrp_body {
+    padding:0px;
+}
+
+
+IMG.createBubbleImg {
+    margin-right:5px;
+    margin-bottom:5px;
+}
+
+.create_description {
+    margin-left:33px;
+    margin-top:-3px;
+}
+
+#wwgrp_customizePostingOptions_contentTypes div {
+    padding:0px;
+}
+#wwctrl_customizePostingOptions_contentTypes-1 input {
+    margin-left:0px;
+}
+
+#wwgrp_customizePostingOptions_contentTypes input {
+    margin-left:240px;
+}
+
+.wwctrl_error input,
+.wwctrl_error textarea,
+.wwctrl_error select,
+.wwctrl_on input,
+.wwctrl_on textarea,
+.wwctrl_on select,
+.wwctrl input,
+.wwctrl textarea,
+.wwctrl select,
+.wwctrl .timePickerWithLeftLabel,
+.wwctrl_error .timePickerWithLeftLabel,
+.wwInfoRight,
+.brokenRadioOptions,
+.postControlHtml{
+    margin-left: 205px;
+}
+
+.wideLabel .wwctrl select,
+.wideLabel .wwctrl_on select,
+.wideLabel .wwctrl_error select {
+    margin-left: 255px;
+}
+.extraWideLabel .wwctrl select,
+.extraWideLabel .wwctrl_on select,
+.extraWideLabel .wwctrl_error select {
+    margin-left: 330px;
+}
+
+
+.wwctrl input.sequentialRadioOption,
+.wwctrl .brokenRadioOptions input {
+    margin-left: 0;
+}
+
+.forwardContentOnRight {
+    margin-left: 100px;
+}
+
+#sidebarItems .wwgrp, #contentType .wwgrp{
+    border-width:0px;
+    padding:2px 0px;
+}
+
+#groupInviteFormId label {
+    width:350px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#artistTitleTextFilterId_label {width:100px;}
+
+input#artistTitleTextFilterId {margin-left:100px;}
+
+#search_div Label {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight:bold;
+}
+
+#postDialogForm label {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;;}
+
+#createGroup .wwlbl_top,#postDialogForm .wwlbl_top {margin-bottom:10px;padding-bottom:5px;}
+#postDialogForm #wwctrl_body {clear:both;}
+#postDialogForm #wwgrp_body {margin-top:10px;}
+#postDialogForm #wwgrp_subject {clear:both;margin-top:0px}
+
+#searchForm .wwlbl_top {display:none}
+#searchForm .wwgrp {padding:0}
+#artistjoin4 .wwgrp {padding:0}
+#artistjoin4 .wwlbl_top {display:none}
+
+#forwardContentFormId label, #editAreaHeadlineWysiwygId_label {font-weight:bold}
+#forwardContentFormId label#forwardContentFormId_ccSender_label {font-weight:normal;font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+#artist_join_4 label {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+
+#editSiteSettingsFormId_defaultStartPagePROFILE,
+#registerMemberForm_genderFEMALE,
+#updatePrimaryInfoFormId_genderFEMALE {
+    margin-left:10px
+}
+
+#groupInviteFormId .wwlbl_top {
+    padding:5px 0 0 0 ;
+    margin-bottom:-5px;
+}
+
+.inlinePermissionsCheckboxes div {
+    display: inline;
+}
+
+.inlinePermissionsCheckboxes {
+    margin-bottom: 10px;
+}
+
+.inlinePermissionsCheckboxes,
+.permissionsCheckboxes {
+    margin-left: 10px;
+}
+
+.permissionsCheckboxes .wwctrl_on label {
+    font-weight: normal;
+}
+
+#loginForm LABEL {
+width:150px;
+}
+
+.padLeft20 {
+    padding-left:20px;
+}
+
+#googleAnalyticsId_label {width:225px;}
+#googleAnalyticsId {margin-left:225px;}
+
+#createThemeFormID .label,
+#createThemeFormID .errorLabel,
+#createThemeFormID .requiredLabel,
+.wideLabelInputs .label,
+.wideLabelInputs .errorLabel,
+.wideLabelInputs .requiredLabel {
+    width:350px;
+}
+#createThemeFormID .textInputDescriptionUnderInput,
+#createThemeFormID .wwctrl_error input,
+#createThemeFormID .wwctrl input,
+.wideLabelInputs .wwctrl_error input,
+.wideLabelInputs .wwctrl input,
+.wideLabelInputs .wwctrl_error textarea,
+.wideLabelInputs .wwctrl textarea,
+#createThemeFormID .wwctrl .yuiFormContainer,
+#createThemeFormID .wwctrl_error select,
+#createThemeFormID .wwctrl select  {
+    margin-left: 360px;
+}
+
+#contentAwaitingStaffResponseTimeFrameContainer .label,
+#contentAwaitingStaffResponseTimeFrameContainer .errorLabel {
+    width:330px;
+}
+#contentAwaitingStaffResponseTimeFrameContainer .wwctrl select {
+    margin-left: 340px;
+}
+
+
+.narrowLabelOption .label,
+.narrowLabelOption .errorLabel,
+.narrowLabelOption .requiredLabel {
+    width:200px;
+}
+
+.narrowLabelOption .wwctrl select {
+    margin-left: 210px;
+}
+
+#createThemeFormID #theme_fonts .label, #createThemeFormID #theme_fonts .errorLabel, #createThemeFormID #theme_fonts .requiredLabel{width:250px}
+#createThemeFormID #theme_fonts .wwctrl_error input,
+#createThemeFormID #theme_fonts .wwctrl input,
+#createThemeFormID #theme_fonts .wwctrl .yuiFormContainer,
+#createThemeFormID #theme_fonts .wwctrl_error select,
+#createThemeFormID #theme_fonts .wwctrl select  {
+    margin-left: 260px;
+}
+
+#createThemeFormID .wwctrl_error input.noLabel,
+#createThemeFormID .wwctrl input.noLabel,
+#createThemeFormID .wwctrl_error select.noLabel,
+#createThemeFormID .wwctrl select.noLabel  {margin-left:0;}
+
+
+.searchTerms .wwctrl_error input,
+.searchTerms .wwctrl_error textarea,
+.searchTerms .wwctrl_error select,
+.searchTerms .wwctrl_on input,
+.searchTerms .wwctrl_on textarea,
+.searchTerms .wwctrl_on select,
+.searchTerms .wwctrl input,
+.searchTerms .wwctrl textarea,
+.searchTerms .wwctrl select,
+.searchTerms .wwInfoRight,
+.searchTerms .wwctrl_on input.ww_radio,
+.searchTerms .wwctrl input.ww_radio,
+.searchTerms .wwctrl_error input.ww_radio,
+.searchTerms .textInputDescriptionUnderInput,
+.advancedSearchSubmitWrapper .yui-skin-sam .yui-button,
+.searchTerms .postControlHtml{
+    margin-left: 300px;
+}
+
+.searchTerms .horizontalCheckboxListItems input {
+    margin-left: 0;
+}
+
+.searchTerms .wwctrl input.noLabel {
+    margin-left: 7px;
+}
+
+.searchTerms .label,
+.searchTerms .errorLabel,
+.searchTerms .requiredLabel,
+.searchTerms .wwInfoLeft{
+    width:300px;
+}
+
+.topAlignedRadioOptions {
+    vertical-align: top;
+}
+
+.radio-option {
+    display: inline-block;
+    white-space: nowrap;
+    margin-right: 7px;
+}
+
+.long-radio-options .radio-option {
+    white-space: normal;
+}
+
+
+input[type='password'] {
+
+        font-family: helvetica,Geneva, "Trebuchet MS", sans-serif, 'Microsoft Sans Serif';
+
+}
+input[type='password'].bigInput {
+
+        font-family: helvetica,Geneva, "Trebuchet MS", sans-serif, 'Microsoft Sans Serif';
+
+}
+
+.indentedCheckboxWrapper {
+    margin-left: 10px;
+}html{
+    height: 100%;
+
+    background-color: #ffffff;
+}
+
+body {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    padding: 20px 20px;
+	text-align: center;
+    height: 92%;
+    word-wrap: break-word;
+    color: #333333;
+}
+
+body div#narrativeBody  {
+
+    min-height:100%;
+    background-color:#ffffff;1;
+    width:98%;
+    border-width:0 1px;
+}
+
+
+#standalonePageWrapperMargin {
+    margin:60px auto auto auto;
+    width:100%;
+}
+
+#standalonePageWrapper {
+    border:3px solid #bdb7b7;
+    text-align:left;
+}
+
+#standalonePageWrapper td.generic {
+    padding:5px;
+}
+
+#standalonePageWrapper td.standalonePageTitle {
+    font-weight:bold;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+}
+
+div#breadcrumbAndHeaderWrapper, div#horizontalNavMenuWrapper {
+    width:100%;
+    margin:auto;
+}
+div#breadcrumbAndHeaderWrapper {
+
+    border-bottom:0;
+}
+
+div#breadcrumbAndHeaderWrapper {
+    background-color: #ffffff;1;
+}
+
+#page_header {
+    text-align: left;
+    margin: 10px 0 10px 15px;
+}
+
+#page_header h1 {
+    margin-bottom: 0;
+}
+
+.adHeaderWrapper {
+    padding:25px 0;
+}
+
+div.customHeaderHTML{
+    color:#333333;
+    text-align:left;
+}
+
+div.customHeaderHTML, div.customHeaderImage {
+    width:100%;
+    background-color: transparent;
+    padding:0;
+    background-repeat:no-repeat;
+}
+
+div.customFooterHTML {
+    width:100%;
+    margin:auto;
+    text-align:left;
+    padding:0;
+}
+div.customHeaderChannelHTML{padding:7px;}
+
+.areaHeaderAvatarColumn {
+    padding-right: 10px;
+}
+
+.areaHeaderBodyColumn {
+    width: 100%;
+}
+
+.areaHeaderBodyColumn * {
+    color: #333333;
+}
+
+.areaHeaderBodyColumn * a {
+    color: #194e84;
+}
+
+.areaHeaderBodyColumn * a:visited {
+    color: #194e84;
+}
+
+.areaHeaderLocation {
+  margin-top: 10px;
+}
+
+table.advWrapperTitleBox {
+    text-align:left;
+    width:100%;
+
+}
+table.advWrapperTitleBox td {
+    border-bottom: 1px DOTTED #bdb7b7;
+    padding: 5px;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+table.advWrapperTitleBox td.advWrapperTitleEmbedded {
+    border-top: 1px DOTTED #bdb7b7;
+}
+
+
+table.advWrapperTitleBox td.advWrapperTitleHighlight {
+    background-color:#d7d7d7;1;
+    border-left: 1px DOTTED #bdb7b7;
+}
+
+
+.userDivTitleBox {
+    padding:10px 10px 0 10px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.userDivSection {
+    margin-bottom: 10px;
+}
+
+.userDivDetailsTable .avatarColumn {
+    width: 100px;
+    padding-right: 10px;
+}
+
+.userDivDetailsTable .onlineStatus {
+    float: right;
+}
+
+.userDivTitleBox .detailsRow {
+    margin-bottom: 5px;
+}
+
+.userDivSection .expandablePopupSectionTitle,
+.userDivSection #expandablePopupSectionuserNotes,
+div.divTable.userDetailsTable {
+    width: 730px;
+}
+
+.userDetailsTable .titleRow {
+    font-weight: bold;
+}
+
+.userDetailsTable .spacerColumn {
+    width: 10px;
+}
+.communityAndGroupDetailsTable .communityDetailsColumn,
+.communityAndGroupDetailsTable .groupDetailsColumn {
+    width: 360px;
+}
+
+.watchUserEditIconColumn {
+    width: 18px;
+}
+
+div.divTable.userDivActionsTable {
+    width: 730px;
+}
+.userDivActionsTable .leftColumn,
+.userDivActionsTable .rightColumn {
+    width: 360px;
+}
+
+.userDivActionsTable .divCell.spacerColumn {
+    width: 10px;
+}
+
+.userDivActionTable {
+    width: 360px;
+}
+
+.userDivActionTable.inline {
+    width: 730px;
+}
+
+.userDivActionTable .iconColumn {
+    width: 33px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.userDivActionTable .textColumn {
+    vertical-align: middle;
+}
+
+.userDivActionTable .userDivActionSubtext {
+    margin-top: 5px;
+}
+
+
+
+#areaWrapperExtraHeaderContent {
+    padding: 20px 0 0 15px;
+}
+
+table#areaWrapperContent {
+    width:100%;
+    margin:auto;
+    text-align:left;
+    margin-top: 10px;
+}
+table#areaWrapperContent td#areaWrapperContentNav{
+    padding:0 0 0 15px;
+    vertical-align:top;
+    width:250px;
+}
+
+table#areaWrapperContent.hasExtraContentAbove td#areaWrapperContentNav,
+table#areaWrapperContent.hasExtraContentAbove td.primaryContentBox {
+    padding-top:0px;
+}
+
+
+table#areaWrapperContent td.primaryContentBox{
+    padding:0 15px 0 15px;
+    vertical-align:top;
+}
+
+.primaryContentBox {
+    color:#333333;
+    text-align:left;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    padding:15px 10px;
+    vertical-align:top;
+}
+        .primaryContentBox A{color:#194e84;}
+        .primaryContentBox A:visited{color:#194e84;}
+        .primaryContentBoxPadding {padding:10px;}
+
+.primaryWrapper {
+
+}
+
+
+em, em * {font-style: italic;}
+strong, strong * {font-weight: bold;}
+
+img {border:none;}
+
+
+a {color: #194e84;text-decoration: none;}
+a:hover {text-decoration:  underline;}
+
+
+.xxlgfont {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 26px;
+    letter-spacing: 1px;}
+.xxbold {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 26px;
+    letter-spacing: 1px; font-weight:bold}
+.xlgfont,.xfont {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;}
+.xbold {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;font-weight:bold;}
+.lgfont {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;}
+.lgbold {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;font-weight:bold;}
+.medfont, .medfont A {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;}
+.medbold {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;font-weight:bold;}
+.navfont, .navfont A {font-family: Helvetica, Arial, sans-serif;
+
+    font-size: 11px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;}
+.navbold {font-family: Helvetica, Arial, sans-serif;
+
+    font-size: 11px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;font-weight:bold;}
+.smallfont, .small_print, .small_print A, tr.smallFont td  {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+.smallbold {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;font-weight:bold;}
+.normalText {
+    font-weight: normal;
+}
+
+
+
+.breakWord, .breakWord a {
+    word-wrap:break-word;
+}
+
+.customHeaderGraphicsColumn {
+    width: 100px;
+    padding-left: 10px;
+}
+
+.areaHeaderTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 26px;
+    letter-spacing: 1px;
+    font-weight:bold;
+    margin-bottom: 10px;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+
+.headerColumn h1,
+.headerTitle h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.headerColumn,
+.headerColumn h1,
+.headerTitle h1 {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.headerTitle {
+    margin-bottom: 10px;
+}
+
+.headerColumn {
+    padding: 0;
+}
+
+.headerColumn h1 {
+    width:625px;
+    vertical-align:bottom;
+    word-wrap:break-word;
+    overflow:hidden;
+}
+
+.headerColumn h1.withAnotherColumn {
+    width:100%;
+}
+
+h1 {
+    color:#333333;
+}
+
+.unread {font-weight: bold;}
+
+
+
+div#footer  {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    color:#ffffff;
+}
+
+.site_title {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 26px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+div.subnavSelected, div.subnav{
+    float:left;
+    padding: 0px;
+    font-size:12px;
+    margin-right: 4px
+}
+
+.align_right {
+    text-align:right;
+}
+
+.commentDiv .bubble_padding {
+    padding:0;
+}
+
+.avatar {
+    margin-right: 7px;
+    border: 1px solid #333333;
+}
+td.avatar {
+    vertical-align:top;
+    border:none;
+}
+
+.userLovedImage {
+    float: left;
+    margin: 0 5px 10px 5px;
+}
+
+.largeUserLovedImageWrapper {
+    float: left;
+    margin: 5px;
+}
+
+.largeUserLovedImageWrapper .scaledImage {
+    border: 1px solid #333333;
+}
+
+.userLovedImageTitle {
+    text-align: center;
+    margin-top: 5px;
+    width: 250px;
+}
+
+.showBorder {
+    border: 1px solid #333333;
+}
+
+.info_bar_section, .info_bar_section_hover {
+    margin-bottom: 10px;
+    text-align:left;
+}
+
+.info_bar_section .bubble_padding,
+.info_bar_section_hover .bubble_padding,
+.resetSurveyHeader .bubble_padding {
+    padding:7px;
+}
+
+.info_bar_section_alt, .info_bar_section_hover:hover {
+    margin-bottom: 10px;
+    text-align:left;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+.info_bar_section_alt.disableBottomMargin, .info_bar_section_hover.disableBottomMargin:hover {
+    margin-bottom: 0;
+}
+
+
+.tierSectionHeader .info_bar_section_alt,
+.subTierAdminRow .info_bar_section,
+.subTierAdminRow .info_bar_section_hover:hover,
+.subTierAdminRow {
+    margin-bottom: 2px;
+}
+
+.subTierAdminRow.disabledSubTierAdminRow {
+    -moz-opacity:0.6;
+    opacity:0.6;
+    filter:alpha(opacity=60);
+}
+
+.subTierAdminRows {
+    min-height:1px;
+}
+
+
+.info_bar_section_alt .bubble_padding,
+.info_bar_section_hover:hover .bubble_padding {
+    padding:7px;
+}
+
+
+.info_bar_section, .info_bar_section table,
+.info_bar_section_hover, info_bar_section_hover table,
+.info_bar_section_alt, .info_bar_section_alt table {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    color:#333333;
+}
+
+#menu_all_topics {
+    /*round top 5px*/
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+}
+
+#cp_menu_last,#menu_control_panel_off {
+    border-bottom-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+}
+
+
+.bubble_padding {padding:3px 5px;}
+.nopad {padding: 0;}
+
+.nav_options {font-size: 15px;font-weight:  normal;}
+
+.pagination {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;text-align:right;padding:3px 0px;}
+    .pagination A {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+
+.data_table th {
+    background-color: ;
+    color:;
+    padding:5px 3px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+        .data_table th A,.data_table th .wwctrl_on label {color:;}
+
+table.generic,.data_table  {width:100%;}
+td.genericW, td.generic,td.generic a, td.generic img, td.generic span, .data_table td {vertical-align:top;}
+td.genericW, td.generic,.data_table td {padding:3px;font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;}
+th.generic{vertical-align:top;padding:3px;}
+td.genericNoPad, th.genericNoPad{vertical-align:top;font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;}
+td.genericW {width:50%;}
+
+
+
+tr.skipRow td {padding-top: 1em;}
+
+br {letter-spacing:0px;}
+
+.slider-bg {position: relative;height:28px;width:110px;}
+.slider-thumb {position: absolute;top: 15px;cursor: move;}
+
+.reviews_table {width:100%;}
+        .reviews_table TD {vertical-align:top;font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;padding-bottom:5px;vertical-align:top;}
+
+.clearMedium, .clear5 {clear:both;height:5px;}
+.clear7 {clear:both;height:7px;}
+.clearLarge, .clear10 {clear:both;height:10px;}
+.clear15 {clear:both;height:15px;}
+.clearExtraLarge, .clear20 {clear:both;height:20px;}
+
+
+div.ajaxAutoComplete {
+    width: 350px;
+    background: #fff;
+    background-color:white;
+    border:1px solid #888;
+    margin:0px;
+    padding:0px;}
+
+div.ajaxAutoComplete ul {
+    border:1px solid #888;
+    margin:0;
+    padding:0;
+    width:100%;
+    list-style-type:none;}
+div.ajaxAutoComplete ul li {
+    margin:0;
+    padding:3px;}
+div.ajaxAutoComplete ul li.selected {
+    background-color: #ffb;}
+div.ajaxAutoComplete ul strong.highlight {
+    color: #800;
+    margin:0;
+    padding:0;}
+
+
+.tempSpanLink { color:#194e84; text-decoration: none; cursor:pointer;}
+.tempSpanLink span:hover {text-decoration:  underline;}
+
+
+.confirmDialog_header {text-align:center;background-color:#EAEAEA;color:#666666;font-weight:bold;width:150px;z-index:2;position:relative;top:1px;cursor:pointer;}
+.confirmDialog_header_padding {padding:3px}
+.confirmDialog_container {border: 1px solid #8C8C8B; background-color:#EAEAEA; padding:7px;width:98%;}
+.confirmDialog_content {background-color:#ffffff; text-align:left;}
+.confirmDialog_padding {padding:10px}
+
+
+TH.cBoxOrIcon, TD.cBoxOrIcon, .cBoxOrIcon {width:20px;}
+TH.cBoxOrIcon30, TD.cBoxOrIcon30, cBoxOrIcon {
+    width:30px;
+    vertical-align:top;
+}
+.l_align {text-align:left;}
+.c_align {text-align:center;}
+
+ul.accountList LI{width:500px;}
+
+.review_table th {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+td.small_print, table.advWrapperTitleBox td.small_print {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+
+tr.altRow td {background-color:#f0f0f0;1;}
+tr.altRow2 td {background-color:#d7d7d7;1;}
+tr.regRow td, tr.altRow td , tr.altRow2 td {padding:10px 5px;}
+
+tr.altRow td,
+tr.altRow2 td {
+    color:#333333;
+}
+tr.altRow td A,
+tr.altRow2 td A {
+    color: #194e84;
+}
+tr.altRow td A:visited,
+tr.altRow2 td A:visited {
+    color: #194e84;
+}
+
+.content_title{
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    margin-bottom: 4px;
+    color:#333333;
+    font-weight:bold;}
+        .content_title A {color:#194e84;}
+
+
+.sharedContentBody, .sharedContentBody p {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+
+
+.content_body {
+    vertical-align:middle;
+    text-align:left;
+    padding-top: 5px;
+    padding-bottom:5px;
+    word-wrap:break-word;
+    width: 620px;
+    margin:0;
+}
+
+.extractedBlogWrapper .content_body {
+    width: 530px;
+}
+
+.content_body {
+        max-width: 620px;
+        word-wrap: break-word;
+    }
+
+    .content_body img {
+                margin: 0 10px 10px 10px;
+                max-width: 600px;
+
+            }
+
+            .content_body img.noBorder {
+                margin: 0;
+            }
+        .content_body img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .content_body embed, .content_body iframe, .content_body object {
+        max-width: 620px;
+    }.extractedBlogWrapper .content_body {
+        max-width: 530px;
+        word-wrap: break-word;
+    }
+
+    .extractedBlogWrapper .content_body img {
+                max-width: 530px;
+            }
+        .extractedBlogWrapper .content_body img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .extractedBlogWrapper .content_body embed, .extractedBlogWrapper .content_body iframe, .extractedBlogWrapper .content_body object {
+        max-width: 530px;
+    }.content_short_body {
+        max-width: 620px;
+        word-wrap: break-word;
+    }
+
+    .content_short_body img {
+                margin: 0 10px 10px 10px;
+                max-width: 600px;
+
+            }
+
+            .content_short_body img.noBorder {
+                margin: 0;
+            }
+        .content_short_body img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .content_short_body embed, .content_short_body iframe, .content_short_body object {
+        max-width: 620px;
+    }.forumTopicMessageBody {
+        max-width: 490px;
+        word-wrap: break-word;
+    }
+
+    .forumTopicMessageBody img {
+                margin: 0 10px 10px 10px;
+                max-width: 470px;
+
+            }
+
+            .forumTopicMessageBody img.noBorder {
+                margin: 0;
+            }
+        .forumTopicMessageBody img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .forumTopicMessageBody embed, .forumTopicMessageBody iframe, .forumTopicMessageBody object {
+        max-width: 490px;
+    }.moderatedMessageBody {
+        max-width: 620px;
+        word-wrap: break-word;
+    }
+
+    .moderatedMessageBody img {
+                margin: 0 10px 10px 10px;
+                max-width: 600px;
+
+            }
+
+            .moderatedMessageBody img.noBorder {
+                margin: 0;
+            }
+        .moderatedMessageBody img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .moderatedMessageBody embed, .moderatedMessageBody iframe, .moderatedMessageBody object {
+        max-width: 620px;
+    }
+
+.commentWrapper {
+    margin-bottom:7px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+.commentWrapper .content_body,
+.commentWrapper table.generic td {
+    padding:0;
+}
+
+.commentWrapper.commentAltRow .contentCommentModerated,
+.commentWrapper.commentAltRow .contentCommentHeader,
+.commentWrapper.commentAltRow .contentCommentBody {
+    background: #d7d7d7;1;
+}
+
+.contentCommentHeader .bubble_padding,
+.contentCommentBody .bubble_padding {
+    padding: 10px;
+}
+.contentCommentHeader {
+    margin-bottom: 3px;
+}
+
+.content_links {text-align:right;padding-top:5px;font-size:10px}
+
+table.display_content_byline  {
+    width:100%;
+}
+
+
+.content_short_byline {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.content_byline {
+    padding: 3px;
+    margin-bottom: 3px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.content_byline.content_summary_byline {
+    padding-top: 12px;
+}
+
+.content_byline .longDatetime {
+    width: 240px;
+    float: right;
+    text-align: right;
+}
+
+.content_short_byline {
+    text-align: center;
+}
+
+img.content_byline_image {
+    vertical-align:middle;
+}
+
+.content_short_byline_author {
+    padding-right:7px;
+}
+
+.content_short_body {
+    padding: 15px;
+}
+
+.content_tools {
+    text-align: right;
+    vertical-align:top;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.toolIcon {
+    cursor: pointer;
+    padding-left:3px;
+}
+
+table.display_content_byline tr.display_content_byline_forum  td{
+    padding-bottom:7px;
+    border-bottom:1px dotted#bdb7b7;
+}
+
+table.display_content_byline td{
+    vertical-align:top;
+}
+
+table.display_content_byline td.bylineAvatar {
+    width:50px;
+    padding-right:10px;
+}
+
+.songTable {
+    border-style:dotted;
+    border-color:#bdb7b7;
+    border-width:1px;
+}
+
+.songTable td {padding:5px;font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;vertical-align:top;}
+.songTable td.songDetails {padding:5px;border-left:1px dotted #bdb7b7;}
+.songTable th {padding:5px;border-left:1px dotted #bdb7b7;background-color:#e7e7e7;font-weight:bold;font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+.songTable tr.detailsbottom td,
+.songTable tr.detailsbottom th{border-bottom:1px dotted #bdb7b7;}
+.songTable .constrainedDetails {
+        max-width: 250px;
+        word-wrap: break-word;
+    }
+
+    .songTable .constrainedDetails img {
+                max-width: 250px;
+            }
+        .songTable .constrainedDetails img {
+        box-sizing: border-box;
+        height: auto;
+
+    }
+
+    .songTable .constrainedDetails embed, .songTable .constrainedDetails iframe, .songTable .constrainedDetails object {
+        max-width: 250px;
+    }
+
+.uploadedSongData {
+    margin:3px 3px 3px 0;
+    padding:5px;
+}
+
+.uploadedSongPlayerIcon {
+    float:left;
+    width:25px;
+}
+
+.uploadedSongTitle {
+    float:left;
+    width:200px;
+    cursor:move;
+}
+
+.upoadedSongDeleteIcon {
+    float:right;
+    width:15px;
+}
+
+.content_actions {text-align:right;font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;width:100%;margin-bottom:5px;}
+
+div.altRow, div.regRow,div.chatWhisperRow {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;padding: 8px;}
+div.altRow {background-color:#f0f0f0;1;color:#333333;}
+div.altRow A{color: #194e84 }
+
+div.chatWhisperRow {background-color:#fff673;color:#333333;}
+div.chatWhisperRow A, div.chatWhisperRow a:visited, .primaryContentBox div.chatWhisperRow a:visited {color:#1513AB;}
+
+#chatPostSection {
+    padding: 5px;
+}
+
+.chatSidebarList {
+    max-height:600px;
+    overflow-y:auto;
+}
+
+.chatSidebarList .shadedContentArea {
+    margin-bottom: 3px;
+}
+
+#chatEventMainId,
+#chatSidebarId {
+    border:1px solid #bdb7b7;
+}
+
+#chatSidebarId {
+    margin-bottom: 10px;
+}
+
+#chatEventHeaderId,
+.chatStatusBubble {
+    border-bottom:1px solid #bdb7b7;
+}
+
+.chatStatusBubble {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+#chatBodyId {
+    overflow-y:auto;
+    height:350px;
+}
+
+#futureChatBoxSection {
+    padding: 5px;
+}
+
+#chatNotYetBegunMessageId {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#toggleChatEventTabs.highlightedTabs a.highlightedTab,
+#toggleChatEventTabs.highlightedTabs div.highlightedTab {
+    padding: 0 9px;
+}
+
+#sb-wrapper #sb-title, #sb-wrapper #sb-title-inner {
+    height: auto;
+}
+
+#sb-container {
+    z-index:9001 !important;
+}
+
+.manageEmptyWidget {
+
+    border:  ;
+    background-color:#ffffff;1;
+
+}
+
+.yui-skin-sam .yui-panel.addWidgetPopupDiv .bd {
+    padding: 0;
+}
+
+.addWidgetType {
+    width:275px;
+    margin-right:15px;
+    margin-top:5px;
+}
+
+.customWidgetType {
+    float: left;
+}
+
+.widgetPopupContent {
+    padding: 0 10px;
+}
+
+.widgetTypeLabel {
+    margin-left: 3px;
+    font-weight: bold;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.widgetTypeDescription {
+    padding-left: 20px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.widgetHighlightSection {
+    background-color:#f0f0f0;1;
+    color:#333333;
+    width:100%;
+    margin: 10px 0;
+}
+
+.widgetHighlightSection .widgetHighlightSectionContent {
+    padding: 10px 10px;
+}
+
+.widgetHighlightSection a {
+    color: #194e84;
+}
+
+.widgetHighlightSection a:visited {
+    color: #194e84;
+}
+
+#createEditWidgetFormId_title, #createEditWidgetFormId_html {
+    width: 560px;
+}
+
+.customWidgetRadioLabel {
+    float:left;
+    width: 255px;
+}
+
+.customWidgetDeleteIcon {
+    float:right;
+}
+
+.highlightThumb {border-width:1px;border-style:;border-color:;float:left;padding:2px;}
+.noHighlightThumb {
+    border:none;
+    float:left;
+    padding:3px;
+}
+
+.mediumNoHighlightThumb {
+    border:none;
+    float:left;
+    padding:6px;
+}
+
+.eveHeaderTabs {width:100%;}
+        .eveHeaderTabs TD {font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;;padding-right:10px;text-align:left;padding-top:8px}
+
+.eveSubmit {padding:10px 0;text-align:center}
+
+.eve_cp_table {width:100%;border:1px solid #bdb7b7;border-right:none;margin:10px 0;}
+.eve_cp_table th {
+    background-color:;
+    color:;
+}
+.eve_cp_table th a {color:;}
+.eve_cp_table th a:visited {color:;}
+
+.eve_cp_table tr td {color:#333333}
+.eve_cp_table tr A {color:#194e84;}
+.eve_cp_table tr A:visited {color:#194e84;}
+
+.eve_cp_table tr td, .eve_cp_table tr.regRow td {background-color:#d7d7d7;1;}
+.eve_cp_table tr.altRow td {background-color:#f0f0f0;1;}
+
+.eve_cp_table tr td,
+.eve_cp_table tr th {
+    border-right:1px solid #bdb7b7;
+    padding:3px;
+}
+
+.check_td {width:20px;text-align:center;}
+
+img.inline {vertical-align:bottom;}
+
+ul.cp_sort {list-style-type:none;margin-left:5px;}
+
+ul,  ol {
+    padding-left: 12px;
+    list-style-type: inherit;
+    list-style-position: outside;
+    margin: 12px 0 0 20px;
+}
+ ol li {
+    list-style-type: decimal;
+}
+ ul li {
+    list-style-type: disc;
+}
+
+ li {
+    padding: 0 0 12px 0;
+}
+
+h1 {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    font-weight:bold;
+    margin-bottom:2px;
+}
+h2 {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    margin:0 0 5px 0;
+    padding:0;
+}
+h3 {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    margin:0 0 5px 0;
+    padding:0;
+}
+h5 {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+}
+h6 {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight:bold;
+    margin-bottom:8px
+}
+
+h1,
+h2,
+h3,
+h5,
+h6 {
+    color:#333333;
+}
+
+.shadedContentArea h1,
+.shadedContentArea h2,
+.shadedContentArea h3,
+.shadedContentArea h5,
+.shadedContentArea h6 {
+    color:#333333;
+}
+
+.forumIsland .info_bar_section,
+.portfolioIsland .info_bar_section {
+    cursor: pointer;
+}
+
+.forumIsland td,
+.portfolioIsland td {
+    padding: 10px 0;
+}
+
+.forumIsland .avatarColumn {
+    width: 50px;
+    vertical-align: top;
+}
+
+.forumIsland .infoColumn,
+.portfolioIsland .infoColumn,
+.forumIsland .avatarColumn {
+    padding-left: 10px;
+}
+
+.forumIsland .forumDescription,
+.forumIsland .forumLastPostInfo {
+    margin-top: 7px;
+    padding-right: 7px;
+}
+
+.forumIsland .forumLastPostAuthorColumn {
+    width:25px;
+}
+
+.forumIsland .forumLastPostInfoColumn {
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+.portfolioIsland .avatarColumn {
+    vertical-align: top;
+    padding-left: 10px;
+    width: 50px;
+}
+
+.portfolioDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-top: 10px;
+}
+
+#surveysList .shadedContentArea,
+.drillDownIslandList .shadedContentArea {
+    margin-bottom: 3px;
+}
+
+#surveysList #surveyList .drillDownIsland {
+    margin-top: 18px;
+}
+
+.drillDownIslandArrowIconColumn {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-align: center;
+    vertical-align: middle;
+    width: 50px
+}
+
+.drillDownIslandArrowIcon {
+    width: 35px;
+}
+
+td.categoryTitleColumn {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+.forumRecentContentSidebarTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.forumRecentContentAvatar {
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.displayForumByline img {
+    margin-top:-5px;
+}
+
+img.forum_avatar_off{-moz-opacity:0.3; opacity:0.3; filter:alpha(opacity=30);}
+
+td.topicHeaderTitleColumn {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    padding: 10px;
+}
+
+
+.forumTopicDrillDownIsland td {
+    padding: 10px 0 10px 0;
+}
+
+.forumTopicDrillDownIsland .iconColumn {
+    width: 75px;
+    text-align: center;
+}
+
+.forumTopicDrillDownIsland .infoColumn {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.forumTopicDrillDownIsland .infoColumn .forumTopicStats,
+.forumTopicDrillDownIsland .infoColumn .forumTopicsForum,
+.forumTopicDrillDownIsland .infoColumn .forumTopicNavigation {
+    margin-top: 5px;
+}
+
+.forumTopicDrillDownIsland .datetimeColumn {
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 10px;
+    width: 175px;
+}
+
+#memberDirectoryDrillDownIslandList td.avatarColumn {
+    vertical-align: middle;
+    padding: 10px;
+    width: 50px;
+}
+
+#memberDirectoryDrillDownIslandList td.displayNameColumn {
+    text-align: left;
+    padding-left: 10px;
+}
+
+div.userSelectionWrapper {
+    float:left;
+    cursor:pointer;
+    padding: 3px;
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    overflow:hidden;
+    text-align:center;
+    position: relative;
+    border: 1px DOTTED #bdb7b7;
+}
+div.userSelectionWrapper .selectedIcon {
+    top: 0;
+    right: 0;
+    display: none;
+    position: absolute;
+}
+div.userSelectionWrapper.selectedUserDiv .selectedIcon {
+    display: inline-block;
+}
+
+div.unselectedUserDiv {background-color: #f0f0f0;1;}
+div.selectedUserDiv {background-color: #ffffff;1;color:#333333;}
+
+#clipViewer {
+    text-align:left
+}
+
+#clipViewer {
+        max-width: 640px;
+        word-wrap: break-word;
+    }
+
+    #clipViewer img {
+                max-width: 640px;
+            }
+        #clipViewer img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    #clipViewer embed, #clipViewer iframe, #clipViewer object {
+        max-width: 640px;
+    }
+
+/* MANAGING WIDGET CLASSES*/
+
+.sidebar_manageWrapper{
+    border:1px solid ;
+}
+
+.sidebarItemDiv {
+    position: relative; height: 100%; top: 0; left: 0;
+}
+
+.verticalLeft {
+    top: 40%;left: 5px;
+}
+.verticalRight {
+    top: 40%;right: 5px;
+}
+
+.clipsListRightSidebar {
+    padding-top: 30px;
+}
+
+#audioClipsList td {
+    padding-bottom: 7px;
+}
+
+#audioClipsList td.audioClipTitle {
+    padding-left: 7px;
+}
+
+table.audioDetailsTable td {
+    height: 40px;
+    vertical-align: middle;
+}
+
+td.audioDetailsPlayerColumn {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+#title_section {border-width:1px 1px 0 1px;}
+#contentsearchlistcontainer *, #SelectedContentList * {font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+.searchReplyDiv {border-left:1px dotted #bdb7b7;margin-left:50px; padding-left:5px;
+}
+
+
+ .bottom_border, .bottom_border_twitter {
+    color: #333333;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px dotted #bdb7b7; }
+        .bottom_border_twitter {border-bottom:none;}
+
+#postReplyDivId {
+    overflow:auto;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    color:#333333;
+}
+
+td.chatEventDate {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;font-weight:bold;
+    vertical-align:top
+}
+
+#scheduleTimezoneSpanIdForUpdateFuture {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+tr.chatEventSmall td {padding:10px 0;}
+tr.chatEventBorder td,tr.notificationBorder td{border-top:1px dotted #bdb7b7;}
+
+tr.notificationRow:hover {
+    background-color: #d7d7d7;1;
+    color:#333333;
+}
+
+td.postIconColumn {width:30px}
+td.postIconContentTitle {padding-bottom:4px}
+
+
+
+.genericLeft, td.genericLeft {text-align:left;}
+td.genericLeft {vertical-align:top}
+
+.genericCenter, td.genericCenter {text-align:center;}
+td.genericCenter {vertical-align:top}
+
+.genericRight, td.genericRight {text-align:right;}
+td.genericRight {vertical-align:top}
+
+table.personalConnectionsTable {width:100%}
+table.personalConnectionsTable td {vertical-align:bottom;text-align:center}
+.personalHeaderTabOn {background-color:#f0f0f0;1;color:#333333;font-weight:bold;}
+.personalHeaderTabOn a {color: #194e84;}
+.personalHeaderTabOn a:visited {color: #194e84;}
+
+.connectionsAltBubble {background-color:#ffffff;1;color:#333333;}
+.personalHeaderTabOff {background-color:#ffffff;1;color:#194e84;}
+.personalHeaderTabOff  A {color:#194e84;font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;}
+.personalHeaderTabOff  A:visited {color:#194e84;}
+
+tr.summaryDocumentation td {
+    border-bottom:1px DOTTED #bdb7b7;
+}
+tr.summaryDocumentationNoBorder td,tr.summaryDocumentation td {
+    padding:4px;
+    vertical-align:middle;
+}
+
+td.smallCommunityAvatar {width:55px;vertical-align:top}
+.lc_channels_subs_bubble {float:right;width:30%;background-color:#ffffff;padding:10px;text-align:center;font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;}
+.lc_channels_count{padding:7px;font-size:56px;line-height:56px;}
+
+.errorBackground { background-color: #FFCCCC; color: #000000; }
+.manageAreaMenuItemSlot { background-color: #ffffff;1; color: #333333; text-align: center; font-weight: bold; }
+
+ul.lcHeaderMenu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+ul.lcHeaderMenu li {
+    float: right;
+    white-space: nowrap;
+    padding:10px;
+    border-left:1px DOTTED #bdb7b7;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+ul.lcHeaderMenuSingle li {/*use as an additional class for lcHeaderMenu*/
+    float: left;
+    border-left:none;
+
+}
+
+ul.lcHeaderMenu li a.lcHeaderMenuLink, ul.lcHeaderMenu li a.lcHeaderMenuLink:visited{
+    color:#194e84
+}
+
+td.avatarLarge {
+    width:100px;
+    margin-right:7px;
+    padding-top:3px;
+}
+
+span.highlightedSearchTerms {
+    background-color: #fdf9db;
+    color: #000000;
+    font-weight: bold;
+    padding: 2px;
+}
+
+div.leftContentBody {
+    vertical-align:top;
+}
+
+div.contentDisplay .info_bar_section_alt .bubble_padding {
+    padding:15px;
+}
+
+
+
+td.leftContent {
+    vertical-align: top;
+    text-align: left;
+    width: 955px;
+}
+
+
+
+td.searchLeftContent {
+    vertical-align: top;
+    text-align: left;
+    width: 770px;
+}
+
+td.rightSidebar {
+    vertical-align:top;
+    padding-left:15px;
+    width:px;
+}
+
+.rightSidebarHeader, .rightSidebarHeader a, .rightSidebarInfoLabel {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.rightSidebarHeader, .rightSidebarHeader {
+    padding-top: 5px;
+}
+
+.rightSidebarContent {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+td.rightSidebarEdit {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    vertical-align: middle;
+}
+
+td.rightSidebarEditIcon {
+    vertical-align: top;
+    width: 18px;
+}
+
+.rightSidebarContent {
+    padding: 5px 0 5px 0;
+}
+
+.rightSidebarIcon {
+    vertical-align: top;
+    text-align: center;
+    width: 35px;
+    padding: 10px 15px 10px 10px;
+}
+
+.narrowActionIslandTable .rightSidebarIcon {
+    padding-left: 3px;
+    padding-right: 10px;
+}
+
+.rightSidebarText {
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.rightSidebarInfoLabel, .rightSidebarInfoValue, .rightSidebarInfoValue a {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.rightSidebarInfoLabel, .rightSidebarInfoValue {
+    padding-top: 5px;
+}
+
+.rightSidebarInfoLabel {
+    padding-left: 5px;
+    font-weight: bold;
+    width: 85px;
+}
+
+.collectionsSidebarHeader {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    padding-left: 12px;
+}
+
+.collectionSidebarDrillDownIsland .info_bar_section {
+    cursor: pointer;
+}
+
+.collectionTitleColumn {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    padding: 10px 0 10px 20px;
+}
+
+#rightSidebarCollections td.rightSidebarEdit {
+    padding-right: 15px;
+}
+
+div.attachmentsHeader {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    float:left;
+}
+
+div.attachmentsHeaderExpandCollapse {
+    float:right;
+}
+
+div.attachmentsHeader,
+div.attachmentsHeaderExpandCollapse {
+    margin-top: 10px;
+}
+
+div.attachmentsHeader img,
+div.attachmentsHeaderExpandCollapse img {
+    vertical-align: baseline;
+}
+
+div.attachmentWrapper {
+    margin: 0;
+    padding:10px;
+    border:1px DOTTED #bdb7b7;
+}
+
+.pollDetails {
+    margin-top: 10px;
+}
+
+.commentsAndToolsTable {
+    width: 100%;
+    margin-top: 10px;
+}
+
+td.noLeftPadding {
+    padding-left: 0;
+}
+
+.breadcrumb, .breadcrumb a {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.breadcrumb {
+    padding: 0 0 7px 0;
+}
+
+.leftPad8 {
+    padding-left: 8px;
+}
+
+.leftPad12 {
+    padding-left: 12px;
+}
+
+.leftPad15 {
+    padding-left: 15px;
+}
+
+.roundedDivEquivalentPadding, .roundedDivEquivalent {
+    padding: 7px;
+}
+
+.roundedDivEquivalent {
+    margin-bottom: 10px;
+}
+
+.emptyPlaceMarker {
+    z-index: 2;
+    border: 2px dashed #cccccc;
+    background-color: Transparent;
+    padding-bottom: -15px;
+}
+
+td.verticalAlignMiddle {
+    vertical-align: middle;
+}
+
+div.memberDirectoryInputWithTitle {
+    float: left;
+}
+div.memberDirectoryInputWithTitle div.clear20, div.memberDirectoryInputWithTitle div.clear5 {
+    height: 0;
+}
+
+td.rightHeaderColumn {
+    text-align: right;
+    vertical-align: bottom;
+    width: 200px;
+}
+
+td.rightHeaderColumn, td.rightHeaderColumn a {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.createCommunityFieldLabel, .createCommunityTextInput, .createCommunityRadioOption {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.createCommunityFieldLabel {
+    font-weight: bold;
+    width: 150px;
+}
+
+.createCommunityTextInput {
+    width: 375px;
+}
+
+.checkboxOptionDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    padding-left: 20px;
+}
+
+.indentedOption {
+    padding-left: 20px;
+}
+
+
+.center {
+    text-align: center;
+}
+
+.profileAvatarArea {
+    width: 315px;
+    vertical-align: top;
+    padding-left: 15px;
+}
+
+.profileAvatar {
+    padding: 25px;
+    border: 0;
+}
+
+.profileFieldLabel,
+.profileFieldGroupLabel {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.profileFieldValue {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+}
+
+#profileAvatarColumn {
+    width: 100px;
+}
+
+#profileDetailsColumn {
+    padding-left: 10px;
+}
+
+#profileDetailsTable {
+    margin-bottom: 10px;
+}
+
+.profileCoreDetails {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.profilePageTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+.watchedUserListSidebarItemAvatar {
+    vertical-align: bottom;
+}
+
+.watchedUserListSidebarItemDisplayName {
+    margin-left: 5px;
+}
+
+.divRow div.sidebarExpandableSectionTitleColumn {
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.sidebarExpandableSectionIconColumn {
+    width: 18px;
+}
+
+.sidebarExpandedSection {
+    margin-bottom: 10px;
+}
+
+.cpSettingsGroupHeader {
+    margin: 10px 0 10px 0;
+}
+.cpSettingsGroupTitle,.cpSettingsGroupSubtitle {
+    padding-left: 6px;
+}
+
+.cpSettingsGroupTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.dialogDrillDownIsland td {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.dialogDrillDownIsland .checkboxColumn {
+    width: 30px;
+    text-align: center;
+}
+
+.dialogDrillDownIsland td.subjectColumn {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.dialogDrillDownIsland .participantsColumn {
+    width: 165px;
+}
+
+.dialogDrillDownIsland .participantsColumn div {
+    display: inline;
+    padding: 0 5px 0 0;
+    width: 33px;
+    vertical-align: bottom;
+}
+
+.dialogDrillDownIsland .replyCountColumn {
+    text-align: center;
+    width: 75px;
+}
+
+.dialogDrillDownIsland .lastPostDatetimeColumn, .dialogDrillDownIsland .lastPostDatetimeColumnTitle {
+    padding-right: 10px;
+    text-align: right;
+    width: 160px;
+}
+
+.dialogDrillDownIsland .lastPostDatetimeColumnTitle {
+    font-weight: bold;
+}
+
+.dialogDrillDownIsland .titleRightSpace {
+    width: 55px;
+}
+
+.participantsEllipses {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.createDialogDiv {
+    float:right;
+}
+
+#displayObjectSortOrderSelector,
+#memberDirectorySortOrderSelector {
+    float: right;
+    margin-right: 10px;
+}
+
+.displayObjectDrillDownIsland .info_bar_section {
+    cursor: pointer;
+}
+
+.displayObjectDrillDownIsland td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.displayObjectDrillDownIsland .titleColumn {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.displayObjectDrillDownIsland .lastUpdateColumn, .displayObjectDrillDownIsland:hover .lastUpdateColumn {
+    text-align: right;
+    padding-right: 50px;
+    width: 150px;
+}
+.poweredByLine {
+    padding: 10px 0 10px 0;
+    text-align: center;
+}
+
+.loginPoweredByLine {
+    padding: 50px 0 10px 0;
+    text-align: center;
+}
+
+.clipsListHeaderTypeColumn {
+    padding: 15px 0 15px 15px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.clipsListHeaderExtraColumn {
+    padding: 5px 10px 5px 0;
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.createNewPermissionGroup {
+    float:right;
+    padding-bottom: 10px;
+}
+
+#parentalConsentRequiredId {
+    margin-bottom: 10px;
+}
+
+#parentalConsentRequiredTitle {
+    font-weight: bold;
+}
+
+div.joinSubmit {
+    margin-top: 15px;
+}
+
+.signInTitleRightColumn {
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 10px;
+    font-weight: bold;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+}
+
+.loginFormColumn, .joinFormColumn {
+    padding-right: 15px;
+    vertical-align: top;
+}
+
+.loginFormColumn {
+    width: 500px;
+}
+
+.joinFormColumn {
+    width: 550px;
+}
+
+.registerThreeColumn .loginFacebookColumn {
+    width: 170px;
+}
+
+.loginFacebookColumn {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.loginFacebookColumn,
+.customRegistrationWordingColumn {
+    padding-left: 12px;
+    vertical-align: top;
+}
+
+.customRegistrationWordingColumn {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.loginInput, .loginLostPasswordLink {
+    width: 475px;
+}
+
+.loginLostPasswordLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-align: right;
+}
+
+img.mobilePostImageAlignThin {
+    max-width: 350px;
+    width: expression(this.width > 350 ? 350 : true);
+    float: right;
+    height: auto;
+}
+
+.videoPlayerPlaceholder, .videoPlayerPlaceholderFooter, .videoPlayerPlaceholderImageTable {
+    width: 640px;
+}
+
+.videoPlayerPlaceholder, .videoPlayerPlaceholderImageTable {
+    height: 512px;
+}
+
+
+.videoPlayerPlaceholder {
+    float: left;
+    position: relative;
+
+    display: table-cell;
+
+    background-color: black;
+    text-align: center;
+}
+
+
+.videoPlayerPlaceholderFooter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    height: 150px;
+
+    background-color:#ffffff;1;
+    -moz-opacity:0.8;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+}
+
+
+.videoPlayerPlaceholderImageTable td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.videoPlayerPlaceholderTitle, .videoPlayerPlaceholderDescription {
+    -moz-opacity:1.0;
+    opacity:1.0;
+    filter:alpha(opacity=100);
+}
+
+.videoPlayerPlaceholderTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+    text-align:center;
+    padding-top: 30px;
+}
+
+.videoPlayerPlaceholderDescription {
+    padding: 20px 30px 0 30px;
+    text-align: left;
+}
+
+.manageAreaMenuItemTable {
+    width: 100%;
+}
+.manageAreaMenuItemTable, .manageAreaMenuItemTable td {
+    padding: 0;
+    margin: 0;
+}
+
+.manageAreaMenuItemToolsColumn {
+    width: 50px;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.userDivInfo div {
+    padding-bottom:8px;
+}
+
+.fieldWithPlaceholder label.placeholder span {
+    padding: 3px 6px;
+}
+
+.birthdayFields .wwgrp {
+    display: inline;
+}
+
+.areaMenuItemsColumn {
+    width: 330px;
+}
+
+.signature {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.signature, .signature pre {
+    width:620px;
+}
+
+.signature.forumTopicMessageSignature, .signature.forumTopicMessageSignature pre {
+    width:490px;
+}
+
+.signature {
+        max-width: 620px;
+        word-wrap: break-word;
+    }
+
+    .signature img {
+                margin: 0 10px 10px 10px;
+                max-width: 600px;
+
+            }
+
+            .signature img.noBorder {
+                margin: 0;
+            }
+        .signature img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .signature embed, .signature iframe, .signature object {
+        max-width: 620px;
+    }.signature.forumTopicMessageSignature {
+        max-width: 490px;
+        word-wrap: break-word;
+    }
+
+    .signature.forumTopicMessageSignature img {
+                margin: 0 10px 10px 10px;
+                max-width: 470px;
+
+            }
+
+            .signature.forumTopicMessageSignature img.noBorder {
+                margin: 0;
+            }
+        .signature.forumTopicMessageSignature img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .signature.forumTopicMessageSignature embed, .signature.forumTopicMessageSignature iframe, .signature.forumTopicMessageSignature object {
+        max-width: 490px;
+    }
+
+.userApprovalHeaderTable, .userApprovalTable {
+    width: 100%;
+}
+
+.userApprovalHeaderTable td {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+.userApprovalTable td {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.userApprovalHeaderTable td, .userApprovalTable td {
+    text-align: left;
+    vertical-align: top;
+}
+
+.userApprovalApproveColumn {
+    width: 70px;
+}
+.userApprovalTable .userApprovalApproveColumn {
+    padding-left: 10px;
+    width: 60px;
+}
+
+.userApprovalUserColumn img {
+    margin-right: 10px;
+}
+.userApprovalRegistrationDateColumn {
+    width: 200px;
+}
+.userApprovalIconsColumn {
+    width: 25px;
+    text-align: right;
+}
+
+.leftTools, a.leftTools {
+    float: left;
+}
+
+.centerToolsColumn {
+    text-align: center;
+}
+
+.rightTools, a.rightTools {
+    float: right;
+}
+
+#manageUserLovedImagesDescription {
+    margin-bottom: 10px;
+}
+
+#manageUserLovedImageLinks {
+    margin-top: 10px;
+}
+
+td.rightIconColumn {
+    text-align: right;
+    vertical-align: middle;
+}
+
+.afterInputDescription {
+    padding-left: 10px;
+}
+
+.controlWrappedContent {
+    margin-left: 205px;
+    padding:  0;
+}
+
+.fontFamilyInput {
+    margin-top: 10px;
+}
+
+.postQuestionTable .questionCol{
+    padding:0px 10px;
+    overflow:hidden;
+    font-size:12px;
+    width:325px
+}
+
+#rightSidebarAdTop, #rightSidebarAdBottom {
+    text-align: center;
+}
+
+#rightSidebarAdTop {
+    padding-bottom: 10px;
+}
+
+#rightSidebarAdBottom {
+    padding-top: 10px;
+}
+
+.infoRow div {
+    position: absolute;
+}
+.infoRow span {
+    font-weight: bold;
+}
+
+.infoRow {
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.standardInfoRow div {
+    margin-left: 100px;
+}
+
+.requestToJoinThisSiteButtonDiv {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.allMemberFilterButtonWrapper {
+    vertical-align: top;
+}
+
+#wwctrl_postedDateWrapper .wwgrp {
+    margin-left: 205px;
+}
+
+.search_type_title {
+    margin-bottom: 0;
+    text-align:left;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+
+.search_type_title .bubble_padding {
+    padding: 7px;
+}
+
+.search_type_img {
+    vertical-align: text-bottom;
+}
+
+.searchQueryInput, .inlineWithButtonInput {
+    vertical-align: top;
+}
+
+.searchPageTitle {
+    float:left;
+}
+
+.floatSearchLinkRight {
+    float:right;
+}
+
+.searchResultItem {
+    padding-bottom:10px;
+    word-wrap:break-word;
+}
+
+.searchResultFileTitle {
+    font-weight: bold;
+}
+
+table#areaWrapperContent td#areaWrapperContentNav.searchNavColumn {
+    width:170px;
+}
+
+.clipImageSearchResult {
+    float:left;
+    padding: 5px;
+}
+
+.clipSearchResultPrimaryInfo,
+.contentSearchResultPrimaryInfo,
+.clipSearchResultByline {
+    max-width: 418px;
+}
+
+.clipSearchResultPrimaryInfo {
+    float:left;
+}
+
+.contentSearchResultPostDate {
+    float:right;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.contentSearchResultDetails {
+    max-width: 418px;
+    word-wrap: break-word;
+    padding-top: 5px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+
+.searchQueryInputWrapper .yui-skin-sam .yui-button, .inlineWithButtonInputWrapper .yui-skin-sam .yui-button {
+    margin:0;
+}
+
+
+.searchQueryInputWrapper .yui-skin-sam .yui-button button, .inlineWithButtonInputWrapper .yui-skin-sam .yui-button button {
+    min-height: 0;
+}
+
+
+input.searchQueryInput, input.inlineWithButtonInput, select.inlineWithButtonInput {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+select.inlineWithButtonInput {
+    margin-left: 0;
+}
+
+#forumTopicTopPagination {
+    text-align: right;
+    margin-top: 7px;
+    margin-right: 10px;
+}
+
+#forumTopicTopPagination .pagination {
+    margin: 0;
+}
+
+#forumTopicDisplay #areaActionButtonColumn {
+    vertical-align: bottom;
+}
+
+.shareToolbar {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    padding: 12px 0;
+    border:1px #bdb7b7 DOTTED;
+    border-left: 0;
+    border-right: 0;
+}
+
+.shareToolbar.topicShareToolbar {
+    margin-bottom: 12px;
+}
+
+#shareToolbarPublicDescription {
+    padding-bottom: 10px;
+}
+
+.emailAFriendLink {
+    padding-right: 15px;
+}
+
+#forwardLinkId {
+    text-decoration: none;
+}
+
+
+button::-moz-focus-inner {border:0;}
+
+.moveIcon {
+    cursor: move;
+    border: none;
+    padding: 3px 5px 0 0;
+}
+
+.createSubTierButtonContainer {
+    text-align: right;
+}
+
+.tierOrSubTierRightDescription {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    float: right;
+}
+
+.upperCaseText {
+    text-transform: uppercase;
+}
+
+.additionalOpenIdSettings {
+    padding-left: 25px;
+}
+
+input.openIdRadioOption {
+    float: left;
+    margin-top: 5px;
+}
+
+label.openIdRadioLabel {
+    float: left;
+    display: block;
+    width: 570px;
+    padding-left: 5px;
+}
+
+.whatIsOpenIdLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.verifyLoginOptions li {
+    padding-top: 10px;
+}
+
+
+.premiumTextField {
+    width: 650px;
+}
+
+textarea.premiumTextField {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.premiumPriceDescription {
+    margin-left:100px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.premiumClip {
+    margin-top: 10px;
+}
+
+.premiumDescriptionIconLink, .premiumDescriptionIcon {
+    padding-right: 7px;
+}
+
+.premiumContentSubjectIcon {
+    margin-left:7px;
+}
+
+.premiumContentSubjectIcon img {
+    vertical-align: middle;
+}
+
+.premiumContentLabelIcon {
+    padding-left:7px;
+    vertical-align: text-bottom;
+}
+
+.groupPermissionsTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.disableRoundedDivMarginBottom .info_bar_section_alt, .disableRoundedDivMarginBottom .info_bar_section {
+    margin-bottom: 0;
+}
+
+.editGroupSetupRow {
+    padding-bottom: 5px;
+}
+.editGroupSetupRow * {
+    vertical-align: middle;
+}
+.editGroupSetupRow .icon {
+    padding: 0 7px;
+}
+
+.addPollPremiumIcon, .likeThisPremiumIconLink {
+    float: right;
+    vertical-align: middle;
+}
+
+#premiumPriceAndDurationReadOnlyId {
+    font-weight: bold;
+}
+
+.googleOrYahooUserAuthIcon {
+    vertical-align: middle;
+}
+
+.premiumGroupMemberRow td {
+    padding: 5px 0;
+}
+
+#disbursementOptionRadios {
+    text-align: center;
+    font-weight: bold;
+}
+
+#disbursementOptionRadios input {
+    margin-left: 15px;
+}
+
+.upsellRemoveAdLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.cpSearchResultTable .checkBoxColumn {
+    padding: 5px 10px 0 2px;
+    vertical-align: top;
+}
+
+.cpSearchResultTable .informationColumn {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;;
+    width: 100%;
+}
+
+.cpSearchResultTable .informationColumn .header {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.cpSearchResultTable .informationColumn .thumbnail {
+    float: right;
+}
+.cpSearchResultTable .informationColumn .areaStatus {
+    float: right;
+    width: 250px;
+    text-align: right;
+}
+
+.undeleteLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight:normal;
+}
+
+.areaListNavLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: normal;
+}
+
+.areaListOwnerUnclaimed {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-style: italic;
+}
+
+.areaAdminEmail {
+    margin-bottom: 5px;
+}
+
+.areaListAreaDetails {
+    float: left;
+    width: 530px;
+}
+
+.cpSearchResultTable .informationColumn .emailAddress {
+    padding-bottom: 12px;
+}
+
+.filterColumnRightPadding {
+    padding-right: 10px;
+}
+
+.selectAllToolbarWrapper {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.selectAllToolbarWrapper input {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.selectAllToolbarWrapper .descriptionText {
+    float: right;
+    width: 550px;
+    text-align: center;
+}
+
+.cpSearchListSelectAll {
+    padding: 10px 0 10px 9px;
+}
+
+.cpSearchListNoResults {
+    margin-top: 10px;
+}
+
+.horizontalCheckboxListItems div.wwgrp {
+    float: left;
+    white-space:nowrap;
+    padding: 0;
+}
+
+.forkingReplyFieldHeader {
+    margin: 10px 0 0 0;
+}
+
+.productsForForkingReply .wwgrp {
+    width: 300px;
+}
+
+.horizontalCheckboxListItems input {
+    margin-left: 0;
+}
+
+.authZoneBadgeIcon {
+    padding-left: 7px;
+}
+
+.forumPageActionBox {
+    margin-top: 15px;
+}
+
+.actionBoxWrapper .iconColumn {
+    width: 18px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+.actionBoxWrapper .iconColumn img {
+    align: center;
+}
+
+.actionBoxWrapper .bodyColumn {
+    padding: 5px 5px 0 10px;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.actionBoxWrapper.narrowActionBox .iconColumn,
+#areaWrapperContentNav .actionBoxWrapper .iconColumn {
+    width: 18px;
+    padding-left: 7px;
+}
+
+.actionBoxWrapper .bodyColumn .description {
+    padding-top: 7px;
+}
+.actionBoxWrapper .bodyColumn .editIcon {
+    width:18px;
+    float: right;
+}
+.actionBoxWrapper hr {
+    width: 100%;
+    border: 0;
+    margin: 0;
+    color: #bdb7b7;
+    background-color: #bdb7b7;
+    height: 1px;
+}
+
+.actionBoxWrapper .actionBoxItemWrapper {
+    margin-bottom: 3px;
+}
+
+.actionBoxWrapper .actionBoxItemWrapper.lastItem {
+    margin-bottom: 10px;
+}
+
+.actionBoxWrapper .actionBoxItem {
+    padding: 4px 0 8px;
+}
+
+.actionBoxItem .userAvatar {
+    margin: 0 6px 6px 0;
+}
+
+.linksWidgetAddNewLink {
+    padding: 10px 0;
+}
+
+.basicSettingsBigInput {
+    width: 450px;
+}
+
+.basicSettingsTextarea {
+    width: 450px;
+    height:100px;
+}
+
+.wideTextarea {
+    width: 100%;
+    height: 100px;
+}
+
+#affiliateAdCode {
+    width: 100%;
+    height: 50px;
+}
+
+#theme_customHeaderHTML {
+    width: 100%;
+}
+
+#subject {
+    width: 100%;
+}
+
+#closedContentDiv {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#closedContentDiv .bubble_padding {
+    padding: 10px;
+}
+
+#closedContentDiv .closedIconImage {
+    padding-right: 7px;
+}
+
+#forumTopicMessages .forumTopicMessageRowContainer {
+    width: 645px;
+    display: table;
+}
+
+
+.forumTopicMessageRow {
+    display: table-row;
+}
+
+.forumTopicMessageAuthorCell,
+.forumTopicMessageTextCell,
+.forumTopicMessageSpacerCell {
+    display: table-cell;
+    vertical-align: top;
+}
+
+div.forumTopicTopCell {
+    border-bottom: 0;
+}
+
+div.forumTopicBottomCell {
+    border-top: 0;
+}
+
+.forumTopicToolsCell .bubble_padding {
+    padding: 0 5px 3px 5px;
+}
+
+
+
+.forumTopicMessageAuthorCell {
+    width: 125px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+.forumTopicMessageAuthorCell .userAvatarImage {
+    text-align: center;
+}
+.forumTopicMessageAuthorCell .userAvatarImage img {
+    padding: 10px 0;
+}
+
+.forumTopicMessageAuthorCell .userDisplayname,
+.forumTopicMessageAuthorCell .userTitle,
+.forumTopicMessageAuthorCell .userBadges {
+    text-align: center;
+    width: 111px;
+    word-wrap: break-word;
+}
+
+.forumTopicMessageAuthorCell .userTitle,
+.forumTopicMessageAuthorCell .userBadges {
+    padding-top: 5px;
+}
+
+.forumTopicMessageAuthorCell .authZoneBadgeIcon {
+    padding: 0 5px 0 0;
+}
+
+.forumTopicMessageSpacerCell {
+    width: 7px;
+}
+
+.forumTopicMessageRowContainer {
+    margin-bottom: 7px;
+}
+
+.forumTopicMessageHeader {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.forumTopicMessageQuoteIcons {
+    width: 50px;
+    padding: 0 7px 7px 0;
+}
+
+#forumTopicMessages hr {
+    width: 100%;
+    border: 0;
+    margin: 5px 0 5px 0;
+    color: #bdb7b7;
+    background-color: #bdb7b7;
+    height: 1px;
+}
+
+.forumTopicMessageEditText {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    padding: 5px 5px 0 0;
+    text-align:right;
+    font-style:italic;
+}
+
+.restrictedFeatureMessage {
+    margin: 10px 0;
+}
+
+.createEventAddressMapLink {
+    width: 150px;
+    text-align: right;
+    float: right;
+}
+
+.createContentInput {
+    width: 100%;
+}
+
+.endDatetimeField {
+    margin-left: 5px;
+}
+
+.yui-skin-sam.yuiTimepickerButtonWrapper .yui-button button {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-weight: normal;
+}
+
+.datepickerInput {
+    vertical-align: top;
+}
+
+#calendarStartEndDateFields {
+    vertical-align: top;
+}
+
+.eventAvatarFields {
+    margin-top: 10px;
+}
+
+.postingPageSectionHeader {
+    margin-top: 30px;
+}
+
+.postingPageSubmitWrapper {
+    margin-top: 30px;
+}
+
+#eventDetailsAvatar {
+    float: left;
+}
+
+#eventTitleId {
+    margin: 0 0 10px 5px;
+    float: left;
+    width: 600px;
+}
+
+#eventDetailsByline {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: normal;
+    margin-top: 2px;
+}
+
+#eventLocationId {
+    float: right;
+    text-align: right;
+}
+
+#eventRsvpSectionId .bubble_padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#eventRsvpSectionTitleId {
+    margin-top: 0;
+}
+
+.eventRsvpSection {
+    margin: 5px 0 5px 0;
+    padding:  0 7px 0 7px;
+}
+
+.eventSectionTitle {
+    font-weight: bold;
+}
+
+.eventAddressBody {
+    width: 450px;
+}
+
+.eventAddressMap {
+    float: right;
+    padding: 5px;
+}
+
+#attendingStatusId {
+    width: 200px;
+    float: right;
+    text-align: right;
+}
+
+.eventDetailsOffset {
+    padding: 10px;
+    font-weight: bold;
+}
+
+#eventUserStatusSection {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+#eventUserStatusText {
+    float: left;
+}
+
+#eventUserStatusIcon {
+    float: right;
+}
+
+.eventDetailsRsvpAvatarList {
+    margin-top: 10px;
+}
+
+#addToCalendarChoicesId {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-align: center;
+}
+
+#addToCalendarChoicesDescriptionId {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.addToCalendarChoice {
+    float: left;
+    width: 110px;
+    text-align: center;
+    margin: 10px 15px;
+}
+
+.addToCalendarChoiceTitle {
+    padding-top: 5px;
+}
+
+.searchResults {
+    display: table;
+    width: 100%;
+}
+
+.searchResult {
+    display: table-row;
+}
+
+.searchResultCell {
+    display: table-cell;
+    padding: 0 5px 0 5px;
+    vertical-align: top;
+}
+
+.searchResultAvatar {
+    width: 50px;
+}
+
+.searchResultLeftContent {
+    float: left;
+    width: 258px;
+}
+.searchResultRightContent {
+    float: right;
+    width: 160px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-align: right;
+}
+
+.fadedElement {
+    -moz-opacity:0.8;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+}
+
+.clickableElement {
+    cursor: pointer;
+}
+
+.statisticsSectionLabel {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.statisticsSectionDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#googleAnalyticsFormatDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-top: 5px;
+}
+
+.googleAnalyticsFieldSubText {
+    margin-left: 205px;
+    margin-top: 10px;
+}
+
+.importEventResult {
+    margin: 5px 0;
+}
+
+#premiumPermissionDescriptionLabelText {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.chatEventOption {
+    margin-bottom: 10px;
+}
+
+#moderateHostPostsWrapperId {
+    margin-left: 205px;
+}
+
+input#postContentForm_shortFormPosttrue {
+    margin-left: 15px;
+}
+
+.enableTiersCheckboxContainer {
+    margin-bottom: 10px;
+}
+
+.createTierButton {
+    float: right;
+    width: 200px;
+    text-align:right;
+}
+
+#createEditContentSubmitTable {
+    margin-top: 20px;
+}
+
+#createEditContentSubmitTable #draftButtonColumn {
+    padding-right:10px
+}
+
+.addClipsOptionGroup {
+    margin-bottom: 15px;
+}
+.addClipsOptionGroupTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#areaActionButtonColumn {
+    width: 300px;
+    padding-left: 15px;
+}
+
+#addEditClipTable {
+    display: table;
+}
+
+#addEditClipLeftColumn {
+    width: 290px;
+}
+
+#addEditClipLeftColumn input,
+#addEditClipLeftColumn textarea {
+    width: 100%;
+}
+
+#addEditClipLeftColumn .wwlbl_top {
+    width: 290px;
+}
+
+#addEditClipRightColumn {
+    width: 275px;
+    padding-left: 15px;
+}
+
+#clipDetailsFileIcon {
+    float: left;
+    margin-right: 10px;
+}
+
+#clipDetailsTitleAndDescription {
+    word-wrap: break-word;
+    width: 650px;
+}
+#clipDetailsTitleAndDescription.forRegularFile {
+    width: 565px;
+}
+
+#clipDetailsTitleAndDescriptionSection {
+    float: left;
+}
+
+.clipsFileViewTable * {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.clipsFileViewTitleRow * {
+    font-weight: bold;
+}
+
+.clipsFileViewTableRow:hover {
+    background: #f0f0f0;1;
+}
+
+.clipsFileViewCellPadding {
+    padding: 5px 0;
+}
+
+.fileViewCheckboxColumn input {
+    margin-top: 7px;
+}
+
+#administrativeAreaId .label {
+    width: 250px;
+}
+
+#administrativeAreaId .wwctrl select {
+    margin-left: 255px;
+}
+
+.clipsFileViewTable div.divCell {
+    vertical-align: middle;
+}
+
+.socialNetworkRegistrationSettingsIcon {
+    padding-left: 7px;
+}
+
+.openIdSettingsTable .iconColumn {
+    width: 85px;
+    text-align: center;
+}
+
+.externalAuthAppIconColumn {
+    padding-right: 10px;
+    width: 64px;
+}
+
+.externalAuthAppIconColumn img {
+    vertical-align: middle;
+}
+
+.externalAuthAppDescriptionColumn {
+    padding-top: 5px;
+}
+
+.externalAuthAppCheckboxSettings .wwgrp {
+    padding-right: 5px;
+}
+
+.userFeedAccountWidgetsDescription {
+    margin-top: 10px;
+}
+
+.userLinkedSocialNetworksTable .titleColumn,
+.userLinkedSocialNetworksTable .iconsColumn {
+    vertical-align: middle;
+}
+.userLinkedSocialNetworksTable .titleColumn {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.userLinkedSocialNetworksTable .iconsColumn {
+    width: 100%;
+    padding-left: 5px;
+}
+
+#communityRankProfileSection {
+    margin-bottom: 1px;
+    font-weight: bold;
+}
+
+#communityRankPointsSection {
+    text-align: center;
+}
+
+#communityRankSectionTitle img {
+    vertical-align: middle;
+}
+
+#communityRankWhatsThis {
+    text-align: right;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: normal;
+}
+
+#communityRankDescTitle {
+    font-weight: bold;
+}
+
+.communityRankParagraph {
+    margin-top: 10px;
+}
+
+#communityRankPointsSection {
+    margin-top: 10px;
+    padding-bottom: 3px;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+#activityPointsProfileSection {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#activityPointsPointsSection {
+    text-align: right;
+}
+
+.externalAuthAppLoginTable .externalAuthAppNameColumn {
+    vertical-align: middle;
+}
+
+
+.fileViewCheckboxColumn {
+    width: 15px;
+}
+
+.fileViewIconColumn {
+    width: 30px;
+}
+
+div.fileViewTitleColumn {
+    vertical-align: middle;
+    padding-right: 10px;
+    width: 200px;
+}
+
+.fileViewAuthorColumn {
+    width: 170px;
+    padding-right: 10px;
+}
+
+.fileViewNoFeaturedIcon .fileViewAuthorColumn {
+    width: 200px;
+}
+
+.fileViewCreationDatetimeColumn {
+    width: 150px;
+    text-align: right;
+}
+
+.fileViewFeatureIconColumn {
+    width: 30px;
+    text-align: right;
+}
+
+.clipFileTagSearchResult {
+    margin-bottom: 10px;
+}
+
+#addTagsToClipsButton {
+    vertical-align: middle;
+}
+
+.featuresTable {
+    margin: 10px 0;
+}
+
+.featureCell {
+    width: 225px;
+    padding: 3px 0 0 5px;
+}
+
+.featureCell * {
+    verticle-align: middle;
+}
+
+.featureCell img {
+    padding-right: 7px;
+}
+
+.postCommentFooter {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.permissionGroupDescription {
+    margin: 10px 0;
+}
+
+#customPermissionGroups {
+    margin-top: 30px;
+}
+
+.areaHeaderTypeDescription, .areaHeaderTypeOptions {
+    margin-bottom: 10px;
+}
+
+.areaHeaderTypeIndentedSection {
+    margin-left: 20px;
+}
+
+.areaHeaderTypeOneOfThreeImageColumn {
+    width: 33%;
+    text-align: center;
+}
+
+.areaHeaderImagesDescription {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.communityAvatarImagePlaceholder,
+.areaHeaderImagesPlaceholder {
+    border: 1px solid #333333;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.communityAvatarImagePlaceholder {
+    width:180px;
+    height:70px;
+    padding-top: 50px;
+}
+
+.areaHeaderImagesPlaceholder {
+    margin: auto;
+    width:100px;
+    height:68px;
+    padding-top: 32px;
+}
+
+.expandableSectionHeader {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.divRow div.expandableCpSectionHeaderTitleColumn {
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+div.divCell.expandableCpSectionHeaderIconColumn {
+    text-align: right;
+    vertical-align: middle;
+    width: 35px;
+}
+
+#inviteUsersColumn {
+    text-align: right;
+}
+#inviteUsersColumn * {
+    vertical-align: middle;
+}
+
+#inviteEmailsDivId label {
+    font-weight: bold;
+}
+
+#inviteBypassMemberModeration {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#inviteCommunityMembersColumn {
+    padding-left: 20px;
+}
+
+#communityMemberInvitationssTitle {
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+#communityMemberInvitationssSubtitle {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#wwctrl_sendInvitationsNowButton .yui-button.yui-submit-button {
+    margin: 0;
+}
+
+.advancedUserLayout .avatarColumn {
+    width: 25px;
+    padding-right: 10px;
+}
+
+.advancedUserLayout .trashcanColumn {
+    width: 18px;
+}
+
+.requiredMarkerDescription {
+    text-align: center;
+}
+
+.dividedSearchResult {
+    border-top:1px DOTTED #bdb7b7;
+    padding-top: 10px;
+}
+
+.searchResult .informationColumn {
+    text-align: left;
+}
+
+.customProfileFieldMoveHandle {
+    cursor:move;
+    border:none;
+    padding:0 3px;
+}
+
+.registrationCaptchaWrapper {
+    margin-bottom: 10px;
+}
+
+#linkProfileTip .description,
+#linkProfileTip .descriptionLink {
+    text-align: center;
+}
+
+#linkProfileTip .descriptionLink {
+    margin-top: 5px;
+}
+#linkProfileTip .removeLink {
+    text-align: right;
+}
+
+
+.shadedContentArea.inheritStyling {
+    background-color: inherit;
+    color: inherit;
+}
+.shadedContentArea.inheritStyling a {
+    color: inherit;
+}
+.shadedContentArea.inheritStyling a:visited {
+    color: inherit;
+}
+.shadedContentArea.inheritStyling img {
+    border-color: inherit;
+}
+
+.shadedContentArea.backgroundColor1OnHover:hover,
+.shadedContentArea {
+    background-color: #f0f0f0;1;
+    color: #333333;
+}
+
+.shadedContentArea.backgroundColor1OnHover:hover a,
+.shadedContentArea a {
+    color: #194e84;
+}
+.shadedContentArea.backgroundColor1OnHover:hover a:visited,
+.shadedContentArea a:visited {
+    color: #194e84;
+}
+.shadedContentArea.backgroundColor1OnHover:hover img,
+.shadedContentArea img {
+    border-color: #333333;
+}
+
+.shadedContentArea.backgroundColor2, .shadedContentArea.backgroundColor2OnHover:hover {
+    background-color: #d7d7d7;1;
+}
+
+.shadedContentArea.backgroundColor3, .shadedContentArea.backgroundColor3OnHover:hover {
+    background-color: #e8e8e8;1;
+}
+
+.shadedContentArea.statusBackgroundColor, .shadedContentArea.statusBackgroundColorOnHover:hover {
+    background-color: #E8F2FC;1;
+}
+
+.groupedShadedContentAreas .shadedContentArea {
+    margin-bottom: 2px;
+}
+.groupedShadedContentAreas {
+    margin-bottom: 18px;
+}
+
+.authProviderLoginImageLink {
+    float: left;
+    margin: 0 5px 5px 0;
+}
+
+.pageContentTopDescription {
+    margin-bottom: 20px;
+}
+
+.textInputDescription,
+.selectInputDescription,
+.textInputDescriptionUnderInput,
+.selectInputDescriptionUnderInput {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.textInputDescription,
+.selectInputDescription {
+    margin-bottom: 5px;
+}
+
+.textInputDescriptionUnderInput,
+.selectInputDescriptionUnderInput {
+    margin: 5px 0 0 205px;
+}
+
+.div_popup .controlWrappedContent,
+.div_popup .textInputDescriptionUnderInput,
+.div_popup .selectInputDescriptionUnderInput {
+    margin-left: 150px;
+}
+
+.div_popup #addEditForum .controlWrappedContent,
+.div_popup #addEditForum .textInputDescriptionUnderInput {
+    margin-left: 250px;
+}
+
+
+.standalonePageContentBody {
+    background-color:#ffffff;1;
+    border:#bdb7b7 DOTTED;
+    border-width:1px 0;
+    padding:10px;
+}
+
+.standalonePageContentBody,
+.loginFacebookColumn,
+.customRegistrationWordingColumn,
+.standalonePageContentBody .label,
+.standalonePageContentBody .requiredLabel,
+.standalonePageContentBody .checkboxLabel {
+    color: #333333;
+}
+.standalonePageContentBody a {
+    color: #194e84;
+}
+.standalonePageContentBody a:visited {
+    color: #194e84;
+}
+
+img.postingTipNavIcon {
+    vertical-align: top;
+    margin-right: 3px;
+}
+
+.posting_tips_div, .posting_tips_div_on {
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+
+.postingTipsContent .postingTipTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.graemlinKeystrokes .graemlinIntro {
+    margin-bottom: 10px;
+}
+
+.graemlinTable .tableHeader {
+    font-weight: bold;
+}
+
+.graemlinTable .graemlinColumn {
+    width: 100px;
+}
+
+#activityStreamDivId .info_bar_section,
+#activityStreamDivId .info_bar_section_hover {
+    margin-bottom: 3px;
+}
+
+#activityStreamDivId .info_bar_section .bubble_padding,
+#activityStreamDivId .info_bar_section_hover .bubble_padding,
+.widgetActivityStream .bubble_padding {
+    padding: 10px;
+}
+
+#activityStreamHeader {
+    margin-top: 10px;
+}
+
+#activityStreamTitle {
+    float: left;
+    font-weight: bold;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+}
+
+#excludeSocialFeedsOption {
+    float: right;
+}
+
+.activityStreamItemTitle {
+    width: 450px;
+}
+.activityStreamItemDate {
+    width: 190px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-align: right;
+    vertical-align: top;
+}
+.activityStreamItemDetails {
+    margin-top: 5px;
+}
+.activityStreamItemAvatar {
+    width: 50px;
+}
+.activityStreamItemSubDetails {
+    padding-left: 10px;
+    vertical-align: middle;
+    position: relative;
+}
+.activityStreamDescImage {
+    vertical-align: middle;
+    padding-right: 5px;
+}
+#userLikesLoadMoreId,
+#activityStreamLoadMoreId {
+    text-align: center;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+}
+
+.viewOnFeedSourceLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.widgetWrapper .activityStreamItemAvatar {
+    width: 25px;
+}
+
+.widgetWrapper .activityStreamItemTitle {
+    width: 100%;
+}
+
+.widgetWrapper .activityStreamItemDate {
+    width: 125px;
+}
+
+#widgetColumnMIDDLE .widgetWrapper .activityStreamItemTitle {
+    width: 280px;
+}
+
+#activityStreamLoadMoreId.widgetActivityStream {
+    text-align: right;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.textualWidgetContentSeparator,
+.activityStreamItemWidgetSeparator {
+    width: 100%;
+    height: 1px;
+    line-height: 1px;
+    background-color: #ffffff;1;
+}
+
+#updateProfileBackLink {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+#deleteCategoryWithContentWarning {
+    margin-bottom: 10px;
+}
+
+.alertRowRightTime {
+    float: right;
+}
+
+.alertRowLikedEntity,
+.alertRowFeaturedEntity {
+    margin-top: 10px;
+}
+
+.someoneFollowedMeAvatarColumn {
+    padding-right: 10px;
+}
+
+.someoneFollowedMeDisplayNameColumn {
+    width: 100%;
+}
+
+.someoneFollowedMeUserTitle {
+    margin-top: 10px
+}
+
+.addWidgetTypeDescriptionColumn {
+    width: 100%;
+}
+
+.addWidgetTypeAuthProviderColumn {
+    padding-left: 5px;
+}
+
+.addWidgetTypeAlreadyUsedAuthProviderIcon {
+    margin-right: 5px;
+}
+
+.addWidgetTypeAfterLinkingName {
+    font-weight: bold;
+}
+
+.addWidgetTypeAfterLinkingDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.addUserProfileWidgetSectionTitle {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.collectionTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.collectionSubText {
+    margin-top: 5px;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: normal;
+}
+
+.userFeedAccountCheckbox {
+    white-space: nowrap;
+    float: left;
+}
+
+div.divCell.termForPortfoliosTitleColumn {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.termForPortfoliosSettingColumn {
+    white-space: nowrap;
+}
+
+.portfolioDeleteAvatarIcon {
+    float: right;
+}
+
+.portfolioAvatarColumn {
+    padding-right: 10px;
+}
+
+.portfolioInformationColumn {
+    width: 100%;
+}
+
+.editPortfolioSettingsLink {
+    padding-left: 5px;
+    font-weight: normal;
+}
+
+.portfolioDisplayLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-top: 10px;
+}
+
+#portfolioHeaderTable * {
+    color: #333333;
+}
+
+#portfolioHeaderTable * a {
+    color: #194e84;
+}
+
+#portfolioHeaderTable * a:visited {
+    color: #194e84;
+}
+
+#portfolioHeaderTable .portfolioInformation {
+    background-color: transparent;
+    border: 0;
+    text-align: left;
+}
+
+#portfolioHeaderTable.shadedContentArea {
+    margin-bottom: 0;
+}
+#portfolioHeaderTable .avatarColumn {
+    width: 50px;
+    padding-right: 10px;
+}
+
+#portfolioHeaderTable .titleColumn {
+    width: 100%;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.portfolioDirectoryTitleInputDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.updatePortfolioSettingsButtonContainer {
+    margin-top: 10px;
+    text-align: right;
+}
+
+#portfoliosDescription {
+    margin-bottom: 10px;
+}
+
+.areaModuleTypeTable .descriptionColumn {
+    padding-right: 10px;
+}
+
+.areaModuleTypeTable .areaModuleDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-left: 18px;
+}
+
+.areaModuleTypeTable .titleInputColumn {
+    width: 225px;
+    padding: 5px 0;
+}
+
+.areaModuleTypeTable .titleInputColumn .customizeTitleLink,
+.areaModuleTypeTable .titleInputColumn .areaModuleUpgradePlanLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.areaModuleTypeTable .titleInputColumn .customizeTitleResetLink img {
+    vertical-align: bottom;
+}
+
+.integrateTwitterTable .iconColumn {
+    width: 64px;
+}
+
+.integrateTwitterTable .descriptionColumn {
+    padding-left: 10px;
+}
+
+.integrateTwitterTable .twitterIntegrationTitle {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.booleanCheckboxOptionsTitle {
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.booleanCheckboxOptions {
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+
+#restrictBloggingDescriptionId {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-left: 18px;
+}
+
+.markAllBlogEntriesPremiumOptionWrapper,
+.booleanCheckboxOption {
+    margin-bottom: 10px;
+}
+
+.areaModuleDisabledTable .iconColumn {
+    width: 20px;
+}
+
+.areaModuleDisabledTable .descriptionColumn {
+    padding-left: 10px;
+}
+
+.enableDisabledModuleText {
+    margin-top: 10px;
+}
+
+.dividedBlogExtract {
+    border-top: 1px #bdb7b7 solid;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.blogExtractTable .iconColumn {
+    width: 100px;
+}
+
+.blogExtractTable .blogExtractColumn {
+    padding-left: 10px;
+}
+
+.blogExtractTable .blogExtractSubjectLink {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+}
+
+.blogExtractTable .blogExtractAuthorData {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.permissionColumnHeader, .permissionSectionTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.checkboxListItemDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-left: 17px;
+}
+
+.info_bar_section.permissionSectionTitle {
+    margin-bottom: 0;
+}
+
+.areaResourcePermissionsFORUM {
+    margin-bottom: 15px;
+}
+
+hr.dividedPermissionGroup {
+    border: none;
+    height: 1px;
+    color: #bdb7b7;
+    background-color: #bdb7b7;
+    margin-bottom: 20px;
+}
+
+.areaResourcePermissionsFORUM div {
+    display: inline;
+}
+
+.moderatedItemPortfolio,
+.moderatedItemPopupPortfolio {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#AREAPermsDiv .eveHeaderTabs,
+#FORUMPermsDiv .eveHeaderTabs {
+    margin-bottom: 10px;
+}
+
+.userProfileContentActionButton {
+    float: right;
+}
+
+#activityStreamHeader .unselectedUserSectionTitle,
+#activityStreamHeader .selectedUserSectionTitle {
+    float: left;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 0 7px;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+#activityStreamHeader .unselectedUserSectionTitle,
+.profileWithAdditionalData #activityStreamHeader #excludeSocialFeedsOption,
+.userCommentWall #activityStreamHeader #excludeSocialFeedsOption,
+#activityStreamHeader .selectedUserSectionTitle {
+    line-height: 20px;
+}
+
+#activityStreamHeader #wallCommentsCreationButton {
+    position: relative;
+    top: 20px;
+}
+
+.selectedUserSectionTitle {
+    background-color: #f0f0f0;1;
+    color: #333333;
+}
+
+.profileWithAdditionalData #activityStreamHeader .wwgrp {
+    padding: 0;
+}
+.userCommentWall #activityStreamHeader,
+.profileWithAdditionalData #activityStreamHeader {
+    border-bottom:1px #bdb7b7 DOTTED;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+}
+
+.userCommentWall #activityStreamHeader {
+    border-top:1px #bdb7b7 DOTTED;
+    padding-top: 15px;
+}
+
+.profileWithAdditionalData #activityStreamHeader {
+    padding-top: 5px;
+}
+
+div#userWallTopicPlaceholder {
+    text-align: center;
+}
+
+#userWallCommentSubject {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.blockedUserTable .avatarColumn {
+    width: 50px;
+    padding-right: 10px;
+}
+
+.blockedUserTable .userTitle {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-top: 10px;
+}
+
+.blockedUserTable .deleteIcon {
+    float:right;
+}
+
+.explanatoryShadedTable .iconColumn {
+    width:50px;
+}
+
+.explanatoryShadedTable .explanationColumn {
+    padding-left: 10px;
+}
+
+.explanatoryRoundedDivContainer {
+    margin-bottom: 10px;
+}
+
+.explanatoryRoundedDivLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.explanatoryRoundedDivLink .wwgrp {
+    padding: 0;
+}
+
+.backOneLevelBreadcrumbImageLink {
+    margin-right: 5px;
+}
+.backOneLevelBreadcrumbImageLink img,
+.backOneLevelBreadcrumbLink {
+    vertical-align: bottom;
+}
+
+#premiumPromoWrapper {
+    position: relative;
+}
+
+#premiumPromo .hd {
+    display: none;
+}
+
+#premiumPromoHeader {
+    position: absolute;
+    width: 640px;
+    top: 155px;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: left;
+    padding: 30px;
+}
+
+#premiumPromoTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+#premiumPromoDescription {
+    margin-top: 10px;
+    max-height: 125px;
+    overflow-y: auto;
+}
+
+#premiumPromoOptOut {
+    float: right;
+    text-align: right;
+}
+
+#premiumPromoPriceAndOptOut {
+    position: absolute;
+    top: 465px;
+    width: 680px;
+    padding: 0 10px;
+    text-align: left;
+}
+
+#premiumPromoPriceAndOptOut {
+    color: #000000;
+}
+
+#premiumPromoPriceAndOptOut #premiumPromoOptOut a,
+#premiumPromoPriceAndOptOut #premiumPromoOptOut a:hover,
+#premiumPromoPriceAndOptOut #premiumPromoOptOut a:visited {
+    color: #000000;
+    text-decoration: underline;
+}
+
+
+#premiumGroupPromoRadioDescription {
+    margin-bottom: 10px;
+}
+
+.actionBoxWrapper.premiumPlanOptions {
+    width: 265px;
+}
+.actionBoxWrapper.premiumPlanOptions .bodyColumn {
+    width: 220px;
+}
+
+#premiumAreaAccountInfoTable .divTable {
+    width: auto;
+    margin: 0;
+}
+#premiumAreaAccountInfoTable .titleColumn {
+    width: 175px;
+    font-weight: bold;
+}
+
+#planLimits {
+    margin-top: 10px;
+}
+
+#planLimits .titleColumn {
+    font-weight: bold;
+}
+
+#premiumAreaAccountInfoTable .informationColumn {
+    width: 225px;
+}
+
+#premiumPromoPreviewLink {
+    float: right;
+    font-weight: normal;
+}
+
+#premiumMembershipGroupSettingsWrapper {
+    margin-bottom: 10px;
+}
+
+#premiumMembershipGroupSettingsWrapper .shadedContentArea {
+    margin-bottom: 0;
+}
+
+.defaultPermissionsListTable .divCell {
+    width: 50%;
+}
+
+.defaultPermissionsListTable .defaultPermissionInList {
+    margin-top: 5px;
+}
+
+#dialogParticipantsListColumn .removeSelectedUserIcon {
+    margin-left: 10px;
+}
+
+.continueReadingArea {
+    margin-top: 10px;
+}
+
+.breadcrumbsColumn {
+    padding-top: 10px;
+}
+
+.continueReadingColumn {
+    width: 200px;
+}
+
+.defaultForumAvatarAndText {
+    text-align: center;
+    display: inline-block;
+}
+
+.defaultForumAvatarText {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    white-space: nowrap;
+    padding-top: 10px;
+}
+
+.dialogParticipant {
+    margin-bottom: 7px;
+}
+
+.dialogExplanation {
+    padding-top: 10px;
+    font-weight: normal;
+}
+
+.dialogParticipantSelectorTitle {
+    font-weight: bold;
+}
+
+.dialogParticipantSelectorTitle,
+.dialogParticipantSelectorDescription {
+    margin-bottom: 7px;
+}
+
+.moderationQueueDescription {
+    margin-bottom: 10px;
+}
+
+.moderatedItemTable .divCell {
+    padding-top: 7px;
+}
+
+.moderatedItemTable .checkBoxColumn {
+    width: 30px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.moderatedItemTable .informationColumn {
+    padding-right: 10px;
+}
+
+.moderatedItemTable .avatarColumn {
+    width: 50px;
+    padding-right: 7px;
+    vertical-align: top;
+}
+
+.informationColumn .moderatedItemTitle * {
+    vertical-align: top;
+}
+
+.moderatedItemTable .informationColumn .moderatedItemTitle,
+.moderatedItemTable .informationColumn .moderatedItemDatetimeAndAuthor {
+    margin-bottom: 10px;
+}
+
+.reviewContentDetailsTable .informationColumn,
+.reviewContentDetailsTable .avatarColumn {
+    padding: 7px 0;
+}
+
+.reviewContentDetailsTable .avatarColumn {
+    width: 50px;
+    padding-left: 7px;
+}
+
+.reviewContentDetailsTable .informationColumn .reviewContentTitle {
+    font-weight: bold;
+    padding-right: 7px;
+}
+
+.reviewContentDetailsTable .informationColumn .reviewContentPostDatetimeAndDisplayname,
+.reviewContentDetailsTable .informationColumn .reviewContentUserWall,
+.reviewContentDetailsTable .informationColumn .reviewContentPortfolio,
+.reviewContentDetailsTable .informationColumn .reviewContentPostedTo,
+.reviewContentDetailsTable .informationColumn .reviewContentModerationReason {
+    margin-top: 10px;
+}
+
+.reviewContentDetailsTable .reviewContentModerationReason .reviewContentModerationReasons {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.reviewContentTitle {
+    font-weight: bold;
+}
+
+.reviewContentEditLink {
+    font-weight: normal;
+    padding-left: 7px;
+}
+
+.userInformationTable .avatarColumn {
+    width: 50px;
+    padding-right: 10px;
+}
+
+.userInformationDisplayName {
+    margin-bottom: 10px;
+}
+
+.userInformationDatetime {
+    float: right;
+}
+
+.reviewContentTable .imagePreviewColumn {
+    width: 100px;
+}
+.reviewContentTable .audioPlayerColumn {
+    width: 30px;
+    text-align: center;
+}
+.reviewContentTable .avatarColumn {
+    width: 50px;
+}
+
+.reviewContentTable .imagePreviewColumn,
+.reviewContentTable .avatarColumn {
+    padding-right: 10px;
+}
+
+.reviewContentTable .imagePreviewColumn,
+.reviewContentTable .audioPlayerColumn,
+.reviewContentTable .avatarColumn,
+.reviewContentTable .informationColumn {
+    padding-top: 7px;
+}
+
+.reviewContentTable .reviewSubject,
+.reviewContentTable .reviewCalendarEventLocation,
+.reviewContentTable .reviewCalendarEventTimeframe,
+.reviewContentTable .reviewContentClipDescription,
+.reviewContentTable .reviewContentClipTitle {
+    margin-bottom: 10px;
+}
+
+.expandablePopupSectionTitle {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.expandablePopupSectionLinks {
+    float: right;
+}
+
+.expandablePopupSectionBody {
+    margin-bottom: 20px;
+}
+
+.watchAllCommentsDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-bottom: 10px;
+}
+
+.editNotificationsTable .titleCell {
+    font-weight: bold;
+}
+
+.editNotificationsTable .deliveryMethodCell {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    width: 100px;
+    text-align: center;
+}
+
+.editNotificationsTable td {
+    padding-bottom: 7px;
+}
+
+.editNotificationsTable .firstRow td {
+    padding-top: 7px;
+    border-top: 1px dotted #bdb7b7;
+}
+
+.editNotificationsTable #blogPostEmailEditsRowId td,
+.editNotificationsTable #blogPostExcludeTweetsRowId td,
+.editNotificationsTable #supportTopicsActivityRowId td {
+    padding: 0 0 0 20px;
+}
+.editNotificationsTable #blogPostExcludeTweetsRowId td {
+    padding-bottom: 7px;
+}
+
+.notificationCheckboxColumn {
+    text-align: center;
+    vertical-align: top;
+}
+
+.defaultNofificationLevelDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin: 0 0 7px 20px;
+}
+
+.couponTableHeader {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+#activeCouponsDiv {
+    float: left;
+}
+
+#createCouponDiv {
+    float: right;
+}
+
+.premiumMembershipCouponsTable th {
+    font-weight: bold;
+}
+
+.wideCouponInput {
+    width: 350px;
+}
+
+.shortCouponInput {
+    width: 100px;
+}
+
+#appliesForMonthsId label {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.couponName {
+    font-weight: bold;
+}
+
+.deleteCouponIcon {
+    padding-top: 5px;
+    float: right;
+}
+
+.firstCoupon {
+    margin-top: 10px;
+}
+
+.dividedCoupon {
+    margin-top: 7px;
+    padding-top: 7px;
+    border-top: 1px solid #bdb7b7;
+}
+
+.featuredAreaUserTable .avatarColumn {
+    width: 30px;
+    padding: 5px;
+}
+
+.featuredAreaUserTable .displayNameColumn {
+    padding: 5px 0;
+    vertical-align: middle;
+}
+
+.featuredAreaUserTable .removeIconColumn {
+    width: 18px;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.featuredUserAlertIcon {
+    margin-left: 5px;
+}
+
+.rightFeaturedStarIcon {
+    float: right;
+}
+
+.inlineFeaturedStarIcon {
+    padding-left: 7px;
+    vertical-align: text-bottom;
+}
+
+#toggleFeaturingLinks {
+    float: right;
+}
+
+.highlightedTabs {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-transform:uppercase;
+}
+
+.highlightedTabs a.highlightedTab,
+.highlightedTabs div.highlightedTab {
+    display: inline-block;
+    line-height: 20px;
+    padding: 0 10px;
+}
+
+.highlightedTabs div.highlightedTab {
+    font-weight: bold;
+}
+
+.highlightedTabs a {
+    color: #194e84;
+    text-decoration:none;
+    opacity: 0.4;
+}
+.highlightedTabs a:hover {
+    text-decoration:underline;
+    opacity: 1.0;
+}
+
+.highlightedTabs a:visited {
+    color: #194e84;
+}
+
+.addClipsAllowedFileTypes {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    font-weight: normal;
+}
+
+.tagsHeader,
+.resetSurveyHeader {
+    margin-top: 20px;
+}
+
+.fileDataTable .iconColumn {
+    width: 50px;
+    padding-right: 10px;
+}
+
+.fileDataTable .deleteIconColumn {
+    width: 18px;
+    padding-left: 10px;
+}
+
+.fileDataTitleAndCaptionTable .titleColumn {
+    width: 100px;
+}
+
+.fileDataTitleAndCaptionTable .inputColumn input {
+    width: 100%;
+}
+
+.fileUploadResultsAddMoreLink {
+    float: right;
+}
+
+.fileUploadResultsAddMoreLink * {
+    vertical-align: top;
+}
+
+.clipBoxContainer {
+    position: relative;
+    margin-top: 10px;
+}
+
+.clip-box {
+    width: 205px;
+}
+
+.clip-box .shadedContentArea {
+    margin-bottom: 0;
+}
+
+.clipDetailsTable .iconColumn {
+    width: 25px;
+    text-align: center;
+}
+
+.clipDetailsTable .textColumn {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    padding-left: 10px;
+    vertical-align: top;
+}
+
+.clipDetailsTable .clipTitle,
+.clipImageTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+.clipImageTitle {
+    margin-top: 7px;
+}
+
+.clipDetailsTable .clipAuthorColumn * {
+    vertical-align: top;
+}
+
+.clipDetailsTable .textColumn .clipDescription {
+    margin-top: 5px;
+}
+
+.clipDetailIcons {
+    margin-left: 5px;
+}
+
+.clipDetailsTable .textColumn {
+        max-width: 160px;
+        word-wrap: break-word;
+    }
+
+    .clipDetailsTable .textColumn img {
+                max-width: 160px;
+            }
+        .clipDetailsTable .textColumn img {
+        box-sizing: border-box;
+        height: auto;
+        border-color: #333333;
+    }
+
+    .clipDetailsTable .textColumn embed, .clipDetailsTable .textColumn iframe, .clipDetailsTable .textColumn object {
+        max-width: 160px;
+    }
+
+.clipDetails {
+    border: 1px solid #e2e2e2;
+}
+
+.spacedClipDetailsComment {
+    margin-top: 5px;
+}
+
+.viewAllClipCommentsLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-align: center;
+}
+
+.uploadMoreTextLink {
+    margin-right: 7px;
+}
+
+#facebookAdditionalOptionsId li {
+    list-style-type: lower-alpha;
+}
+
+.loadingDiv * {
+    text-align: center;
+}
+
+.loadingDiv .loadingText {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: bold;
+}
+
+.loadingDiv .loadingImage {
+    margin-top: 7px;
+}
+
+.spin  {
+	-webkit-transform: rotate(360deg);
+	-webkit-animation-name: spin;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count:  infinite;
+	-webkit-animation-timing-function: linear;
+}
+@-webkit-keyframes spin {
+	from {-webkit-transform: rotate(0deg);}
+  	to {-webkit-transform: rotate(360deg);}
+}
+
+.yui-skin-sam .yui-panel.colorPickerPopupBackground .bd {
+    padding: 0;
+}
+
+.affiliateSettingsDetails {
+    margin-top: 10px;
+}
+
+.inlineTextLabel,
+.inlineTextShortLabel,
+.affiliateTextLabel,
+.affiliateTextShortLabel {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.inlineTextLabel,
+.affiliateTextLabel {
+    width: 200px;
+}
+
+.inlineTextShortLabel,
+.affiliateTextShortLabel {
+    width: 175px;
+}
+
+.affiliates-search {
+    margin-top: 15px;
+}
+
+.affiliatesTable .headerRow {
+    font-weight: bold;
+}
+
+.akismetSettingsTable {
+    margin: 10px 0 15px 0;
+}
+
+.akismetSpamStatsHeader {
+    font-weight: bold;
+}
+
+.akismetSettingOption {
+    margin-bottom: 7px;
+}
+
+.billingStatsForAkismet .akismetSpamStatsHeader,
+.billingStatsForAkismet .akismetSpamStatsTable .divCell {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+}
+
+.billingStatsTotalAdjustedPageViews {
+    font-weight: bold;
+}
+
+.statsDecimalValue {
+    font-style: italic;
+}
+
+.languageChooserOption {
+    margin:  5px 10px;
+}
+
+.standalonePageWrapperHeaderTable {
+    margin-bottom: 10px;
+}
+
+.standalonePageWrapperHeaderTable .communityAvatarColumn {
+    width: 200px;
+}
+
+.standalonePageWrapperHeaderTable .languageSelectorColumn {
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.cpSummaryLeftColumn {
+    padding-right: 10px;
+}
+
+.cpSummaryRightColumn {
+    width: 250px;
+}
+
+.cpSummaryStatisticsTable .valueColumn {
+    text-align: right;
+}
+
+.squareHeadedSettingsBody {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 10px;
+}
+
+#hellobar-wrapper a#hellobar-open,
+#hellobar-wrapper #hellobar-close {
+    display: none;
+}
+
+#hellobar-container #hellobar-content a,
+#hellobar-container #hellobar-content a:link {
+    color: #194e84;
+}
+#hellobar-container #hellobar-content a:visited {
+    color: #194e84;
+}
+
+#helloBarWarningClock {
+    margin-right: 7px;
+    vertical-align: text-bottom;
+}
+
+#helloBarTimeZoneMessage {
+    font-weight: bold;
+}
+
+#hideThisMessageLink {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.timeZoneName,
+.timeZoneLabel {
+    font-weight: bold;
+}
+
+.detectedTimeZone .divCell {
+    padding-top: 15px;
+}
+
+#hideThisMessageLink {
+    margin-left: 30px;
+}
+
+.timeZoneDiffText,
+.changeTimezoneConfirmation,
+div.divRow.detectedTimeZone {
+    display:none;
+}
+
+.timeZoneChangeDetected .timeZoneDiffText,
+.timeZoneChangeDetected .changeTimezoneConfirmation {
+    display:block;
+}
+
+.timeZoneChangeDetected div.divRow.detectedTimeZone {
+    display:table-row;
+}
+
+#wwctrl_prettyUrlStringId input {
+    margin-left: 0;
+}
+
+#addEditClipLeftColumn #wwctrl_prettyUrlStringId input {
+    width: auto;
+}
+
+
+#customUrlInlineError {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+.indentedPrettyUrlOption {
+    margin-left: 205px;
+}
+
+#generatedPrettyUrlStringId {
+    font-style: italic;
+}
+
+#prettyUrlStringId_label {
+    font-weight: bold;
+}
+
+.inlineGingerbreadIcon {
+    margin-left: 4px;
+}
+
+.userLikedItemHeader {
+    margin-bottom: 5px;
+}
+
+.userLikedItemDetails {
+    width: 100%;
+}
+
+.userLikedItemDate,
+.userLikedItemType {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    white-space: nowrap;
+}
+
+.activityStreamItemSubDetails .userLikedItemDate {
+    float: right;
+}
+
+.activityStreamItemSubDetails .userLikedItemType {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.activityStreamItemSubDetails,
+.activityStreamItemSubDetails div {
+    max-width: 570px;
+    word-wrap: break-word;
+}
+
+.userLikedItemDateAndType {
+    text-align: right;
+}
+.userLikedItemDateAndType .userLikedItemType {
+    margin-top: 5px;
+}
+
+.manageGroupsPagination {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-bottom: 10px;
+}
+
+.manageGroupsPagination .pagination {
+    float: right;
+    padding: 0;
+}
+
+#portfolioHeaderTable {
+    padding:10px;
+    width:980px;
+    text-align:center;
+}
+
+#portfolioHeaderTable .spacerCell {
+    width:5px;
+}
+
+#portfolioHeaderTable .portfolioDetailsCell {
+    width:100%;
+    padding-left: 15px;
+}
+
+#portfolioHeaderTable .portfolioHeaderBreadcrumbs,
+#portfolioHeaderTable .portfolioDescription {
+    text-align: left;
+}
+
+#portfolioHeaderTable .portfolioHeaderBreadcrumbs {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-bottom: 5px;
+    border: 0;
+}
+
+
+#portfolioHeaderTable .portfolioInformation .portfolioName {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    font-weight: bold;
+    padding: 0;
+}
+
+#portfolioHeaderTable .portfolioDescription {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    margin-top: 3px;
+    padding-right: 20px;
+}
+
+#portfolioHeaderTable .communityAvatarColumn {
+    text-align: center;
+    width: 180px;
+    background-color: transparent;
+    vertical-align: top;
+}
+
+#portfolioHeaderTable .communityAvatarColumn img {
+
+    border:1px solid #dfdfdf;
+}
+
+#toggleGroupLists {
+    margin-bottom: 10px;
+    width: 655px;
+}
+
+.groupIsland .infoColumn {
+    padding: 10px;
+}
+
+#joinGroupBody div.joinGroupMessage {
+    margin: 10px 0 10px 0;
+}
+
+#joinGroupBody div#joinGroupTitle {
+    margin-top: 20px;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 20px;
+    letter-spacing: 1.5px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+#joinGroupBody div.joinGroupMessage#joinGroupSubmitButtonWrapper {
+    margin-left: 235px;
+}
+
+table#areaWrapperContent td#joinGroupPageBody.primaryContentBox {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#joinGroupContentBody.standalonePageContentBody {
+    border-bottom: none;
+}
+
+#backToSiteJoinGroupLink {
+    text-align: left;
+}
+
+#joinPrivateGroupButton {
+    text-align: center;
+}
+
+.rightNotificationsHeaderText {
+    float: right;
+}
+
+.rightNotificationsHeaderText a {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#defaultGuestTimeZoneSelectId {
+    max-width: 690px;
+}
+
+.cpChatRoundedDivTable .avatarColumn {
+    width: 25px;
+}
+
+.cpChatRoundedDivTable .titleColumn {
+    padding-left: 10px;
+}
+
+.cpChatRoundedDivTable .titleColumn a {
+    font-weight: bold;
+}
+
+.cpChatRoundedDivTable .chatDescription {
+    margin-top: 5px;
+}
+
+.cpChatRoundedDivTable .descriptionColumn {
+    width: 200px;
+}
+
+.cpChatRoundedDivTable .toolsColumn {
+    width: 45px;
+}
+
+.listChatsTable .listChatListColumn,
+.manageChatsTable .manageChatListColumn {
+    width: 48%;
+}
+
+.listChatsTable .spacerColumn,
+.manageChatsTable .spacerColumn {
+    width: 4%;
+}
+
+.managePreviousChatEventsLinkWrapper {
+    text-align: right;
+}
+
+.manageChatsHeaderLink {
+    font-weight: normal;
+}
+
+.addEditChatTypesTable .chatTypeColumn {
+    width: 49%;
+}
+
+.addEditChatTypesTable .spacerColumn {
+    width: 4px;
+}
+
+.addEditChatTypeOption .radioColumn {
+    width: 20px;
+}
+
+.addEditChatTypeOption .chatTypeName {
+    font-weight: bold;
+}
+
+.addEditChatTypeOption .chatTypeDescription {
+    margin-top: 10px;
+}
+
+.subLabelText {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    font-weight: normal;
+}
+
+.liveModerationOptionsDiv {
+    margin-bottom: 0;
+}
+
+.addEditChatEventSettingsTable .spacerColumn {
+    width: 5px;
+}
+
+.addEditChatEventSettingsTable .avatarColumn {
+    width: 250px;
+}
+
+.addEditChatNotesLink {
+    float: right;
+}
+
+.addEditChatNotesDescription {
+    margin-top: 10px;
+}
+
+.addEditChatSectionHeader {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.addEditChatEventSettingsTable {
+    margin-bottom: 2px;
+}
+
+.chatEventAvatarSelector {
+    text-align: center;
+}
+
+.chatWideInput {
+    width: 485px;
+}
+
+.chatEventTable .avatarColumn {
+    width: 50px;
+    padding-right: 10px;
+}
+
+#toggleChatActionTypes,
+.chatRightDetails {
+    float: right;
+}
+
+.chatTitle {
+    font-weight: bold;
+}
+
+.chatTagline {
+    margin-top: 7px;
+}
+
+.chatListSectionTitle,
+.manageChatListTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.chatListSectionTitleText {
+    margin-top: 5px;
+}
+
+#chatEventsLoadMoreId {
+    text-align: center;
+}
+
+.headerChatRoomTagline {
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+.chatRoomCountdownText {
+    float: right;
+}
+
+.chatRoomStatusTable {
+    margin-bottom: 10px;
+}
+
+.chatRoomStatusTable .iconColumn {
+    width: 18px;
+}
+
+.chatRoomStatusTable .statusColumn {
+    vertical-align: middle;
+}
+
+.chatRoomStatusTable .divCell {
+    padding: 5px;
+}
+
+.highlightedTabs .chatEventSidebarTab {
+    padding: 0;
+}
+
+.chatMessageDeleteIcon {
+    float: right;
+    margin-top: -22px;
+}
+
+.chatParticipantAvatars img {
+    margin: 5px 5px 0 0;
+}
+
+.chatParticipantDetailsTable .avatarColumn {
+    width: 25px;
+    padding-right: 7px;
+}
+
+.chatParticipantDetailsTable .detailsColumn .subDetails {
+    margin-top: 5px;
+}
+
+.manageChatLinks {
+    text-align: right;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    padding-right: 5px;
+}
+
+.chatParticipantsTitle {
+    font-weight: bold;
+    padding: 5px;
+}
+
+.chatHeader {
+    width: 655px;
+}
+
+.chatMessageText {
+    margin-right: 18px;
+    word-wrap: break-word;
+}
+
+.moderatedChatMessageText {
+    width: 220px;
+    word-wrap: break-word;
+}
+
+#chatEventDatetimeChatDataWrapper {
+    float: left;
+}
+
+#chatEventDescriptionTogglesChatDataWrapper {
+    float:right;
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#stadiumChatPostChatMessageFormId_message {
+    width:100%;
+    max-width: 435px;
+}
+
+.systemChatMessage {
+    font-style: italic;
+}
+
+.hostChatMessage {
+    font-weight: bold;
+}
+
+.chatMessageUserAvatar {
+    width:60px;
+}
+
+.chatMessageTable {
+    width:100%;
+}
+
+.chatMessageDatetime {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    text-align:right;
+    vertical-align:top;
+}
+
+.chatMessageTools {
+    margin-top:5px;
+}
+
+.liveChatMessage {
+    padding:5px;
+    border-bottom:1px solid #bdb7b7;
+}
+
+.emmbeddedChatEventDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.diskUsageStatsSectionPercentage {
+    float: right;
+}
+
+.diskUsageStatsSection .inlineTextLabel {
+    font-weight: normal;
+}
+
+#planOptionsHeader {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#planOptionsDescription {
+    margin-bottom: 5px;
+}
+
+.upgradeLink {
+    text-align: center;
+}
+
+.plan-option {
+    padding: 10px;
+}
+
+.yui-menu-button-menu .yuimenuitem,
+.yui-menu-button-menu .yuimenuitem a {
+    word-wrap: normal;
+    white-space: nowrap;
+}
+
+.mapLocationsUserTable .divCell {
+    padding-bottom: 5px;
+}
+
+.mapLocationAvatarColumn {
+    width: 35px;
+    padding-right: 5px;
+}
+
+#mapCaAttribution {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-top: 20px;
+}
+
+.portfolioTable .portfolioAvatarColumn {
+    width: 100px;
+}
+
+.portfolioTable .avatarColumn {
+    width: 50px;
+}
+
+.portfolioTable .informationColumn {
+    padding-left: 10px;
+}
+
+.portfolioTable .informationColumn .productManagementLinks {
+    float: right;
+}
+
+.addEditProductTable .productImageColumn {
+    width: 150px;
+    text-align: center;
+}
+
+.addEditProductTable .productInput {
+    width: 330px;
+}
+
+
+.popupOverlayWrapper {
+    position: absolute;
+    top: 0;
+}
+
+.popupOverlayWrapper.show-scrollbars {
+    overflow: visible;
+}
+
+.popupOverlayBody  {
+    position: relative;
+}
+
+.fullLikeListPopupLink {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.fullLikeListPopop.yui-panel .bd {
+    max-height:400px;
+    overflow-y: scroll !important;
+}
+
+.stockAvatarUploadContainer {
+    float: left;
+    position: relative;
+    padding: 5px;
+}
+
+.stockAvatarUploadContainer img {
+    position: relative;
+}
+
+.stockAvatarUploadContainer .stockAvatarDeleteIcon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.stockAvatarContainer {
+    float: left;
+    padding: 5px;
+}
+
+
+.avatarManagementTable .avatarColumn {
+    width: 100px;
+}
+
+.avatarManagementTable .detailsColumn {
+    padding-left: 10px;
+}
+
+.avatarManagementTable .deleteIconColumn {
+    width: 18px;
+}
+
+.stockAvatarSelectionContainer {
+    float: left;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.stockAvatarSelectionContainer.selectedStockAvatar {
+    background-color: #d7d7d7;1;
+}
+
+.selectStockAvatarPopop.yui-panel .bd {
+    max-height:400px;
+    overflow-y: auto !important;
+}
+
+.toolsTable {
+    margin-top: 10px;
+}
+ .forumTopicMessageTextCell .toolsTable {
+    margin-top: 0;
+}
+
+.toolsTable .likeReplyColumn.withCenterTools,
+.toolsTable .toolsColumn.withCenterTools {
+    width: 150px;
+}
+
+.toolsTable .divCell,
+.toolsTable .divCell * {
+    vertical-align: middle;
+}
+
+.toolsTable .centerColumn {
+    text-align: center;
+}
+.toolsTable .toolsColumn {
+    text-align: right;
+}
+.toolsTable .toolsColumn a {
+    margin-left: 5px;
+}
+.toolsTable .likeReplyColumn img {
+    margin-right: 5px;
+}
+
+.commentButton {
+    float:right;
+}
+
+.commentButtonDescription {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    margin-top: 5px;
+}
+
+.entityNotificationsBubbleTable .notificationsColumn {
+    width: 400px;
+}
+
+#confirmationMessage p {
+    margin-bottom: 10px;
+}
+
+#parentalApprovalQueueIntro {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#manageCategoriesAndForumsWrapper {
+    margin-top: 10px;
+}
+
+.setProductsStatusBubble {
+    display: inline-block;
+}
+
+.premiumPurchaseBubbleTable .iconColumn {
+    width: 18px;
+}
+.premiumPurchaseBubbleTable .messageColumn {
+    padding: 0 7px;
+}
+
+.likeCountParenthetical {
+    white-space: nowrap;
+}
+
+#administrativeDossier {
+    margin: 10px 0 10px 0;
+}
+
+#administrativeDossierTitle {
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.dossierInformationRow {
+    margin: 10px 0 10px 0;
+}
+
+.userProfileDossierData.dossierDataLeft {
+    float: left;
+}
+
+.userProfileDossierData.dossierDataRight {
+    float: right;
+}
+
+.dossierToggleTab {
+    text-align: right;
+}
+
+#administrativeDossierHeader {
+    margin-bottom: 5px;
+}
+
+#administrativeDossierSubtext {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    width: 450px;
+}
+
+#administrativeDossierInformation .bubble_padding {
+    padding: 10px;
+}
+
+#dossierInformationTitle,
+.selectedDossierTab {
+    font-weight: bold;
+}
+
+.cpNavigationBubbleTable .bubble_padding {
+    padding: 10px;
+}
+
+.cpNavigationBubbleTable .textColumn {
+    vertical-align: middle;
+}
+
+.cpNavigationBubbleTable .iconColumn {
+    width: 35px;
+}
+
+.chatGuestNameBubble * {
+    vertical-align: middle;
+}
+
+.chatGuestNameBubble {
+    margin-bottom: 0;
+}
+
+.chatGuestNameSignInInfo {
+    text-align: center;
+}
+
+.alertRoundedDivTable {
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.alertRoundedDivTable .iconColumn {
+    width: 18px;
+    padding-right: 10px;
+}
+
+.alertRoundedDivTable .iconColumn img {
+    margin-right:3px;
+}
+
+.alertRoundedDivTable .informationColumn {
+    vertical-align: middle;
+}
+
+.chatSignInLink {
+    text-transform: uppercase;
+}
+
+.spiderThrottleDescription {
+    margin-bottom: 5px;
+}
+
+#spiderRequestPercentage {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#spiderThrottleLevelId_label {
+    font-weight: bold;
+}
+
+#chatPauseFeature {
+    float: right;
+}
+
+.announcementActionBox {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.newsFlashTitle,
+.newsFlashMessage {
+    margin-bottom: 10px;
+}
+
+.fileSelectionLink {
+    margin-top: 10px;
+}
+
+.inlineRoundedDiv {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 4px;
+}
+
+.inlineRoundedDiv,
+.inlineRoundedDiv img {
+    vertical-align: middle;
+}
+
+.searchTagName img {
+    padding-left: 5px;
+}
+
+.clipAsRowTable .iconColumn {
+    width: 50px;
+    vertical-align: top;
+}
+
+.clipAsRowTable .detailsColumn {
+    padding-left: 10px;
+}
+
+.clipAsRowTable .clipTitleRow {
+    margin-bottom: 5px;
+}
+
+.clipAsRowTable .likeColumn {
+    width: 18px;
+    vertical-align: top;
+}
+
+.clipsSortHeaderTable {
+    margin-top: 10px;
+}
+
+.clipsSortHeaderTable .slideshowPlayerLinkColumn {
+    vertical-align: middle;
+}
+
+.clipsSortHeaderTable .clipListSortingColumn {
+    text-align: right;
+}
+
+.noClipsTextContainer {
+    margin-top: 10px;
+}
+
+.upgradeFromShortToFullPostingFormLink {
+    text-align: right;
+    margin: 7px 0;
+}
+
+.blogShortBubbleBody {
+    margin-bottom: 0;
+}
+
+.blogShortBubbleFooter {
+    margin-bottom: 20px;
+}
+
+#variableNote {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+}
+
+#editWordletsTable {
+    margin-top: 10px;
+    width: 690px;
+}
+
+#editWordletsTable .wordletInputColumn {
+    width: 370px;
+}
+#editWordletsTable td.defaultWordletColumn {
+    text-align: left;
+}
+#editWordletsTable td.customWordletColumn {
+    text-align: right;
+}
+#editWordletsTable .iconColumn {
+    width: 50px;
+}
+
+#editWordletsTable th,
+#editWordletsTable tr {
+    text-align: center;
+}
+
+#editWordletsTable th {
+    font-weight: bold;
+}
+
+#editWordletsSubmitWrapper {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.themeWidthAlertTable .iconColumn {
+    width: 18px;
+}
+
+.themeWidthAlertTable .iconColumn img {
+    vertical-align: middle;
+}
+
+.themeWidthAlertTable .descriptionColumn {
+    padding-left: 10px;
+}
+
+#updateEmailThemeSettingsForm textarea {
+    width: 290px;
+}
+
+#updateEmailThemeSettingsForm .revertIcon {
+    vertical-align: top;
+}
+
+#updateEmailThemeSettingsForm textarea {
+    overflow: hidden;
+}
+
+#updateEmailThemeSettingsForm .textareaWithFocus {
+    height: 100px;
+    overflow: auto;
+}
+
+.emailCssPreviewDiv {
+    margin-bottom: 10px;
+}
+
+.emailCssPreviewCpSection {
+    margin-bottom: 25px;
+}
+
+.emailCssPreviewCpSection .bubble_padding {
+    padding: 10px;
+}
+
+.emailCssPreviewCpSection .previewEmailLinks {
+    text-align: center;
+    margin: 10px;
+}
+
+.emailCssPreview {
+    padding: 10px;
+    background-color: white;
+}
+
+.emailCssPreview,
+.emailCssPreview h1,
+.emailCssPreview h2,
+.emailCssPreview h3 {
+    color: black;
+}
+
+.yui-panel .bd .emailCssPreview a,
+.yui-panel .bd .emailCssPreview a:visited {
+    color: blue;
+}
+
+.importExportOptions label {
+    display: inline-block;
+    width: 300px;
+    padding-left: 5px;
+}
+
+.importExportWordletsHeader .bubble_padding {
+    padding: 10px;
+}
+
+.wordletVariableNoteBubble .bubble_padding {
+    padding: 10px;
+}
+
+.userSearchInputOverlay .shadedContentArea {
+    margin-bottom: 0;
+}
+
+.changeAuthorInlineSection,
+.changeAuthorInlineSection .wwgrp {
+    display: inline;
+}
+
+.customizedAuthorTools {
+    margin-left: 5px;
+}
+
+.tosRoundedDiv .bubble_padding {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.userSearchInput {
+    width: 230px;
+}
+
+.headerSearchInput {
+    width: 200px;
+}
+
+.autoCloseSettingGroupInternalHeader {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.relatedSearchResultsWrapper {
+    margin: 20px 0;
+}
+
+.relatedSearchResultsWrapper .bubble_padding {
+    padding: 15px;
+}
+
+.relatedSearchResult {
+    margin-top: 10px;
+}
+
+.calendarEventRelatedSearchResultTable .subjectColumn {
+    width: 100%;
+}
+
+.calendarEventRelatedSearchResultTable .timeFrameColumn {
+    text-align:right;
+    white-space: nowrap;
+}
+
+.clipRelatedSearchResultTable .avatarColumn,
+.userRelatedSearchResultTable .avatarColumn {
+    width: 35px;
+}
+
+.clipRelatedSearchResultTable .infoColumn,
+.userRelatedSearchResultTable .infoColumn {
+    padding-left: 10px;
+}
+
+.clipRelatedSearchResultTable .clipDescription,
+.userRelatedSearchResultTable .userTitle {
+    margin-top: 3px;
+}
+
+.timeBasedStatsFilterSettingsTable {
+    margin-bottom: 15px;
+}
+
+.timeBasedStatsFilterSettingsTable .dateSelectorColumn {
+    text-align: right;
+}
+
+.leaderBoardSectionHeaderFilter {
+    margin-right: 10px;
+}
+
+.communityHealthReportItemTypeFilter,
+.leaderBoardSectionHeaderFilter,
+.leadingContentItemTypeSelector {
+   float: right;
+}
+
+#leadingContentHeader {
+    margin-top: 20px;
+}
+
+.leaderBoardSectionResultTable .rankColumn {
+    width: 40px;
+}
+
+.leaderBoardSectionResultTable .bodyColumn {
+    padding-right: 10px;
+}
+
+.leaderBoardSectionResultTable .byLine {
+    margin-top: 10px;
+}
+
+.leaderBoardSectionResultTable .avatarColumn {
+    width: 50px;
+}
+
+.leaderBoardSectionResultTable .statisticValueColumn {
+    width: 75px;
+    text-align: right;
+}
+
+.leaderBoardResultsHeader, .healthReportGraphsSection {
+    padding: 7px;
+}
+
+.communityHealthGraph {
+    width: 100%;
+    height: 250px;
+}
+
+.activeUserResultTable .checkboxColumn {
+    width: 25px;
+    text-align: center;
+}
+
+.activeUserResultTable .detailsColumn {
+    padding: 0 10px;
+}
+
+.activeUserResultTable .avatarColumn {
+    width: 50px;
+}
+
+.communityAveragesTable .communityAverageBubble {
+    width: 440px;
+}
+.communityAveragesTable .spacerColumn {
+    width: 20px;
+}
+
+.communityAveragesTable .spacerRow {
+    height: 20px;
+}
+
+
+.communityAverageBubble {
+    text-align: center;
+}
+
+.communityAverageBubble .bubble_padding {
+    padding: 10px;
+}
+
+.communityAverageTitle {
+    text-transform:uppercase;
+    font-weight:bold;
+}
+
+.communityAverageValue {
+    margin: 20px;
+}
+
+.communityAveragesRightTitle {
+    text-transform: uppercase;
+}
+
+.communityAveragesUpsellBubble {
+    margin-top: 15px;
+}
+
+.newExternalClipThumbnail {
+    max-width: 50px;
+}
+
+
+.defaultSkin.mceListBoxMenu .mceMenu.mceListBoxMenu tr.mceMenuItem { font-size: 12px; }
+.defaultSkin.mceListBoxMenu .mceMenu.mceListBoxMenu tr.mceMenuItem span.mceText { font-size: inherit; }
+
+.defaultSkin.mceListBoxMenu .mceMenu.mceListBoxMenu { height: auto !important; }
+
+.premiumPurchaseDescriptionSection {
+    margin-top: 10px;
+}
+
+.premiumUpsellSurveyDescription {
+    margin: 10px 0 0 30px;
+}
+
+.hide {
+    display: none !important;
+}
+
+a:hover { cursor: pointer; }.mask {
+    background-color: #CCCCCC;
+    opacity: .5;
+    filter: alpha(opacity=50);  /* Set opacity in IE */
+}
+
+.yui-panel .bd {
+    padding:5px;
+	overflow:hidden !important;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    text-align:left;
+    background-color:#ffffff;1 !important;
+    color:#333333 !important;
+}
+
+.yui-skin-sam .yui-panel .ft, .yui-skin-sam .yui-dialog .ft {
+    padding: 5px;
+}
+
+.yui-panel .bd A {
+    color:#194e84;
+}
+
+.yui-panel .bd A:visited {
+    color:#194e84;
+}
+
+.yui-panel .bd .shadedContentArea A {
+    color:#194e84;
+}
+
+.yui-panel .bd .shadedContentArea A:visited {
+    color:#194e84;
+}
+
+.yui-skin-sam .yui-dt td {
+    color: black;
+}
+
+.file-upload-error, .yui-skin-sam .yui-dt .file-upload-error td {
+    background-color:#b0715a;
+    color:white;
+}
+
+.file-upload-success, .yui-skin-sam .yui-dt .file-upload-success td  {
+    background-color:#76bb5f;
+    color:white;
+}
+
+.file-upload-progress-bar {
+    padding-top: 5px;
+}
+
+.file-upload-progress-bar-text {
+    padding-top: 10px;
+}
+
+.yui-skin-sam .yui-button button,
+.yui-skin-sam .yui-button a,
+.yui-skin-sam .yui-button a:visited {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-weight: bold;
+    font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+    word-wrap: normal;
+    white-space: nowrap;
+}
+
+
+.yui-skin-sam .yui-button button,
+.yui-skin-sam .yui-button a,
+.yui-skin-sam .yui-button a:visited {
+    line-height: normal;
+}
+
+.yui-skin-sam .yui-panel {
+    border-color: #CCC;
+    border-width: 0;
+}
+
+.yui-skin-sam .yui-panel .hd {
+    border-color: #CCC;
+    border-top: solid 1px #CCC;
+    background: none;
+    background-color: rgb(242,242,242);
+    background-color:rgba(242,242,242,0.85);
+}
+
+.yui-skin-sam .yui-panel .ft {
+    border-color: #CCC;
+    border-bottom: solid 1px #CCC;
+    background-color: rgb(242,242,242);
+    background-color:rgba(242,242,242,0.85);
+}
+
+.yui-skin-sam .yui-panel .bd {
+   border-color: #CCC;
+}
+
+
+.yui-skin-sam .yui-panel-container.shadow .underlay {
+    /* Do rounding (native in Firefox and Safari) */
+    border-top-right-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-left-radius: 6px;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    opacity: 1.00;
+    rgb(0,0,0);
+    background-color: rgb(0,0,0);
+    background-color:rgba(0,0,0,0.12);
+}
+
+.yui-simple-dialog .yui-panel {
+    max-width: 600px;
+}
+
+.yui-skin-sam .yui-dialog .ft .button-group {
+    text-align: center;
+}
+
+
+a:active, a:focus {outline:none;}
+
+.yui-button a:hover {text-decoration: none;}
+
+/*hide the YUI scroll bars*/
+.yui-skin-sam .yuimenu .topscrollbar,
+.yui-skin-sam .yuimenu .bottomscrollbar {
+    display: none;
+}
+
+.yui-skin-sam .yuimenu .yui-menu-body-scrolled {
+    overflow: auto;
+/*
+    // to prevent horizontal scroll
+    padding-right: 10px;
+*/
+
+
+}
+
+.yui-skin-sam .yuimenu .yuimenuitemlabel {
+    font-size: 12px;
+}
+
+.yui-skin-sam .yuimenu .yuimenuitemlabel span {
+    color: black;
+}
+
+
+.yui-skin-sam .yui-button a,.yui-skin-sam .yui-button a:visited,.yui-skin-sam .yui-button button {
+    min-height: 0;
+}
+
+.yui-skin-sam .yui-tt .bd {
+    font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    color: #333333;
+    background-color: #ffffff;1;
+    border-color: #bdb7b7;
+}
+
+.yui-skin-sam.datepickerWrapper .yui-panel .bd {
+    padding: 0;
+}
+
+.yui-skin-sam.datepickerWrapper .calheader {
+    color: #333333;
+}.fieldWithPlaceholder {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+}
+
+.fieldWithPlaceholder label.placeholder {
+    cursor: text;
+    pointer-events: none;
+}
+
+.placeholder {
+    -moz-opacity:0.8;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+}
+
+label.fade {
+    -moz-opacity:0.6;
+    opacity:0.6;
+    filter:alpha(opacity=60);
+}
+
+.fieldWithPlaceholder label.placeholder span {
+    position: absolute;
+    z-index: 2;
+}
+
+.hiddenMessageBody img {
+    padding-right: 5px;
+}
+
+.hiddenMessageBody a {
+    margin-left: 5px;
+}
+
+.stopWatchingUserWarning {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.changeTimezoneConfirmation {
+    margin-top: 10px;
+}
+
+.timeZoneDiffText,
+.timeZoneName {
+    margin-bottom: 7px;
+}
+
+.descriptionParagraph {
+    margin-bottom: 15px;
+}
+
+select.use_icon option {
+    background-position:left top;
+    background-repeat:no-repeat;
+    padding-left: 25px;
+    height:20px;
+}.clear {clear:both;height:0;line-height:0;}
+
+    div.divTable {
+        width:100%;
+        display: table;
+    }
+
+    div.divRow {
+        width:100%;
+        display: table-row;
+    }
+
+    div.divCell {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    .scaledImage {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .scaledImage img {
+        position: absolute;
+    }#checkTimeFilterFormParametersAction .errorMessageContainerTitle {
+        display: none !important;
+    }
+    #checkTimeFilterFormParametersAction .errorMessageContainer {
+        display: inline-block;
+        padding: 7px;
+        margin:  10px 0 0 0;
+    }
+
+    #checkTimeFilterFormParametersAction ul,
+    #checkTimeFilterFormParametersAction .errorMessageLi {
+        margin: 0;
+        padding: 0;
+    }
+
+    #checkTimeFilterFormParametersAction .errorMessageLi {
+        list-style: none;
+    }
+
+    #wwgrp_averagesTimeSpan {
+        padding-bottom: 15px;
+    }
+
+    .webSpaceFileTable .avatarColumn {
+        width: 25px;
+        padding-right: 10px;
+    }
+
+    .webSpaceFileTable .toolsColumn {
+        width: 18px;
+        padding-left: 10px;
+        vertical-align: top;
+    }
+
+    .webSpaceFileTable .toolsColumn .wwgrp {
+        padding: 0;
+    }
+
+    .webSpaceFileTable .filenameColumn .webSpaceFileDetails,
+    .webSpaceFileTable .filenameColumn .filenameConflictResolutionSection {
+        margin-top: 10px;
+    }
+
+    .webSpaceFilenameInputWrapper {
+        display: inline;
+        white-space: nowrap;
+    }
+
+    .webSpaceFilenameInputWrapper input {
+        vertical-align: top;
+    }
+
+    .minimalErrors .errorMessageContainerTitle  {
+        display: none;
+    }
+
+    .minimalErrors .errorMessageContainer  {
+        padding: 5px;
+    }
+
+    .minimalErrors .errorMessageContainer ul,
+    .minimalErrors .errorMessageContainer li  {
+        margin: 0 0 0 10px;
+        padding: 0;
+    }
+
+    .minimalErrors .errorMessageContainer *  {
+        font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+    }
+
+    .cpNavigationBubbleTable .cpNavigationBubbleDescription {
+        font-weight: normal;
+        margin-top: 10px;
+    }
+
+    .manageCalendarTable {
+        margin-bottom: 10px;
+    }
+
+    .manageCalendarTable .disabledWording {
+        text-transform: uppercase;
+    }
+
+    .manageCalendarTable .extraCalendarDetails {
+        margin-top: 10px;
+    }
+
+    .manageCalendarTable .reorderColumn {
+        width: 18px;
+    }
+
+    .manageCalendarTable .toolsColumn {
+        width: 45px;
+        text-align: right;
+    }
+
+    .manageCalendarTable .toolsColumn .toolIcon {
+        margin-left: 7px;
+    }
+
+    .calendarNameInput {
+        width: 472px;
+    }
+
+    #inviteUsersColumn .inviteUsersLink {
+        margin-top: 10px;
+    }
+
+    .premiumMembershipEmailPreviewLink {
+        margin-top: 10px;
+    }
+
+    .premiumMembershipPreviewIframe {
+        overflow: hidden;
+        width: 100%;
+        border: 2px solid #d7d7d7;1;
+    }
+
+    #downloadTransactionReportSubmit {
+        margin-top: 10px;
+    }
+
+    .inviteTable .divCell {
+        padding-bottom: 10px;
+    }
+
+    .inviteTable .lastRow .divCell {
+        padding-bottom: 0;
+    }
+
+    #addEditChatForm_eventFields_eventStartDatetime_date {
+        width: 105px;
+    }/* this is the css for the navigation menus */
+
+
+
+/*the nav menu wrapper div */
+        .communityVerticalMenu{
+            text-align:         left;
+            margin-bottom:      15px;
+            border:             1px solid #999999;
+        }
+
+
+        table.navMenuUnselected,
+        table.navMenuSelectedSection,
+        table.navMenuSelected{
+            border-bottom-width:1px;
+            border-bottom-style:SOLID;
+            border-bottom-color:#999999;
+            width:100%;
+            font-family: Helvetica, Arial, sans-serif;
+
+    font-size: 11px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+        }
+
+/*everybody gets a border-bottom except the last row*/
+        table.vMenuLast{
+            border-bottom:      none;
+        }
+
+/*nav menu unselected*/
+        table.navMenuUnselected  td{
+            background-color:   #f0f0f0;1;
+        }
+
+        table.navMenuUnselected a,
+        table.navMenuUnselected a:visited{
+            color:              #555555;
+        }
+
+/*nav menu selected section*/
+        table.navMenuSelectedSection td{
+            background-color:   #d8f3c9;1;
+        }
+
+        table.navMenuSelectedSection a,
+        table.navMenuSelectedSection a:visited{
+            color:              #444444
+        }
+
+/*nav menu selected row */
+        table.navMenuSelected td{
+            background-color:   #c8c8c8;1
+        }
+
+        table.navMenuSelected a,
+        table.navMenuSelected a:visited{
+            color:              #222222
+        }
+
+/*the hovering of rows*/
+        .communityVerticalMenu table:hover td{
+            background-color:   #c0c0c0;1;
+        }
+
+        .communityVerticalMenu table:hover a,
+        .communityVerticalMenu table:hover a:visited{
+            color:              #222222;
+        }
+
+
+/*default cell padding and styles*/
+        .communityVerticalMenu table td {
+            padding:            5px 0 5px 3px;
+            vertical-align:     top;
+        }
+
+        .communityVerticalMenu table td.signIn {
+            padding-right:      3px;
+            text-align:right;
+            font-family: helvetica,arial, "Trebuchet MS", sans-serif;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    line-height: 14px;
+        }
+        .communityVerticalMenu table td.signIn a{
+            text-decoration:underline;
+        }
+
+
+
+/*the left padding for the nested tiers two and three*/
+        .communityVerticalMenu table td.navMenuTierTwo {
+            padding-left:       20px;
+        }
+        .communityVerticalMenu table td.navMenuTierThree{
+            padding-left:       35px;
+        }
+
+
+/*menu icons are 18px wide*/
+        .communityVerticalMenu table td.menuIcon {
+            width:              18px;
+            vertical-align: middle;
+        }
+
+        .communityVerticalMenu table td.menuIcon img {
+            vertical-align:     middle;
+            margin-right:       3px;
+        }
+
+        .communityVerticalMenu a.vMenuControl img{
+            float:              right;
+            margin-left:        -18px;
+            width:              18px;
+        }
+
+/*the sub menu wrappers */
+        div.subMenuBar {
+            display:            none;
+        }
+
+        div.subMenuBarOn {
+            display:            block;
+            font-family: helvetica,Geneva, "Trebuchet MS", sans-serif;
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+
+    line-height: 20px;
+        }
+
+
+/*the network menu*/
+
+
+
+
+    #profileFromHeaderAvatarLinkId img,
+    #userInformationPopupLeftColumn img,
+    .headerPopup {
+        border: 1px solid #333333;
+    }
+
+
+
+#profileFromHeaderLinkId {
+    margin-left: 4px;
+}
+
+#profileFromHeaderLinkId img {
+    vertical-align: middle;
+}
+
+.headerPopup {
+    background-color: #d7d7d7;1;
+    color: #333333;
+}
+
+.headerPopup a:visited,
+.headerPopup a {
+    color: #194e84;
+}
+
+#userInformationPopup {
+    padding: 15px;
+    top: 14px;
+    left: 1px;
+}
+
+#userInformationPopupLeftColumn {
+    width: 100px;
+}
+
+#userInformationPopupRightColumn {
+    white-space: nowrap;
+    padding-left: 10px;
+    text-align: left;
+}
+
+#userInformationDisplayName {
+    font-weight: bold;
+}
+
+
+    .externalAuthProviderRow .divCell {
+        border-top: 1px solid #333333;
+    }
+
+
+#userInformationProfileLink,
+#userInformationLogoutLink {
+    margin-top: 10px;
+}
+
+#joinPopup,
+#signInPopup {
+    top: 5px;
+}
+
+.lcMenuLogo {
+    text-align:left;
+    vertical-align:top;
+    padding-top:10px;
+}

@@ -1,0 +1,54 @@
+spring:
+
+  liquibase:
+    enabled: false
+
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:myDb;DB_CLOSE_ON_EXIT=FALSE
+    username: test
+    password: test
+    hikari:
+      transactionIsolation: TRANSACTION_REPEATABLE_READ
+
+  jpa:
+    database-platform:  org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.narrative.shared.hibernate.NarrativePhysicalNamingStrategy
+
+  groovy:
+    template:
+      check-template-location: false
+
+  batch:
+    job:
+      enabled: false
+    initialize-schema: always
+
+narrative:
+  reputation:
+    batchJobSchedulingEnabled: false
+    si:
+      event:
+        conductStatusEvent:
+          startPoller: false
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: ERROR
+        engine:
+          transaction:
+            internal:
+              TransactionImpl: ERROR
+
+    narrative: ERROR
+
+server:
+  port: 9097
+
+

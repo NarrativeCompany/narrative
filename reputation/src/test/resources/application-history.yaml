@@ -1,0 +1,35 @@
+hibernate:
+  jdbc:
+    batch_size: 100
+
+narrative:
+  reputation:
+    dailyHistoryRollupJobProperties:
+      chunkSize: 10
+
+    si:
+      event:
+        conductStatusEvent:
+          startPoller: false
+        likeEvent:
+          startPoller: false
+        kycVerifyEvent:
+          startPoller: false
+        ratingEvent:
+          startPoller: false
+        votingEndedEvent:
+          startPoller: false
+        consensusChangedEvent:
+          startPoller: false
+
+logging:
+  level:
+    org:
+      narrative:
+        reputation: ERROR
+      hibernate:
+        SQL: ERROR
+        engine:
+          transaction:
+            internal:
+              TransactionImpl: ERROR

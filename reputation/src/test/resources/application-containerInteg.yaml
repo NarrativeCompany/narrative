@@ -1,0 +1,54 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3316/test?useSSL=false
+    username: test
+    password: test
+    hikari:
+      transactionIsolation: TRANSACTION_REPEATABLE_READ
+
+  liquibase:
+    enabled: false
+
+  jpa:
+    database-platform:  org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.narrative.shared.hibernate.NarrativePhysicalNamingStrategy
+
+  groovy:
+    template:
+      check-template-location: false
+
+  batch:
+    job:
+      enabled: false
+    initialize-schema: always
+
+redisson:
+  client:
+    host: 127.0.0.1
+    port: 6479
+    scheme: redis
+    threads: 4
+    netty-threads: 4
+    timeout: 5000
+    connect-timeout: 30000
+    codecName: org.narrative.shared.redisson.codec.NarrativeJsonJacksonCodec
+
+server:
+  port: 9097
+
+narrative:
+  reputation:
+    batchJobSchedulingEnabled: false
+
+logging:
+  level:
+    org:
+      narrative:
+        shared:
+          redisson:
+            codec: INFO
+      springframework:
+            batch: INFO

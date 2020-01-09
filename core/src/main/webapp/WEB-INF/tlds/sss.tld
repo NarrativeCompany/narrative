@@ -1,0 +1,89 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+
+  <description><![CDATA[Narrative Struts Tags]]></description>
+  <display-name>Narrative Struts Tags</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>sss</short-name>
+  <uri>http://www.narrative.org/tags/struts</uri>
+
+
+    <!-- jw: todo: if you want to use this tag in the new foundation pages, use ss:setFromOgnl instead -->
+    <tag>
+       <description><![CDATA[
+           Sets a ognl value in the request and types it.
+
+       ]]></description>
+       <name>set</name>
+       <tag-class>org.narrative.common.web.struts.tags.SetTag</tag-class>
+       <tei-class>org.narrative.common.intellij.VariableClassTEI</tei-class>
+       <body-content>empty</body-content>
+       <attribute>
+           <description><![CDATA[
+               Name of the exported scoped variable
+           ]]></description>
+           <name>var</name>
+           <required>true</required>
+           <rtexprvalue>false</rtexprvalue>
+       </attribute>
+       <attribute>
+           <description><![CDATA[
+               The ognl path which produces the value
+           ]]></description>
+           <name>ognl</name>
+           <required>true</required>
+           <rtexprvalue>true</rtexprvalue>
+       </attribute>
+        <attribute>
+            <description><![CDATA[
+                The class name of the variable
+            ]]></description>
+            <name>className</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                true if null should be returned if this object isn't of the specified type.
+                defaults to false.  if the object isn't of the specified type and this value
+                is false, an exception will be raised.
+            ]]></description>
+            <name>setNullIfNotOfType</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                Scope for var.
+            ]]></description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        
+     </tag>
+
+
+    <function>
+        <description><![CDATA[
+            Get the Struts action name from a form action path.  Removes ! and any method names and also strips
+            off any namespacing.  e.g.
+            <br>
+            /action -> action
+            <br>
+            /namespace/action -> action
+            <br>
+            /namespace/action!method -> action
+            <br>
+            /namespace/action!method/!action2!method2 -> action2
+        ]]></description>
+        <name>actionName</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String strutsActionName(java.lang.String)</function-signature>
+    </function>
+
+</taglib>

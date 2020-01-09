@@ -1,0 +1,54 @@
+type FollowedUser {
+  oid: String!
+  user: User!
+  currentUserFollowedItem: CurrentUserFollowedItem
+}
+
+type FollowScrollParams {
+  lastItemName: String!
+  lastItemOid: String!
+}
+
+type FollowedNiches {
+  items: [Niche!]!
+  hasMoreItems: Boolean!
+  scrollParams: FollowScrollParams
+}
+
+type FollowedPublications {
+  items: [Publication!]!
+  hasMoreItems: Boolean!
+  scrollParams: FollowScrollParams
+}
+
+type FollowedUsers {
+  items: [FollowedUser!]!
+  hasMoreItems: Boolean!
+  scrollParams: FollowScrollParams
+}
+
+type UserFollowers {
+  items: [FollowedUser!]!
+  hasMoreItems: Boolean!
+  scrollParams: FollowScrollParams
+  totalFollowers: Int!
+}
+
+input FollowFilterInput {
+  count: Int
+
+  # jw: it's important that we keep these in sync with the FollowScrollParams above.
+  lastItemName: String
+  lastItemOid: String
+}
+
+input FollowInput {
+  userOid: String!
+}
+
+type Query {
+  getFollowedUsers (input: FollowInput!, filters: FollowFilterInput): FollowedUsers!
+  getFollowedNiches (input: FollowInput!, filters: FollowFilterInput): FollowedNiches!
+  getFollowedPublications (input: FollowInput!, filters: FollowFilterInput): FollowedPublications!
+  getUserFollowers (input: FollowInput!, filters: FollowFilterInput): UserFollowers!
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@narrative/shared",
+  "version": "0.1.0",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "graphql:combine": "node schema/utils/mergeSchema.js",
+    "createSchemaJson": "node schema/utils/createSchemaJson.js",
+    "client:codegen": "apollo client:codegen --target=typescript --addTypename --outputFlat --tagName=gql --localSchemaFile=./schema/serverSchema.graphql --includes=./schema/clientSchema.graphql,./src/api/graphql/**/*.ts ./src/types/generated.ts",
+    "generate": "yarn run graphql:combine && yarn run createSchemaJson && yarn run client:codegen",
+    "build": "npx rimraf ./build && yarn tslint --project tsconfig.json && tsc",
+    "refresh": "yarn run generate && yarn run build"
+  },
+  "author": "Frank Cooke",
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-context": "^1.0.17",
+    "apollo-link-error": "^1.1.10",
+    "apollo-link-http": "^1.5.14",
+    "apollo-link-rest": "^0.7.2",
+    "apollo-link-state": "^0.4.2",
+    "formik": "^1.5.1",
+    "graphql": "^14.2.0",
+    "graphql-tag": "^2.10.1",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.3",
+    "recompose": "^0.30.0",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.7",
+    "@types/react": "^16.8.10",
+    "@types/recompose": "^0.30.5",
+    "@types/yup": "^0.26.12",
+    "apollo": "^2.6.2",
+    "merge-graphql-schemas": "^1.5.8",
+    "tslint": "^5.14.0"
+  }
+}

@@ -1,0 +1,91 @@
+# "Special" bogus void result to keep Apollo Link Rest happy for REST mutation methods that are void methods.  This
+# type must be mapped as the result type for mutations that return no value.
+type VoidResult {
+  success: Boolean
+}
+
+type PageInfo {
+  totalPages: Int!
+  totalElements: Int!
+  number: Int!
+  size: Int!
+  numberOfElements: Int!
+  first: Boolean!
+  last: Boolean!
+}
+
+type Country {
+  countryCode: String!
+  countryName: String!
+}
+
+input PageQueryInput {
+  page: Int!
+  size: Int
+}
+
+input TempFileUploadInput {
+  oid: String!
+  token: String!
+}
+
+input FileUploadInput {
+  tempFile: TempFileUploadInput
+  remove: Boolean
+}
+
+# Dummy any type to use for BodySerializer params for mutations - converts to "any" on schema compilation.
+# *** DO NOT USE *** for input or result types!
+scalar Any
+
+# File input type
+input FileInput {
+  name: String!
+  type: String!
+}
+
+# GraphQL does not support arg-less mutations so this is a bogus input type for support of param-less mutations
+input EmptyInput {
+  dummy: Boolean
+}
+
+type Query {
+  getCountryList: [Country!]!
+}
+
+type StringScalar {
+  value: String!
+}
+
+interface NrveValueDetail {
+  nrve: String!
+  nrveRounded: String!
+  nrveDecimal: String!
+}
+
+type NrveValueDetailImpl implements NrveValueDetail {
+  nrve: String!
+  nrveRounded: String!
+  nrveDecimal: String!
+}
+
+type NrveUsdValue implements NrveValueDetail {
+  nrve: String!
+  nrveRounded: String!
+  nrveDecimal: String!
+  usd: String!
+}
+
+enum HorizontalAlignment {
+  LEFT
+  CENTER
+  RIGHT
+}
+
+type ShutdownNoticeUrl {
+  value: String!
+}
+
+type Query {
+  getShutdownNoticeUrl: ShutdownNoticeUrl
+}

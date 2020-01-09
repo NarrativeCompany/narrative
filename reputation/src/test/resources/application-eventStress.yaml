@@ -1,0 +1,38 @@
+narrative:
+  reputation:
+    si:
+      event:
+        conductStatusEvent:
+          threadCount: 5
+          pollInterval: 100
+          startPoller: false
+        likeEvent:
+          threadCount: 5
+          pollInterval: 100
+          startPoller: false
+        kycVerifyEvent:
+          threadCount: 5
+          pollInterval: 100
+          startPoller: false
+        ratingEvent:
+          threadCount: 5
+          pollInterval: 100
+          startPoller: false
+        votingEndedEvent:
+          threadCount: 5
+          pollInterval: 100
+          startPoller: false
+        consensusChangedEvent:
+          threadCount: 5
+          pollInterval: 100
+          startPoller: false
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: ERROR
+      narrative:
+        reputation: ERROR
+#          config:
+#            integration: DEBUG

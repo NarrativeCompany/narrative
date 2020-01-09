@@ -1,0 +1,31 @@
+############################################################################################################
+# Redisson localCacheOptions:
+#
+#   reconnectionStrategy:
+#       NONE          - No reconnect handling
+#       CLEAR         - Clear local cache if map instance has been disconnected for a while
+#       LOAD          - Store invalidated entry hash in invalidation log for 10 minutes. Cache keys
+#                       for stored invalidated entry hashes will be removed if LocalCachedMap instance
+#                       has been disconnected less than 10 minutes or whole cache will be cleaned otherwise.
+#
+#   syncStrategy:
+#       NONE          - No synchronizations on map changes.
+#       INVALIDATE    - Invalidate cache entry across all LocalCachedMap instances on map entry
+#                       change. Broadcasts map entry hash (16 bytes) to all instances.
+#       UPDATE        - Update cache entry across all LocalCachedMap instances on map entry change.
+#                       Broadcasts full map entry state (Key and Value objects) to all instances.
+#   evictionPolicy:
+#       NONE          - Cache without eviction.
+#       LRU           - Least Recently Used cache.
+#       LFU           - Least Frequently Used cache.
+#       SOFT          - Cache with Soft Reference used for values. All references will be collected by GC
+#       WEAK          - Cache with Weak Reference used for values. All references will be collected by GC
+#
+#   writeMode:
+#       WRITE_BEHIND  - In write behind mode all data written in map object also written using MapWriter
+#                       in asynchronous mode
+#       WRITE_THROUGH - In write through mode all write operations for map object are
+#                       synchronized with MapWriter write operations.  If MapWriter
+#                       throws an error then it will be re-thrown to Map operation caller.
+############################################################################################################
+

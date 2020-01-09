@@ -1,0 +1,61 @@
+############################################################################################################
+#  Example cache configuration for Redisson managed Spring cache manager local
+#  caches.  These settings override the default configuration specified by
+#  CacheManagerDefaultConfig
+#
+# !!! You can generate a configuration file from the default configuration by executing the
+# !!! "CacheManagerDefaultConfig yml file generator" run target in IntelliJ
+#
+############################################################################################################
+
+############################################################################################################
+# Redisson cache options:
+#
+#   ttl         - Time to live in milliseconds for a cache entry - 0 lives forever
+#   maxIdleTime - Max idle time in milliseconds - resets on access and is superceeded by ttl
+#   maxSize     - Max number of objects to cache
+############################################################################################################
+
+############################################################################################################
+# Redisson localCacheOptions:
+#
+#   reconnectionStrategy:
+#       NONE          - No reconnect handling
+#       CLEAR         - Clear local cache if map instance has been disconnected for a while
+#       LOAD          - Store invalidated entry hash in invalidation log for 10 minutes. Cache keys
+#                       for stored invalidated entry hashes will be removed if LocalCachedMap instance
+#                       has been disconnected less than 10 minutes or whole cache will be cleaned otherwise.
+#
+#   syncStrategy:
+#       NONE          - No synchronizations on map changes.
+#       INVALIDATE    - Invalidate cache entry across all LocalCachedMap instances on map entry
+#                       change. Broadcasts map entry hash (16 bytes) to all instances.
+#       UPDATE        - Update cache entry across all LocalCachedMap instances on map entry change.
+#                       Broadcasts full map entry state (Key and Value objects) to all instances.
+#   evictionPolicy:
+#       NONE          - Cache without eviction.
+#       LRU           - Least Recently Used cache.
+#       LFU           - Least Frequently Used cache.
+#       SOFT          - Cache with Soft Reference used for values. All references will be collected by GC
+#       WEAK          - Cache with Weak Reference used for values. All references will be collected by GC
+#
+#   writeMode:
+#       WRITE_BEHIND  - In write behind mode all data written in map object also written using MapWriter
+#                       in asynchronous mode
+#       WRITE_THROUGH - In write through mode all write operations for map object are
+#                       synchronized with MapWriter write operations.  If MapWriter
+#                       throws an error then it will be re-thrown to Map operation caller.
+############################################################################################################
+
+similarNichesByDesc:
+  ttl: 30000
+  maxIdleTime: 0
+  maxSize: 2
+  localCacheOptions:
+    reconnectionStrategy: "CLEAR"
+    syncStrategy: "INVALIDATE"
+    evictionPolicy: "LRU"
+    writeMode: "WRITE_BEHIND"
+    cacheSize: 2
+    timeToLiveInMillis: 30000
+    maxIdleInMillis: 12

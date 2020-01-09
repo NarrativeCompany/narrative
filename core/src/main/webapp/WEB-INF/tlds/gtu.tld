@@ -1,0 +1,100 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+
+  <description><![CDATA[Narrative Tag Utils]]></description>
+  <display-name>Narrative Tag Utils</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>gtu</short-name>
+  <uri>http://legacy.narrative.org/tags/tagUtils</uri>
+
+
+    <function>
+        <description><![CDATA[
+            Create an input element.  Saves from excessive JSP variable creation.  Params are:
+             String type,
+             <br>
+             String name,
+             <br>
+             String value,
+             <br>
+             boolean enableDisabledHtmlInValue,
+             <br>
+             String formId,
+             <br>
+             String size,
+             <br>
+             String maxLength,
+             <br>
+             String accept,
+             <br>
+             boolean disabled,
+             <br>
+             boolean readonly,
+             <br>
+             boolean isChecked,
+             <br>
+             String tabIndex,
+             <br>
+             String id,
+             <br>
+             String cssClass,
+             <br>
+             String cssStyle,
+             <br>
+             String title,
+             <br>
+             String onClick,
+             <br>
+             String onDoubleClick,
+             <br>
+             String onMouseDown,
+             <br>
+             String onMouseUp,
+             <br>
+             String onMouseOver,
+             <br>
+             String onMouseMove,
+             <br>
+             String onMouseOut,
+             <br>
+             String onFocus,
+             <br>
+             String onBlur,
+             <br>
+             String onKeyPress,
+             <br>
+             String onKeyDown,
+             <br>
+             String onKeyUp,
+             <br>
+             String onPaste,
+             <br>
+             String onCut,
+             <br>
+             String onInput,
+             <br>
+             String onSelect,
+             <br>
+             String onChange,
+             <br>
+             String autocomplete
+             <br>
+             String body
+        ]]></description>
+        <name>createInput</name>
+        <function-class>org.narrative.common.web.tags.JspTagUtils</function-class>
+        <function-signature>java.lang.String createInput(java.lang.String,java.lang.String,java.lang.String,boolean,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,boolean,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create an input ID based on a supplied id (optional), the form id, and the input field name.
+        ]]></description>
+        <name>createInputId</name>
+        <function-class>org.narrative.common.web.tags.JspTagUtils</function-class>
+        <function-signature>java.lang.String createInputId(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+    </function>
+
+</taglib>

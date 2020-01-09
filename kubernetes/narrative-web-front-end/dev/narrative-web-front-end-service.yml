@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: narrative-web-front-end
+  name: narrative-web-front-end
+  namespace: dev
+spec:
+  ports:
+  - name: nwfe
+    port: 80
+    targetPort: 80
+  selector:
+    app: narrative-web-front-end
+

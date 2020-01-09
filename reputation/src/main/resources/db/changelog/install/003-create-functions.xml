@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        context="install">
+
+    <changeSet author="palessi" id="create-functions-1">
+        <sql>
+            DROP FUNCTION IF EXISTS reputation.formatUUID;
+
+            CREATE FUNCTION reputation.formatUUID (id binary(16))
+            RETURNS char(36)
+            RETURN LOWER(CONCAT(
+            SUBSTR(HEX(id), 1, 8), '-',
+            SUBSTR(HEX(id), 9, 4), '-',
+            SUBSTR(HEX(id), 13, 4), '-',
+            SUBSTR(HEX(id), 17, 4), '-',
+            SUBSTR(HEX(id), 21)
+            ));
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

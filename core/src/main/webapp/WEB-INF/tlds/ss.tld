@@ -1,0 +1,1269 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+
+    <description><![CDATA[Narrative Core Tags]]></description>
+    <display-name>Narrative Core Tags</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>ss</short-name>
+    <uri>http://www.narrative.org/tags/core</uri>
+
+    <!-- jw:todo: place tags below here -->
+
+    <tag>
+        <description><![CDATA[
+           References an object in the pageContext and types it.
+        ]]></description>
+        <name>ref</name>
+        <tag-class>org.narrative.common.util.tags.RefTag</tag-class>
+        <tei-class>org.narrative.common.intellij.VariableClassTEI</tei-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description><![CDATA[
+               Name of the exported scoped variable
+            ]]></description>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                The class name of the variable
+            ]]></description>
+            <name>className</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description><![CDATA[
+           Sets an object in the pageContext and types it.
+        ]]></description>
+        <name>set</name>
+        <tag-class>org.narrative.common.util.tags.SetTag</tag-class>
+        <tei-class>org.narrative.common.intellij.VariableClassTEI</tei-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description><![CDATA[
+               Name of the exported scoped variable
+            ]]></description>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+               The object to set.
+            ]]></description>
+            <name>object</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+               Set to true if you don't want to trim the resulting string output (if it's a string).
+            ]]></description>
+            <name>dontTrim</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                The class name of the variable
+            ]]></description>
+            <name>className</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                true if null should be returned if this object isn't of the specified type.
+                defaults to false.  if the object isn't of the specified type and this value
+                is false, an exception will be raised.
+            ]]></description>
+            <name>setNullIfNotOfType</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                Scope for var.
+            ]]></description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description><![CDATA[
+           Formats a URL.
+        ]]></description>
+        <name>url</name>
+        <tag-class>org.narrative.common.web.tags.URLTag</tag-class>
+        <tei-class>org.narrative.common.intellij.URLTagExtraInfo</tei-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description><![CDATA[
+               Name of the exported scoped variable
+            ]]></description>
+            <name>value</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                the id of the url.  Using this will set the url value on the page context with this id.
+            ]]></description>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
+        <attribute>
+            <description><![CDATA[
+                The class name of the variable
+            ]]></description>
+            <name>includeParams</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                Whether or not the URL should be encoded.  Defaults to false.
+            ]]></description>
+            <name>encode</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+            ]]></description>
+            <name>appendParamsAsPathParams</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                The name of a parameter to strip from the original URL (value attribute).
+                Useful for generating pagination URLs (and stripping out the old page number from the URL).
+            ]]></description>
+            <name>stripParamName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description><![CDATA[
+           Adds a URL parameter when nested in a url tag.
+        ]]></description>
+        <name>param</name>
+        <tag-class>org.narrative.common.web.tags.URLParam</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description><![CDATA[
+               Name of the parameter to add to the URL
+            ]]></description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                Value of the parameter.  If not specified, then the body content will be used as the value.
+            ]]></description>
+            <name>value</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description><![CDATA[
+	    The basic iteration tag, accepting many different
+        collection types and supporting subsetting and other
+        functionality
+        ]]></description>
+        <name>forEach</name>
+        <tag-class>org.narrative.common.util.tags.ForEachTag</tag-class>
+        <tei-class>org.narrative.common.intellij.ForEachTEI</tei-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description><![CDATA[
+            Collection of items to iterate over.
+            ]]></description>
+            <name>items</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+            If items specified:
+            Iteration begins at the item located at the
+            specified index. First item of the collection has
+            index 0.
+            If items not specified:
+            Iteration begins with index set at the value
+            specified.
+            ]]></description>
+            <name>begin</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+            If items specified:
+            Iteration ends at the item located at the
+            specified index (inclusive).
+            If items not specified:
+            Iteration ends when index reaches the value
+            specified.
+            ]]></description>
+            <name>end</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+            Iteration will only process every step items of
+            the collection, starting with the first one.
+            ]]></description>
+            <name>step</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+            Name of the exported scoped variable for the
+            current item of the iteration. This scoped
+            variable has nested visibility. Its type depends
+            on the object of the underlying collection.
+            ]]></description>
+            <name>obj</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+            Name of the exported scoped variable for the
+            status of the iteration. Object exported is of type
+            javax.servlet.jsp.jstl.core.LoopTagStatus. This scoped variable has nested
+            visibility.
+            ]]></description>
+            <name>varStatus</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+             type of object
+            ]]></description>
+            <name>className</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+    <description><![CDATA[
+	    The basic iteration tag for iterating a certain number of times
+    ]]></description>
+    <name>forLoop</name>
+    <tag-class>org.apache.taglibs.standard.tag.rt.core.ForEachTag</tag-class>
+    <tei-class>org.narrative.common.intellij.ForLoopTEI</tei-class>
+    <body-content>JSP</body-content>
+    <attribute>
+        <description><![CDATA[
+            Iteration begins with index set at the value
+            specified.
+        ]]></description>
+        <name>begin</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+        <type>int</type>
+    </attribute>
+    <attribute>
+        <description><![CDATA[
+            Iteration ends when index reaches the value
+            specified.
+        ]]></description>
+        <name>end</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+        <type>int</type>
+    </attribute>
+    <attribute>
+        <description><![CDATA[
+            Iteration will only process every step items of
+            the collection, starting with the first one.
+        ]]></description>
+        <name>step</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+        <type>int</type>
+    </attribute>
+    <attribute>
+        <description><![CDATA[
+            Name of the exported scoped variable for the
+            status of the iteration. Object exported is of type
+            javax.servlet.jsp.jstl.core.LoopTagStatus. This scoped variable has nested
+            visibility.
+        ]]></description>
+	    <name>varStatus</name>
+	    <required>true</required>
+	    <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+    <tag>
+       <description><![CDATA[
+           Sets a ognl value in the request and types it.
+       ]]></description>
+       <name>setFromOgnl</name>
+       <tag-class>org.narrative.common.web.struts.tags.SetTag</tag-class>
+       <tei-class>org.narrative.common.intellij.VariableClassTEI</tei-class>
+       <body-content>empty</body-content>
+       <attribute>
+           <description><![CDATA[
+               Name of the exported scoped variable
+           ]]></description>
+           <name>var</name>
+           <required>true</required>
+           <rtexprvalue>false</rtexprvalue>
+       </attribute>
+       <attribute>
+           <description><![CDATA[
+               The ognl path which produces the value
+           ]]></description>
+           <name>ognl</name>
+           <required>true</required>
+           <rtexprvalue>true</rtexprvalue>
+       </attribute>
+        <attribute>
+            <description><![CDATA[
+                The class name of the variable
+            ]]></description>
+            <name>className</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                true if null should be returned if this object isn't of the specified type.
+                defaults to false.  if the object isn't of the specified type and this value
+                is false, an exception will be raised.
+            ]]></description>
+            <name>setNullIfNotOfType</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+                Scope for var.
+            ]]></description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+     </tag>
+
+    <tag>
+       <description><![CDATA[
+           Sets an object with a variable name in the pageContext.
+       ]]></description>
+       <name>varVarSet</name>
+       <tag-class>org.narrative.common.util.tags.VarVarSetTag</tag-class>
+       <!--<tei-class>org.narrative.common.intellij.VariableClassTEI</tei-class>-->
+       <body-content>JSP</body-content>
+       <attribute>
+           <description><![CDATA[
+               Name of the exported scoped variable
+           ]]></description>
+           <name>var</name>
+           <required>true</required>
+           <rtexprvalue>true</rtexprvalue>
+       </attribute>
+       <attribute>
+           <description><![CDATA[
+               The object to set.
+           ]]></description>
+           <name>object</name>
+           <required>false</required>
+           <rtexprvalue>true</rtexprvalue>
+           <type>java.lang.Object</type>
+       </attribute>
+        <attribute>
+            <description><![CDATA[
+                Scope for var.
+            ]]></description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <!-- jw:todo: place functions below here -->
+
+    <function>
+        <description><![CDATA[
+            Throws an UnexpectedError with the supplied error message if the condition is not true.
+        ]]></description>
+        <name>assert</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void assertTrue(boolean, java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Sometimes there are situations in JSP where we want to raise an error if a certain condition is met.
+            This JSP tag lib function will directly throw an instance of UnexpectedError with the message of
+            the supplied string.  Useful for doing "assert"-like behavior in JSP.
+        ]]></description>
+        <name>throwUnexpectedError</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void throwUnexpectedError(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Test two objects for equality.  If two DAOObjects are supplied, will do the proper equality checks
+            for DAOObjects (testing class and OIDs).
+        ]]></description>
+        <name>isEqual</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>boolean isEqualForJsp(java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Output an attribute name/value pair.
+        ]]></description>
+        <name>attr</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String attr(java.lang.String, java.lang.String)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Conditionally output an attribute name/value pair.  Name/value pair string will only be output if the
+            value is non-empty.  First argument is the attribute name and second argument is the attribute value.
+        ]]></description>
+        <name>condAttr</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String condAttr(java.lang.String,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Serialize a map of attribute name/value pairs into a serialized string of those attributes. If an
+            attribute has a null value, then no value will be included in the resulting HTML.
+        ]]></description>
+        <name>htmlAttributes</name>
+        <function-class>org.narrative.common.web.tags.JspTagUtils</function-class>
+        <function-signature>java.lang.String getHtmlAttributeString(java.util.Map)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a Map of HTML attributes for a Foundation tooltip based on tooltip/title text.
+        ]]></description>
+        <name>foundationTooltipAttributes</name>
+        <function-class>org.narrative.common.web.tags.JspTagUtils</function-class>
+        <function-signature>java.util.Map getFoundationTooltipAttributes(java.lang.String,boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a string of serialized HTML attributes for a Foundation tooltip based on tooltip/title text.
+        ]]></description>
+        <name>foundationTooltipAttributeString</name>
+        <function-class>org.narrative.common.web.tags.JspTagUtils</function-class>
+        <function-signature>java.lang.String getFoundationTooltipAttributeString(java.lang.String,boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Test the existence of an object.  For DAOObjects, will test that the object actually exists in the database.
+            For all other objects, will return true if the argument is not null.
+        ]]></description>
+        <name>exists</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>boolean exists(java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Output a newline character.  Useful when generating text emails.
+        ]]></description>
+        <name>newline</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String newline()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Output a specified number of newline characters.  Useful when generating text emails.
+        ]]></description>
+        <name>newlines</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String newlines(int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Concatenate two strings together.  Surprisingly (and disappointingly), JSP 2.0 does not provide any string
+            concatenation functionality by default.
+        ]]></description>
+        <name>concat</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String concat(java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Concatenate three strings together.  Surprisingly (and disappointingly), JSP 2.0 does not provide any string
+            concatenation functionality by default.
+        ]]></description>
+        <name>concat3</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String concat3(java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Concatenate four strings together.  Surprisingly (and disappointingly), JSP 2.0 does not provide any string
+            concatenation functionality by default.
+        ]]></description>
+        <name>concat4</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String concat4(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Concatenate five strings together.  Surprisingly (and disappointingly), JSP 2.0 does not provide any string
+            concatenation functionality by default.
+        ]]></description>
+        <name>concat5</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String concat5(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Concatenate six strings together.  Surprisingly (and disappointingly), JSP 2.0 does not provide any string
+            concatenation functionality by default.
+        ]]></description>
+        <name>concat6</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String concat6(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Concatenate seven strings together.  Surprisingly (and disappointingly), JSP 2.0 does not provide any string
+            concatenation functionality by default.
+        ]]></description>
+        <name>concat7</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String concat7(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Concatenate eight strings together.  Surprisingly (and disappointingly), JSP 2.0 does not provide any string
+            concatenation functionality by default.
+        ]]></description>
+        <name>concat8</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String concat8(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Escape quotes " in a string to &amp;quot;.
+            <br><br>
+            This method should be used any time that you are outputting an unknown string into an HTML or XML
+            attribute value, e.g.:
+            <br>
+            &lt;a title="${g:escapeQuotes(theTitle)}"&gt;
+        ]]></description>
+        <name>escapeQuotes</name>
+        <function-class>org.narrative.common.util.posting.HtmlTextMassager</function-class>
+        <function-signature>java.lang.String escapeQuotesForXml(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Escape the closing CDATA pattern ]]&gt; to ]]&amp;gt;.
+            <br><br>
+            Useful when outputting strings into a CDATA block and you want to ensure that the text doesn't include
+            a closing CDATA section, which would otherwise break the CDATA block.
+        ]]></description>
+        <name>escapeCdataText</name>
+        <function-class>org.narrative.common.util.posting.HtmlTextMassager</function-class>
+        <function-signature>java.lang.String escapeCdataText(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Enables disabled HTML in a string.  Converts &amp;lt; to &lt;, &amp;gt; to &gt; and &amp;amp; to &amp;.
+        ]]></description>
+        <name>enableDisabledHtml</name>
+        <function-class>org.narrative.common.util.posting.HtmlTextMassager</function-class>
+        <function-signature>java.lang.String enableDisabledHtml(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Determines if the provided object is an array.  This is difficult (impossible?) to do in JSP.
+        ]]></description>
+        <name>isArray</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>boolean isArray(java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Test if an object is contained within another object.  First parameter must be either a Collection,
+            Map, or array.  Second parameter is the object to look for.  For maps, we check if the object is specified
+            as a key in the map (not a value).
+        ]]></description>
+        <name>contains</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>boolean contains(java.lang.Object, java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Test if any object within a collection is contained within another object.  First parameter must be either a Collection,
+            Map, or array.  Second parameter is the object collection to look for.  For maps, we check if the object is specified
+            as a key in the map (not a value).
+        ]]></description>
+        <name>containsAny</name>
+        <function-class>org.apache.commons.collections4.CollectionUtils</function-class>
+        <function-signature>boolean containsAny(java.util.Collection, java.util.Collection)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a new java.util.List object.
+        ]]></description>
+        <name>newList</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.List newList()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a new java.util.Set object.
+        ]]></description>
+        <name>newSet</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.Set newSet()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Put a new element into a list at the specified position.  First argument is the list, second argument is the position, third element is the new element to insert.
+        ]]></description>
+        <name>listAddToPosition</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void listAddToPosition(java.util.List,int,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Put a new element into a collection.  First argument is the collection, second argument is the new element.
+        ]]></description>
+        <name>collectionAdd</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void collectionAdd(java.util.Collection,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Put new elements into a collection.  First argument is the collection, second argument is the collection of new elements.
+        ]]></description>
+        <name>collectionAddAll</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void collectionAddAll(java.util.Collection,java.util.Collection)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Removes a element from a collection.  First argument is the collection, second argument is the element to remove.
+        ]]></description>
+        <name>collectionRemove</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void collectionRemove(java.util.Collection,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Removes all of the specified elements from a collection.  First argument is the collection, second argument is the collection of elements to remove.
+        ]]></description>
+        <name>collectionRemoveAll</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void collectionRemoveAll(java.util.Collection,java.util.Collection)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Returns the intersection of two collections
+        ]]></description>
+        <name>collectionIntersection</name>
+        <function-class>org.apache.commons.collections4.CollectionUtils</function-class>
+        <function-signature>java.util.Collection intersection(java.lang.Iterable,java.lang.Iterable)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the first item in a collection.  Returns null if the collection is null or empty.
+        ]]></description>
+        <name>firstItemInCol</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.Object firstItemInCol(java.util.Collection)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the item in a list by index.  Returns null if the list is null, empty or the provided index is out of bounds.
+        ]]></description>
+        <name>itemFromIndexOfList</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.Object itemFromIndexOfList(java.util.List,int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a new java.util.LinkedHashMap object.
+        ]]></description>
+        <name>newMap</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.Map newMap()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Returns a map that is modifiable, containing all elements from the provided map if a new map is necessary. Should never receive a null object as this methods result.
+        ]]></description>
+        <name>getModifiableMap</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.Map getModifiableMap(java.util.Map)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a new java.util.TreeMap object.
+        ]]></description>
+        <name>newTreeMap</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.TreeMap newTreeMap()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a Map with a single entry in it.
+        ]]></description>
+        <name>singletonMap</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.Map singletonMap(java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a singleton list with one item in it.
+        ]]></description>
+        <name>singletonList</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <!-- bl: ignore that this is red in IntelliJ. it works, and can't be defined with T -->
+        <function-signature>java.util.Listsi singletonList(java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a list with two items in it.
+        ]]></description>
+        <name>list2</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.List list2(java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create a list with three items in it.
+        ]]></description>
+        <name>list3</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.List list3(java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Put a new value into a map.  First argument is the map, second argument is the new key, and third
+            argument is the new value.
+        ]]></description>
+        <name>mapPut</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void mapPut(java.util.Map,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Conditionally put a new value into a map, only if the key and the value are both not null.
+            First argument is the map, second argument is the new key, and third argument is the new value.
+        ]]></description>
+        <name>mapPutNoNulls</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void mapPutNoNulls(java.util.Map,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Conditionally put a new String value into a map, only if the key is not null and and the value is not empty.
+            First argument is the map, second argument is the new key, and third argument is the new String value.
+        ]]></description>
+        <name>mapPutNonEmpty</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void mapPutNonEmpty(java.util.Map,java.lang.Object,java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Put a all values into a map.  First argument is the map, second argument is the map containing values to add.
+        ]]></description>
+        <name>mapPutAll</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void mapPutAll(java.util.Map,java.util.Map)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Remove a value from a map.  First argument is the map, second argument is the key.
+        ]]></description>
+        <name>mapRemove</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void mapRemove(java.util.Map,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a collection of all of the values in a map.  Effectively calls java.util.Map.values().
+        ]]></description>
+        <name>mapValues</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.Collection mapValues(java.util.Map)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the value from the provided Map, this is necessary because jsp does not properly support maps with
+            null keys.  For example ${map[null]} will always result in a null result.
+        ]]></description>
+        <name>mapValue</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.Object mapValue(java.util.Map,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a set of all of the keys in a map.  Effectively calls java.util.Map.keySet().
+        ]]></description>
+        <name>mapKeySet</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.Set mapKeySet(java.util.Map)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Test if a variable is already defined in the page context.  First argument is the PageContext, second
+            argument is the variable name to test for, and third argument is the scope to check.
+            <br><br>
+            Useful primarily in our gct:doOnce tag where we want to limit the output of certain chunks of HTML
+            to once for a single page.
+        ]]></description>
+        <name>isInPageContext</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>boolean isInPageContext(javax.servlet.jsp.PageContext,java.lang.String,java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Convert a string into its proper javascript value.  If the string is empty (null or empty string), then
+            the javascript null will be used.  For all other non-empty strings, this function will output a valid
+            javascript literal string, delimited by quotes " with all proper escaping.
+        ]]></description>
+        <name>getJavascriptStringValue</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String getStringForJavascriptAndNullIfEmpty(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Disable any HTML in a string.  Converts &lt; to &amp;lt;, &gt; to &amp;gt;, and &amp; to &amp;amp;.
+            Useful when you want to display the contents of a string exactly as shown (e.g. stack traces).
+            <br><br>
+            Note: we store all strings in the database in their proper HTML format (escaped as necessary), so in general,
+            we should very rarely need to use this method.
+        ]]></description>
+        <name>disableHtml</name>
+        <function-class>org.narrative.common.util.posting.HtmlTextMassager</function-class>
+        <function-signature>java.lang.String disableHtml(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Evaluate the getter for a dynamic bean property name on an object.
+        ]]></description>
+        <name>evaluateBeanProperty</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.Object evaluateBeanProperty(java.lang.Object,java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the Struts action name from a form action path.  Removes ! and any method names and also strips
+            off any namespacing.  e.g.
+            <br>
+            /action -> action
+            <br>
+            /namespace/action -> action
+            <br>
+            /namespace/action!method -> action
+            <br>
+            /namespace/action!method/!action2!method2 -> action2
+        ]]></description>
+        <name>actionName</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String strutsActionName(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Create an input ID based on a supplied id (optional), the form id, and the input field name.
+        ]]></description>
+        <name>createInputId</name>
+        <function-class>org.narrative.common.web.tags.JspTagUtils</function-class>
+        <function-signature>java.lang.String createInputId(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the hash code for an exception's stack trace.
+            On our error pages, we need to get the hash code from an exception for generating a reference ID.
+        ]]></description>
+        <name>exceptionHashCode</name>
+        <function-class>org.narrative.common.util.Debug</function-class>
+        <function-signature>int getHashCodeFromException(java.lang.Throwable)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Strip the script tag from Javascript for return in a JavaScript file.  Necessary in order to trick
+            IntelliJ into knowing that the Javascript in our JSP tag files is actually Javascript.
+        ]]></description>
+        <name>stripScriptTag</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String stripScriptTag(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the hash code for the root cause exception's class name.
+            On our error pages, we need to get the hash code from the root exception class name for generating a reference ID.
+        ]]></description>
+        <name>exceptionRootCauseHashCode</name>
+        <function-class>org.narrative.common.util.Debug</function-class>
+        <function-signature>int getRootCauseClassHashCode(java.lang.Throwable)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a number using the user's browser's locale's number formatting mechanism.  For US, will render
+            numbers like 1,000,000.
+        ]]></description>
+        <name>formatNumber</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String formatNumber(long)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a decimal number using the user's browser's locale's decimal number formatting mechanism.
+        ]]></description>
+        <name>formatDecimalNumber</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String formatDecimalNumber(double)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Creates a new StringBuilder object.
+        ]]></description>
+        <name>newStringBuilder</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.StringBuilder newStringBuilder()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Adds a cssClass to a StringBuilder of cssClasses.  Should make it more efficient to add cssClasses together
+            while ensuring that there are spaces between the classes.
+        ]]></description>
+        <name>addCssClass</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>void addCssClass(java.lang.StringBuilder,java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Generate a sequence number.  Almost surely (though not 100% guaranteed) to be unique for a given request.
+        ]]></description>
+        <name>seq</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>long seq()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Generate a sequence number.  Almost surely (though not 100% guaranteed) to be unique for a given request.
+        ]]></description>
+        <name>seqInt</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>int seqInt()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Generate a sequence number as an OID object.  Sequence number almost surely (though not 100% guaranteed) to
+            be unique for a given request.
+        ]]></description>
+        <name>seqOid</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>org.narrative.common.persistence.OID seqOid()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the provided Timestamp as a yyyyMMdd formatted String.
+        ]]></description>
+        <name>formatYyyyMmDdDate</name>
+        <function-class>org.narrative.common.util.IPDateUtil</function-class>
+        <function-signature>java.lang.String getYyyyMmDdString(java.util.Calendar)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the provided Timestamp as a UTC formatted String.
+        ]]></description>
+        <name>formatUtcDatetime</name>
+        <function-class>org.narrative.common.util.IPDateUtil</function-class>
+        <function-signature>java.lang.String getUtcDatetimeString(java.sql.Timestamp)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the current year.
+        ]]></description>
+        <name>currentYear</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>int currentYear()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the current time in milliseconds since Jan. 1, 1970
+        ]]></description>
+        <name>now</name>
+        <function-class>java.lang.System</function-class>
+        <function-signature>long currentTimeMillis()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a java.util.Date object from a long millisecond timestamp value
+        ]]></description>
+        <name>getDateFromLong</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.util.Date getDateFromLong(long)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the date components, in order, from a date format string
+        ]]></description>
+        <name>getDateFormatOrder</name>
+        <function-class>org.narrative.common.web.DateComponentType</function-class>
+        <function-signature>java.util.List getDateFormatOrder(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the min of two numbers
+        ]]></description>
+        <name>mathMin</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>double min(double,double)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Round any number into its integer/long form.
+        ]]></description>
+        <name>round</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>long round(double)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the max of two numbers
+        ]]></description>
+        <name>mathMax</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>double max(double,double)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            URL encode a string.  Should be used for query argument parameter encoding.
+        ]]></description>
+        <name>enc</name>
+        <function-class>org.narrative.common.util.IPHTMLUtil</function-class>
+        <function-signature>java.lang.String getURLEncodedString(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            URL encode a string, but do not convert spaces to plus as you would for query argument parameters.  Used
+            when URL encoding a string that is to be used in path parameters.  Spaces will get encoded as
+            “%20” instead of “+”.
+        ]]></description>
+        <name>encNoSpaceToPlus</name>
+        <function-class>org.narrative.common.util.IPHTMLUtil</function-class>
+        <function-signature>java.lang.String getURLEncodedStringButDontEncodeSpacesToPlus(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Short-hand for encNoSpaceToPlus.
+        ]]></description>
+        <name>encNP</name>
+        <function-class>org.narrative.common.util.IPHTMLUtil</function-class>
+        <function-signature>java.lang.String getURLEncodedStringButDontEncodeSpacesToPlus(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets a ObjectTriplet given three values
+        ]]></description>
+        <name>newObjectTriplet</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>org.narrative.common.persistence.ObjectTriplet newObjectTripletForJsp(java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets a ObjectTriplet given three values
+        ]]></description>
+        <name>newObjectQuadruplet</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>org.narrative.common.persistence.ObjectQuadruplet newObjectQuadrupletForJsp(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Truncate a string to the specified number of characters and add an ellipsis "..." if string was truncated.
+        ]]></description>
+        <name>elipse</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String elipse(java.lang.String, int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Truncate a string to the specified number of characters, but don't break in the middle of a word unless
+            the string passed in is only 1 word and longert then specified number of characters.
+            add an ellipsis "..." if string was truncated.
+        ]]></description>
+        <name>elipseToEndOfWord</name>
+        <function-class>org.narrative.common.util.IPStringUtil</function-class>
+        <function-signature>java.lang.String getStringTruncatedToEndOfWord(java.lang.String,int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Truncate a string to a specified number of characters with an ellipsis "..." in the middle, if necessary.
+            First numeric argument specifies the amount of characters to display at the beginning of the string and
+            second numeric argument specifies the amount of characters to display at the end of the string.
+        ]]></description>
+        <name>elipseInTheMiddle</name>
+        <function-class>org.narrative.common.util.IPStringUtil</function-class>
+        <function-signature>java.lang.String getTruncatedString(java.lang.String,int,int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the OID for the page context list
+        ]]></description>
+        <name>pageContextOid</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String getPageContextOid(java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the type for the page context list
+        ]]></description>
+        <name>pageContextType</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String getPageContextType(java.lang.Object)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the ceiling of a numeric value
+        ]]></description>
+        <name>ceil</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>double ceil(double)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            If the provided string does not end in punctuation HTML ellipses will be appended to the result.
+        ]]></description>
+        <name>getStringWithEllipsis</name>
+        <function-class>org.narrative.common.util.IPStringUtil</function-class>
+        <function-signature>java.lang.String getStringWithEllipsis(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Return true if the two strings are equal. null and empty string "" are considered to be equal.
+        ]]></description>
+        <name>isStringEqual</name>
+        <function-class>org.narrative.common.util.IPStringUtil</function-class>
+        <function-signature>boolean isStringEqual(java.lang.String,java.lang.String)</function-signature>
+    </function>
+
+</taglib>

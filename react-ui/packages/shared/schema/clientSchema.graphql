@@ -1,0 +1,43 @@
+enum AuthenticationState {
+  USER_AUTHENTICATED,
+  USER_NOT_AUTHENTICATED,
+  USER_REQUIRES_2FA
+}
+
+type AuthState {
+  authenticationState: AuthenticationState!
+}
+
+input AuthStateInput {
+  authenticationState: AuthenticationState!
+}
+
+type ErrorState {
+  type: String
+  title: String
+  message: String
+  referenceId: String
+  detail: String
+  httpStatusCode: Int
+  result: String
+  data: String
+  graphQLErrors: String
+  stack: String
+}
+
+input ErrorStateInput {
+  errorState: ErrorState!
+}
+
+extend type Query {
+  authState: AuthState!
+  errorState: ErrorState!
+}
+
+extend type Mutation {
+  updateAuthenticationState (input: AuthStateInput!): Boolean
+  # Update the error state in link state if not already present.  Return true if written, false if already set
+  setErrorState (input: ErrorStateInput!): Boolean!
+  # Clear the current error state
+  clearErrorState: Boolean
+}

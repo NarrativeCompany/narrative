@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run JUnit tests" type="JUnit" factoryName="JUnit">
+    <module name="core" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="directory" />
+    <option name="PARAMETERS" value="" />
+    <dir value="$PROJECT_DIR$/src/test/java/com/groupee" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

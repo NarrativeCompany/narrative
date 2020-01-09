@@ -1,0 +1,117 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: narrative-core
+  name: narrative-core
+  namespace: staging
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+      labels:
+        app: narrative-core
+      name: narrative-core
+    spec:
+      containers:
+      - name: narrative-core
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: default,staging,secret
+        - name: SPRING_CONFIG_ADDITIONAL-LOCATION
+          value: file:./staging/,file:./secret/
+        image: narrativecompany/narrative-core:master-latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: nc
+          protocol: TCP
+        - containerPort: 8082
+          name: cp
+          protocol: TCP
+        - containerPort: 8083
+          name: kyc
+          protocol: TCP
+        readinessProbe:
+          tcpSocket:
+            port: 9090
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 180
+          periodSeconds: 20
+        resources:
+          requests:
+            cpu: .5
+            memory: 512M
+          limits:
+            cpu: 2
+            memory: 2048M
+        volumeMounts:
+          - name: application-secret-properties
+            mountPath: /opt/narrative-core/secret
+            readOnly: true
+          - name: google-analytics-api-key-json
+            mountPath: /opt/narrative-core/google-analytics
+            readOnly: true
+          - name: application-staging-properties
+            mountPath: /opt/narrative-core/staging
+            readOnly: true
+          - name: cloud-storage-credentials
+            mountPath: /opt/narrative-core/cloud-storage-credentials
+            readOnly: true
+          - name: kyc-certification-files
+            mountPath: /opt/narrative-core/certification-files
+            readOnly: true
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.13
+        command: ["/cloud_sql_proxy",
+                  "-term_timeout=30s",
+                  "-instances=staging-narrative:us-east1:staging-master=tcp:3306",
+                  "-credential_file=/opt/cloud-sql-proxy/staging-sql.json"]
+        resources:
+          requests:
+            cpu: .1
+            memory: 128M
+          limits:
+            cpu: .5
+            memory: 256M
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - name: cloud-sql-proxy
+            mountPath: /opt/cloud-sql-proxy
+            readOnly: true
+      imagePullSecrets:
+        - name: narrativecompany-docker
+      volumes:
+        - name: cloud-sql-proxy
+          secret:
+            secretName: cloud-sql-proxy
+        - name: application-secret-properties
+          secret:
+            secretName: application-secret-properties
+        - name: google-analytics-api-key-json
+          secret:
+            secretName: google-analytics-api-key-json
+        - name: cloud-storage-credentials
+          secret:
+            secretName: cloud-storage-credentials
+        - name: kyc-certification-files
+          secret:
+            secretName: kyc-certification-files
+        - name: application-staging-properties
+          configMap:
+            name: application-staging-properties

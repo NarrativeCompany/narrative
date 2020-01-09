@@ -1,0 +1,47 @@
+enum UserRedemptionStatus {
+  WALLET_UNSPECIFIED
+  WALLET_IN_WAITING_PERIOD
+  HAS_PENDING_REDEMPTION
+  REDEMPTION_AVAILABLE
+}
+
+type UserNeoWallet {
+  oid: String!
+  neoAddress: String
+  redemptionStatus: UserRedemptionStatus!
+  waitingPeriodEndDatetime: String
+  currentBalance: NrveValueDetailImpl!
+}
+
+input DeleteUserNeoWalletInput {
+  currentPassword: String!
+  twoFactorAuthCode: String
+}
+
+input UpdateUserNeoWalletInput {
+  currentPassword: String!
+  twoFactorAuthCode: String
+  neoAddress: String
+}
+
+input RequestRedemptionInput {
+  currentPassword: String!
+  twoFactorAuthCode: String
+  redemptionAmount: String!
+  nrveUsdPrice: NrveUsdPriceInput!
+}
+
+input CancelRedemptionRequestInput {
+  redemptionOid: String!
+}
+
+type Query {
+  getUserNeoWallet: UserNeoWallet!
+}
+
+type Mutation {
+  putUserNeoWallet (input: UpdateUserNeoWalletInput!): UserNeoWallet!
+  deleteUserNeoWallet (input: DeleteUserNeoWalletInput!): UserNeoWallet!
+  requestRedemption (input: RequestRedemptionInput!): VoidResult
+  cancelRedemptionRequest (input: CancelRedemptionRequestInput!): VoidResult
+}

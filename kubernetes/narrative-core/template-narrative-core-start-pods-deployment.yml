@@ -1,0 +1,98 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ${APP}
+  name: ${APP}
+  namespace: ${K8S_ENV}
+spec:
+  replicas: ${REPLICAS}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+      labels:
+        app: ${APP}
+      name: ${APP}
+    spec:
+      containers:
+      - name: narrative-core
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: default,${K8S_ENV},secret
+        - name: SPRING_CONFIG_ADDITIONAL-LOCATION
+          value: file:./${K8S_ENV}/,file:./secret/
+        image: narrativecompany/narrative-core:${DOCKER_TAG}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: nc
+          protocol: TCP
+        - containerPort: 8082
+          name: cp
+          protocol: TCP
+        - containerPort: 8083
+          name: kyc
+          protocol: TCP
+        resources:
+          requests:
+            cpu: .5
+            memory: 2048M
+          limits:
+            cpu: 2
+            memory: 3072M
+        volumeMounts:
+          - name: application-secret-properties
+            mountPath: /opt/narrative-core/secret
+            readOnly: true
+          - name: google-analytics-api-key-json
+            mountPath: /opt/narrative-core/google-analytics
+            readOnly: true
+          - name: application-${K8S_ENV}-properties
+            mountPath: /opt/narrative-core/${K8S_ENV}
+            readOnly: true
+          - name: cloud-storage-credentials
+            mountPath: /opt/narrative-core/cloud-storage-credentials
+            readOnly: true
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.13
+        command: ["/cloud_sql_proxy",
+                  "-term_timeout=30s",
+                  "-instances=${GOOGLE_ENV}-narrative:${REGION}:${K8S_ENV}-master=tcp:3306",
+                  "-credential_file=/opt/cloud-sql-proxy/${GOOGLE_ENV}-sql.json"]
+        resources:
+          requests:
+            cpu: .1
+            memory: 128M
+          limits:
+            cpu: .5
+            memory: 256M
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - name: cloud-sql-proxy
+            mountPath: /opt/cloud-sql-proxy
+            readOnly: true
+      imagePullSecrets:
+        - name: narrativecompany-docker
+      volumes:
+        - name: cloud-sql-proxy
+          secret:
+            secretName: cloud-sql-proxy
+        - name: application-secret-properties
+          secret:
+            secretName: application-secret-properties
+        - name: google-analytics-api-key-json
+          secret:
+            secretName: google-analytics-api-key-json
+        - name: cloud-storage-credentials
+          secret:
+            secretName: cloud-storage-credentials
+        - name: application-${K8S_ENV}-properties
+          configMap:
+            name: application-${K8S_ENV}-properties

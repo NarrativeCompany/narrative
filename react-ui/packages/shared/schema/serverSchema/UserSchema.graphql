@@ -1,0 +1,462 @@
+enum ReputationLevel {
+  HIGH
+  MEDIUM
+  LOW
+  CONDUCT_NEGATIVE
+}
+
+type UserReputation {
+  oid: String!
+  conductNegative: Boolean
+  negativeConductExpirationTimestamp: String
+  qualityAnalysisScore: Int!
+  kycVerifiedScore: Int!
+  kycVerificationPending: Boolean
+  totalScore: Int!
+  level: ReputationLevel!
+}
+
+enum UserAgeStatus {
+  UNKNOWN
+  UNDER_18
+  OVER_18
+}
+
+type User {
+  oid: String!
+  displayName: String!
+  username: String!
+  avatarSquareUrl: String
+  deleted: Boolean!
+  labels: [String!]
+  reputation: UserReputation
+}
+
+type UserDetail {
+  user: User!
+  joined: String!
+  lastVisit: String
+  hideMyFollowers: Boolean!
+  hideMyFollows: Boolean!
+}
+
+enum SubmitTribunalAppealsRevokeReason {
+  REPORTED_IN_LAST_24_HOURS
+  CONDUCT_NEGATIVE
+  LOW_REPUTATION
+}
+
+enum SuggestNichesRevokeReason {
+  SUGGESTED_IN_LAST_24_HOURS
+  CONDUCT_NEGATIVE
+  LOW_REPUTATION
+}
+
+enum BidOnNichesRevokeReason {
+  NICHE_SLOTS_FULL
+  SECURITY_DEPOSIT_REQUIRED
+  CONDUCT_NEGATIVE
+  LOW_REPUTATION
+}
+
+enum StandardRevokeReason {
+  CONDUCT_NEGATIVE
+  NOT_CERTIFIED
+}
+
+interface Permission {
+  granted: Boolean!
+}
+
+interface RevokablePermission {
+  restorationDatetime: String
+}
+
+type StandardPermission implements Permission & RevokablePermission {
+  granted: Boolean!
+  restorationDatetime: String
+  revokeReason: StandardRevokeReason
+}
+
+type SuggestNichesPermission implements Permission & RevokablePermission {
+  granted: Boolean!
+  restorationDatetime: String
+  revokeReason: SuggestNichesRevokeReason
+}
+
+type BidOnNichesPermission implements Permission & RevokablePermission {
+  granted: Boolean!
+  restorationDatetime: String
+  revokeReason: BidOnNichesRevokeReason
+}
+
+type SubmitTribunalAppealsPermission implements Permission & RevokablePermission {
+  granted: Boolean!
+  restorationDatetime: String
+  revokeReason: SubmitTribunalAppealsRevokeReason
+}
+
+type GlobalPermissions {
+  suggestNiches: SuggestNichesPermission!
+  bidOnNiches: BidOnNichesPermission!
+  createPublications: StandardPermission!
+  participateInTribunalActions: Permission!
+  removeAupViolations: Permission!
+  submitTribunalAppeals: SubmitTribunalAppealsPermission
+  voteOnApprovals: StandardPermission
+  rateContent: StandardPermission
+  nominateForModeratorElection: StandardPermission
+  postContent: StandardPermission
+  postComments: StandardPermission
+}
+
+type CurrentUser {
+  user: User!
+  personalJournalOid: String!
+  userAgeStatus: UserAgeStatus!
+  formatPreferences: FormatPreferences!
+  globalPermissions: GlobalPermissions!
+}
+
+type FormatPreferences {
+  timeZone: String!
+  locale: String!
+  localeForNumber: String!
+}
+
+type UserReferralDetails {
+  rank: Int
+  friendsJoined: Int!
+  nrveEarned: String
+}
+
+enum NicheAssociationType {
+  OWNER
+  BIDDER
+}
+
+enum NicheAssociationSlot {
+  SLOT_1
+  SLOT_2
+  SLOT_3
+  SLOT_4
+  SLOT_5
+}
+
+type NicheUserAssociation {
+  niche: Niche!
+  type: NicheAssociationType!
+  associationSlot: NicheAssociationSlot!
+  associationDatetime: String!
+}
+
+type PublicationUserAssociation {
+  oid: String!
+  publication: Publication!
+  roles: [PublicationRole!]!
+  owner: Boolean!
+}
+
+type UserNotificationSettings {
+  notifyWhenFollowed: Boolean!
+  notifyWhenMentioned: Boolean!
+  suspendAllEmails: Boolean!
+}
+
+type UserPersonalSettings {
+  qualityFilter: QualityFilter!
+  displayAgeRestrictedContent: Boolean!
+  hideMyFollowers: Boolean!
+  hideMyFollows: Boolean!
+}
+
+type UserOwnedChannels {
+  ownedNiches: Int!
+  ownedPublications: Int!
+}
+
+enum KycIdentificationType {
+  PASSPORT
+  DRIVERS_LICENSE
+  GOVERNMENT_ID
+}
+
+enum UserKycStatus {
+  NONE
+  READY_FOR_VERIFICATION
+  AWAITING_METADATA
+  IN_REVIEW
+  APPROVED
+  REJECTED
+  REVOKED
+}
+
+enum UserKycEventType {
+  # jw: note: we only need the rejected UserKycEventTypes
+  USER_INFO_MISSING_FROM_DOCUMENT
+  SELFIE_NOT_VALID
+  REJECTED_DUPLICATE
+  DOCUMENT_INVALID
+  DOCUMENT_SUSPICIOUS
+  SELFIE_PAPER_MISSING
+  SELFIE_LOW_QUALITY
+  SELFIE_MISMATCH
+  USER_UNDERAGE
+}
+
+type UserKyc {
+  oid: String!
+  kycStatus: UserKycStatus!
+  rejectedReasonEventType: UserKycEventType
+  kycPricing: KycPricing!
+  payPalCheckoutDetails: PayPalCheckoutDetails
+}
+
+enum EmailAddressVerificationStep {
+  VERIFY_PRIMARY
+  VERIFY_PENDING
+}
+
+type VerifyEmailAddressResult {
+  emailAddress: String!
+  emailAddressToVerify: String
+  incompleteVerificationSteps: [EmailAddressVerificationStep!]!
+  token: AuthPayload
+}
+
+type UserEmailAddressDetail {
+  oid: String!
+  emailAddress: String!
+  pendingEmailAddress: String
+  pendingEmailAddressExpirationDatetime: String
+  incompleteVerificationSteps: [EmailAddressVerificationStep!]
+}
+
+type SuspendEmailValidation {
+  error: String
+  user: User!
+}
+
+input UserNotificationSettingsInput {
+  notifyWhenFollowed: Boolean!
+  notifyWhenMentioned: Boolean!
+  suspendAllEmails: Boolean!
+}
+
+input UserPersonalSettingsInput {
+  qualityFilter: QualityFilter!
+  displayAgeRestrictedContent: Boolean!
+  hideMyFollowers: Boolean!
+  hideMyFollows: Boolean!
+}
+
+input UserOidInput {
+  userOid: String!
+}
+
+input UpdateEmailAddressInput {
+  currentPassword: String!
+  twoFactorAuthCode: String
+  emailAddress: String!
+}
+
+input UpdatePasswordInput {
+  currentPassword: String!
+  twoFactorAuthCode: String
+  newPassword: String!
+}
+
+input DeleteCurrentUserInput {
+  currentPassword: String!
+  twoFactorAuthCode: String
+  confirmDeleteAccount: Boolean!
+}
+
+input UpdateCurrentUserProfileInput {
+  displayName: String!
+  username: String!
+}
+
+input UserRenewTosAgreementInput {
+  hasAgreedToTos: Boolean!
+}
+
+input VerifyEmailAddressInput {
+  confirmationId: String!
+}
+
+input SuspendEmailInput {
+  emailAddress: String!
+  token: String!
+}
+
+input VerifyPendingEmailAddressInput {
+  confirmationId: String!
+  emailAddressOid: String!
+  verificationStep: EmailAddressVerificationStep!
+}
+
+input RecoverPasswordInput {
+  emailAddress: String!
+  recaptchaResponse: String!
+}
+
+input ValidateResetPasswordUrlInput {
+  resetPasswordKey: String!
+  timestamp: String!
+}
+
+input ResetPasswordInput {
+  twoFactorAuthCode: String
+  resetPasswordKey: String!
+  password: String!
+  passwordConfirm: String!
+  timestamp: String!
+}
+
+input KycApplicationInput {
+  kycIdentificationType: KycIdentificationType!
+}
+
+input FollowUserInput {
+  userOid: String!
+}
+
+type User2FAState {
+  value: Boolean!
+}
+
+type PWResetURLValidationResult {
+  valid: Boolean!
+  expired: Boolean!
+  twoFactorEnabled: Boolean!
+}
+
+type PermittedAgeRating {
+  permittedAgeRatings: [AgeRating!]!
+}
+
+type NicheOwnershipReward {
+  niche: Niche!
+
+  reward: NrveUsdValue!
+}
+
+input UserRewardTransactionsInput {
+  size: Int!
+  page: Int!
+}
+
+type UserRewardPeriodStats {
+  rewardPeriodRange: String!
+
+  totalContentCreationReward: NrveUsdValue!
+  totalNicheOwnershipReward: NrveUsdValue!
+  totalNicheModerationReward: NrveUsdValue!
+  totalActivityRewards: NrveUsdValue!
+  activityBonusPercentage: Int!
+  totalElectorateReward: NrveUsdValue!
+  totalTribunalReward: NrveUsdValue!
+  totalReward: NrveUsdValue!
+
+  nicheOwnershipRewards: [NicheOwnershipReward!]!
+
+  percentageOfTotalPayout: String!
+}
+
+enum UserWalletTransactionType {
+  REFERRAL,
+  REFERRAL_TOP_10,
+  NICHE_REFUND,
+  PUBLICATION_REFUND,
+  DELETED_USER_ABANDONED_BALANCES,
+  REFUND_REVERSAL,
+  CONTENT_REWARD,
+  NICHE_OWNERSHIP_REWARD,
+  NICHE_MODERATION_REWARD,
+  ACTIVITY_REWARD,
+  TRIBUNAL_REWARD,
+  ELECTORATE_REWARD,
+  USER_TIP,
+  USER_REDEMPTION
+}
+
+enum UserWalletTransactionStatus {
+  COMPLETED,
+  PENDING,
+  PROCESSING
+}
+
+enum ContentCreatorRewardRole {
+  WRITER,
+  PUBLICATION_OWNER,
+  PUBLICATION_ADMIN,
+  PUBLICATION_EDITOR
+}
+
+type UserRewardTransaction {
+  oid: String!
+  transactionDatetime: String!
+  type: UserWalletTransactionType!
+  status: UserWalletTransactionStatus!
+  metadataUser: User
+  metadataNiche: Niche
+  metadataPost: Post
+  metadataContentCreatorRewardRole: ContentCreatorRewardRole
+  metadataActivityBonusPercentage: Int
+  metadataNeoWalletAddress: String
+  metadataNeoTransactionId: String
+  memo: String
+  amount: NrveUsdValue!
+}
+
+type UserRewardTransactionsPayload {
+  items: [UserRewardTransaction!]!
+  info: PageInfo!
+}
+
+type Query {
+  getUserDetail (userId: String!): UserDetail!
+  getCurrentUser: CurrentUser!
+  getCurrentUserDetail: UserDetail!
+  getCurrentUserTwoFactorAuthState: User2FAState!
+  getAllTribunalMembers: [User!]!
+  getUserNotificationSettings: UserNotificationSettings!
+  getUserPersonalSettings: UserPersonalSettings!
+  getUserReferralDetails (input: UserOidInput!): UserReferralDetails!
+  getCurrentUserRewardsBalance: RewardValue!
+  getUserRewardPeriods (input: UserOidInput!): [RewardPeriod!]!
+  getUserRewardPeriodRewards (userOid: String!, input: RewardPeriodInput): UserRewardPeriodStats!
+  getUserRewardTransactions (userOid: String!, input: UserRewardTransactionsInput!): UserRewardTransactionsPayload!
+  getNicheUserAssociations (userOid: String!): [NicheUserAssociation!]!
+  getPublicationUserAssociations (userOid: String!): [PublicationUserAssociation!]!
+  getCurrentUserEmailAddress: UserEmailAddressDetail!
+  getCurrentUserOwnedChannels: UserOwnedChannels!
+  getCurrentUserKyc: UserKyc!
+  validateResetPasswordUrl(input: ValidateResetPasswordUrlInput!, userOid: String!): PWResetURLValidationResult!
+  getNichesMostPostedToByCurrentUser (count: Int): [Niche]!
+  getCurrentUserPermittedAgeRating: PermittedAgeRating!
+  getCurrentUserFollowingUser (userOid: String!) : CurrentUserFollowedItem!
+  validateSuspendEmailAddress(input: SuspendEmailInput!, userOid: String!): SuspendEmailValidation!
+}
+
+type Mutation {
+  updateUserNotificationSettings (input: UserNotificationSettingsInput!): UserNotificationSettings!
+  updateUserPersonalSettings (input: UserPersonalSettingsInput!): UserPersonalSettings!
+  updateEmailAddress (input: UpdateEmailAddressInput): UserEmailAddressDetail!
+  updatePassword (input: UpdatePasswordInput): AuthPayload!
+  deleteCurrentUser (input: DeleteCurrentUserInput): VoidResult
+  uploadCurrentUserAvatar(input: FileInput): User!
+  updateCurrentUserProfile(input: UpdateCurrentUserProfileInput): User!
+  renewTermsOfService(input: UserRenewTosAgreementInput): VoidResult
+  resendCurrentUserVerificationEmail(input: EmptyInput): VoidResult
+  verifyEmailAddressForUser(input: VerifyEmailAddressInput!, userOid: String!): VoidResult
+  verifyPendingEmailAddressForUser(input: VerifyPendingEmailAddressInput!, userOid: String!): VerifyEmailAddressResult!
+  suspendEmailAddressForUser(input: SuspendEmailInput!, userOid: String!): VoidResult!
+  cancelEmailAddressChange(input: VerifyPendingEmailAddressInput!, userOid: String!): StringScalar
+  recoverPassword(input: RecoverPasswordInput): VoidResult
+  resetPassword(input: ResetPasswordInput, userOid: String!): VoidResult
+  submitKycApplicant (input: KycApplicationInput!): UserKyc!
+  startFollowingUser (input: FollowUserInput!): CurrentUserFollowedItem!
+  stopFollowingUser (input: FollowUserInput!): CurrentUserFollowedItem!
+}

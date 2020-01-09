@@ -1,0 +1,56 @@
+server:
+  port: 8180
+
+spring:
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    contexts: install,update
+    default-schema: reputation
+
+  jpa:
+    open-in-view: false
+    database-platform:  org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: true
+      naming:
+        physical-strategy: org.narrative.shared.hibernate.NarrativePhysicalNamingStrategy
+    hikari:
+      transactionIsolation: TRANSACTION_REPEATABLE_READ
+
+  batch:
+    initialize-schema: never
+    job:
+      # Disable the JobLauncherCommandLineRunner that runs all jobs at start up
+      enabled: false
+      table-prefix: BATCH_
+
+redisson:
+  client:
+    databaseNumber: 0
+    codecName: org.redisson.codec.SerializationCodec
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health,prometheus
+
+  endpoint:
+    health:
+      showDetails: always
+
+logging:
+  pattern:
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%30.30t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  level:
+    org.narrative.reputation: INFO
+    org:
+      narrative:
+        reputation:
+          batch:
+            historyrollup: DEBUG
+
+
+

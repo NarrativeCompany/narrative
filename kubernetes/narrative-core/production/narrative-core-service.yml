@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: narrative-core
+  name: narrative-core
+  namespace: production
+spec:
+  ports:
+  - name: nc
+    port: 8080
+    targetPort: 8080
+  - name: kyc
+    port: 8083
+    targetPort: 8083
+  selector:
+    app: narrative-core
+

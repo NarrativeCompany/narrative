@@ -1,0 +1,2578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <query name="user.getByPrimaryEmailAddress">
+      <![CDATA[
+            select u
+            from EmailAddress e
+            inner join e.user u
+            where e.emailAddress = :emailAddress
+            and e.type = :primaryEmailAddressType
+      ]]>
+    </query>
+
+    <query name="areaUser.getFromUserOIDAreaOID">
+      <![CDATA[
+           select au
+           from AreaUser au
+           where au.user.oid = :userOID and au.area.oid = :areaOID
+      ]]>
+    </query>
+
+    <query name="user.getUsersByUsername">
+      <![CDATA[
+           select u
+           from User u
+           where u.authZone = :authZone
+           and u.username in (:usernames)
+      ]]>
+    </query>
+
+    <query name="areaUser.getMemberCountForArea">
+        <![CDATA[
+            select count(*)
+            from AreaUser au
+            where au.user.userStatus < 4
+            and au.area = :area
+        ]]>
+    </query>
+
+    <query name="areaUser.getAllUsersForAreaCircle">
+        <![CDATA[
+           select au
+           from AreaUser au
+           inner join au.areaCircleUsers acu
+           where au.area = :area
+           and acu.areaCircle = :areaCircle
+           and au.user.userStatus < 4
+           order by au.displayName asc, au.user.username asc
+      ]]>
+    </query>
+    <query name="propertySet.getDefaultPropertySetByType">
+      <![CDATA[
+           select ps.oid
+           from PropertySet ps
+           where ps.propertySetType = :propertySetType
+      ]]>
+    </query>
+
+    <query name="areaUser.getAllUsersWithCommunitySubscription">
+      <![CDATA[
+            select u
+            from AreaUser au
+                join au.user u
+                join au.area a
+            where u.oid in (:userOids)
+                and u.userStatus < 2
+                and bitwise_and(au.preferences.notificationSettings, :notificationTypeBitmask) != 0
+      ]]>
+    </query>
+
+    <query name="areaUser.getAllUserOidsWithCommunitySubscription">
+      <![CDATA[
+            select u.oid
+            from AreaUser au
+                join au.user u
+                join au.area a
+            where u.oid in (:userOids)
+                and u.userStatus < 2
+                and bitwise_and(au.preferences.notificationSettings, :notificationTypeBitmask) != 0
+      ]]>
+    </query>
+
+    <query name="user.getAllUsersWithCommunityRights">
+        <![CDATA[
+        select distinct au.user
+        from AreaUser au
+        inner join au.area a
+        inner join a.areaResource ar
+        inner join a.areaCircles ac
+        left outer join ac.permissions acp with acp.areaResource.oid = ar
+        left outer join ac.areaCircleUsers acu with acu.areaUser.oid = au
+        where a = :area
+        and au.user.userStatus < 2
+        and acu is not null
+        and acp.securableType in (:securableTypes)
+        ]]>
+    </query>
+
+    <query name="user.getAllNonDeleted">
+      <![CDATA[
+            select u.oid
+            from User u
+            , Area a
+            where
+            u.userStatus < 4
+            and a.oid = u.authZone
+       ]]>
+    </query>
+
+    <query name="user.getIndexRecordChunked">
+        <![CDATA[
+            select u
+            from User u
+            inner join fetch u.userStats
+            , Area a
+            where
+            u.oid > :lastOid
+            and u.userStatus < 4
+            and a.oid = u.authZone
+            order by u.oid
+        ]]>
+    </query>
+
+    <query name="appVersion.getLatestAppVersion">
+        <![CDATA[
+            from AppVersion
+            order by startDatetime desc
+        ]]>
+    </query>
+
+    <query name="userAuth.getForZoneProviderIdentifier">
+        <![CDATA[
+            from UserAuth
+            where authZone = :authZone
+            and authProvider = :authProvider
+            and identifier = :identifier
+        ]]>
+    </query>
+
+    <query name="emailAddress.deleteExpiredPendingEmailAddresses">
+        <![CDATA[
+            delete from EmailAddress email
+            where email.creationDatetime < :expiration
+            and email.type = :pendingEmailAddressType
+        ]]>
+    </query>
+
+    <sql-query name="areaCirclePermission.deleteInvalidPermissions">
+        <![CDATA[
+            delete acp
+            from AreaCirclePermission acp
+            inner join AreaResource ar on ar.oid = acp.areaResource_oid
+            where ar.areaResourceType = :areaResourceType
+            and acp.securableType not in (:securableTypes)
+        ]]>
+    </sql-query>
+
+    <query name="areaUser.getAreaUserOidAndUserOid">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(au.oid, au.user.oid)
+            from AreaUser au
+            where
+            au.oid in (:areaUserOids)
+        ]]>
+    </query>
+
+    <query name="areaUser.getUserOidsForAreaUserOids">
+        <![CDATA[
+            select au.user.oid
+            from AreaUser au
+            where au.oid in (:areaUserOids)
+        ]]>
+    </query>
+
+    <query name="areaCirclePermission.getCountWithPermissionForAreaResource">
+        <![CDATA[
+            select count(distinct acu.areaUser)
+            from AreaCircleUser acu
+            inner join acu.areaCircle ac
+            left join ac.permissions acp with acp.areaResource.oid = :areaResourceOid
+            where ac.area = :area
+            and (acp.securableType = :securableType or acu.areaUser.oid in (:includeAreaUserOids))
+        ]]>
+    </query>
+
+    <query name="areaCirclePermission.getAreaUserOidsWithPermissionForAreaResource">
+        <![CDATA[
+            select distinct acu.areaUser.oid
+            from AreaCircleUser acu
+            inner join acu.areaCircle ac
+            left join ac.permissions acp with acp.areaResource.oid = :areaResourceOid
+            where ac.area = :area
+            and acp.securableType = :securableType
+            and acu.areaUser.oid not in (:excludeAreaUserOids)
+        ]]>
+    </query>
+
+    <query name="area.getNarrativePlatformArea">
+        <![CDATA[
+            select a
+            from Area a
+        ]]>
+    </query>
+
+    <query name="area.getNarrativePlatformAreaOid">
+        <![CDATA[
+            select a.oid
+            from Area a
+        ]]>
+    </query>
+
+    <query name="fileOnDisk.getExpiredTempFileOids">
+        <![CDATA[
+            select fod.oid
+            from FileOnDisk fod
+            where fod.status = :tempFileStatus
+            and fod.creationDatetime < :olderThan
+        ]]>
+    </query>
+
+    <query name="areaUser.getActiveMemberCount">
+        <![CDATA[
+            select count(*)
+            from AreaUser au
+            inner join au.user u
+            where au.area = :area
+            and u.userStatus < 4
+            and au.areaUserStats.lastLoginDatetime > :cutoff
+        ]]>
+    </query>
+
+    <query name="appliedPatch.getPatchByName">
+        <![CDATA[
+            select ap
+            from AppliedPatch ap
+            where ap.name = :name
+            and ap.partition = :partition
+        ]]>
+    </query>
+
+    <query name="user.getWaitListInviteRank">
+        <![CDATA[
+            select count(*)+1
+            from User u
+            where u.authZone = :authZone
+            and u.userStatus < 4
+            and (
+                u.confirmedWaitListInviteCount > :confirmedInviteCount
+                or (
+                    u.confirmedWaitListInviteCount = :confirmedInviteCount
+                    and u.lastConfirmedWaitListInviteDatetime > :lastConfirmedInviteDatetime
+                )
+            )
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSum">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(transaction.nrveAmount))
+            from WalletTransaction transaction
+            where transaction.type in (:types)
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSumBetweenWallets">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from WalletTransaction t
+            where t.fromWallet = :fromWallet
+            and t.toWallet = :toWallet
+            and t.type in (:types)
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSumToWallet">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(transaction.nrveAmount))
+            from WalletTransaction transaction
+            where transaction.toWallet = :toWallet
+            and transaction.type in (:types)
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSumFromWallet">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(transaction.nrveAmount))
+            from WalletTransaction transaction
+            where transaction.fromWallet = :fromWallet
+            and transaction.type in (:types)
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSumsByTypeToWallet">
+        <![CDATA[
+            select t.type, sum(t.nrveAmount)
+            from WalletTransaction t
+            where t.toWallet = :toWallet
+            and t.type in (:types)
+            group by t.type
+        ]]>
+    </query>
+
+    <sql-query name="walletTransaction.getRefundTransactionSumsByFromWalletInRange">
+        <![CDATA[
+            select t.fromWallet_oid, sum(t.nrveAmount)
+            from (
+                select t.fromWallet_oid, t.nrveAmount
+                from Invoice i
+                inner join NrvePayment p on p.oid = i.nrvePayment_oid
+                inner join WalletTransaction t on t.oid = p.refundWalletTransaction_oid
+                where t.type = :type
+                and i.refundDatetime >= :after
+                and i.refundDatetime < :before
+
+                union all
+
+                select t.fromWallet_oid, t.nrveAmount
+                from Invoice i
+                inner join FiatPayment p on p.oid = i.fiatPayment_oid
+                inner join WalletTransaction t on t.oid = p.refundWalletTransaction_oid
+                where t.type = :type
+                and i.refundDatetime >= :after
+                and i.refundDatetime < :before
+            ) t
+            group by t.fromWallet_oid
+        ]]>
+    </sql-query>
+
+    <query name="walletTransaction.getTransactionCountFromWallet">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction transaction
+            where transaction.fromWallet = :fromWallet
+            and transaction.type in (:types)
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getSumForToWalletsAndStatus">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(transaction.nrveAmount))
+            from WalletTransaction transaction
+            where transaction.toWallet in (:toWallets)
+            and transaction.status = :status
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getUserTransactionSumsFromWallet">
+        <![CDATA[
+            select u.oid, sum(t.nrveAmount)
+            from User u
+            inner join u.wallet w
+            inner join w.toWalletTransactions t
+            where t.fromWallet = :fromWallet
+            group by u.oid
+            having sum(t.nrveAmount) > 0
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionsForUser">
+        <![CDATA[
+            select t
+            from WalletTransaction t
+            where (
+              t.fromWallet = :userWallet
+              or t.toWallet = :userWallet
+            )
+            and t.type not in (:excludeTypes)
+            order by ifint(eq(t.status, :pendingStatus), 0, ifint(eq(t.status, :processingStatus), 1, 2)), t.transactionDatetime desc
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionCountForUser">
+        <![CDATA[
+            select count(t)
+            from WalletTransaction t
+            where (
+              t.fromWallet = :userWallet
+              or t.toWallet = :userWallet
+            )
+            and t.type not in (:excludeTypes)
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSumForWallet">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(iflong(eq(t.fromWallet, :wallet), -t.nrveAmount, t.nrveAmount)))
+            from WalletTransaction t
+            where
+            t.fromWallet = :wallet
+            or t.toWallet = :wallet
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionOidsFromWallet">
+        <![CDATA[
+            select t.oid
+            from WalletTransaction t
+            where t.fromWallet = :wallet
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSumByToWalletType">
+        <![CDATA[
+            select t.status, sum(t.nrveAmount)
+            from WalletTransaction t
+            where t.toWallet = :toWallet
+            and t.type = :type
+            group by t.status
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTotalUsdForNonPendingFromWalletAndTypeAfter">
+        <![CDATA[
+            select sum(t.usdAmount)
+            from WalletTransaction t
+            where t.fromWallet = :fromWallet
+            and t.type in (:types)
+            and t.status != :pendingStatusType
+            and t.transactionDatetime >= :after
+            and t.usdAmount is not null
+        ]]>
+    </query>
+
+    <query name="walletTransaction.getTransactionSumByTypeWithStatus">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from WalletTransaction t
+            where
+            t.type = :type
+            and t.status = :status
+        ]]>
+    </query>
+
+    <query name="wallet.getSumOfAllBalancesForType">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(w.balance))
+            from Wallet w
+            where w.type = :walletType
+        ]]>
+    </query>
+
+    <!-- all of the queries for the old realm partition here -->
+
+    <query name="areaPropertyOverride.areaPropertySetOidsWithOverridesOfPropertyTypes">
+        <![CDATA[
+            select distinct aps.oid
+            from AreaPropertyOverride apo
+            inner join apo.areaPropertySet aps
+            where aps.propertySetType = :propertySetType
+            and apo.propertyType in (:propertyTypes)
+        ]]>
+    </query>
+
+    <query name="content.getAllOids">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(c.oid, c.portfolio.areaRlm.oid)
+            from Content c
+            where c.contentStatus<8
+        ]]>
+    </query>
+
+    <query name="content.getAllLiveInOids">
+        <![CDATA[
+            select c
+            from Content c
+            inner join fetch c.contentStats cs
+            where c.oid in (:contentOids)
+            and c.contentStatus = 0
+        ]]>
+    </query>
+
+    <query name="niche.getForPrettyUrlString">
+        <![CDATA[
+            from Niche n
+            where n.portfolio = :portfolio
+            and n.prettyUrlString = :prettyUrlString
+        ]]>
+    </query>
+
+    <query name="niche.getForReservedName">
+        <![CDATA[
+            from Niche n
+            where n.portfolio = :portfolio
+            and n.reservedName = :reservedName
+        ]]>
+    </query>
+
+    <query name="niche.getReservedRejectedNichesOlderThan">
+        <![CDATA[
+            select n
+            from Niche n
+            where n.portfolio = :portfolio
+            and n.reservedName is not null
+            and n.status = :rejectedStatus
+            and n.lastStatusChangeDatetime < :lastStatusChangeBefore
+        ]]>
+    </query>
+
+    <query name="referendum.getCountOfReferendumsByTypeAndStatus">
+        <![CDATA[
+            select count(r)
+            from Referendum r
+            where r.type in (:referendumTypes)
+            and r.open = :open
+            and (
+                (r.open = 1 and r.endDatetime > now())
+                or (r.open = 0 and r.endDatetime < now())
+            )
+        ]]>
+    </query>
+
+    <query name="referendum.getOpenReferendumsByType">
+        <![CDATA[
+            select r
+            from Referendum r
+            where r.type in (:referendumTypes)
+            and r.open = true
+            and r.endDatetime > now()
+            order by r.startDatetime asc, r.oid
+        ]]>
+    </query>
+
+    <query name="referendum.getCompletedReferendumsByType">
+        <![CDATA[
+            select r
+            from Referendum r
+            where r.type in (:referendumTypes)
+            and r.open = false
+            and r.endDatetime < now()
+            order by r.endDatetime desc, r.oid
+        ]]>
+    </query>
+
+    <query name="tribunalIssue.getCountOfOpenIssuesByTypeAndStatusPendingResponse">
+        <![CDATA[
+            select count(r)
+            from TribunalIssue ti
+            inner join ti.referendum r
+            left outer join r.referendumVotes vote with vote.voter.oid = :voterOid
+            where r.type in (:referendumTypes)
+            and r.open = 1
+            and r.endDatetime > now()
+            and vote.oid is null
+        ]]>
+    </query>
+
+    <query name="tribunalIssue.getOpenIssuesByTypeAndStatusPendingResponse">
+        <![CDATA[
+            select ti
+            from TribunalIssue ti
+            inner join ti.referendum r
+            left outer join r.referendumVotes vote with vote.voter.oid = :voterOid
+            where r.type in (:referendumTypes)
+            and r.open = 1
+            and r.endDatetime > now()
+            and vote.oid is null
+            order by r.startDatetime asc, r.oid
+        ]]>
+    </query>
+
+    <query name="niche.getMostRecentNicheSuggestedByUser">
+        <![CDATA[
+            from Niche n
+            where n.suggester = :suggester
+            order by n.suggestedDatetime desc
+        ]]>
+    </query>
+
+    <query name="niche.getAllOidsAndAreaOids">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(n.oid, n.portfolio.areaRlm.oid)
+            from Niche n
+        ]]>
+    </query>
+
+    <query name="niche.getIndexRecordChunked">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectSeptuplet(n.oid, na.oid, n.name, n.description, n.suggestedDatetime, n.status, n.owner.oid)
+            from Niche n
+            join n.portfolio.areaRlm na
+            left join n.owner owner
+            where n.oid > :lastOid
+            order by n.oid
+        ]]>
+    </query>
+
+    <query name="niche.getIndexRecordForAreaRlm">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectSeptuplet(n.oid, na.oid, n.name, n.description, n.suggestedDatetime, n.status, owner.oid)
+            from Niche n
+            left join n.owner owner
+            join n.portfolio.areaRlm na
+            where na = :areaRlm
+        ]]>
+    </query>
+
+    <query name="publication.getAllOidsAndAreaOids">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(p.oid, au.area.oid)
+            from Publication p
+            inner join p.owner owner
+            inner join AreaUser au on au.user = owner and au.area.oid = owner.authZone
+        ]]>
+    </query>
+
+    <query name="publication.getIndexRecordChunked">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectQuadruplet(p.oid, p.name, p.description, p.creationDatetime)
+            from Publication p
+            where p.oid > :lastOid
+            and p.status = :activeStatus
+            order by p.oid
+        ]]>
+    </query>
+
+    <query name="publication.getCountOwnedPublications">
+        <![CDATA[
+            select count(*)
+            from Publication p
+            where p.owner = :user
+            and p.status = :activeStatus
+        ]]>
+    </query>
+
+    <query name="publication.getOwnedPublications">
+        <![CDATA[
+            select p
+            from Publication p
+            where p.owner = :user
+            and p.status = :activeStatus
+        ]]>
+    </query>
+
+    <query name="publication.getAssociatedPublications">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(p, cu)
+            from Publication p
+            left outer join ChannelUser cu on cu.channel.oid = p.oid and cu.user.oid = :userOid and cu.roles != 0
+            where p.status = :activeStatus
+            and (
+              p.owner = :user
+              or cu.oid is not null
+            )
+            order by p.name asc, p.oid
+        ]]>
+    </query>
+
+    <query name="watchedUser.getUsersWatchingUser">
+      <![CDATA[
+            select watcher
+            from WatchedUser wu
+            inner join wu.watcherUser watcher
+            where wu.watchedUser = :watchedUser
+            and watcher.userStatus < 4
+            and wu.blocked = false
+            and (:lastName is null or (
+              watcher.displayName > :lastName or (
+                watcher.displayName = :lastName and watcher.oid < :lastOid
+              )
+            ))
+            order by watcher.displayName asc, watcher.oid desc
+      ]]>
+    </query>
+
+    <query name="watchedUser.getUsersWatchedByUser">
+      <![CDATA[
+            select watched
+            from WatchedUser wu
+            inner join wu.watchedUser watched
+            where wu.watcherUser = :watcherUser
+            and watched.userStatus < 4
+            and wu.blocked = false
+            and (:lastName is null or (
+              watched.displayName > :lastName or (
+                watched.displayName = :lastName and watched.oid < :lastOid
+              )
+            ))
+            order by watched.displayName asc, watched.oid desc
+      ]]>
+    </query>
+
+    <query name="watchedUser.getUsersInListWatchedByUser">
+        <![CDATA[
+            select wu.watchedUser
+            from WatchedUser wu
+            where wu.watchedUser in (:users)
+            and wu.watcherUser = :watcher
+            and wu.blocked = false
+            and wu.watchedUser.userStatus < 4
+        ]]>
+    </query>
+
+    <query name="watchedUser.getTotalWatcherCountForUser">
+        <![CDATA[
+            select count(wu)
+            from WatchedUser wu
+            where wu.watchedUser = :watched
+            and wu.blocked = false
+            and wu.watcherUser.userStatus < 4
+        ]]>
+    </query>
+
+    <query name="niche.getNichesFollowedByUser">
+        <![CDATA[
+            select n
+            from Niche n
+            inner join n.channel c
+            inner join c.followers f
+            where f.follower = :follower
+            and (:lastName is null or (
+              n.name > :lastName or (
+                n.name = :lastName and n.oid < :lastOid
+              )
+            ))
+            order by n.name asc, n.oid desc
+        ]]>
+    </query>
+
+    <query name="publication.getPublicationsFollowedByUser">
+        <![CDATA[
+            select p
+            from Publication p
+            inner join p.channel c
+            inner join c.followers f
+            where f.follower = :follower
+            and (:lastName is null or (
+              p.name > :lastName or (
+                p.name = :lastName and p.oid < :lastOid
+              )
+            ))
+            order by p.name asc, p.oid desc
+        ]]>
+    </query>
+
+    <query name="watchedUser.getAllUserOidsBlockingUser">
+      <![CDATA[
+            select wu.watcherUser.oid
+            from WatchedUser wu
+            where wu.watchedUser = :blockedUser
+            and wu.blocked = true
+      ]]>
+    </query>
+
+    <query name="itemHourTrendingStats.getLockedForObjectOidAndHoursSinceEpoch">
+        <![CDATA[
+            select ohs
+            from ItemHourTrendingStats ohs
+            where ohs.objectOid = :objectOid and ohs.hoursSinceEpoch = :hoursSinceEpoch
+        ]]>
+    </query>
+
+    <query name="itemHourTrendingStats.deleteStaleObjects">
+        <![CDATA[
+            delete from ItemHourTrendingStats
+            where hoursSinceEpoch < :cutoffHours
+        ]]>
+    </query>
+
+    <query name="watchedUser.deleteAllForUser">
+        <![CDATA[
+            delete
+            from WatchedUser wu
+            where (
+                wu.watchedUser = :user
+                or wu.watcherUser = :user
+            )
+        ]]>
+    </query>
+
+    <query name="referendum.getExpiredReferendumOids">
+        <![CDATA[
+            select r.oid
+            from Referendum r
+            where r.open = 1
+            and r.endDatetime < now()
+            group by r.oid
+        ]]>
+    </query>
+
+    <query name="referendum.getOpenReferendumsForNiche">
+    <![CDATA[
+            select r
+            from Referendum r
+            where r.niche = :niche
+            and r.open = 1
+            and r.endDatetime > now()
+            order by r.endDatetime asc, r.niche.oid
+        ]]>
+    </query>
+
+    <query name="referendum.getOpenReferendumsOfTypesForNiche">
+        <![CDATA[
+            select r
+            from Referendum r
+            where r.niche = :niche
+            and r.type in (:referendumTypes)
+            and r.open = 1
+            and r.endDatetime > now()
+            order by r.endDatetime asc, r.niche.oid
+        ]]>
+    </query>
+
+    <query name="tribunalIssueReport.getCountForIssue">
+        <![CDATA[
+            select count(r)
+            from TribunalIssueReport r
+            where r.tribunalIssue = :tribunalIssue
+        ]]>
+    </query>
+
+    <query name="tribunalIssueReport.getCountByIssue">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(ti, count(*))
+            from TribunalIssueReport r
+            inner join r.tribunalIssue ti
+            where ti.referendum in (:referendums)
+            group by ti
+        ]]>
+    </query>
+
+    <query name="tribunalIssueReport.getForIssue">
+        <![CDATA[
+            select r
+            from TribunalIssueReport r
+            where r.tribunalIssue = :tribunalIssue
+            order by r.creationDatetime desc
+        ]]>
+    </query>
+
+    <query name="tribunalIssueReport.getMostRecentReportSubmittedByUser">
+        <![CDATA[
+            select r
+            from TribunalIssueReport r
+            inner join r.tribunalIssue ti
+            where r.reporter = :areaUserRlm
+            and ti.type in (:issueTypes)
+            order by r.creationDatetime desc
+        ]]>
+    </query>
+
+    <query name="referendumVote.getForReferendumAndVoter">
+        <![CDATA[
+            select v
+            from ReferendumVote v
+            where v.referendum = :referendum
+            and v.voter = :voter
+        ]]>
+    </query>
+
+    <query name="referendumVote.getByReferendumForVoter">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(v.referendum, v)
+            from ReferendumVote v
+            where v.referendum in (:referendums)
+            and v.voter = :voter
+        ]]>
+    </query>
+
+    <query name="ledgerEntry.getEntriesForChannelBefore">
+        <![CDATA[
+            select le
+            from LedgerEntry le
+            where le.channel = :channel
+            and le.type in (:ledgerEntryTypes)
+            and le.eventDatetime < :before
+            order by le.eventDatetime desc, le.oid
+        ]]>
+    </query>
+
+    <query name="ledgerEntry.getEntriesForAreaUserRlm">
+        <![CDATA[
+            select le
+            from LedgerEntry le
+            where le.actor = :areaUserRlm
+            and le.eventDatetime < :before
+            order by le.eventDatetime desc, le.oid
+        ]]>
+    </query>
+
+    <query name="ledgerEntry.getEntriesForAreaUserRlmByOid">
+        <![CDATA[
+            select le
+            from LedgerEntry le
+            where le.actor.oid = :areaUserRlmOid
+            and le.type in (:ledgerEntryTypes)
+            and le.eventDatetime < :before
+            order by le.eventDatetime desc, le.oid
+        ]]>
+    </query>
+
+    <query name="nicheAuctionBid.getUserOidsOutbidOnAuction">
+        <![CDATA[
+            select bidder.oid
+            from NicheAuctionBid bid
+            inner join bid.bidder bidder
+            where bid.auction = :auction
+            and bid.status = :outbidStatus
+        ]]>
+    </query>
+
+    <query name="nicheAuctionBid.getUserOidsWithActiveBidOnAuction">
+        <![CDATA[
+            select bidder.oid
+            from NicheAuctionBid bid
+            inner join bid.bidder bidder
+            where bid.auction = :auction
+            and bid.status in (:activeStatuses)
+        ]]>
+    </query>
+
+    <query name="followedChannel.getUserOidsFollowing">
+        <![CDATA[
+            select fc.follower.oid
+            from FollowedChannel fc
+            where fc.channel = :channel
+        ]]>
+    </query>
+
+    <query name="followedChannel.getRandomFollowers">
+        <![CDATA[
+            select fc.follower
+            from FollowedChannel fc
+            where fc.channel = :channel
+            order by rand()
+        ]]>
+    </query>
+
+    <query name="followedChannel.getFollowerCount">
+        <![CDATA[
+            select count(*)
+            from FollowedChannel fc
+            where fc.channel = :channel
+        ]]>
+    </query>
+
+    <query name="followedChannel.getUserOidsInCircleFollowing">
+        <![CDATA[
+            select u.oid
+            from AreaUser au
+            inner join au.user u
+            inner join u.followedChannels fc
+            inner join au.areaCircleUsers acu
+            where fc.channel = :channel
+            and acu.areaCircle = :circle
+        ]]>
+    </query>
+
+    <query name="followedChannel.getChannelOidsFollowedByUser">
+        <![CDATA[
+            select fc.channel.oid
+            from FollowedChannel fc
+            where fc.follower = :user
+            and fc.channel in (:channels)
+        ]]>
+    </query>
+
+    <query name="nicheAuction.getBidCountsForAuctions">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(a, count(*))
+            from NicheAuction a
+            inner join a.auctionBids bid
+            where a in (:auctions)
+            group by a.oid
+        ]]>
+    </query>
+
+    <query name="nicheAuction.getBidCountsForActiveAuctions">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(a, count(*))
+            from Niche n
+            inner join n.activeAuction a
+            inner join a.auctionBids bid
+            where n in (:niches)
+            and (a.endDatetime is null or a.endDatetime > now())
+            group by a.oid
+        ]]>
+    </query>
+
+    <query name="electionNominee.getElectionNomineeCounts">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(e.oid, count(*))
+            from ElectionNominee en
+            inner join en.election e
+            where e in (:elections)
+            and en.status = :confirmedStatus
+            group by e.oid
+        ]]>
+    </query>
+
+    <query name="electionNominee.getConfirmedForElection">
+        <![CDATA[
+            select en
+            from ElectionNominee en
+            inner join en.election e
+            where e = :election
+            and en.nominee.oid != :excludeUserOid
+            and en.status = :confirmedStatus
+            and en.nominationConfirmedDatetime < :confirmedBefore
+            order by en.nominationConfirmedDatetime desc
+        ]]>
+    </query>
+
+    <query name="nicheModeratorElection.getElectionCount">
+        <![CDATA[
+            select count(*)
+            from NicheModeratorElection nme
+            inner join nme.election e
+            where e.status = :status
+        ]]>
+    </query>
+
+    <query name="nicheModeratorElection.getElections">
+        <![CDATA[
+            select nme
+            from NicheModeratorElection nme
+            inner join nme.election e
+            where e.status = :status
+            order by e.nominationStartDatetime asc
+        ]]>
+    </query>
+
+    <query name="invoice.getExpiredInvoicedOids">
+        <![CDATA[
+            select invoice.oid
+            from Invoice invoice
+            where invoice.paymentDueDatetime < now()
+            and invoice.status = :invoicedStatus
+        ]]>
+    </query>
+
+    <query name="invoice.getInvoiceOidsWithPendingNrvePayment">
+        <![CDATA[
+            select invoice.oid
+            from Invoice invoice
+            inner join invoice.nrvePayment payment
+            where invoice.status = :invoicedStatus
+            and payment.transactionDate is not null
+            and payment.transactionId is not null
+            and payment.paymentStatus is not null
+        ]]>
+    </query>
+
+    <query name="nicheAuctionBid.updateStatusForAllBids">
+        <![CDATA[
+            update NicheAuctionBid bid
+            set bid.status = :toStatus
+            where bid.auction = :auction
+            and bid.bidder = :bidder
+        ]]>
+    </query>
+
+    <query name="nicheAuctionBid.getLatestBidForUser">
+        <![CDATA[
+            select bid
+            from NicheAuctionBid bid
+            where bid.auction = :auction
+            and bid.bidder = :bidder
+            order by bid.bidDatetime desc
+        ]]>
+    </query>
+
+    <query name="nicheAuctionBid.updateStatusForAllActiveBids">
+        <![CDATA[
+            update NicheAuctionBid bid
+            set bid.status = :toStatus
+            where bid.auction = :auction
+            and bid.status in (:activeStatuses)
+        ]]>
+    </query>
+
+    <query name="referendumVote.getRecentVotes">
+        <![CDATA[
+            select vote
+            from ReferendumVote vote
+            inner join vote.voter voter
+            inner join voter.sandboxedAreaUsers sau
+            inner join AreaUser au on au.oid = sau.oid
+            inner join au.user u
+            where vote.referendum = :referendum
+            and ((:votedFor is null and vote.votedFor is null) or vote.votedFor = :votedFor)
+            and (
+                :lastDisplayName is null
+                or sau.displayName >= :lastDisplayName
+            )
+            and (
+                :lastUsername is null
+                or u.username > :lastUsername
+            )
+            order by sau.displayName asc, u.username asc
+        ]]>
+    </query>
+
+    <query name="referendumVote.getVoterAreaUserOids">
+        <![CDATA[
+            select voter.oid
+            from ReferendumVote vote
+            inner join vote.voter voter
+            where vote.referendum = :referendum
+        ]]>
+    </query>
+
+    <query name="referendumVote.getCount">
+        <![CDATA[
+            select count(*)
+            from ReferendumVote vote
+            where vote.referendum = :referendum
+            and vote.votedFor is not null
+        ]]>
+    </query>
+
+    <query name="referendumVote.getUserVotesForReferendum">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(au.user.oid, vote.votedFor)
+            from ReferendumVote vote
+            inner join vote.voter voter
+            inner join AreaUser au on au.oid = voter.oid
+            where vote.referendum = :referendum
+            and vote.votedFor is not null
+        ]]>
+    </query>
+
+    <query name="referendumVote.getForReferendumAndComment">
+        <![CDATA[
+            select vote
+            from ReferendumVote vote
+            where vote.referendum = :referendum
+            and vote.commentReplyOid = :commentReplyOid
+        ]]>
+    </query>
+
+    <query name="nrvePayment.getPendingPayment">
+        <![CDATA[
+            select payment
+            from NrvePayment payment
+            where payment.fromNeoAddress = :neoAddress
+            and payment.nrveAmount = :nrveAmount
+            and payment.paymentStatus = :pendingPaymentStatus
+        ]]>
+    </query>
+
+    <query name="nrvePayment.getTransactionSumToWallet">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from NrvePayment np
+            inner join np.paymentWalletTransaction t
+            where t.toWallet = :toWallet
+        ]]>
+    </query>
+
+    <query name="invoice.getInvoiceStatus">
+        <![CDATA[
+            select status
+            from Invoice
+            where oid = :invoiceOid
+        ]]>
+    </query>
+
+    <query name="invoice.getInvoiceOidsByStatusBefore">
+        <![CDATA[
+            select i.oid
+            from Invoice i
+            where i.status = :status
+            and i.updateDatetime < :before
+        ]]>
+    </query>
+
+    <query name="niche.getCountOfNicheOwners">
+        <![CDATA[
+            select count(distinct u)
+            from Niche n
+            , AreaUser au
+            inner join au.user u
+            where
+            au.oid = n.owner.oid
+            and n.status = :activeStatus
+            and u.userStatus < 4
+        ]]>
+    </query>
+
+    <query name="niche.getCountOfNichesByStatus">
+        <![CDATA[
+            select count(n)
+            from Niche n
+            where
+            n.status in (:statuses)
+        ]]>
+    </query>
+
+    <query name="nicheOfInterest.getNichesOfInterest">
+        <![CDATA[
+            from NicheOfInterest
+            where niche.status=:activeStatus
+            order by niche.name
+        ]]>
+    </query>
+
+    <query name="niche.getActiveNichesByName">
+        <![CDATA[
+            select n
+            from Niche n
+            where
+            n.name like :name and n.status=:activeStatus
+            order by length(n.name), n.name
+        ]]>
+    </query>
+
+    <query name="eventMessage.getQueuedEventMessages">
+        <![CDATA[
+            select em
+            from EventMessage em
+            where
+            em.status = :queuedStatus
+            and em.sendDatetime <= :sendDatetime
+        ]]>
+    </query>
+
+    <query name="eventMessage.getStalledEventMessages">
+        <![CDATA[
+            select em
+            from EventMessage em
+            where
+            em.status = :sentStatus
+            and em.lastSentDatetime <= :lastSentDatetimeCutoff
+        ]]>
+    </query>
+
+    <query name="userReputation.getUserOidsWhoBecameConductNeutralInWindow">
+        <![CDATA[
+            select ur.userOid
+            from UserReputation ur
+            where
+            ur.negativeConductExpirationTimestamp>=:startTimestamp
+            and ur.negativeConductExpirationTimestamp < :endTimestamp
+        ]]>
+    </query>
+
+    <query name="channelContent.getNichesMostPostedToByUser">
+        <![CDATA[
+            select n
+            from ChannelContent cc
+            inner join cc.channel channel
+            inner join cc.content content
+            inner join Niche n on n.oid = channel.oid
+            where
+            content.areaUserRlm = :author
+            and content.liveDatetime > :postedAfter
+            and channel.type = :nicheChannelType
+            and n.status = :activeNicheStatus
+            group by n.oid
+            order by count(*) desc
+        ]]>
+    </query>
+
+    <query name="channelContent.getNichesMostPostedTo">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(n, count(*))
+            from ChannelContent cc
+            inner join cc.channel channel
+            inner join cc.content content
+            inner join Niche n on n.oid = channel.oid
+            where
+            cc.status = :approvedStatus
+            and channel.type = :nicheChannelType
+            and n.status = :activeNicheStatus
+            and content.contentStatus = :contentStatus
+            and content.moderationStatus != :moderatedStatus
+            group by n.oid
+            order by count(*) desc
+        ]]>
+    </query>
+
+    <query name="channelContent.getNichesMostPostedToInChannel">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(n, count(*))
+            from Content content
+            inner join content.channelContents ccc with ccc.channel.oid = :channelOid and ccc.status = :approvedStatus
+            inner join content.channelContents cc with cc.status = :approvedStatus
+            inner join cc.channel channel
+            inner join Niche n on n.oid = channel.oid
+            where
+            channel.type = :nicheChannelType
+            and n.status = :activeNicheStatus
+            and content.contentStatus = :contentStatus
+            and content.moderationStatus != :moderatedStatus
+            group by n.oid
+            order by count(*) desc
+        ]]>
+    </query>
+
+    <query name="channelContent.getContentOidsInChannelByStatuses">
+        <![CDATA[
+            select cc.content.oid
+            from ChannelContent cc
+            where cc.channel = :channel
+            and cc.status in (:statuses)
+        ]]>
+    </query>
+
+    <query name="channelContent.removePostsFromChannelByStatuses">
+        <![CDATA[
+            delete from ChannelContent cc
+            where cc.channel = :channel
+            and cc.status in (:statuses)
+        ]]>
+    </query>
+
+    <query name="channelContent.getPostCountsByChannelOidForAuthor">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(channel.oid, count(*))
+            from ChannelContent cc
+            inner join cc.channel channel
+            inner join cc.content content
+            where channel.type = :channelType
+            and content.areaUserRlm = :areaUserRlm
+            and cc.status in (:statuses)
+            and content.contentStatus = :activeContentStatus
+            group by channel.oid
+        ]]>
+    </query>
+
+    <query name="content.getEmptyNarrativePostDraftOids">
+        <![CDATA[
+            select c.oid
+            from Content c
+            inner join c.futureContent fc
+            where c.contentType = :narrativePostType
+            and fc.draft = true
+            and fc.saveDatetime < :savedBefore
+            and fc.saveDatetime > :savedAfter
+            and length(c.subject) = 0
+            and length(c.extract) = 0
+            and (c.subTitle is null or length(c.subTitle) = 0)
+        ]]>
+    </query>
+
+    <query name="userKyc.getByUserDetailHash">
+        <![CDATA[
+            select ukyc
+            from UserKyc ukyc
+            where
+            ukyc.userDetailHash = :userDetailHash
+        ]]>
+    </query>
+
+    <sql-query name="trendingContent.calculateTrendingContent">
+        <![CDATA[
+            insert into TrendingContent (content_oid, buildTime, score)
+            select c.oid, :buildTime, sum(
+                (
+                    (stats.viewPoints * :viewsMultiplier) +
+                    (stats.replyPoints * :repliesMultiplier) +
+                    (stats.likePoints * :likePointsMultiplier)
+                ) * ((stats.hoursSinceEpoch - :minimumHoursSinceEpoch) / :hoursInRange)
+            ) point_value
+            from Content c
+            inner join ItemHourTrendingStats stats on stats.objectOid = c.oid
+            where stats.hoursSinceEpoch >= :minimumHoursSinceEpoch
+            group by stats.objectOid
+            having point_value > 0
+        ]]>
+    </sql-query>
+
+    <query name="trendingContent.deleteOldTrendingContent">
+        <![CDATA[
+            delete from TrendingContent tc
+            where tc.buildTime < :buildTime
+        ]]>
+    </query>
+
+    <query name="trendingContent.getTrendingNicheOids">
+        <![CDATA[
+            select n.oid
+            from Niche n
+            inner join n.channel ch
+            inner join ch.contents cc
+            inner join cc.content c
+            inner join c.trendingContents tc with tc.buildTime = :buildTime
+            group by n.oid
+            order by sum(tc.score) desc
+        ]]>
+    </query>
+
+    <query name="roleContentPageView.getOneForRoleContentAfterDate">
+        <![CDATA[
+            select 1
+            from RoleContentPageView pv
+            where pv.roleId = :roleId
+            and pv.contentOid = :contentOid
+            and pv.viewDatetime >= :afterDate
+        ]]>
+    </query>
+
+    <query name="roleContentPageView.deleteOldPageViews">
+        <![CDATA[
+            delete from RoleContentPageView pv
+            where pv.viewDatetime < :beforeDate
+        ]]>
+    </query>
+
+    <query name="nicheAuctionSecurityDeposit.getAllSecurityDepositOidsForAuctionExcludingUser">
+        <![CDATA[
+            select sd.oid
+            from NicheAuctionSecurityDeposit sd
+            where sd.auction = :auction
+            and sd.user != :user
+        ]]>
+    </query>
+
+    <query name="fiatPayment.getWithTransactionForToWalletAndStatus">
+        <![CDATA[
+            select fp
+            from FiatPayment fp
+            inner join fp.paymentWalletTransaction t
+            where t.toWallet = :toWallet
+            and t.status = :status
+        ]]>
+    </query>
+
+    <query name="fiatPayment.getTransactionSumToWallet">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from FiatPayment fp
+            inner join fp.paymentWalletTransaction t
+            where t.toWallet = :toWallet
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getOidForYearMonth">
+        <![CDATA[
+            select rp.oid
+            from RewardPeriod rp
+            where rp.period = :period
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getLatestRewardPeriod">
+        <![CDATA[
+            select rp
+            from RewardPeriod rp
+            order by rp.period desc
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getOldestIncompleteRewardPeriodBefore">
+        <![CDATA[
+            select rp
+            from RewardPeriod rp
+            where rp.completedDatetime is null
+            and rp.period < :before
+            order by rp.period asc
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getAllIncompleteRewardPeriods">
+        <![CDATA[
+            select rp
+            from RewardPeriod rp
+            where rp.completedDatetime is null
+            order by rp.period asc
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getLatestRewardPeriodBefore">
+        <![CDATA[
+            select rp
+            from RewardPeriod rp
+            where rp.period < :before
+            order by rp.period desc
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getLatestCompletedRewardPeriodBefore">
+        <![CDATA[
+            select rp
+            from RewardPeriod rp
+            where rp.period < :before
+            and rp.completedDatetime is not null
+            order by rp.period desc
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getAllCompletedPeriods">
+        <![CDATA[
+            select rp
+            from RewardPeriod rp
+            where rp.completedDatetime is not null
+            order by rp.period desc
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getAllTimeRewardsDisbursed">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(rp.totalRewardsDisbursed))
+            from RewardPeriod rp
+            where rp.completedDatetime is not null
+        ]]>
+    </query>
+
+    <query name="rewardPeriod.getRewardPeriodsForUser">
+        <![CDATA[
+            select distinct rp
+            from RewardPeriod rp
+            inner join rp.wallet fromWallet
+            , WalletTransaction t
+            where t.fromWallet = fromWallet
+            and t.toWallet = :toWallet
+            and rp.completedDatetime is not null
+            order by rp.period desc
+        ]]>
+    </query>
+
+    <query name="proratedMonthRevenue.getAllWithAvailableCaptures">
+        <![CDATA[
+            select revenue
+            from ProratedMonthRevenue revenue
+            where revenue.captures < :maxCaptures
+            and revenue.month <= :throughRewardPeriodMonth
+            order by revenue.month asc
+        ]]>
+    </query>
+
+    <query name="proratedMonthRevenue.getForWallet">
+        <![CDATA[
+            select revenue
+            from ProratedMonthRevenue revenue
+            where revenue.wallet = :wallet
+        ]]>
+    </query>
+
+    <query name="proratedMonthRevenue.getWalletsForTypeAndYearMonths">
+        <![CDATA[
+            select r.wallet
+            from ProratedMonthRevenue r
+            where r.type in (:types)
+            and r.month in (:yearMonths)
+        ]]>
+    </query>
+
+    <sql-query name="contentReward.createTemporaryNicheContentTable">
+        create temporary table tmp_NicheContent
+        (primary key(nicheOid, contentOid), index(contentOid))
+        ENGINE=InnoDB
+        as (
+            select n.oid as nicheOid, c.oid as contentOid
+            from Content c
+            inner join ChannelContent cc on cc.content_oid = c.oid and cc.status = :approvedPostStatus
+            inner join Channel channel on channel.oid = cc.channel_oid and channel.type = :nicheChannel
+            inner join Niche n on n.oid = channel.oid and n.status = :activeNicheStatus
+            where c.qualityRatingFields_score >= :minScore
+        )
+    </sql-query>
+
+    <sql-query name="contentReward.dropTemporaryNicheContentTable">
+        drop table tmp_NicheContent
+    </sql-query>
+
+    <sql-query name="contentReward.createTemporaryPublicationContentTable">
+        create temporary table tmp_PublicationContent
+        (primary key(contentOid))
+        ENGINE=InnoDB
+        as (
+            select c.oid as contentOid, p.oid as publicationOid
+            from Content c
+            inner join ChannelContent cc on cc.content_oid = c.oid and cc.status = :approvedPostStatus
+            inner join Channel channel on channel.oid = cc.channel_oid and channel.type = :publicationChannel
+            inner join Publication p on p.oid = channel.oid and p.status = :activePublicationStatus
+            where c.qualityRatingFields_score >= :minScore
+        )
+    </sql-query>
+
+    <sql-query name="contentReward.dropTemporaryPublicationContentTable">
+        drop table tmp_PublicationContent
+    </sql-query>
+
+    <sql-query name="publicationReward.insertPublicationRewardsForPeriod">
+        <![CDATA[
+            insert into PublicationReward (publicationOid, period_oid, contentRewardWriterShare, contentRewardRecipient)
+            select p.oid, :rewardPeriodOid, p.contentRewardWriterShare, p.contentRewardRecipient
+            from Publication p
+            where p.status = :activeStatus
+        ]]>
+    </sql-query>
+
+    <sql-query name="contentReward.insertContentRewardsForPeriod">
+        <![CDATA[
+            insert into ContentReward (contentOid, user_oid, period_oid, points, publicationReward_oid)
+            select c.oid,
+            u.oid,
+            p.oid,
+            sum(ihts.viewPoints * :viewMultiplier) + sum(ihts.replyPoints * :replyMultiplier) + sum(ihts.likePoints * :likeMultiplier) as point_value,
+            pr.oid
+            from Content c
+            inner join AreaUser au on au.oid = c.areaUserRlm_oid
+            inner join User u on u.oid = au.user_oid
+            inner join RewardPeriod p on p.oid = :rewardPeriodOid
+            inner join ItemHourTrendingStats ihts on ihts.objectOid = c.oid and ihts.hoursSinceEpoch >= :lowerBound and ihts.hoursSinceEpoch < :upperBound
+            left outer join tmp_PublicationContent pc on pc.contentOid = c.oid
+            left outer join PublicationReward pr on pr.publicationOid = pc.publicationOid and pr.period_oid = p.oid
+            where c.oid in (
+                select distinct contentOid from tmp_NicheContent
+            )
+            group by c.oid
+            having point_value > 0
+        ]]>
+    </sql-query>
+
+    <sql-query name="roleContentReward.insertRoleContentRewardsForPeriod">
+        <![CDATA[
+            insert into RoleContentReward (contentReward_oid, role, user_oid)
+            select cr.oid,
+            :writerRole,
+            u.oid
+            from ContentReward cr
+            inner join Content c on c.oid = cr.contentOid
+            inner join AreaUser au on au.oid = c.areaUserRlm_oid
+            inner join User u on u.oid = au.user_oid
+            where cr.period_oid = :rewardPeriodOid
+        ]]>
+    </sql-query>
+
+    <sql-query name="nicheReward.insertNicheRewardsForPeriod">
+        <![CDATA[
+            insert into NicheReward (niche_oid, period_oid)
+            select distinct nc.nicheOid, cr.period_oid
+            from ContentReward cr
+            inner join tmp_NicheContent nc on nc.contentOid = cr.contentOid
+            where cr.period_oid = :rewardPeriodOid
+        ]]>
+    </sql-query>
+
+    <sql-query name="nicheContentReward.insertNicheContentRewardsForPeriod">
+        <![CDATA[
+            insert into NicheContentReward (contentReward_oid, nicheReward_oid)
+            select cr.oid, nr.oid
+            from ContentReward cr
+            inner join tmp_NicheContent nc on nc.contentOid = cr.contentOid
+            inner join NicheReward nr on nr.niche_oid = nc.nicheOid and nr.period_oid = cr.period_oid
+            where cr.period_oid = :rewardPeriodOid
+        ]]>
+    </sql-query>
+
+    <sql-query name="nicheContentReward.clearNicheContentRewardValuesForPeriod">
+        <![CDATA[
+            update NicheContentReward ncr
+            inner join NicheReward nr on nr.oid = ncr.nicheReward_oid
+            set ncr.reward = null
+            where nr.period_oid = :rewardPeriodOid
+        ]]>
+    </sql-query>
+
+    <sql-query name="nicheOwnerReward.insertNicheOwnerRewardsForPeriod">
+        <![CDATA[
+            insert into NicheOwnerReward (nicheReward_oid, user_oid)
+            select nr.oid, owner.oid
+            from NicheReward nr
+            inner join Niche n on n.oid = nr.niche_oid
+            inner join AreaUser owner_au on owner_au.oid = n.owner_oid
+            inner join User owner on owner.oid = owner_au.user_oid
+            where nr.period_oid = :rewardPeriodOid
+            and owner.userStatus < :deletedUserStatus
+        ]]>
+    </sql-query>
+
+    <sql-query name="nicheModeratorReward.insertNicheModeratorRewardsForPeriod">
+        <![CDATA[
+            insert into NicheModeratorReward (nicheReward_oid, user_oid)
+            select nr.oid, moderator.oid
+            from NicheReward nr
+            inner join Niche n on n.oid = nr.niche_oid
+            inner join AreaUser moderator_au on moderator_au.oid = n.owner_oid
+            inner join User moderator on moderator.oid = moderator_au.user_oid
+            where nr.period_oid = :rewardPeriodOid
+            and moderator.userStatus < :deletedUserStatus
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.createTemporaryUserActivityPointsTable">
+        <![CDATA[
+            create temporary table tmp_UserActivityPoints
+            (
+            userOid bigint not null,
+            points bigint not null,
+            reputationAdjusted bit not null default 1,
+            index(userOid)
+            )
+            ENGINE=InnoDB
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.dropTemporaryUserActivityPointsTable">
+        <![CDATA[
+            drop table tmp_UserActivityPoints
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForPublishPost">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select au.user_oid, :activityPoints
+            from Content c
+            inner join AreaUser au on au.oid = c.areaUserRlm_oid
+            where c.liveDatetime >= :lowerBound
+            and c.liveDatetime < :upperBound
+            and c.qualityRatingFields_score >= :minScore
+            and c.contentStatus = :activeContentStatus
+            and c.moderationStatus = :approvedModerationStatus
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForReferendumVotes">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select au.user_oid, :activityPoints
+            from ReferendumVote rv
+            inner join AreaUser au on au.oid = rv.voter_oid
+            inner join Referendum r on r.oid = rv.referendum_oid
+            where rv.voteDatetime >= :lowerBound
+            and rv.voteDatetime < :upperBound
+            and r.type in (:referendumTypes)
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForNicheAuctionBids">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select au.user_oid, :activityPoints
+            from NicheAuctionBid nab
+            inner join AreaUser au on au.oid = nab.bidder_oid
+            inner join NicheAuction na on na.oid = nab.auction_oid
+            where nab.bidDatetime >= :lowerBound
+            and nab.bidDatetime < :upperBound
+            group by na.niche_oid, au.user_oid
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForNicheAuctionWins">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select au.user_oid, :activityPoints
+            from NicheAuction na
+            inner join NicheAuctionBid nab on nab.oid = na.leadingBid_oid
+            inner join AreaUser au on au.oid = nab.bidder_oid
+            where na.endDatetime >= :lowerBound
+            and na.endDatetime < :upperBound
+        ]]>
+    </sql-query>
+
+    <!--
+        jw: this query needs to ensure that we only honor the first referendum that approved each niche, and then limit
+            results to niches whose referendum passed in the supplied timeframe.
+    -->
+    <sql-query name="userActivityReward.insertTempRecordsForSuggestedNicheApprovals">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+
+            select au.user_oid, :activityPoints
+            from Niche n
+            inner join AreaUser au on au.oid = n.suggester_oid
+            inner join Referendum r on r.niche_oid = n.oid
+            inner join (
+                select r.niche_oid as niche_oid, min(r.endDatetime) as endDatetime
+                from Referendum r
+                where r.type in (:approvalReferendumTypes)
+                and r.votePointsFor > r.votePointsAgainst
+                and r.open = 0
+                group by r.niche_oid
+            ) rd on rd.niche_oid = r.niche_oid and rd.endDatetime = r.endDatetime
+            where r.endDatetime >= :lowerBound
+            and r.endDatetime < :upperBound
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForUserFollows">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select u.oid, :activityPoints
+            from WatchedUser wu
+            inner join User u on u.oid = wu.watcherUser_oid
+            where wu.watchDatetime >= :lowerBound
+            and wu.watchDatetime < :upperBound
+            and wu.blocked = 0
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForChannelFollows">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select u.oid, :activityPoints
+            from FollowedChannel fc
+            inner join User u on u.oid = fc.follower_oid
+            where fc.followDatetime >= :lowerBound
+            and fc.followDatetime < :upperBound
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForAcceptedModeratorNominations">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select u.oid, :activityPoints
+            from ElectionNominee en
+            inner join User u on u.oid = en.nominee_oid
+            inner join Election e on e.oid = en.election_oid
+            where en.nominationConfirmedDatetime >= :lowerBound
+            and en.nominationConfirmedDatetime < :upperBound
+            and en.status = :confirmedNomineeStatus
+            and e.type = :nicheModeratorElectionType
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForCertifications">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select kyc.oid, :activityPoints
+            from UserKyc kyc
+            where kyc.lastUpdated >= :lowerBound
+            and kyc.lastUpdated < :upperBound
+            and kyc.kycStatus = :approvedKycStatus
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForProfilePictureUpload">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points, reputationAdjusted)
+            select u.oid, :activityPoints, 0
+            from User u
+            where u.firstAvatarUploadDatetime >= :lowerBound
+            and u.firstAvatarUploadDatetime < :upperBound
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForNicheAuctionPayments">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select i.user_oid, :activityPoints
+            from Invoice i
+            where i.updateDatetime >= :lowerBound
+            and i.updateDatetime < :upperBound
+            and i.type = :nicheAuctionInvoiceType
+            and i.status = :paidInvoiceStatus
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForUpheldAppeals">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select au.user_oid, :activityPoints
+            from TribunalIssueReport tir
+            inner join TribunalIssue ti on ti.oid = tir.tribunalIssue_oid
+            inner join Referendum r on r.oid = ti.referendum_oid
+            inner join AreaUser au on au.oid = tir.reporter_oid
+            where r.endDatetime >= :lowerBound
+            and r.endDatetime < :upperBound
+            and ti.status is null
+            and ti.type in (:appealTypes)
+            and if(ti.type = :approveRejectedNicheType, r.votePointsFor > r.votePointsAgainst, r.votePointsAgainst > r.votePointsFor)
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertTempRecordsForRewardEvents">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points, reputationAdjusted)
+            select e.user_oid,
+            if(e.type = :REPORTED_AUP_VIOLATION_REMOVED, :REPORTED_AUP_VIOLATION_REMOVED_points, 0),
+            if(e.type = :REPORTED_AUP_VIOLATION_REMOVED, :REPORTED_AUP_VIOLATION_REMOVED_reputationAdjusted, 0)
+            from UserActivityRewardEvent e
+            where e.eventDatetime >= :lowerBound
+            and e.eventDatetime < :upperBound
+            and e.type in (:eventTypes)
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.insertUserActivityRewardsForPeriod">
+        <![CDATA[
+            insert into UserActivityReward (user_oid, period_oid, points, bonus)
+            select uap.userOid, rp.oid, sum(if(uap.reputationAdjusted=1, uap.points, 0)) * 100, :noneBonus
+            from tmp_UserActivityPoints uap
+            inner join User u on u.oid = uap.userOid
+            , RewardPeriod rp
+            where rp.oid = :rewardPeriodOid
+            and u.userStatus < :deletedUserStatus
+            group by uap.userOid
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.updateUserActivityRewardsForPeriod">
+        <![CDATA[
+            update UserActivityReward uar
+            inner join (
+                select uap.userOid, sum(uap.points) * 100 as rawPoints
+                from tmp_UserActivityPoints uap
+                where uap.reputationAdjusted = 0
+                group by uap.userOid
+            ) uap on uap.userOid = uar.user_oid
+            set uar.points = uar.points + uap.rawPoints
+            where uar.period_oid = :rewardPeriodOid
+        ]]>
+    </sql-query>
+
+    <query name="userActivityReward.getAllUserOidsForPeriod">
+        <![CDATA[
+            select uar.user.oid
+            from UserActivityReward uar
+            where uar.period = :rewardPeriod
+        ]]>
+    </query>
+
+    <query name="userActivityReward.getAllReputationDataEagerFetchForUserOids">
+        <![CDATA[
+            select rep, kyc
+            from UserReputation rep
+            , UserKyc kyc
+            where kyc.oid = rep.userOid
+            and rep.userOid in (:userOids)
+        ]]>
+    </query>
+
+    <sql-query name="userActivityReward.applyReputationAdjustmentToPointsForPeriod">
+        <![CDATA[
+            update UserActivityReward uar
+            set uar.points = round(uar.points * :reputationMultiplier),
+            uar.bonus = :activityBonus
+            where uar.period_oid = :rewardPeriodOid
+            and uar.user_oid in (:userOids)
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.updateUserActivityRewardsForFounderBonus">
+        <![CDATA[
+            update UserActivityReward uar
+            inner join AreaUser au on au.user_oid = uar.user_oid and au.area_oid = :narrativePlatformAreaOid
+            inner join AreaCircleUser acu on acu.areaUser_oid = au.oid and acu.areaCircle_oid = :foundersAreaCircleOid
+            set uar.points = round(uar.points * :founderMultiplier)
+            where uar.period_oid = :rewardPeriodOid
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.applyUserActivityRewardReputationBonuses">
+        <![CDATA[
+            update UserActivityReward uar
+            set uar.points =
+                round(uar.points *
+                    (
+                        if(uar.bonus = :TIER_1, :TIER_1_multiplier,
+                            if(uar.bonus = :TIER_2, :TIER_2_multiplier,
+                                if(uar.bonus = :TIER_3, :TIER_3_multiplier, 1)
+                            )
+                        )
+                    )
+                )
+            where uar.period_oid = :rewardPeriodOid
+            and uar.bonus in (:bonusTiers)
+        ]]>
+    </sql-query>
+
+    <query name="roleContentReward.getCountIncompleteRewardTransactionRefs">
+        <![CDATA[
+            select count(*)
+            from RoleContentReward rcr
+            inner join rcr.contentReward cr
+            where cr.period = :rewardPeriod
+            and rcr.transaction is null
+        ]]>
+    </query>
+
+    <sql-query name="roleContentReward.getCountInvalidRewardTransactions">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction t
+            left outer join RoleContentReward rcr on rcr.transaction_oid = t.oid
+            where t.fromWallet_oid = :fromWalletOid
+            and t.type = :type
+            and rcr.oid is null
+        ]]>
+    </sql-query>
+
+    <query name="roleContentReward.getIncompleteCountAndTotalPointsForPeriod">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(sum(ifint(isnull(t), 1, 0)), sum(cr.points))
+            from RoleContentReward rcr
+            inner join rcr.contentReward cr
+            left outer join rcr.transaction t
+            where cr.period = :rewardPeriod
+            and rcr.role = :writerRole
+        ]]>
+    </query>
+
+    <query name="roleContentReward.getIncompleteRoleContentRewards">
+        <![CDATA[
+            select rcr
+            from RoleContentReward rcr
+            inner join fetch rcr.contentReward cr
+            left outer join fetch cr.publicationReward pr
+            where cr.period = :rewardPeriod
+            and rcr.role = :writerRole
+            and rcr.transaction is null
+        ]]>
+    </query>
+
+    <query name="contentReward.getAllTimeRewardsForContent">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from RoleContentReward rcr
+            inner join rcr.contentReward cr
+            inner join rcr.transaction t
+            where cr.contentOid = :contentOid
+        ]]>
+    </query>
+
+    <query name="roleContentReward.getTransactionOidAndRewardMetadata">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectTriplet(t.oid, cr.contentOid, rcr.role)
+            from RoleContentReward rcr
+            inner join rcr.contentReward cr
+            inner join rcr.transaction t
+            where t in (:transactions)
+        ]]>
+    </query>
+
+    <query name="nicheModeratorReward.getCountIncompleteRewardTransactionRefs">
+        <![CDATA[
+            select count(*)
+            from NicheModeratorReward nmr
+            inner join nmr.nicheReward nr
+            where nr.period = :rewardPeriod
+            and nmr.transaction is null
+        ]]>
+    </query>
+
+    <sql-query name="nicheModeratorReward.getCountInvalidRewardTransactions">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction t
+            left outer join NicheModeratorReward nmr on nmr.transaction_oid = t.oid
+            where t.fromWallet_oid = :fromWalletOid
+            and t.type = :type
+            and nmr.oid is null
+        ]]>
+    </sql-query>
+
+    <query name="nicheModeratorReward.getIncompleteNicheCountForPeriod">
+        <![CDATA[
+            select count(distinct nr.niche)
+            from NicheModeratorReward nmr
+            inner join nmr.nicheReward nr
+            where nr.period = :rewardPeriod
+            and nmr.transaction is null
+        ]]>
+    </query>
+
+    <query name="nicheModeratorReward.getIncompleteNicheModeratorRewards">
+        <![CDATA[
+            select nr.oid, sum(cr.points)
+            from NicheReward nr
+            inner join nr.nicheContentRewards ncr
+            inner join ncr.contentReward cr
+            where nr.period = :rewardPeriod
+            and nr.oid in (
+              select distinct nmr.nicheReward.oid
+              from NicheModeratorReward nmr
+              where nmr.transaction is null
+            )
+            group by nr.oid
+        ]]>
+    </query>
+
+    <query name="nicheModeratorReward.getTransactionSumForNicheReward">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from NicheModeratorReward nmr
+            inner join nmr.nicheReward nr
+            inner join nmr.transaction t
+            where nr = :nicheReward
+        ]]>
+    </query>
+
+    <query name="nicheModeratorReward.getTransactionSumForUserRewardPeriod">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from NicheModeratorReward nmr
+            inner join nmr.nicheReward nr
+            inner join nmr.transaction t
+            where nmr.user = :user
+            and nr.period = :rewardPeriod
+        ]]>
+    </query>
+
+    <query name="nicheModeratorReward.getTransactionOidToNiche">
+        <![CDATA[
+            select t.oid, n
+            from NicheModeratorReward nmr
+            inner join nmr.nicheReward nr
+            inner join nr.niche n
+            inner join nmr.transaction t
+            where t in (:transactions)
+        ]]>
+    </query>
+
+    <!-- bl: this query is a little special in that it checks that not only do all NicheOwnerReward records
+         have a transaction, but it also checks to make sure that all NicheContentReward records have
+         a reward value set. -->
+    <sql-query name="nicheOwnerReward.getCountIncompleteRewardTransactionRefs">
+        <![CDATA[
+            select sum(val)
+            from (
+              select count(*) as val
+              from NicheOwnerReward nor
+              inner join NicheReward nr on nr.oid = nor.nicheReward_oid
+              where nr.period_oid = :rewardPeriodOid
+              and nor.transaction_oid is null
+              union all
+              select count(*) as val
+              from NicheContentReward ncr
+              inner join NicheReward nr on nr.oid = ncr.nicheReward_oid
+              where nr.period_oid = :rewardPeriodOid
+              and ncr.reward is null
+            ) t
+        ]]>
+    </sql-query>
+
+    <sql-query name="nicheOwnerReward.getCountInvalidRewardTransactions">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction t
+            left outer join NicheOwnerReward nor on nor.transaction_oid = t.oid
+            where t.fromWallet_oid = :fromWalletOid
+            and t.type = :type
+            and nor.oid is null
+        ]]>
+    </sql-query>
+
+    <query name="nicheOwnerReward.getIncompleteCountForPeriod">
+        <![CDATA[
+            select count(*)
+            from NicheOwnerReward nor
+            inner join nor.nicheReward nr
+            where nr.period = :rewardPeriod
+            and nor.transaction is null
+        ]]>
+    </query>
+
+    <query name="nicheOwnerReward.getIncompleteNicheOwnerRewards">
+        <![CDATA[
+            select nor, sum(cr.points)
+            from NicheOwnerReward nor
+            inner join nor.nicheReward nr
+            inner join nr.nicheContentRewards ncr
+            inner join ncr.contentReward cr
+            where nr.period = :rewardPeriod
+            and nor.transaction is null
+            group by nor
+        ]]>
+    </query>
+
+    <query name="nicheOwnerReward.getNicheOwnerRewardForContentProcessing">
+        <![CDATA[
+            select nor
+            from NicheOwnerReward nor
+            inner join fetch nor.nicheReward nr
+            inner join nr.nicheContentRewards ncr
+            where nr.period = :rewardPeriod
+            and ncr.reward is null
+        ]]>
+    </query>
+
+    <query name="nicheOwnerReward.getNicheAllTimeRewards">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(t.nrveAmount))
+            from NicheOwnerReward nor
+            inner join nor.nicheReward nr
+            inner join nor.transaction t
+            where nr.niche = :niche
+        ]]>
+    </query>
+
+    <query name="nicheOwnerReward.getForUserRewardPeriod">
+        <![CDATA[
+            select nor
+            from NicheOwnerReward nor
+            inner join fetch nor.nicheReward nr
+            inner join fetch nor.transaction t
+            where nor.user = :user
+            and nr.period = :rewardPeriod
+            order by t.nrveAmount desc
+        ]]>
+    </query>
+
+    <query name="nicheOwnerReward.getTransactionOidToNiche">
+        <![CDATA[
+            select t.oid, n
+            from NicheOwnerReward nor
+            inner join nor.nicheReward nr
+            inner join nr.niche n
+            inner join nor.transaction t
+            where t in (:transactions)
+        ]]>
+    </query>
+
+    <query name="userActivityReward.getCountIncompleteRewardTransactionRefs">
+        <![CDATA[
+            select count(*)
+            from UserActivityReward uar
+            where uar.period = :rewardPeriod
+            and uar.transaction is null
+        ]]>
+    </query>
+
+    <sql-query name="userActivityReward.getCountInvalidRewardTransactions">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction t
+            left outer join UserActivityReward uar on uar.transaction_oid = t.oid
+            where t.fromWallet_oid = :fromWalletOid
+            and t.type = :type
+            and uar.oid is null
+        ]]>
+    </sql-query>
+
+    <query name="userActivityReward.getTotalPointsForPeriod">
+        <![CDATA[
+            select sum(uar.points)
+            from UserActivityReward uar
+            where uar.period = :rewardPeriod
+        ]]>
+    </query>
+
+    <query name="userActivityReward.getIncompleteUserActivityRewards">
+        <![CDATA[
+            select uar
+            from UserActivityReward uar
+            where uar.period = :rewardPeriod
+            and uar.transaction is null
+        ]]>
+    </query>
+
+    <query name="userActivityReward.getTransactionOidToActivityBonus">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(t.oid, uar.bonus)
+            from UserActivityReward uar
+            inner join uar.transaction t
+            where t in :transactions
+        ]]>
+    </query>
+
+    <query name="userElectorateReward.getCountIncompleteRewardTransactionRefs">
+        <![CDATA[
+            select count(*)
+            from UserElectorateReward uer
+            where uer.period = :rewardPeriod
+            and uer.transaction is null
+        ]]>
+    </query>
+
+    <sql-query name="userElectorateReward.getCountInvalidRewardTransactions">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction t
+            left outer join UserElectorateReward uer on uer.transaction_oid = t.oid
+            where t.fromWallet_oid = :fromWalletOid
+            and t.type = :type
+            and uer.oid is null
+        ]]>
+    </sql-query>
+
+    <query name="nicheContentReward.getTotalPointsForPeriod">
+        <![CDATA[
+            select sum(cr.points)
+            from NicheContentReward ncr
+            inner join ncr.contentReward cr
+            where cr.period = :rewardPeriod
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getIncompleteNicheCountForPeriod">
+        <![CDATA[
+            select count(distinct nr.niche)
+            from NicheContentReward ncr
+            inner join ncr.nicheReward nr
+            where nr.period = :rewardPeriod
+            and ncr.reward is null
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getIncompleteContentCountAndTotalPointsForNicheReward">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(sum(ifint(isnull(ncr.reward), 1, 0)), sum(cr.points))
+            from NicheContentReward ncr
+            inner join ncr.contentReward cr
+            where ncr.nicheReward = :nicheReward
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getIncompleteForNicheReward">
+        <![CDATA[
+            select ncr
+            from NicheContentReward ncr
+            inner join fetch ncr.contentReward cr
+            inner join fetch ncr.nicheReward nr
+            where nr = :nicheReward
+            and ncr.reward is null
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getCountForNicheReward">
+        <![CDATA[
+            select count(*)
+            from NicheContentReward ncr
+            where ncr.nicheReward = :nicheReward
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getRewardTotalForNicheReward">
+        <![CDATA[
+            select new org.narrative.network.customizations.narrative.NrveValue(sum(ncr.reward))
+            from NicheContentReward ncr
+            where ncr.nicheReward = :nicheReward
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getTopPostsForNicheReward">
+        <![CDATA[
+            select cr.contentOid, sum(ncr.reward)
+            from NicheContentReward ncr
+            inner join ncr.contentReward cr
+            where ncr.nicheReward = :nicheReward
+            group by cr.contentOid
+            having sum(ncr.reward) > 0
+            order by sum(ncr.reward) desc
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getTopPostsAllTimeForNiche">
+        <![CDATA[
+            select cr.contentOid, sum(ncr.reward)
+            from NicheContentReward ncr
+            inner join ncr.nicheReward nr
+            inner join ncr.contentReward cr
+            where nr.niche = :niche
+            group by cr.contentOid
+            having sum(ncr.reward) > 0
+            order by sum(ncr.reward) desc
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getTopCreatorsForNicheReward">
+        <![CDATA[
+            select cr.user.oid, sum(ncr.reward)
+            from NicheContentReward ncr
+            inner join ncr.contentReward cr
+            where ncr.nicheReward = :nicheReward
+            group by cr.user
+            having sum(ncr.reward) > 0
+            order by sum(ncr.reward) desc
+        ]]>
+    </query>
+
+    <query name="nicheContentReward.getTopCreatorsAllTimeForNiche">
+        <![CDATA[
+            select cr.user.oid, sum(ncr.reward)
+            from NicheContentReward ncr
+            inner join ncr.nicheReward nr
+            inner join ncr.contentReward cr
+            where nr.niche = :niche
+            group by cr.user
+            having sum(ncr.reward) > 0
+            order by sum(ncr.reward) desc
+        ]]>
+    </query>
+
+    <query name="nicheReward.getNicheRewardPeriods">
+        <![CDATA[
+            select nr.period
+            from NicheReward nr
+            where nr.niche = :niche
+            and nr.period.completedDatetime is not null
+            order by nr.period.period desc
+        ]]>
+    </query>
+
+    <sql-query name="narrativeCompanyReward.getCountInvalidRewardTransactions">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction t
+            left outer join NarrativeCompanyReward ncr on ncr.transaction_oid = t.oid
+            where t.fromWallet_oid = :fromWalletOid
+            and t.type = :type
+            and ncr.oid is null
+        ]]>
+    </sql-query>
+
+    <sql-query name="userTribunalReward.getCountInvalidRewardTransactions">
+        <![CDATA[
+            select count(*)
+            from WalletTransaction t
+            left outer join UserTribunalReward utr on utr.transaction_oid = t.oid
+            where t.fromWallet_oid = :fromWalletOid
+            and t.type = :type
+            and utr.oid is null
+        ]]>
+    </sql-query>
+
+    <query name="nicheAuctionInvoice.getRefundTransactionOidToNiche">
+        <![CDATA[
+            select ifoid(isnull(nrveRefund.oid), fiatRefund.oid, nrveRefund.oid), n
+            from NicheAuctionInvoice nai
+            inner join nai.auction a
+            inner join a.niche n
+            inner join nai.invoice i
+            left join i.nrvePayment nrvePayment
+            left join i.fiatPayment fiatPayment
+            left join nrvePayment.refundWalletTransaction nrveRefund
+            left join fiatPayment.refundWalletTransaction fiatRefund
+            where nrveRefund in (:transactions)
+            or fiatRefund in (:transactions)
+        ]]>
+    </query>
+
+    <query name="nicheAuctionInvoice.getReversalTransactionOidToNiche">
+        <![CDATA[
+            select t.oid, n
+            from NicheAuctionInvoice nai
+            inner join nai.auction a
+            inner join a.niche n
+            inner join nai.invoice i
+            inner join i.fiatPayment p
+            inner join p.reversalWalletTransaction t
+            where t in (:transactions)
+        ]]>
+    </query>
+
+    <query name="neoTransaction.getAllIncomplete">
+        <![CDATA[
+            select t
+            from NeoTransaction t
+            left outer join t.neoTransactionIds ti
+            where ti is null
+            and t.type in (:types)
+        ]]>
+    </query>
+
+    <sql-query name="neoTransaction.getAllCompleted">
+        <![CDATA[
+            select t.oid
+            from NeoTransaction t
+            inner join (
+              select ti.neoTransaction_oid, min(ti.transactionDatetime) as transactionDatetime
+              from NeoTransactionId ti
+              group by ti.neoTransaction_oid
+            ) ti on t.oid = ti.neoTransaction_oid
+            order by ti.transactionDatetime
+        ]]>
+    </sql-query>
+
+    <query name="neoTransaction.getCountCompleted">
+        <![CDATA[
+            select count(distinct t)
+            from NeoTransaction t
+            inner join t.neoTransactionIds ti
+        ]]>
+    </query>
+
+    <query name="neoTransaction.getFirstForWallet">
+        <![CDATA[
+            select t
+            from NeoTransaction t
+            where t.fromNeoWallet = :neoWallet
+            or t.toNeoWallet = :neoWallet
+        ]]>
+    </query>
+
+    <query name="neoWallet.getAllByTypes">
+        <![CDATA[
+            select w
+            from NeoWallet w
+            where w.type in (:types)
+        ]]>
+    </query>
+
+    <query name="content.getCountCreatedByUserAfter">
+        <![CDATA[
+            select count(c)
+            from Content c
+            where c.areaUserRlm = :author
+            and c.contentStatus = :activeStatus
+            and c.contentType = :contentType
+            and c.liveDatetime >= :after
+        ]]>
+    </query>
+
+    <query name="content.getAllCreatedByUser">
+        <![CDATA[
+            select c
+            from Content c
+            inner join fetch c.contentStats
+            where c.areaUserRlm = :author
+            and c.contentType = :contentType
+            order by c.liveDatetime
+        ]]>
+    </query>
+
+    <query name="content.getNonActiveContentFromOidList">
+        <![CDATA[
+            select c
+            from Content c
+            where c.oid in (:contentOids)
+            and c.contentStatus = :activeStatus
+            and c.moderationStatus = :moderatedModerationStatus
+        ]]>
+    </query>
+
+    <query name="publicationInvoice.getOpenForPublication">
+        <![CDATA[
+            select pi
+            from PublicationInvoice pi
+            inner join pi.invoice i
+            where pi.publication = :publication
+            and i.status = :invoicedStatus
+        ]]>
+    </query>
+
+    <query name="channelUser.getUserCountByRoles">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(bitwise_or(cu.roles, cu.invitedRoles), count(*))
+            from ChannelUser cu
+            where cu.channel = :channel
+            group by bitwise_or(cu.roles, cu.invitedRoles)
+        ]]>
+    </query>
+
+    <query name="channelUser.getUsersWithRoleInChannel">
+        <![CDATA[
+            select cu.user
+            from ChannelUser cu
+            where cu.channel = :channel
+            and bitwise_and(cu.roles, :role) != 0
+        ]]>
+    </query>
+
+    <query name="channelUser.getChannelsForUserByTypeAndRole">
+        <![CDATA[
+            select cu.channel
+            from ChannelUser cu
+            where cu.user = :user
+            and cu.channel.type = :type
+            and bitwise_and(cu.roles, :role) != 0
+        ]]>
+    </query>
+
+    <query name="channelUser.getUsersWithAnyRoleInChannel">
+        <![CDATA[
+            select cu.user
+            from ChannelUser cu
+            where cu.channel = :channel
+            and cu.roles != 0
+        ]]>
+    </query>
+
+    <query name="publication.getDeletablePublicationOids">
+        <![CDATA[
+            select p.oid
+            from Publication p
+            where p.endDatetime <= :endedBefore
+        ]]>
+    </query>
+
+    <query name="ledgerEntry.removeReferencesForDeletedChannel">
+        <![CDATA[
+            update LedgerEntry le
+            set le.channel = null
+            where le.channel = :channel
+        ]]>
+    </query>
+
+</hibernate-mapping>
+
+

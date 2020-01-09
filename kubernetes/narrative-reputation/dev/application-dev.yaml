@@ -1,0 +1,18 @@
+redisson:
+  client:
+    scheme: redis
+    host: 10.0.0.4
+    port: 6379
+    threads: 4
+    netty-threads: 4
+    timeout: 5000
+    connect-timeout: 30000
+server:
+  port: 8180
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: INFO
+

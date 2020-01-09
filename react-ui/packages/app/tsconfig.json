@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es6", "dom", "esnext.asynciterable"],
+    "jsx": "react-native",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "src",
+    "baseUrl": ".",
+    "noUnusedLocals": true,
+  }
+}

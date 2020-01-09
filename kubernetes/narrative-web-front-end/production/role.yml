@@ -1,0 +1,38 @@
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: jenkins
+  namespace: production
+rules:
+- apiGroups:
+  - extensions
+  - ""
+  resources:
+  - pods
+  - deployments
+  - deployments/rollback
+  - rollouts
+  - events
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - post
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: jenkins
+  namespace: production
+subjects:
+  - kind: User
+    name: jenkins@informationtechnology-205813.iam.gserviceaccount.com
+    namespace: production
+roleRef:
+  kind: Role
+  name: jenkins
+  apiGroup: rbac.authorization.k8s.io

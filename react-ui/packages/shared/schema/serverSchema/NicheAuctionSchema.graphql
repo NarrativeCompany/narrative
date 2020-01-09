@@ -1,0 +1,71 @@
+type NicheAuction {
+  oid: String!
+  niche: Niche!
+  openForBidding: Boolean!
+  startDatetime: String!
+  endDatetime: String
+  totalBidCount: Int!
+  startingBid: NrveUsdValue!
+  nrveUsdPrice: NrveUsdPrice!
+  currentRoleOutbid: Boolean
+  leadingBid: NicheAuctionBid
+}
+
+type NicheAuctionDetail {
+  auction: NicheAuction!
+  currentUserLatestBidStatus: BidStatus
+  currentUserLatestMaxNrveBid: NrveUsdValue
+  currentUserActiveInvoiceOid: String
+  currentUserBypassesSecurityDepositRequirement: Boolean
+  securityDepositPayPalCheckoutDetails: PayPalCheckoutDetails
+}
+
+enum BidStatus {
+  LEADING
+  OUTBID
+  FAILED_TO_PAY
+}
+
+type NicheAuctionBid {
+  oid: String!
+  bidder: User!
+  status: BidStatus!
+  bidAmount: NrveUsdValue!
+  bidDatetime: String!
+}
+
+type NicheAuctionInvoice {
+  oid: String!
+  auction: NicheAuction!
+  bid: NicheAuctionBid!
+}
+
+input AllAuctionsInput {
+  pendingPayment: Boolean
+  size: Int
+  page: Int
+}
+
+type AllAuctionsPayload {
+  items: [NicheAuction!]!
+  info: PageInfo!
+}
+
+input NicheAuctionBidInput {
+  maxNrveBid: String!
+  nrveUsdPrice: NrveUsdPriceInput!
+}
+
+type Query {
+  getAllNicheAuctions (input: AllAuctionsInput): AllAuctionsPayload!
+  getNicheAuction (auctionOid: String!): NicheAuctionDetail!
+  # jw: adding the leading bid to this query so that the results will be cached based on the last leading bid that the
+  #     caller knew about.
+  getNicheAuctionBids (auctionOid: String!, leadingBidOid: String): [NicheAuctionBid!]
+}
+
+type Mutation {
+  postBidOnAuction (input: NicheAuctionBidInput!, auctionOid: String!): NicheAuctionDetail!
+  placeSecurityDepositOnNicheAuction (input: FiatPaymentInput!, auctionOid: String!): NicheAuctionDetail!
+}
+

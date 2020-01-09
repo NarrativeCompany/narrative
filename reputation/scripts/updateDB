@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+scriptDir=$(cd "$(dirname "$0")"; pwd)
+pushd $scriptDir/..
+
+. $scriptDir/setEnv
+
+res="$( which mvn )"
+if [  -z  "$res" ]; then
+    echo Error - you must have Maven on your path
+    exit -1
+fi
+
+echo -e
+url=$(askForValue 'MySQL URL to update' 'jdbc:mysql://127.0.0.1:3306')
+pass=$(askForValue 'reputation_user password' 'password' 'true')
+echo -e
+
+args="-Dliquibase.username=reputation_user \
+-Dliquibase.changelogfile=db/changelog/db.changelog-master.xml
+-Dliquibase.contexts=install,update"
+
+mvn process-resources liquibase:update@update -Dliquibase.url="${url}" -Dliquibase.password="${pass}" ${args}
+
+popd

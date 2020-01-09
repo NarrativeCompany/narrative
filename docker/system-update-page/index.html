@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Please Wait...</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto' rel='stylesheet' type='text/css'>
+        <script type="text/javascript">
+            function redirectAttempt() {
+                document.location.reload();
+            }
+        </script>
+    </head>
+    <body onLoad="setTimeout('redirectAttempt()', 5000);">
+        <div style="text-align:center;">
+            <div style="margin-top:30px;font-size:30px;font-weight:400;font-family: Roboto, Arial;padding-bottom:10px;color:#5b9030;">
+                We're Sorry!
+            </div>
+            <div style="font-size:16px;font-weight:400;font-family:'Open Sans'; padding-bottom:20px;color:#555555;">
+                We're enhancing our bionics at the moment. Please come back a little later when we reactivate our
+                circuits.
+            </div>
+            <img src="/cartoon-robot.png"/>
+            <div style="font-family:Arial, helvetica;font-size:14px;padding-top:15px;padding-bottom:20px;">
+                <a id="tryAgainLinkId" href="javascript:document.location.reload()" style="color: #1965a8;">Click Here To Try Again</a>
+            </div>
+            <script type="text/javascript">
+                document.getElementById('tryAgainLinkId').href = document.location.href;
+            </script>
+        </div>
+    </body>
+</html>

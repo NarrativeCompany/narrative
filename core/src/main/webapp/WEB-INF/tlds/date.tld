@@ -1,0 +1,233 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+
+    <description><![CDATA[Narrative Date Tags]]></description>
+    <display-name>Narrative Date Tags</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>date</short-name>
+    <uri>http://www.narrative.org/tags/handy/date</uri>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the long date/time format.
+        ]]></description>
+        <name>dateFormatLongDatetime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDatetime(java.util.Date,java.lang.Boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get date string for title using the long date/time format.
+        ]]></description>
+        <name>dateTitleLongString</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateTitleLongString(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the long date/time format.
+        ]]></description>
+        <name>dateFormatLongDatetimeWithTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDatetime(java.util.Date,java.util.TimeZone,java.lang.Boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Determines if the date is within the time frame to be rendered "Pretty"
+        ]]></description>
+        <name>isDateWithinPrettyTimeFrame</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>boolean isDateWithinPrettyTimeFrame(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the long date/time format (but don't ever use Pretty Time formatting).
+        ]]></description>
+        <name>dateFormatLongDatetimeNoPrettyTime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDatetimeNoPrettyTime(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the long date/time format (but don't ever use Pretty Time formatting).
+        ]]></description>
+        <name>dateFormatLongDatetimeNoPrettyTimeWithTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDatetimeNoPrettyTime(java.util.Date,java.util.TimeZone,java.lang.Boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the short date format.
+        ]]></description>
+        <name>dateFormatShortDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDate(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Format a date using the short date format.
+        ]]></description>
+        <name>dateFormatShortDateWithTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDate(java.util.Date,java.util.TimeZone)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the short date/time format.
+        ]]></description>
+        <name>dateFormatShortDatetimeWithTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDatetime(java.util.Date,java.util.TimeZone,java.lang.Boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the short date/time format (but don't ever use Pretty Time formatting).
+        ]]></description>
+        <name>dateFormatShortDatetimeNoPrettyTime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDatetimeNoPrettyTime(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date using the short date/time format (but don't ever use Pretty Time formatting).
+        ]]></description>
+        <name>dateFormatShortDatetimeNoPrettyTimeWithTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDatetimeNoPrettyTime(java.util.Date,java.util.TimeZone,java.lang.Boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a date and display only the time-of-day.
+        ]]></description>
+        <name>dateFormatTime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatTime(java.util.Date,java.lang.Boolean)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Format a date and display only the time-of-day.
+        ]]></description>
+        <name>dateFormatTimeWithTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatTime(java.util.Date,java.util.TimeZone,java.lang.Boolean)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a Date using the long date format.
+        ]]></description>
+        <name>dateFormatLongDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDate(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Format a Date using the long date format.
+        ]]></description>
+        <name>dateFormatLongDateWithTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDate(java.util.Date,java.util.TimeZone)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formats the provided Date in the users timezone (and locale) as: Wed Aug 10
+        ]]></description>
+        <name>dateFormatIso8601Date</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatIso8601Date(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formats the provided Date in the users timezone (and locale) in long format without the Year included.
+        ]]></description>
+        <name>dateFormatLongMonthDayFormat</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongMonthDayFormat(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formats the provided Date in the user's time zone according to the ISO 8601 spec
+        ]]></description>
+        <name>dateFormatIso8601Datetime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String getIso8601DatetimeString(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formats the provided Date in UTC according to the ISO 8601 spec
+        ]]></description>
+        <name>dateFormatIso8601UtcDatetime</name>
+        <function-class>org.narrative.common.util.IPDateUtil</function-class>
+        <function-signature>java.lang.String getIso8601UtcDatetimeString(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formats the provided Calendar in the users timezone (and locale) as: Wed Aug 10
+        ]]></description>
+        <name>calendarFormatIso8601Date</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String calendarFormatIso8601Date(java.util.Calendar)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formate a Calendar using the short date format.
+        ]]></description>
+        <name>calendarFormatShortDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String calendarFormatShortDate(java.util.Calendar)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Format a Calendar using the long date format.
+        ]]></description>
+        <name>calendarFormatLongDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String calendarFormatLongDate(java.util.Calendar)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the Short TimeZone name for right now.
+        ]]></description>
+        <name>formatShortTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String formatShortTimeZone(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the Long TimeZone name for right now.
+        ]]></description>
+        <name>formatLongTimeZone</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String formatLongTimeZone(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets the time for a hour and minute.
+        ]]></description>
+        <name>hourAndMinuteFormatTime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String hourAndMinuteFormatTime(int,int)</function-signature>
+    </function>
+
+</taglib>

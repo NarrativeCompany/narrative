@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+scriptDir=$(cd "$(dirname "$0")"; pwd)
+pushd $scriptDir/..
+
+. $scriptDir/setEnv
+
+res="$( which mvn )"
+if [  -z  "$res" ]; then
+    echo Error - you must have Maven on your path
+    exit -1
+fi
+
+echo -e
+host=$(askForValue 'MySQL host' '127.0.0.1')
+port=$(askForValue 'MySQL port' '3306')
+user=$(askForValue 'MySQL user' 'root')
+pass=$(askForValue 'MySQL password' 'password' 'true')
+
+url="jdbc:mysql://${host}:${port}"
+
+# Execute post-deploy Liquibase scripts
+args="-Dliquibase.username=$user \
+-Dliquibase.changelogfile=db/admin/changelog-admin-master.xml \
+-Dliquibase.contexts=postdeploy"
+
+mvn process-resources liquibase:update@update -Dliquibase.url="${url}" -Dliquibase.password="${pass}" ${args}
+
+popd

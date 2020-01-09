@@ -1,0 +1,50 @@
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{MM/dd/yy HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- bl: from logback, the max "window size" for the rolling file appender's FixedWindowRollingPolicy
+         is 12. that means that no matter how high we make the MaxIndex, it will constrain its value
+         to MinIndex+1 (or 13). LAME.
+         refer: http://logback.qos.ch/manual/appenders.html#FixedWindowRollingPolicy
+         "Given that the fixed window rolling policy requires as many file renaming operations as the window size,
+         large window sizes are strongly discouraged. The current implementation will automatically reduce the window
+         size to 12, when larger values are specified by the user."
+
+         so, instead of using a large MaxIndex, we're just going to set the MaxFileSize to 25MB.
+         -->
+    <!--
+    <appender name="production_info" class="ch.qos.logback.core.RollingFileAppender">
+        <file>/var/log/narrative.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>/var/log/narrative.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>25MB</MaxFileSize>
+        </triggeringPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    -->
+
+    <logger name="org.narrative" level="DEBUG"/>
+
+    <logger name="org.apache.catalina.startup.Catalina" level="INFO"/>
+    <!--<logger name="org.hibernate" level="INFO"/>-->
+
+    <root level="WARN">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!--
+    <root level="INFO">
+        <appender-ref ref="production_info" />
+    </root>
+    -->
+</configuration>

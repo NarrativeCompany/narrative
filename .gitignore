@@ -1,0 +1,41 @@
+# global
+/firebase-crash-keys
+
+# QA SQL directory
+/docker/sql
+
+# IDEA/IntelliJ Ignore files
+*.ipr
+*.iws
+/.idea/*
+!/.idea/misc.xml
+!/.idea/modules.xml
+# IDEA/Android Studio Ignore exceptions
+!/.idea/vcs.xml
+!/.idea/fileTemplates/
+!/.idea/inspectionProfiles/
+/.idea/scopes/
+!/.idea/codeStyles/
+!/.idea/encodings.xml
+!/.idea/copyright/
+!/.idea/compiler.xml
+!/.idea/runConfigurations
+
+# /docs/
+/docs/schema
+/docs/sql
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Developer Files (for testing/developer notes)
+/notes.txt
+/misc*.*
+/schema*

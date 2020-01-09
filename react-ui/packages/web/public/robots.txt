@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /search?
+Disallow: /suggest-niche
+Disallow: /hq/appeals/my-queue
+Disallow: /hq/invoice
+Disallow: /member-cp
+Disallow: /confirm-email
+Disallow: /unsubscribe

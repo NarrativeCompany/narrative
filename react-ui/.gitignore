@@ -1,0 +1,8 @@
+**/node_modules/
+packages/shared/package-lock.json
+**/build
+packages/shared/schema.json
+packages/shared/src/types/generated.ts
+packages/shared/schema/serverSchema.graphql
+packages/web/extracted
+packages/shared/dist

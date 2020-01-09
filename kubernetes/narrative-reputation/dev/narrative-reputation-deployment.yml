@@ -1,0 +1,75 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: narrative-reputation
+  name: narrative-reputation
+  namespace: dev
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: narrative-reputation
+      name: narrative-reputation
+    spec:
+      containers:
+      - name: narrative-reputation
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: default,dev,secret
+        - name: SPRING_CONFIG_ADDITIONAL-LOCATION
+          value: file:./dev/,file:./secret/
+        image: narrativecompany/narrative-reputation:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: .25
+            memory: 256M
+          limits:
+            cpu: 1
+            memory: 2048M
+        volumeMounts:
+          - name: rep-application-secret-yaml
+            mountPath: /opt/narrative-reputation/secret
+            readOnly: true
+          - name: rep-application-dev-yaml
+            mountPath: /opt/narrative-reputation/dev
+            readOnly: true
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.13
+        command: ["/cloud_sql_proxy",
+                  "-term_timeout=30s",
+                  "-instances=sandbox-narrative:us-east1:dev-master=tcp:3306",
+                  "-credential_file=/opt/cloud-sql-proxy/sandbox-sql.json"]
+        resources:
+          requests:
+            cpu: .1
+            memory: 128M
+          limits:
+            cpu: .5
+            memory: 256M
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - name: cloud-sql-proxy
+            mountPath: /opt/cloud-sql-proxy
+            readOnly: true
+      imagePullSecrets:
+        - name: narrativecompany-docker
+      volumes:
+        - name: cloud-sql-proxy
+          secret:
+            secretName: cloud-sql-proxy
+        - name: rep-application-secret-yaml
+          secret:
+            secretName: rep-application-secret-yaml
+        - name: rep-application-dev-yaml
+          configMap:
+            name: rep-application-dev-yaml

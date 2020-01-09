@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+        <!-- Use the Narrative MySQL dialect which is a subclass of MySQL57Dialect.  This dialect also requires
+             storage_engine to be defined so that Hibernate knows to use InnoDB.  Ideally this along with other
+             connection properties should be specified in Spring configuration at some point -->
+        <property name="hibernate.dialect">org.narrative.common.persistence.hibernate.NarrativeMySQLDialect</property>
+        <property name="hibernate.dialect.storage_engine">innodb</property>
+
+         <!-- bl: this can be set via the hibernate.show_sql system property.  right now, it is
+             being set to true by the application during startup if the site has is_development_database
+             set to true in the ADMIN_SITE table. -->
+        <!--<property name="show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>-->
+        <!-- bl: going to set hibernate.generate_statistics programmatically in GSessionFactory now instead. -->
+        <!--<property name="hibernate.generate_statistics">true</property>-->
+        <property name="bytecode.use_reflection_optimizer">true</property>
+        <!-- todo: when we do #427 we need to enable the query cache and L2 cache. we should do this only once
+             we have completed the upgrade to Hibernate 5. Hibernate 3.5 didn't handle collection invalidations
+             properly so we had our own region caching mechanism. that's gone now, so collection caching is broken.
+             see #427 for more details on how to reproduce the specific issue. -->
+        <property name="cache.use_second_level_cache">true</property>
+        <property name="cache.use_query_cache">true</property>
+        <property name="hibernate.cache.region.factory_class">org.narrative.config.cache.hibernate.ManagedRedissonLocalCachedRegionFactory</property>
+        <property name="hibernate.cache.region_prefix">hibernate</property>
+
+        <!-- bl: IntelliJ's Hibernate inspection reports an error here, but this is correct. the class is supposed
+             to be a BatcherFactory, not a Batcher implementation. maybe a newer version of Hibernate expects
+             a Batcher instead of a BatcherFactory? -->
+        <property name="hibernate.jdbc.batch.builder">org.narrative.common.persistence.hibernate.NarrativeNonBatchingBatchBuilder</property>
+        <!-- bl: use_outer_join deprecated in favor of max_fetch_depth:
+             file:///D:/work/hibernate/doc/reference/en/html_single/index.html#configuration-optional -->
+        <property name="use_outer_join">true</property>
+        <property name="default_batch_fetch_size">8</property>        
+        <property name="max_fetch_depth">2</property>
+        <!-- bl: the default batch_fetch_style (BatchFetchStyle) is LEGACY, but it has issues with refresh not refreshing into the same
+             object instance, which ultimately results in two objects with the same ID managed by Hibernate, which
+             should never happen, but apparently does. with the default_batch_fetch_size of 8, we have batch loaders
+             of size (8,7,6,5,4,3,2,1) so PADDED actually will never result in ANY padding anyway. but the internal
+             implementation doesn't have the issue with refresh, so it solves the duplicate managed object problem.
+             specifically, org.hibernate.loader.entity.plan.LegacyBatchingEntityLoaderBuilder.LegacyBatchingEntityLoader.load()
+             calls org.hibernate.loader.entity.plan.EntityLoader.loadEntityBatch, which completely ignores the passed
+             optionalObject. on the other hand, Hibernate's org.hibernate.loader.entity.PaddedBatchingEntityLoaderBuilder.PaddedBatchingEntityLoader
+             does not have this issue; it calls org.hibernate.loader.entity.BatchingEntityLoader.doBatchLoad(),
+             which properly honors the supplied optionalObject in determining the return value. -->
+        <property name="batch_fetch_style">PADDED</property>
+
+        <!-- bl: we never want to use auto-commit, so disable it universally in Hibernate. in doing so, Hibernate
+             will not attempt to fetch new connections upon AbstractLogicalConnectionImplementor.resetConnection()
+             which avoids further issues with the PartitionTypeConnectionProvider's CURRENT_PARTITION_OID ThreadLocal
+             not being set. -->
+        <property name="hibernate.connection.provider_disables_autocommit">true</property>
+
+        <property name="query.substitutions">true 1, false 0</property>
+
+        <!-- Mapping files -->
+        <!--<mapping resource="mapping.hbm.xml"/>-->
+
+    </session-factory>
+
+</hibernate-configuration>

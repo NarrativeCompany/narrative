@@ -1,0 +1,118 @@
+enum InvoiceType {
+  NICHE_AUCTION
+  KYC_CERTIFICATION
+  NICHE_AUCTION_SECURITY_DEPOSIT
+  PUBLICATION_ANNUAL_FEE
+}
+
+enum InvoiceStatus {
+  INVOICED
+  PAID
+  EXPIRED
+  CANCELED
+  CHARGEBACK
+  REFUNDED
+}
+
+enum NrvePaymentStatus {
+  PENDING_PAYMENT
+}
+
+enum FiatPaymentStatus {
+  CALCULATED
+  PAID
+  CHARGEBACK
+  REFUNDED
+}
+
+enum FiatPaymentProcessorType {
+  STRIPE
+  PAYPAL
+}
+
+type PayPalCheckoutDetails {
+  clientMode: String!
+  clientId: String!
+  amountForPayPal: String!
+  usdAmount: String!
+}
+
+type NrvePayment {
+  oid: String!
+  nrveAmount: String!
+  transactionDate: String
+  transactionId: String
+  hasBeenPaid: Boolean!
+  fromNeoAddress: String!
+  paymentStatus: NrvePaymentStatus
+  paymentNeoAddress: String!
+}
+
+type FiatPayment {
+  oid: String
+  nrveAmount: String
+  transactionDate: String
+  transactionId: String
+  hasBeenPaid: Boolean!
+  usdAmount: String!
+  feeUsdAmount: String!
+  totalUsdAmount: String!
+  status: FiatPaymentStatus!
+
+  payPalCheckoutDetails: PayPalCheckoutDetails
+}
+
+type Invoice {
+  oid: String!
+  type: InvoiceType!
+}
+
+type InvoiceDetail {
+  oid: String!
+  type: InvoiceType!
+  status: InvoiceStatus!
+  invoiceDatetime: String!
+  paymentDueDatetime: String!
+  updateDatetime: String
+
+  nrveAmount: String
+  usdAmount: String
+
+  nrvePayment: NrvePayment
+  fiatPayment: FiatPayment
+
+  nicheAuctionInvoice: NicheAuctionInvoice
+}
+
+type InvoiceStatusDetail {
+  status: InvoiceStatus!
+  invoice: InvoiceDetail
+}
+
+input NrvePaymentInput {
+  neoAddress: String!
+}
+
+input FiatPaymentInput {
+  processorType: FiatPaymentProcessorType!
+  paymentToken: String!
+}
+
+input ImmediateFiatPaymentInput {
+  invoiceType: InvoiceType!
+  processorType: FiatPaymentProcessorType!
+  paymentToken: String!
+}
+
+type Query {
+  getInvoice (invoiceOid: String): InvoiceDetail!
+  getInvoiceStatus (invoiceOid: String): InvoiceStatusDetail!
+}
+
+type Mutation {
+  deleteInvoiceNrvePayment (invoiceOid: String!): InvoiceDetail!
+  putInvoiceNrvePayment (input: NrvePaymentInput!, invoiceOid: String!): NrvePayment!
+  putInvoiceFiatPayment (input: FiatPaymentInput!, invoiceOid: String!): InvoiceDetail!
+  postImmediateFiatPayment (input: ImmediateFiatPaymentInput!): InvoiceDetail!
+}
+

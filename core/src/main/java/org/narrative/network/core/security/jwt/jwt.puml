@@ -1,0 +1,101 @@
+@startuml
+title Login
+participant Browser as user
+participant "Security \nConfiguration" as sc
+participant "Username & Password \nFilter" as upf
+participant "User Details\n Service" as uds
+participant DB as db
+
+activate sc #darkSalmon
+activate user #skyBlue
+user -> sc : /api/login
+deactivate user
+activate uds #darkSalmon
+sc -> upf : attemptAuthentication
+activate upf #darkSalmon
+upf -> uds : loadUserByUsername
+uds -> db : Get user by email
+activate db #skyBlue
+db -> uds
+deactivate db
+uds -> upf : successfulAuthentication
+deactivate uds
+upf -> upf : build JWT
+upf -> sc : JWT
+deactivate upf
+sc -> user : JWT
+@enduml
+
+@startuml
+title Valid JWT
+participant Browser as user
+participant "Security \nConfiguration" as sc
+participant "JWT \nToken Filter" as jtf
+participant Controller as c
+
+activate sc #darkSalmon
+activate user #skyBlue
+user -> sc : valid JWT /api/*
+deactivate user
+activate jtf #darkSalmon
+sc -> jtf
+jtf -> jtf : Parse JWT
+jtf -> jtf : Validate token
+jtf -> jtf : Set UserDetails on Spring Security context \nSet User on Network context
+jtf -> c
+activate c #skyBlue
+c -> jtf : Payload
+deactivate c
+jtf -> sc
+sc -> user
+deactivate jtf
+@enduml
+
+@startuml
+title No JWT
+participant Browser as user
+participant "Security \nConfiguration" as sc
+participant "JWT \nToken Filter" as jtf
+participant Controller as c
+
+activate sc #darkSalmon
+activate user #skyBlue
+user -> sc : No JWT /api/*
+deactivate user
+activate jtf #darkSalmon
+sc -> jtf
+jtf -> jtf : Create Guest
+jtf -> jtf : Set guest UserDetails on Spring Security context \nSet guest User on Network context
+jtf -> c
+activate c #skyBlue
+c -> jtf : Payload
+deactivate c
+jtf -> sc
+sc -> user
+deactivate jtf
+@enduml
+
+@startuml
+title Invalid JWT
+participant Browser as user
+participant "Security \nConfiguration" as sc
+participant "JWT \nToken Filter" as jtf
+participant "Rest Authentication \nEntry Point" as raep
+
+activate sc #darkSalmon
+activate user #skyBlue
+user -> sc : Invalid JWT /api/*
+deactivate user
+activate jtf #darkSalmon
+sc -> jtf
+jtf -> jtf : Parse JWT
+jtf -> jtf : Attempt token validation
+jtf -> jtf : Throws ServletException \nJWT not trusted
+jtf -> raep
+activate raep #darkSalmon
+raep -> jtf : HTTP Error code
+deactivate raep
+jtf -> sc
+sc -> user
+deactivate jtf
+@enduml

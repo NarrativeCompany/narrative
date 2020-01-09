@@ -1,0 +1,74 @@
+enum ContentStreamChannelType {
+  niches
+  personal_journals
+  publications
+}
+
+enum QualityFilter {
+  ONLY_HIGH_QUALITY,
+  HIDE_LOW_QUALITY,
+  ANY_QUALITY
+}
+
+enum ContentStreamSortOrder {
+  MOST_RECENT,
+  TRENDING,
+  FEATURED,
+  HIGHEST_RATED
+}
+
+type ContentStreamScrollParams {
+  lastItemDatetime: String
+  trendingBuildTime: String
+  lastItemTrendingScore: String
+  lastItemQualityScore: Int
+  lastItemSecondaryQualityValue: Int
+  lastItemOid: String
+  nextItemOids: [String!]
+}
+
+type ContentStreamEntries {
+  items: [Post!]!
+  hasMoreItems: Boolean!
+  scrollParams: ContentStreamScrollParams
+}
+
+input ChannelInput {
+  type: ContentStreamChannelType!
+  oid: String!
+}
+
+input ContentStreamScrollParamsInput {
+  lastItemDatetime: String
+  trendingBuildTime: String
+  lastItemTrendingScore: String
+  lastItemQualityScore: Int
+  lastItemSecondaryQualityValue: Int
+  lastItemOid: String
+}
+
+input ContentStreamFiltersInput {
+  qualityFilter: QualityFilter
+  sortOrder: ContentStreamSortOrder
+  forWidget: Boolean
+  count: Int
+
+  # it's important that we keep these in sync with ContentStreamScrollParms above.
+  lastItemDatetime: String
+  trendingBuildTime: String
+  lastItemTrendingScore: String
+  lastItemQualityScore: Int
+  lastItemSecondaryQualityValue: Int
+  lastItemOid: String
+  nextItemOids: [String!]
+}
+
+input ContentStreamNicheFiltersInput {
+  nicheOid: String
+}
+
+type Query {
+  getChannelContentStream (channel: ChannelInput!, nicheFilters: ContentStreamNicheFiltersInput, filters: ContentStreamFiltersInput): ContentStreamEntries!
+  getPersonalizedContentStream (filters: ContentStreamFiltersInput): ContentStreamEntries!
+  getNetworkWideContentStream (filters: ContentStreamFiltersInput): ContentStreamEntries!
+}

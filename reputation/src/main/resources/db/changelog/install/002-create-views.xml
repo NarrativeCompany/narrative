@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        context="install">
+
+    <changeSet author="bsantare" id="create-views-1">
+        <createView viewName="ConsolidatedCurReputation">
+            <![CDATA[
+            select
+                cur.userOid,
+                cur.qualityAnalysis,
+                cur.kycVerified,
+                case
+                    when
+                        TIMESTAMPDIFF(SECOND,negativeConductExpirationTimestamp,DATE(NOW())) < 0 then true
+                    else
+                        false
+                end as conductStatus,
+                cur.totalScore,
+                coalesce(cc.commentLikePoints, 0) as commentLikePoints,
+                coalesce(cc.commentDislikePoints, 0) as commentDislikePoints,
+                coalesce(cc.contentLikePoints, 0) as contentLikePoints,
+                coalesce(cc.contentDislikePoints, 0) as contentDislikePoints,
+                coalesce(cc.contentRatingsReceivedCount, 0) as contentRatingsReceivedCount,
+                coalesce(fq.userQualityFollowerRatio, 0) as userQualityFollowerRatio,
+                coalesce(fq.userQualityFollowerPctRank, 0) as userQualityFollowerPctRank,
+                coalesce(rc.majorityVoteCount, 0) as ratingMajorityVoteCount,
+                coalesce(rc.totalVoteCount, 0) as ratingTotalVoteCount,
+                coalesce(vc.majorityVoteCount, 0) as corrMajorityVoteCount,
+                coalesce(vc.totalVoteCount, 0) as corrTotalVoteCount
+            from
+                CurrentReputation cur
+                    left join ContentQuality cc on cc.userOid = cur.userOid
+                    left join FollowerQuality fq on fq.userOid = cur.userOid
+                    left join RatingCorrelation rc on rc.userOid = cur.userOid
+                    left join VoteCorrelation vc on vc.userOid = cur.userOid
+             ]]>
+        </createView>
+    </changeSet>
+
+</databaseChangeLog>

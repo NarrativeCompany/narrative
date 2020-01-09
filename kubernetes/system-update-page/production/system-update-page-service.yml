@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: system-update-page
+  name: system-update-page
+  namespace: production
+spec:
+  ports:
+  - name: sup
+    port: 80
+    targetPort: 80
+  selector:
+    app: system-update-page
+

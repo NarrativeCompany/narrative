@@ -1,0 +1,29 @@
+type StatsOverview {
+  totalMembers: Int!
+  uniqueVisitorsPast30Days: Int
+  nicheOwners: Int!
+  approvedNiches: Int!
+  activeNiches: Int!
+  networkRewardsPaidLastMonth: NrveUsdValue!
+  allTimeReferralRewards: NrveUsdValue!
+  totalPosts: Int!
+  topNiches: [TopNiche!]!
+  timestamp: String!
+}
+
+type TopNiche {
+  oid: String!
+  name: String!
+  prettyUrlString: String
+  totalPosts: Int!
+}
+
+type NicheStats {
+  nichesForSale: Int!
+  nichesAwaitingApproval: Int!
+}
+
+type Query {
+  getStatsOverview: StatsOverview!
+  getNicheStats: NicheStats!
+}

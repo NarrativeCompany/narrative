@@ -1,0 +1,8 @@
+FROM nginx:stable
+
+# Custom NGINX config
+COPY ./docker/narrative-web-front-end/default.conf /etc/nginx/conf.d/default.conf
+
+COPY ./react-ui/packages/web/build /usr/share/nginx/html
+
+COPY ./version.txt /usr/share/nginx/html/static/

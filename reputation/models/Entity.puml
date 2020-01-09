@@ -1,0 +1,114 @@
+@startuml
+
+  package "entity"{
+    class AbstractReputationEntity {
+      userOid: OID
+      lastUpdated: instant
+    }
+
+    class AbstractEventReputationEntity extends AbstractReputationEntity{
+      lastEventUUID: UUID
+      lastEventTimestamp: instant
+    }
+
+    class ConductStatusEntity extends AbstractEventReputationEntity {
+      severity: int
+    }
+
+    note bottom of ConductStatusEntity : Events that contribute to conduct status
+
+    class FollowerQualityEntity extends AbstractReputationEntity {
+      userQualityFollowerRatio: double
+      userQualityFollowerPctRank: double
+    }
+
+    note bottom of FollowerQualityEntity : QA1: Quality of Followers
+
+    class ContentQualityEntity extends AbstractEventReputationEntity {
+      contentLikePoints: double
+      contentDislikePoints: double
+      commentLikePoints: double
+      commentDislikePoints: double
+    }
+
+    note bottom of ContentQualityEntity : QA2: Quality of \n Posted Content\n and Comments
+
+    class VoteCorrelationEntity extends AbstractEventReputationEntity {
+      majorityVoteCount: int
+      totalVoteCount: int
+    }
+
+    note bottom of VoteCorrelationEntity : QA3: Correlation of Votes
+
+    class RatingCorrelationEntity extends AbstractEventReputationEntity {
+      majorityVoteCount: int
+      totalVoteCount: int
+    }
+
+    note bottom of RatingCorrelationEntity : QA4: Correlation of Ratings
+
+    class CurrentReputationEntity extends AbstractEventReputationEntity {
+      qualityAnalysis: double
+      kycVerified: int
+      negativeConductExpirationDate: instant
+
+    }
+
+    note bottom of CurrentReputationEntity : Current reputation \nalso tracks last event\nthat triggered recalculation
+
+    enum RollupPeriod {
+      DAILY
+      MONTHLY
+    }
+
+    class ReputationHistoryEntity {
+      userOid: OID
+      period: RollupPeriod
+      snapshotDate: Date
+      userQualityFollowerRatio: double
+      userQualityFollowerPctRank: double
+      contentLikePoints: double
+      contentDislikePoints: double
+      commentLikePoints: double
+      commentDislikePoints: double
+      majorityVoteCount: int
+      totalVoteCount: int
+      ratingMajorityVoteCount: int
+      ratingTotalVoteCount: int
+      kycVerified: int
+      conductStatus: int
+
+    }
+    ReputationHistoryEntity ..> RollupPeriod
+    ReputationHistoryEntity .. CurrentReputationEntity
+
+    note right of ReputationHistoryEntity : Rollup of reputation history.\nPopulated at midnight for\nthe previous day and\nrolled up at the beginning\nof the month for the previous\nmonth. Daily data is deleted\nafter monthly roll up
+
+    class EventHistory {
+      userOid: OID
+      eventUUID: UUID
+      eventTimestamp: Timestamp
+      eventJSON: String
+    }
+
+     note left of EventHistory : Keep last n days\nof raw event data\nfor troubleshooting
+
+    class MessageDedup {
+      eventUUID: UUID
+      version: int
+      timestamp: instant
+    }
+
+    note bottom of MessageDedup : Every message that is\nprocessed will perform\nan optimistic lock write\nto this table as part of\nits write transaction.\nMessages will be\ndeleted when older\nthan n minutes
+
+    class CurrentQualityMembersEntity {
+      id: int
+      meanReputationScore: double
+      totalQualityMembers: int
+      lastUpdated: instant
+    }
+
+    note right of CurrentQualityMembersEntity : Calculated every n hours for \nuse when calculating\nQuality of Followers.\nSingle row table
+  }
+
+@enduml

@@ -1,0 +1,34 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="NarrativeApplication_8089" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="narrative-core" />
+    <extension name="chronon">
+      <include>
+        <pattern>
+          <option name="PATTERN" value="com.groupee.**" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="true" />
+        </pattern>
+      </include>
+    </extension>
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.groupee.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.narrative.NarrativeApplication" />
+    <option name="DEBUG_MODE" value="true" />
+    <option name="VM_PARAMETERS" value="-Djruby.native.verbose=true -Dlogback.configurationFile=file:src/main/config/logback.xml -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true -Djava.net.preferIPv4Stack=true -ea -server -Xms256m -Xmx2048m -Dnarrative.cluster.port=9083" />
+    <option name="PROGRAM_PARAMETERS" value="--server.servlet.context-parameters.socketIoServerPort=8084 --server.servlet.context-parameters.postByEmailSMTPPort=2527 --server.port=8089" />
+    <option name="WORKING_DIRECTORY" value="file://$MODULE_WORKING_DIR$" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="INCLUDE_PROVIDED_SCOPE" value="false" />
+    <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="narrative-core:war exploded" />
+      </option>
+    </method>
+  </configuration>
+</component>

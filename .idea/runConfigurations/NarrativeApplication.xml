@@ -1,0 +1,33 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="NarrativeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <module name="narrative-core" />
+    <extension name="chronon">
+      <include>
+        <pattern>
+          <option name="PATTERN" value="com.groupee.**" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="true" />
+        </pattern>
+      </include>
+    </extension>
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.groupee.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.narrative.NarrativeApplication" />
+    <option name="DEBUG_MODE" value="true" />
+    <option name="VM_PARAMETERS" value="-Djruby.native.verbose=true -Dlogback.configurationFile=file:src/main/config/logback.xml -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true -Djava.net.preferIPv4Stack=true -ea -server -Xms256m -Xmx2048m" />
+    <option name="WORKING_DIRECTORY" value="file://core" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="INCLUDE_PROVIDED_SCOPE" value="false" />
+    <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="narrative-core:war exploded" />
+      </option>
+    </method>
+  </configuration>
+</component>

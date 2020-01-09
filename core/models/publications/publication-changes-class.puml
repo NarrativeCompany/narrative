@@ -1,0 +1,140 @@
+@startuml
+
+package PublicationChanges {
+  class Niche {
+    .. Remove Fields ..
+    -NicheAuctionInvoice purchaseInvoice
+  }
+
+  class ModeratedContent {
+    -OID oid
+    -Content content
+    -Instant moderationDatetime
+  }
+
+  class Channel {
+    .. Add Fields ..
+    -Invoice purchaseInvoice
+    -ChannelDomain primaryDomain
+  }
+  Channel o--- ChannelDomain :primaryDomain
+
+  class ChannelDomain {
+    -OID oid
+    -Channel channel
+    -String domainName
+  }
+  ChannelDomain ---- Channel
+
+  class ChannelUser {
+    -OID oid
+    -Channel channel
+    -User user
+    -long roles
+    -long invitedRoles
+  }
+
+  interface ChannelRole extends IntegerEnum {
+    -int id
+  }
+
+  enum NicheRole {
+    MODERATOR(0)
+  }
+
+  enum PublicationRole {
+    ADMIN(0)
+    EDITOR(1)
+    WRITER(2)
+  }
+
+  enum ChannelType {
+    .. Add Field ..
+    -Class<extends ChannelRole> roleType
+  }
+
+  enum PublicationStatus {
+    ACTIVE,
+    EXPIRED,
+    REJECTED
+  }
+
+  enum PublicationPlanType {
+    BASIC(new BigDecimal(125), 2, 5, false)
+    BUSINESS(new BigDecimal(299), 10, 30, true)
+
+    -BigDecimal price
+    -int maxEditors
+    -int maxWriters
+    -boolean supportsCustomDomain
+  }
+
+  class Publication extends ChannelConsumer {
+    -OID oid
+    -String name
+    -String description
+    -PublicationStatus status
+    -String prettyUrlString
+    -User owner
+    -PublicationPlanType plan
+    -ImageOnDisk logo
+    -Instant creationDatetime
+    -Instant planEndDatetime
+    -PublicationSettings settings
+  }
+  Publication o---- User :owner
+  Publication ----- PublicationSettings
+
+  class PublicationSettings {
+    -boolean contentModerationEnabled
+    -String googleAnalyticsId
+  }
+
+  enum InvoiceType {
+    .. Add Constants ..
+    PUBLICATION_ANNUAL_FEE
+  }
+
+  class PublicationInvoice {
+    -OID oid
+    -Invoice invoice
+    -Publication publication
+    -PublicationPlanType plan
+  }
+
+  class ChannelContent {
+    .. Add Fields ..
+    -Instant featuredDatetime
+    -Instant featuredUntilDatetime
+  }
+
+  class LedgerEntry {
+    .. Add Fields ..
+    -Channel channel
+    .. Remove Fields ..
+    -Niche niche
+  }
+
+  class TribunalIssue {
+    .. Remove Fields ..
+    -Niche niche
+    -Referendum referendumForTribunal
+    -Referendum referendumForCommunity
+    .. Add Fields ..
+    -Channel channel
+    -Referendum referendum
+  }
+  note top of TribunalIssue : referendumForTribunal will be renamed to referendum, and niche will become channel
+
+  class Referendum {
+    .. Add Fields ..
+    -Publication publication
+  }
+  note top of Referendum : niche and publication should both be optional
+
+  enum IndexType {
+    .. Add Constants ..
+    PUBLICATION
+  }
+
+@enduml

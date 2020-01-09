@@ -1,0 +1,50 @@
+type RewardValue {
+  value: NrveUsdValue!
+}
+
+type RewardPeriod {
+  name: String!
+  yearMonth: String!
+}
+
+input RewardPeriodInput {
+  month: String
+}
+
+type RewardPeriodStats {
+  rewardPeriodRange: String!
+
+  contentCreatorReward: NrveUsdValue!
+  narrativeCompanyReward: NrveUsdValue!
+  nicheOwnershipReward: NrveUsdValue!
+  activityRewards: NrveUsdValue!
+  nicheModerationReward: NrveUsdValue!
+  electorateReward: NrveUsdValue!
+  tribunalReward: NrveUsdValue!
+  totalRewards: NrveUsdValue!
+
+  nicheOwnershipFeeRevenue: NrveUsdValue!
+  publicationOwnershipFeeRevenue: NrveUsdValue!
+  tokenMintRevenue: NrveUsdValue!
+  advertisingRevenue: NrveUsdValue!
+  miscellaneousRevenue: NrveUsdValue!
+  carryoverRevenue: NrveUsdValue!
+  totalRevenue: NrveUsdValue!
+}
+
+type RewardLeaderboardPost {
+  postOid: String!
+  post: Post
+  reward: NrveUsdValue!
+}
+
+type RewardLeaderboardUser {
+  user: User!
+  reward: NrveUsdValue!
+}
+
+type Query {
+  getAllTimeRewards: RewardValue!
+  getRewardPeriods: [RewardPeriod!]!
+  getRewardPeriodStats (input: RewardPeriodInput): RewardPeriodStats!
+}

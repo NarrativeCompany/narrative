@@ -1,0 +1,21 @@
+enum ChannelType {
+  NICHE
+  PUBLICATION
+  PERSONAL_JOURNAL
+}
+
+interface Channel {
+  oid: String!
+  type: ChannelType!
+  name: String!
+  description: String!
+  prettyUrlString: String
+  currentUserFollowedItem: CurrentUserFollowedItem!
+}
+
+type DeletedChannel {
+  oid: String!
+  type: ChannelType!
+  name: String!
+  owner: User
+}

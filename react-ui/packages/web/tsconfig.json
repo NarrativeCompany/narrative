@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "jsx": "react",
+    "lib": ["es6", "es2017.object", "dom", "esnext.asynciterable"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "build/dist",
+    "rootDir": "src",
+    "sourceMap": true,
+    "target": "es5",
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts",
+    "config-overrides.js",
+    "extracted",
+    "scripts"
+  ]
+}

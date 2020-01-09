@@ -1,0 +1,69 @@
+enum TribunalIssueType {
+  APPROVE_REJECTED_NICHE
+  RATIFY_NICHE
+  APPROVE_NICHE_DETAIL_CHANGE
+  RATIFY_PUBLICATION
+}
+
+enum TribunalIssueStatus {
+  OPEN
+}
+
+type TribunalAppealsListPayload {
+  items: [TribunalIssue!]!
+  info: PageInfo!
+}
+
+type TribunalIssue {
+  oid: String!
+  type: TribunalIssueType!
+  status: TribunalIssueStatus!
+  creationDatetime: String!
+  referendum: Referendum!
+  lastReport: TribunalIssueReport!
+  nicheEditDetail: NicheEditDetail
+}
+
+type TribunalIssueReport {
+  oid: String!
+  reporter: User!
+  comments: String
+  creationDatetime: String!
+}
+
+type NicheEditDetail {
+  newName: String
+  newDescription: String
+  originalName: String!
+  originalDescription: String!
+}
+
+type TribunalIssueDetail {
+  tribunalIssue: TribunalIssue!
+  tribunalIssueReports: [TribunalIssueReport!]!
+}
+
+input TribunalAppealSummaryInput {
+  tribunalIssueOid: String!
+}
+
+input CreateNicheTribunalIssueInput {
+  type: TribunalIssueType!
+  comment: String!
+}
+
+input CreatePublicationTribunalIssueInput {
+  comment: String!
+}
+
+type Query {
+  getTribunalAppealSummary (input: TribunalAppealSummaryInput!): TribunalIssueDetail!
+  getAllMyQueueTribunalReview (size: Int, page: Int): TribunalAppealsListPayload!
+  getAllNichesUnderTribunalReview (size: Int, page: Int): TribunalAppealsListPayload!
+  getAllNichesWithCompletedTribunalReview (size: Int, page: Int): TribunalAppealsListPayload!
+}
+
+type Mutation {
+  createNicheTribunalIssue (input: CreateNicheTribunalIssueInput!, nicheOid: String!): TribunalIssueDetail!
+  createPublicationTribunalIssue (input: CreatePublicationTribunalIssueInput!, publicationOid: String!): TribunalIssueDetail!
+}

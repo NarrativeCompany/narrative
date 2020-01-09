@@ -1,0 +1,9 @@
+# redisson configuration for redis servers
+# see : https://github.com/mrniko/redisson/wiki/2.-Configuration
+
+singleServerConfig:
+  address: "redis://redis:6379"
+
+# Codec
+codec: !<org.redisson.codec.JsonJacksonCodec> {}
+

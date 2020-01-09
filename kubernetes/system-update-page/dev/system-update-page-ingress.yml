@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start
+    nginx.ingress.kubernetes.io/auth-url: http://oauth.default.svc.cluster.local:4180/oauth2/auth
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/limit-connections: "30"
+    nginx.ingress.kubernetes.io/limit-rate: "262144"
+    nginx.ingress.kubernetes.io/limit-rps: "15"
+    kubernetes.io/ingress.class: "nginx"
+  name: system-update-page
+  namespace: dev
+spec:
+  rules:
+  - host: dev.narrative.org
+    http:
+      paths:
+      - backend:
+          serviceName: system-update-page
+          servicePort: 80
+  tls:
+  - secretName: cloudflare-wildcard-narrative-org
+    hosts:
+      - dev.narrative.org

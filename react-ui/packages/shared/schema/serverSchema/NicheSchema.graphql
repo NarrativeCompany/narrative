@@ -1,0 +1,106 @@
+enum NicheStatus {
+  ACTIVE
+  SUGGESTED
+  FOR_SALE
+  REJECTED
+  PENDING_PAYMENT
+}
+
+type Niche implements Channel {
+  oid: String!
+  type: ChannelType!
+  name: String!
+  description: String!
+  status: NicheStatus!
+  prettyUrlString: String
+  renewalDatetime: String
+  currentUserFollowedItem: CurrentUserFollowedItem!
+  suggester: User!
+  owner: User
+}
+
+type CurrentUserFollowedItem {
+  oid: String!
+  followed: Boolean!
+}
+
+type NicheDetail {
+  niche: Niche!
+  activeAuctionOid: String
+  activeModeratorElectionOid: String
+  currentBallotBoxReferendumOid: String
+  currentTribunalAppealOids: [String]
+  availableTribunalIssueTypes: [TribunalIssueType!]!
+  currentUserActiveInvoiceOid: String
+}
+
+type NicheModeratorSlots {
+  niche: Niche!
+  activeModeratorElection: Election
+  moderatorSlots: Int!
+}
+
+type NicheProfile {
+  niche: Niche!
+  editDetailsTribunalIssue: TribunalIssue
+}
+
+input SimilarNichesByNicheIdInput {
+  nicheId: String!
+}
+
+input SimilarNichesInput {
+  name: String!
+  description: String!
+}
+
+input CreateNicheInput {
+  name: String!
+  description: String!
+  assertChecked: Boolean!
+  agreeChecked: Boolean!
+}
+
+input UpdateNicheInput {
+  name: String
+  description: String
+}
+
+input FollowChannelInput {
+  channelOid: String!
+}
+
+input UpdateNicheModeratorSlotsInput {
+  moderatorSlots: Int!
+}
+
+type NicheRewardPeriodStats {
+  rewardPeriodRange: String!
+
+  totalOwnerReward: NrveUsdValue!
+  totalModeratorReward: NrveUsdValue!
+  totalQualifyingPosts: Int!
+}
+
+type Query {
+  getSimilarNichesByNicheId (input: SimilarNichesByNicheIdInput!): [Niche!]!
+  getNicheDetail (nicheId: String!): NicheDetail!
+  getNicheModeratorSlots (nicheId: String!): NicheModeratorSlots!
+  getNicheProfile (nicheId: String!): NicheProfile!
+  getNicheRewardPeriods (nicheOid: String!): [RewardPeriod!]!
+  getNicheAllTimeRewards (nicheOid: String!): RewardValue!
+  getNicheRewardPeriodRewards (nicheOid: String!, input: RewardPeriodInput): NicheRewardPeriodStats!
+  getNichePostLeaderboard (nicheOid: String!, input: RewardPeriodInput): [RewardLeaderboardPost!]!
+  getNicheCreatorLeaderboard (nicheOid: String!, input: RewardPeriodInput): [RewardLeaderboardUser!]!
+  getNichesOfInterest: [Niche!]!
+  getTrendingNiches: [Niche!]!
+}
+
+type Mutation {
+  createNiche (input: CreateNicheInput): Referendum!
+  updateNiche (input: UpdateNicheInput, nicheOid: String!): TribunalIssueDetail!
+  findSimilarNiches (input: SimilarNichesInput): [Niche!]!
+  startFollowingChannel (input: FollowChannelInput!): CurrentUserFollowedItem!
+  stopFollowingChannel (input: FollowChannelInput): CurrentUserFollowedItem!
+  updateNicheModeratorSlots (input: UpdateNicheModeratorSlotsInput!, nicheOid: String!): NicheModeratorSlots!
+}

@@ -1,0 +1,85 @@
+enum LedgerEntryType {
+  NICHE_SUGGESTED
+  NICHE_REFERENDUM_VOTE
+  NICHE_REFERENDUM_RESULT
+  NICHE_AUCTION_RESTARTED
+  NICHE_AUCTION_STARTED
+  NICHE_BID
+  NICHE_INVOICE_PAID
+  NICHE_INVOICE_FAILED
+  NICHE_EDIT
+  ISSUE_REFERENDUM_VOTE
+  ISSUE_REFERENDUM_RESULT
+  ISSUE_REPORT
+  NICHE_AUCTION_ENDED
+  NICHE_AUCTION_WON
+  NICHE_AUCTION_FALLBACK_WON
+  NICHE_MODERATOR_NOMINATING_STARTED
+  NICHE_MODERATOR_NOMINATED
+  NICHE_MODERATOR_NOMINEE_WITHDRAWN
+  NICHE_MODERATOR_VOTING_STARTED
+  NICHE_MODERATOR_VOTING_COMPLETED
+  KYC_CERTIFICATION_APPROVED
+  KYC_CERTIFICATION_REVOKED
+  NICHE_OWNER_REMOVED
+  PAYMENT_CHARGEBACK
+  KYC_REFUND
+  POST_REMOVED_FROM_CHANNEL
+  USER_PUBLISHED_POST
+  USER_DELETED_POST
+  TRIBUNAL_USER_DELETED_POST_OR_COMMENT_AUP_VIOLATION
+  USER_HAD_POST_OR_COMMENT_DELETED_FOR_AUP_VIOLATION
+  PUBLICATION_CREATED
+  PUBLICATION_PAYMENT
+  PUBLICATION_EDITOR_DELETED_COMMENT
+  USER_HAD_COMMENT_DELETED_BY_PUBLICATION_EDITOR
+}
+
+type LedgerEntry {
+  oid: String!
+  actor: User
+  type: LedgerEntryType!
+  eventDatetime: String!
+  niche: Niche
+  publication: Publication
+  auction: NicheAuction
+  auctionBid: NicheAuctionBid
+  tribunalIssue: TribunalIssue
+  tribunalIssueReport: TribunalIssueReport
+  referendum: Referendum
+  election: Election
+  invoice: Invoice
+  wasReferendumVotedFor: Boolean
+  votedOnByAllTribunalMembers: Boolean
+  postOid: String
+  post: Post
+  commentOid: String
+  author: User
+  securityDepositValue: String
+  publicationPlan: PublicationPlanType
+  publicationPaymentType: PublicationPaymentType
+}
+
+type LedgerEntryScrollParams {
+  lastItemDatetime: String!
+}
+
+type LedgerEntries {
+  items: [LedgerEntry!]
+  hasMoreItems: Boolean!
+  scrollParams: LedgerEntryScrollParams
+}
+
+input LedgerEntriesQueryInput {
+  count: Int
+
+  # jw: this needs to match the LedgerEntryScrollParams exactly
+  lastItemDatetime: String
+}
+
+type Query {
+  # jw: note: The createLoadMorePropsFromQueryResults ujtility function relies on the scrollParams being persisted
+  #     through a filters variable.
+  getLedgerEntriesByChannel (filters: LedgerEntriesQueryInput, channelOid: String!): LedgerEntries!
+  getLedgerEntriesByUser (filters: LedgerEntriesQueryInput, userOid: String!): LedgerEntries!
+}

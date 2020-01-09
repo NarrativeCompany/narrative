@@ -1,0 +1,8 @@
+---
+startDelaySeconds: 15
+hostPort: narrative:9000
+ssl: false
+lowercaseOutputLabelNames: true
+lowercaseOutputName: true
+rules:
+- pattern: '.*'

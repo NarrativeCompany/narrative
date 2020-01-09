@@ -1,0 +1,10 @@
+type KycPricing {
+  initialPrice: String!
+  retryPrice: String!
+  kycPromoPrice: String
+  kycPromoMessage: String
+}
+
+type Query {
+  getKycPricing: KycPricing!
+}

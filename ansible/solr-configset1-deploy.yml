@@ -1,0 +1,34 @@
+# This is the Ansible playbook to deploy new configsets to Solr
+---
+- hosts: tag_solr
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Copy the Solr config files.
+      copy:
+        src: "../core/src/solr/config/{{ item }}"
+        dest: "/opt/solr/configset1/{{ item }}"
+        mode: '0400'
+        owner: '8983'
+      with_items:
+        - schema.xml
+        - solrconfig.xml
+        - stopwords.txt
+
+    - name: Update the Zookeeper configset1.
+      shell: docker exec solr /bin/bash -c "/opt/solr/server/scripts/cloud-scripts/zkcli.sh -zkhost localhost:2181 -cmd upconfig -confname configset1 -confdir /opt/configset1/"
+      run_once: yes
+
+    - name: Wait 5 seconds before updating.
+      pause:
+        seconds: 5
+
+    - name: Reload the narrative-platform collection.
+      shell: curl http://localhost:8983/solr/admin/collections?action=RELOAD\&name=narrative-platform
+      register: solr_reload
+      run_once: yes
+
+    - name: Debug solr output.
+      debug:
+        msg: "{{ solr_reload.stdout }}"
+      run_once: yes

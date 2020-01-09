@@ -1,0 +1,9 @@
+{
+  "presets": ["env", "react"],
+  "plugins": [
+    ["dynamic-import-node"],
+    ["react-intl", {
+      "messagesDir": "./src/shared/i18n"
+    }]
+  ]
+}

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <query name="composition.getAllCompositionOidsAndReplyCountsForIndexer">
+        select new org.narrative.common.persistence.ObjectPair(composition.oid, composition.compositionStats.replyCount)
+        from Composition composition
+        where composition.compositionType in (0, 5, 6)
+        and composition.compositionStats.replyCount > 0
+    </query>
+
+    <query name="composition.getBodiesForCompositionOids">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(c.oid, c.body)
+            from Composition c
+            where c.oid in (:compositionOids)
+        ]]>
+    </query>
+
+    <query name="filePointer.getAllForFileOnDiskOid">
+      <![CDATA[
+            select fp
+            from FilePointer fp
+            inner join fetch fp.filePointerSet
+            where fp.fileOnDiskOid = :fileOnDiskOid
+      ]]>
+    </query>
+
+    <query name="filePointerSet.getAllForCompositionOidsDeepFetch">
+      <![CDATA[
+            select distinct fps
+            from FilePointerSet fps
+            join fetch fps.filePointers
+            where fps.composition.oid in (:compositionOids)
+      ]]>
+    </query>
+
+    <query name="reply.getReplyCountBefore">
+        <![CDATA[
+            select count(*)
+            from Reply r
+            where r.composition = :composition
+            and r.threadingOrder < :threadingOrder
+            and r.moderationStatus != 'MODERATED'
+            and r.qualityRatingFields.score >= :minimumScore
+        ]]>
+    </query>
+
+    <query name="reply.getReplyCountAfter">
+        <![CDATA[
+            select count(*)
+            from Reply r
+            where r.composition = :composition
+            and r.threadingOrder > :threadingOrder
+            and r.moderationStatus != 'MODERATED'
+            and r.qualityRatingFields.score >= :minimumScore
+        ]]>
+    </query>
+
+    <query name="reply.getPopularReplyCountAfter">
+        <![CDATA[
+            select count(*)
+            from Reply r
+            where r.composition = :composition
+            and r.moderationStatus != 'MODERATED'
+            and r.qualityRatingFields.score >= :minimumScore
+            and (
+                r.replyStats.likeCount > :likeCount or (
+                    r.replyStats.likeCount = :likeCount and
+                    r.threadingOrder > :threadingOrder
+                )
+            )
+        ]]>
+    </query>
+
+    <query name="reply.getAllOidsForCompositionOids">
+        <![CDATA[
+            select reply.oid
+            from Reply reply
+            where reply.composition.oid in (:compositionOids)
+            order by liveDatetime asc
+        ]]>
+    </query>
+
+    <query name="reply.getAllForCompositionOids">
+        <![CDATA[
+            select r
+            from Reply r
+            inner join fetch r.replyStats rs
+            where r.composition.oid in (:compositionOids)
+            order by r.liveDatetime asc
+        ]]>
+    </query>
+
+    <query name="reply.getForComposition">
+        <![CDATA[
+            from Reply r
+            where r.composition = :composition
+            order by r.threadingOrder
+        ]]>
+    </query>
+
+    <query name="reply.getOrderedNewestToOldestForComposition">
+        <![CDATA[
+            select r
+            from Reply r
+            where r.composition = :composition
+            and r.moderationStatus != 'MODERATED'
+            and r.qualityRatingFields.score >= :minQualityScore
+            order by r.threadingOrder desc
+        ]]>
+    </query>
+
+    <query name="reply.getOrderedOldestToNewestForComposition">
+        <![CDATA[
+            select r
+            from Reply r
+            where r.composition = :composition
+            and r.moderationStatus != 'MODERATED'
+            and r.qualityRatingFields.score >= :minQualityScore
+            order by r.threadingOrder asc
+        ]]>
+    </query>
+
+    <query name="reply.getOrderedPopularForComposition">
+        <![CDATA[
+            select r
+            from Reply r
+            where r.composition = :composition
+            and r.moderationStatus != 'MODERATED'
+            and r.qualityRatingFields.score >= :minQualityScore
+            order by r.replyStats.likeCount desc
+            , r.threadingOrder desc
+        ]]>
+    </query>
+
+    <query name="reply.getViewableRepliesForReplyOids">
+        <![CDATA[
+            select r
+            from Reply r
+            where r.oid in (:replyOids)
+            and r.moderationStatus != 'MODERATED'
+        ]]>
+    </query>
+
+    <query name="reply.getLastPublicRepliesForComposition">
+        <![CDATA[
+            select r
+            from Reply r
+            where r.composition = :composition
+            and r.moderationStatus != :moderatedStatusType
+            order by r.liveDatetime desc
+
+        ]]>
+    </query>
+
+    <query name="reply.getLiveReplyCountWithMinimumQuality">
+      <![CDATA[
+            select count(*)
+            from Reply r
+            where r.composition = :composition
+            and r.moderationStatus != 'MODERATED'
+            and r.qualityRatingFields.score >= :minQualityScore
+      ]]>
+    </query>
+
+    <query name="reply.getReplyCountForAuthorAndCompositionAfterDate">
+      <![CDATA[
+            select count(*)
+            from Reply r
+            inner join r.composition c
+            where r.userOid = :userOid
+            and c.oid = :compositionOid
+            and r.liveDatetime > :afterDate
+      ]]>
+    </query>
+
+    <query name="reply.getRepliesForReferendum">
+      <![CDATA[
+            select r
+            from Reply r
+            inner join r.replyStats rs
+            where r.composition = :composition
+            and (
+                rs.likeCount < :lastLikeCount
+                or (
+                    rs.likeCount = :lastLikeCount
+                    and r.liveDatetime > :lastReplyDatetime
+                )
+            )
+            order by rs.likeCount desc, r.liveDatetime asc
+      ]]>
+    </query>
+
+    <query name="userQualityRatedComposition.getForUserComposition">
+        <![CDATA[
+            select uqrc
+            from UserQualityRatedComposition uqrc
+            where uqrc.userOid = :userOid
+            and uqrc.composition = :composition
+      ]]>
+    </query>
+
+    <query name="userQualityRatedComposition.getCountForUserAfter">
+        <![CDATA[
+            select count(uqrc)
+            from UserQualityRatedComposition uqrc
+            where uqrc.userOid = :userOid
+            and uqrc.ratingDatetime >= :after
+      ]]>
+    </query>
+
+    <query name="reply.getCountCreatedByUserAfter">
+        <![CDATA[
+            select count(r)
+            from Reply r
+            where r.userOid = :userOid
+            and r.liveDatetime >= :after
+      ]]>
+    </query>
+
+    <query name="userQualityRatedComposition.getRatingsForUsersAndValues">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(uqrc.userOid, uqrc.qualityRating)
+            from UserQualityRatedComposition uqrc
+            where uqrc.composition = :composition
+            and uqrc.qualityRating in (:qualityRatings)
+      ]]>
+    </query>
+
+    <query name="userAgeRatedComposition.getForUserComposition">
+        <![CDATA[
+            select uarc
+            from UserAgeRatedComposition uarc
+            where uarc.userOid = :userOid
+            and uarc.composition = :composition
+      ]]>
+    </query>
+
+    <query name="userAgeRatedComposition.getCountForUserAfter">
+        <![CDATA[
+            select count(uarc)
+            from UserAgeRatedComposition uarc
+            where uarc.userOid = :userOid
+            and uarc.ratingDatetime >= :after
+      ]]>
+    </query>
+
+    <query name="userAgeRatedComposition.getRatingsForUsersAndValues">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(uarc.userOid, uarc.ageRating)
+            from UserAgeRatedComposition uarc
+            where uarc.composition = :composition
+            and uarc.ageRating in (:ageRatings)
+      ]]>
+    </query>
+
+    <query name="userQualityRatedReply.getForUserReply">
+        <![CDATA[
+            select uqrr
+            from UserQualityRatedReply uqrr
+            where uqrr.userOid = :userOid
+            and uqrr.reply = :reply
+      ]]>
+    </query>
+
+    <query name="userQualityRatedReply.getCountForUserAfter">
+        <![CDATA[
+            select count(uqrr)
+            from UserQualityRatedReply uqrr
+            where uqrr.userOid = :userOid
+            and uqrr.ratingDatetime >= :after
+      ]]>
+    </query>
+
+    <query name="userQualityRatedReply.getRatingsForUsersAndValues">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(uqrr.userOid, uqrr.qualityRating)
+            from UserQualityRatedReply uqrr
+            where uqrr.reply = :reply
+            and uqrr.qualityRating in (:qualityRatings)
+      ]]>
+    </query>
+
+    <query name="userQualityRatedReply.getReplyOidToQualityRatingByUser">
+        <![CDATA[
+            select new org.narrative.common.persistence.ObjectPair(uqrr.reply.oid, uqrr.qualityRating)
+            from UserQualityRatedReply uqrr
+            where uqrr.userOid = :userOid
+            and uqrr.reply in (:replies)
+      ]]>
+    </query>
+
+    <sql-query name="userQualityRatedReply.deleteAllForComposition">
+        <![CDATA[
+            delete uqrr
+            from UserQualityRatedReply uqrr
+            inner join Reply r on r.oid = uqrr.reply_oid
+            where r.composition_oid = :compositionOid
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.reply.createTemporaryUserActivityPointsTable">
+        <![CDATA[
+            create temporary table tmp_UserActivityPoints
+            (
+            oid bigint not null auto_increment,
+            userOid bigint not null,
+            points bigint not null,
+            reputationAdjusted bit not null default 1,
+            primary key(oid),
+            index(userOid)
+            )
+            ENGINE=InnoDB
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.reply.dropTemporaryUserActivityPointsTable">
+        <![CDATA[
+            drop table tmp_UserActivityPoints
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.reply.insertTempUserActivityPointRecordsForSubmitComment">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select r.userOid, :activityPoints
+            from Reply r
+            where r.liveDatetime >= :lowerBound
+            and r.liveDatetime < :upperBound
+            and r.qualityRatingFields_score >= :minScore
+            and r.moderationStatus = :approvedModerationStatus
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.reply.insertTempUserActivityPointRecordsForRatePostComment">
+        <![CDATA[
+            insert into tmp_UserActivityPoints (userOid, points)
+            select uqrc.userOid, :activityPoints
+            from UserQualityRatedComposition uqrc
+            where uqrc.ratingDatetime >= :lowerBound
+            and uqrc.ratingDatetime < :upperBound
+            union all
+            select uqrr.userOid, :activityPoints
+            from UserQualityRatedReply uqrr
+            where uqrr.ratingDatetime >= :lowerBound
+            and uqrr.ratingDatetime < :upperBound
+            union all
+            select uarc.userOid, :activityPoints
+            from UserAgeRatedComposition uarc
+            where uarc.ratingDatetime >= :lowerBound
+            and uarc.ratingDatetime < :upperBound
+        ]]>
+    </sql-query>
+
+    <sql-query name="userActivityReward.reply.getTempUserActivityPointRecords">
+        <![CDATA[
+            select userOid, points, reputationAdjusted
+            from tmp_UserActivityPoints
+            order by oid
+        ]]>
+    </sql-query>
+</hibernate-mapping>

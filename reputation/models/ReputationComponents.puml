@@ -1,0 +1,39 @@
+@startuml
+
+
+
+package "NarrativePlatform" {
+  component RESTAPIComponent [
+  REST API Component\n
+  ]
+   RestAPI - RESTAPIComponent
+  [EventGenerationComponent]
+}
+
+package "Reputation" as RepPackage{
+ component ReputationComponent [
+  ReputationComponent\n
+  ]
+  RestAPl - [ReputationComponent]
+}
+
+package "Events"{
+  [ReputationEvents]
+}
+
+
+database "MySql" {
+  [Global]
+  [Reputation]
+}
+
+  [EventGenerationComponent]-->Queue
+  Queue --> [ReputationComponent]
+
+  [ReputationComponent] --> Reputation
+  [ReputationComponent] --> Global
+  note right of Global : Only used for querying of data not\navailable via stream processing.  i.e. \nfollowees when reputation changes \nto above or below the line
+  [EventGenerationComponent]..>ReputationEvents: use
+  [ReputationComponent]..>ReputationEvents: use
+
+@enduml

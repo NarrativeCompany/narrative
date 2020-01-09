@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <!-- Pre-deploy scripts.  These will activate when 'predeploy' context is active -->
+    <include file="predeploy/001-create-users.xml" relativeToChangelogFile="true"/>
+    <include file="predeploy/002-create-view-admin.xml" relativeToChangelogFile="true"/>
+
+    <!--
+    #############################################################################
+    ### Warning!!!                                                            ###
+    ###                                                                       ###
+    ### Do NOT use includeAll for including change sets as this results       ###
+    ### in inconsistent DATABASECHANGELOG paths depending on whether executed ###
+    ### from Maven or Spring Boot.  Just don't do it.                         ###
+    #############################################################################
+    -->
+
+    <!-- Post-deploy scripts.  These will activate when 'postdeploy' context is active  -->
+    <!--<include file="postdeploy/some-post-deploy-changelog.xml" relativeToChangelogFile="true"/>-->
+
+</databaseChangeLog>

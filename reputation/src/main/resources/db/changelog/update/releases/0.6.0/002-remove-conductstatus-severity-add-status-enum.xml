@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        context="update">
+
+    <changeSet author="bsantare" id="release-060-002-remove-conductstatus-severity-add-status-enum-1">
+        <dropColumn tableName="ConductStatus">
+            <column name="severity"/>
+        </dropColumn>
+    </changeSet>
+
+    <changeSet author="bsantare" id="release-060-002-remove-conductstatus-severity-add-status-enum-2">
+        <addColumn tableName="ConductStatus">
+            <column name="conductEventType" type="tinyint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

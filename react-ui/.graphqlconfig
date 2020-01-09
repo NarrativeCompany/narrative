@@ -1,0 +1,10 @@
+{
+  "schemaPath": "packages/shared/schema",
+  "includes": ["*.graphql"],
+  "excludes": ["serverSchema.graphql"],
+  "extensions": {
+    "endpoints": {
+
+    }
+  }
+}

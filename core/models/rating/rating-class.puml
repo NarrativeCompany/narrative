@@ -1,0 +1,156 @@
+@startuml
+
+class UserRatedObject<<MappedSuperclass>>{
+    -OID oid
+    -OID userOid
+    -Instant ratingDatetime
+    -int pointValue
+    +RatingValue getRatingValue()
+    +void setRatingValue(RatingValue ratingValue)
+}
+
+class UserQualityRatedObject<<MappedSuperclass>>{
+    -QualityRating qualityRating
+}
+
+enum RatableType {
+  CONTENT
+  REPLY
+  +RatableType(Map<RatingType, class of UserRatedObjectDao))
+  +UserRatedObjectDAO getDao(RatingType)
+}
+
+class UserAgeRatedObject<<MappedSuperclass>>{
+    -AgeRating ageRating
+}
+
+UserRatedObject <|-- UserQualityRatedObject
+UserRatedObject <|-- UserAgeRatedObject
+
+enum QualityRating {
+  LIKE
+  DISLIKE_CONTENT_VIOLATES_AUP
+  DISLIKE_DISAGREE_WITH_VIEWPOINT
+  DISLIKE_NOT_WRITTEN_IN_PROPER_LANGUAGE
+  DISLIKE_LOW_QUALITY_CONTENT
+}
+
+enum AgeRating {
+GENERAL
+RESTRICTED
+}
+
+RatingValue <|..AgeRating
+RatingValue <|..QualityRating
+
+class UserQualityRatedComposition <<Entity>> {
+  -Composition composition
+  +UserQualityRatedCompositionDAO dao()
+}
+class UserAgeRatedComposition <<Entity>>{
+  -Composition composition
+  +UserAgeRatedCompositionDAO dao()
+}
+class UserQualityRatedReply <<Entity>>{
+  -Reply reply
+  +UserQualityRatedReplyDAO dao()
+}
+
+class UserQualityRatedCompositionDAO {
+}
+class UserAgeRatedCompositionDAO{
+}
+class UserQualityRatedReplyDAO {
+}
+
+UserRatedObjectDAO <|.. UserQualityRatedCompositionDAO
+UserRatedObjectDAO <|.. UserAgeRatedCompositionDAO
+UserRatedObjectDAO <|.. UserQualityRatedReplyDAO
+
+interface UserRatedObjectDAO<RatingValue>{
+    +UserRatedObject getRatingForUser (User user, Ratable ratable)
+    +UserRatedObject createRatingForUser (User user, RatingValue RatingValue)
+}
+
+UserQualityRatedObject <|-- UserQualityRatedComposition
+UserQualityRatedObject <|-- UserQualityRatedReply
+UserAgeRatedObject <|-- UserAgeRatedComposition
+
+enum RatingType {
+    AGE
+    QUALITY
+}
+interface "RatingValue<RatingFields>" as RatingValue {
+  RatingType getRatingType()
+  addVote(Ratable ratable, UserRatedObject userRatedObject)
+  removeVote(Ratable ratable, UserRatedObject userRatedObject)
+}
+
+interface "RatingFields<RatingValue>" as RatingFields {
+  +RatingValue getEffectiveRatingValue()
+  +getTotalVoteCount()
+  +getTotalVotePoints()
+}
+
+RatingFields <|-- AgeRatingFields
+RatingFields <|-- QualityRatingFields
+
+interface Ratable {
+  +RatableType getRatableType()
+  +RatingFields getRatingFields(RatingType ratingType)
+  +onRatingUpdate(RatingType ratingType)
+}
+
+Ratable<|-- Content
+Ratable<|-- Reply
+
+class QualityRatingFields <<Embeddable>> <<MappedSuperclass>>{
+  -int likeCount
+  -int likePoints
+
+  -int dislikeContentViolatesAupCount
+  -int dislikeContentViolatesAupPoints
+
+  -int dislikeNotWrittenInProperLanguageCount
+  -int dislikeNotWrittenInProperLanguagePoints
+
+  -int dislikeLowQualityContentCount
+  -int dislikeLowQualityContentPoints
+
+  -int dislikeDisagreeWithViewpointCount
+
+  -int score
+}
+
+class AgeRatingFields <<Embeddable>> <<MappedSuperclass>>{
+  -int generalCount
+  -int generalPoints
+
+  -int restrictedCount
+  -int restrictedPoints
+}
+
+class Reply{
+  ...
+  -QualityRatingFields qualityRatingFields
+}
+Reply --> QualityRatingFields
+
+class Content{
+  ...
+  -QualityRatingFields qualityRatingFields
+  -AgeRatingFields ageRatingFields
+}
+Content --> QualityRatingFields
+Content --> AgeRatingFields
+
+interface RatingService {
+  +setRating(Ratable, User, RatingType, RatingValue, String)
+}
+
+class RatingServiceImpl {
+
+}
+
+RatingService <|.. RatingServiceImpl
+@enduml

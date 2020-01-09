@@ -1,0 +1,548 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+
+  <description><![CDATA[Narrative Network Tags]]></description>
+  <display-name>Narrative Network Tags</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>gn</short-name>
+  <uri>http://legacy.narrative.org/tags/network</uri>
+
+    <tag>
+        <description><![CDATA[
+          Create an img tag for a static image
+        ]]></description>
+        <name>staticImage</name>
+        <tag-class>org.narrative.network.shared.jsptags.StaticImageTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description><![CDATA[
+              The image to use.  Should not have the static prefix or a base domain.
+              e.g. /images/site/page/blank.gif
+            ]]></description>
+            <name>src</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              Value to use for alt attribute.  If not specified, the default will be used.
+            ]]></description>
+            <name>alt</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              Value to use for title attribute.  If not specified, the default will be used.
+            ]]></description>
+            <name>title</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              Value to use for alt and title attribute.  If not specified, the default will be used.
+            ]]></description>
+            <name>altTitle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              Space-separated list of one or more css classes to use in addition to the forced defaults.
+            ]]></description>
+            <name>cssClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              Any inline css styling to specify on the element directly.
+            ]]></description>
+            <name>cssStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              Any onclick javascript to execute.
+            ]]></description>
+            <name>onclick</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              An optional id for the img tag.
+            ]]></description>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              An optional align attribute for the img tag.
+            ]]></description>
+            <name>align</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              An optional valign attribute for the img tag.
+            ]]></description>
+            <name>valign</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              An optional usemap attribute for the img tag.
+            ]]></description>
+            <name>useMap</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              An optional override value for the width attribute for the img tag.
+            ]]></description>
+            <name>width</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description><![CDATA[
+              An optional override value for the height attribute for the img tag.
+            ]]></description>
+            <name>height</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <function>
+        <description><![CDATA[
+            Test if the NetworkContext ThreadLocal variable has been set.  Necessary to use on error pages
+            when attempting to render wordlets.
+        ]]></description>
+        <name>isNetworkContextSet</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>boolean isNetworkContextSet()</function-signature>
+    </function>
+    
+    <function>
+        <description><![CDATA[
+            Get the short day of the week from a date.
+        ]]></description>
+        <name>dateFormatShortDayOfWeek</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDayOfWeek(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formate a date using the short date format.
+        ]]></description>
+        <name>dateFormatShortDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDate(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a Calendar using the short date format.
+        ]]></description>
+        <name>calendarFormatShortDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String calendarFormatShortDate(java.util.Calendar)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a Calendar using the long date format.
+        ]]></description>
+        <name>calendarFormatLongDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String calendarFormatLongDate(java.util.Calendar)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a date using the long date format.
+        ]]></description>
+        <name>dateFormatLongDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDate(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a date using the short date/time format.
+        ]]></description>
+        <name>dateFormatShortDatetime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDatetime(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a date using the short date/time format (but don't ever use Pretty Time formatting).
+        ]]></description>
+        <name>dateFormatShortDatetimeNoPrettyTime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatShortDatetimeNoPrettyTime(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a date using the long date/time format.
+        ]]></description>
+        <name>dateFormatLongDatetime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDatetime(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a date using the long date/time format with the pretty utility.
+        ]]></description>
+        <name>dateFormatLongDatetimePretty</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDatetimePretty(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Formate a date using the long date/time format (but don't ever use Pretty Time formatting).
+        ]]></description>
+        <name>dateFormatLongDatetimeNoPrettyTime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatLongDatetimeNoPrettyTime(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Gets the format used to format a datetime for the current user.
+        ]]></description>
+        <name>datetimeFormatPattern</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String datetimeFormatPattern()</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Format a date and display only the time-of-day.
+        ]]></description>
+        <name>dateFormatTime</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatTime(java.util.Date)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Determine if the current time display format is an AM/PM format or not.
+        ]]></description>
+        <name>isAmPmTimePattern</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>boolean isAmPmTimePattern()</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Formats the provided date in the users timezone (and locale) as: Wed Aug 10
+        ]]></description>
+        <name>dateFormatStaticLongMonthAndYear</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>java.lang.String dateFormatStaticLongMonthAndYear(java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Determines if the first date is within a day after the second date
+        ]]></description>
+        <name>areDatesOnSameDay</name>
+        <function-class>org.narrative.network.shared.util.NetworkDateUtils</function-class>
+        <function-signature>boolean areDatesOnSameDay(java.util.Date,java.util.Date)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Render a wordlet based on the wordlet key.
+        ]]></description>
+        <name>wordlet</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Render a wordlet with one argument based on the wordlet key and argument value.
+        ]]></description>
+        <name>wordlet1Arg</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet1Arg(java.lang.String, java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Render a wordlet with two arguments based on the wordlet key and argument values.
+        ]]></description>
+        <name>wordlet2Arg</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet2Arg(java.lang.String, java.lang.Object, java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Render a wordlet with three arguments based on the wordlet key and argument values.
+        ]]></description>
+        <name>wordlet3Arg</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet3Arg(java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Render a wordlet with four arguments based on the wordlet key and argument values.
+        ]]></description>
+        <name>wordlet4Arg</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet4Arg(java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Render a wordlet with five arguments based on the wordlet key and argument values.
+        ]]></description>
+        <name>wordlet5Arg</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet5Arg(java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <description><![CDATA[
+            Render a wordlet with six arguments based on the wordlet key and argument values.
+        ]]></description>
+        <name>wordlet6Arg</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet6Arg(java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)</function-signature>
+    </function>
+    <!-- todo: how to get this to work?
+    <function>
+        <name>wordletArgs</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String wordlet(java.lang.String,java.lang.Object...)</function-signature>
+    </function>-->
+
+
+    <function>
+        <description><![CDATA[
+            Format a date using the specified format.
+        ]]></description>
+        <name>formatDate</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String formatDate(java.util.Date,java.lang.String)</function-signature>
+    </function>
+    
+    <function>
+        <description><![CDATA[
+            Format a number using the user's browser's locale's number formatting mechanism.  For US, will render
+            numbers like 1,000,000.
+        ]]></description>
+        <name>formatNumber</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String formatNumber(long)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a decimal number using the user's browser's locale's decimal number formatting mechanism.
+        ]]></description>
+        <name>formatDecimalNumber</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String formatDecimalNumber(double)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Format a decimal number using the user's browser's locale's decimal number formatting mechanism. (maximum of 2 decimal places)
+        ]]></description>
+        <name>formatShortDecimalNumber</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String formatShortDecimalNumber(double)</function-signature>
+    </function>
+    
+    <function>
+        <description><![CDATA[
+            Get the formatted display of the byte size for a given byte size.  Will render in the largest form, e.g.:
+            <br>
+            22 bytes
+            <br>
+            12 KB
+            <br>
+            2 MB
+        ]]></description>
+        <name>getByteSizeFormatted</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String getFileSizeForDisplay(int)</function-signature>
+    </function>
+    
+    <function>
+        <description><![CDATA[
+            Get a duration (for a movie or audio clip) formatted.  Will render in the largest form, e.g.:
+            <br>
+            3 seconds
+            <br>
+            02:03 minutes (for 2 minutes, 3 seconds)
+            <br>
+            01:30 hours (for 1 hour, 30 minutes)
+        ]]></description>
+        <name>getDurationTimeFormatted</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String getDurationTimeForDisplay(int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a elapsed period of time formatted.  Will render in the largest form, e.g.:
+            <br>
+            3 seconds
+            <br>
+            02:03 minutes (for 2 minutes, 3 seconds)
+            <br>
+            01:30 hours (for 1 hour, 30 minutes)
+        ]]></description>
+        <name>getElapsedTimeSinceFormatted</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String getElapsedTimeSinceForDisplay(long)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a elapsed period of time formatted.  Will render in the largest form, e.g.:
+            <br>
+            3 seconds
+            <br>
+            02:03 minutes (for 2 minutes, 3 seconds)
+            <br>
+            01:30 hours (for 1 hour, 30 minutes)
+        ]]></description>
+        <name>getElapsedTimeFormatted</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.lang.String getElapsedTimeForDisplay(long)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given FileMetaDataProvider and ImageType.
+        ]]></description>
+        <name>imageDimensions</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getImageDimensionsForResizedImage(org.narrative.network.core.fileondisk.base.FileMetaDataProvider,org.narrative.network.core.fileondisk.image.ImageType)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given FileMetaDataProvider, ImageType, and image dimension override.
+        ]]></description>
+        <name>imageDimensionsResolved</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getImageDimensionsResolved(org.narrative.network.core.fileondisk.base.FileMetaDataProvider,org.narrative.network.core.fileondisk.image.ImageType,java.lang.Integer)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given FileMetaDataProvider, ImageType, and square size definition.  The result
+            is the size that the image will need to be scaled to in order for the square to be truncated out of the image.
+        ]]></description>
+        <name>imageDimensionsForContainedSquare</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getImageDimensionsForContainedSquare(org.narrative.network.core.fileondisk.base.FileMetaDataProvider,org.narrative.network.core.fileondisk.image.ImageType,java.lang.Integer)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given FileMetaDataProvider, ImageType, and square size definition.  The result
+            is the size that the image will need to be scaled to in order for the square to be truncated out of the image.
+        ]]></description>
+        <name>imageDimensionsForContainedSquareRaw</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getImageDimensionsForContainedSquare(java.lang.Integer,java.lang.Integer,java.lang.Integer)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given FileMetaDataProvider and max width/height value.
+        ]]></description>
+        <name>imageDimensionsManual</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getImageDimensionsForResizedImage(org.narrative.network.core.fileondisk.base.FileMetaDataProvider,int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given DimensionMetaData and max width/height value.
+        ]]></description>
+        <name>imageDimensionsFromMetaData</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getImageDimensionsFromDimensionMetaData(org.narrative.network.core.fileondisk.base.DimensionMetaData,int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given width/height value.
+        ]]></description>
+        <name>imageDimensionsFixed</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getFixedImageDimensions(int,int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a square ImageDimensions object for a given image dimension value.
+        ]]></description>
+        <name>imageDimensionsFixedSquare</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getFixedSquareImageDimensions(int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get an ImageDimensions object for a given FileMetaDataProvider and max width value.
+        ]]></description>
+        <name>imageDimensionsManualWidthOnly</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.common.util.images.ImageDimensions getImageDimensionsForResizedImageWidthOnly(org.narrative.network.core.fileondisk.base.FileMetaDataProvider,int)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get the current AreaContext, if any.  Will look at the Action and the current NetworkContext.
+        ]]></description>
+        <name>areaContext</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>org.narrative.network.shared.context.AreaContext getAreaContextFromPageContext(javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Get a collection of FileData objects from the specified list of the specified type
+        ]]></description>
+        <name>getIncludedFileDatasOfType</name>
+        <function-class>org.narrative.network.shared.util.NetworkCoreUtils</function-class>
+        <function-signature>java.util.List getIncludedFileDatasOfType(java.util.Collection,org.narrative.network.core.fileondisk.base.FileType)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Linkify a twitter message by hyperlinking the @usernames and the http links
+        ]]></description>
+        <name>linkifyTwitterMessage</name>
+        <function-class>org.narrative.common.util.CoreUtils</function-class>
+        <function-signature>java.lang.String linkifyTwitterMessage(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Gets a ImageUrlMetaData instance for the provided base url of a static image
+        ]]></description>
+        <name>staticImageUrlMetaData</name>
+        <function-class>org.narrative.network.shared.jsptags.StaticImageTag</function-class>
+        <function-signature>org.narrative.network.core.fileondisk.image.ImageUrlMetaData getImageUrlMetaData(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <description><![CDATA[
+            Determines from the users session if they are allowed to upload new files for the given fileUploadProcessOid and fileUsageType
+        ]]></description>
+        <name>isAllowNewFileUploads</name>
+        <function-class>org.narrative.network.core.fileondisk.base.services.FileUploadUtils</function-class>
+        <function-signature>boolean isAllowNewFileUploads(org.narrative.common.persistence.OID,org.narrative.network.core.fileondisk.base.FileUsageType)</function-signature>
+    </function>
+</taglib>

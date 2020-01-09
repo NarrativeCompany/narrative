@@ -1,0 +1,22 @@
+############################################################################################################
+#  Example cache configuration for Redisson managed Spring cache manager local
+#  caches.  These settings override the default configuration specified by
+#  CacheManagerDefaultConfig
+#
+# !!! You can generate a configuration file from the default configuration by executing the
+# !!! "CacheManagerDefaultConfig yml file generator" run target in IntelliJ
+#
+############################################################################################################
+
+############################################################################################################
+# Redisson cache options:
+#
+#   ttl         - Time to live in milliseconds for a cache entry - 0 lives forever
+#   maxIdleTime - Max idle time in milliseconds - resets on access and is superceeded by ttl
+#   maxSize     - Max number of objects to cache
+############################################################################################################
+
+someSpecialCacheName:
+  ttl: 15000
+  maxIdleTime: 0
+  maxSize: 2000

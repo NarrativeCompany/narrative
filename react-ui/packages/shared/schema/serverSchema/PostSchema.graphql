@@ -1,0 +1,120 @@
+enum FeaturePostDuration {
+  ONE_DAY
+  THREE_DAYS
+  ONE_WEEK
+}
+
+type Post {
+  oid: String!
+  title: String!
+  subTitle: String
+  author: User!
+  prettyUrlString: String
+  postLive: Boolean!
+  moderationDatetime: String
+  liveDatetime: String!
+  lastUpdateDatetime: String!
+  lastSaveDatetime: String
+  titleImageUrl: String
+  titleImageLargeUrl: String
+  titleImageLargeWidth: Int
+  titleImageLargeHeight: Int
+  titleImageSquareUrl: String
+  publishedToPersonalJournal: Boolean!
+  publishedToPublication: Publication
+  publishedToNiches: [Niche!]!
+  qualityRatingFields: QualityRatingFields!
+  ageRatingFields: AgeRatingFields!
+  featuredInPublication: Boolean
+}
+
+type PostDetail {
+  oid: String!
+  post: Post!
+  extract: String
+  body: String!
+  canonicalUrl: String
+  draft: Boolean!
+  allowComments: Boolean!
+  pendingPublicationApproval: Boolean
+  qualityRatingByCurrentUser: QualityRating
+  ageRatingByCurrentUser: AgeRating
+  editableByCurrentUser: Boolean
+  deletableByCurrentUser: Boolean
+}
+
+type EditPostDetail {
+  postDetail: PostDetail!
+  rawBody: String!
+  authorAgeRating: AgeRating
+  edit: Boolean!
+  authorPersonalJournalOid: String!
+  availablePublications: [Publication!]!
+  blockedInNicheOids: [String!]!
+  publishedToPublicationDetail: PublicationDetail
+}
+
+input PostTextInput {
+  title: String
+  subTitle: String
+  body: String
+  canonicalUrl: String
+}
+
+input PostInput {
+  draft: Boolean!
+  title: String
+  subTitle: String
+  body: String
+  canonicalUrl: String
+  publishToPrimaryChannel: String
+  disableComments: Boolean!
+  ageRestricted: Boolean
+  publishToNiches: [String]!
+}
+
+type PostListPayload {
+  items: [Post!]!
+  info: PageInfo!
+}
+
+input PostListInput {
+  size: Int
+  page: Int
+}
+
+input FeaturedPostInput {
+  duration: FeaturePostDuration!
+}
+
+input RemovePostFromPublicationInput {
+  message: String
+}
+
+# jw: only defining this because posts/puts must have a input object
+input ApprovePublicationPostInput {
+  postOid: String
+}
+
+type Query {
+  getPostForEdit (postOid: String!): EditPostDetail!
+  getPostById (postId: String!): PostDetail!
+  getAllTimePostRewards (postOid: String!): RewardValue!
+  getPublishedPosts (input: PostListInput): PostListPayload!
+  getDraftPosts (input: PostListInput): PostListPayload!
+  getPendingPosts (input: PostListInput): PostListPayload!
+}
+
+type Mutation {
+  validatePostText (input: PostTextInput!): VoidResult
+  submitPost (input: PostInput!): EditPostDetail!
+  editPost (input: PostInput!, postOid: String): EditPostDetail!
+  deletePost (postOid: String!): VoidResult
+  qualityRatePost (input: QualityRatingInput!, postOid: String): PostDetail!
+  ageRatePost (input: AgeRatingInput!, postOid: String): PostDetail!
+  deletePostFromNiche (postOid: String!, nicheOid: String!): PostDetail!
+  featurePost (input: FeaturedPostInput!, postOid: String!): PostDetail!
+  unfeaturePost (postOid: String!): PostDetail!
+  removePostFromPublication (input: RemovePostFromPublicationInput!, postOid: String!): PostDetail!
+  approvePublicationPost (input: ApprovePublicationPostInput!): PostDetail!
+}

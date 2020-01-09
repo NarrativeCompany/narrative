@@ -1,0 +1,58 @@
+enum CompositionConsumerType {
+  referendums
+  posts
+}
+
+type Comment {
+  oid: String!
+  body: String!
+  user: User!
+  liveDatetime: String!
+  qualityRatingFields: QualityRatingFields!
+  qualityRatingByCurrentUser: QualityRating
+}
+
+type CommentForEdit {
+  value: String!
+}
+
+type CommentsPayload {
+  items: [Comment!]!
+  info: PageInfo!
+  buriedCommentCount: Int
+  includeBuried: Boolean
+}
+
+input GetCommentsPageQueryInput {
+  page: Int
+  comment: String
+  size: Int
+  includeBuried: Boolean
+}
+
+input CompositionConsumerQueryFieldsInput {
+  consumerType: CompositionConsumerType!
+  consumerOid: String!
+}
+
+input CommentQueryFieldsInput {
+  consumerType: CompositionConsumerType!
+  consumerOid: String!
+  commentOid: String!
+}
+
+input CommentInput {
+  body: String!
+}
+
+type Query {
+  getComments (queryFields: CompositionConsumerQueryFieldsInput!, pageInput: GetCommentsPageQueryInput!): CommentsPayload!
+  getCommentForEdit (queryFields: CommentQueryFieldsInput!): CommentForEdit!
+}
+
+type Mutation {
+  postComment (input: CommentInput!, queryFields: CompositionConsumerQueryFieldsInput!): Comment!
+  editComment (input: CommentInput!, queryFields: CommentQueryFieldsInput!): Comment!
+  qualityRateComment (input: QualityRatingInput!, queryFields: CommentQueryFieldsInput!): Comment!
+  deleteComment (input: CommentQueryFieldsInput!): VoidResult
+}

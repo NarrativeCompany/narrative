@@ -1,0 +1,44 @@
+@startuml
+package "Reputation"{
+
+  package "service"{
+
+    class FollowerQualityAnalyzerService{
+      + getMeanReputationScore(): float
+      + getTotalQualityMembers(): int
+      + getUserQualityFollowerRatio(userId: OID): float
+      + computeUserQualityFollowerPercentileRanks(): void
+    }
+
+    class ContentQualityAnalyzerService{
+      + getNetContentQualityValue(userId: OID): float
+      + processContentQualityReputationEvent(userId: OID, event: ReputationEvent): void
+      - computeGrossQualityValue(userId: OID): float
+      - getRatingValueMultiplier(userId: OID): float
+    }
+
+    class VoteCorrelationAnalyzerService{
+
+    }
+
+    class RatingsCorrelationAnalyzerService{
+
+    }
+  }
+
+  package "controller"{
+    class ReputationRestController {
+      + getUserReputation(userOid:OID): float
+      + getUserReputations(List<OID> userOids): float
+
+    }
+    class QualityAnalysisController
+  }
+
+  QualityAnalysisController --> FollowerQualityAnalyzerService : uses
+  QualityAnalysisController --> ContentQualityAnalyzerService : uses
+  QualityAnalysisController --> VoteCorrelationAnalyzerService : uses
+  QualityAnalysisController --> RatingsCorrelationAnalyzerService : uses
+}
+
+@enduml

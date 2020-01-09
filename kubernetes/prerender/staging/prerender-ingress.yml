@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start
+    nginx.ingress.kubernetes.io/auth-url: http://oauth.default.svc.cluster.local:4180/oauth2/auth
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/limit-connections: "30"
+    nginx.ingress.kubernetes.io/limit-rate: "262144"
+    nginx.ingress.kubernetes.io/limit-rps: "15"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      set $prerender "0";
+      if ($http_user_agent ~* "googlebot|bingbot|yandex|baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|ahrefs|curl.*|developers\.google\.com|discordbot|Flipboard|gigabot|ia_archiver|redditbot|Screaming.*|yahoo|yeti|yodaobot") {
+        set $prerender "1";
+      }
+      if ($args ~ "_escaped_fragment_") {
+        set $prerender "1";
+      }
+      if ($http_user_agent ~ "Prerender") {
+        set $prerender "0";
+      }
+      if ($uri ~* "\.(js|css|xml|less|png|jpg|jpeg|gif|pdf|doc|txt|ico|rss|zip|mp3|rar|exe|wmv|doc|avi|ppt|mpg|mpeg|tif|wav|mov|psd|ai|xls|mp4|m4a|swf|dat|dmg|iso|flv|m4v|torrent|ttf|woff|svg|eot)") {
+        set $prerender "0";
+      }
+
+      if ($request_uri ~* "/search.*|/suggest-niche.*|/hq/appeals/my-queue.*|/hq/invoice.*|/member-cp.*|/confirm-email.*|/unsubscribe.*") {
+        set $prerender "${prerender}1";
+      }
+
+      if ($prerender = "11") {
+        return 401;
+      }
+      if ($prerender = "1") {
+        rewrite .* /$scheme://$host$request_uri? break;
+        proxy_pass http://prerender.staging.svc.cluster.local:3000;
+      }
+      if ($prerender ~* "0") {
+        proxy_pass http://narrative-web-front-end.staging.svc.cluster.local;
+      }
+    kubernetes.io/ingress.class: "nginx"
+  name: prerender
+  namespace: staging
+spec:
+  rules:
+  - host: staging.narrative.org
+    http:
+      paths:
+      - backend:
+          serviceName: narrative-web-front-end
+          servicePort: 80
+  tls:
+  - secretName: cloudflare-wildcard-narrative-org
+    hosts:
+      - staging.narrative.org

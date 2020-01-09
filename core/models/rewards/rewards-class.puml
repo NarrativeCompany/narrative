@@ -1,0 +1,408 @@
+@startuml
+
+!include ../core-class.puml
+hide Content
+
+class User {
+  -Instant lastWalletAddressChangeDatetime
+  -UserRedemptionStatus redemptionStatus
+}
+
+package Transactions {
+  enum UserRedemptionStatus {
+    WALLET_UNSPECIFIED(true, false)
+    WALLET_IN_WAITING_PERIOD(true, false)
+    HAS_PENDING_REDEMPTION(false, false)
+    REDEMPTION_AVAILABLE(true, true)
+
+    -boolean walletUpdatable
+    -boolean supportsRedemption
+  }
+  User o-down-- UserRedemptionStatus :redemptionStatus
+
+  enum WalletTransactionStatus {
+    COMPLETED
+    PENDING_FIAT_ADJUSTMENT
+    PENDING
+    PROCESSING
+  }
+
+  enum WalletTransactionType {
+    REFERRAL(null, USER)
+    REFERRAL_TOP_10(null, USER)
+
+    NICHE_PAYMENT(null, NICHE_MONTH_REVENUE)
+    NICHE_REFUND(NICHE_MONTH_REVENUE, USER)
+    NICHE_FIAT_PAYMENT_REVERSAL(NICHE_MONTH_REVENUE, null)
+    PUBLICATION_PAYMENT(null, PUBLICATION_MONTH_REVENUE)
+    PUBLICATION_REFUND(PUBLICATION_MONTH_REVENUE, null)
+    PUBLICATION_FIAT_PAYMENT_REVERSAL(PUBLICATION_MONTH_REVENUE, null)
+
+    MINTED_TOKENS(TOKEN_MINT, REWARD_PERIOD)
+    PRORATED_NICHE_MONTH_REVENUE(NICHE_MONTH_REVENUE, REWARD_PERIOD)
+    PRORATED_PUBLICATION_MONTH_REVENUE(PUBLICATION_MONTH_REVENUE, REWARD_PERIOD)
+    ADVERTISING_REVENUE(null, REWARD_PERIOD)
+    DELETED_USER_ABANDONED_BALANCES(USER, REWARD_PERIOD)
+    REFUND_REVERSAL(USER, REWARD_PERIOD)
+
+    REWARD_PERIOD_CARRYOVER(REWARD_PERIOD, REWARD_PERIOD)
+
+    CONTENT_REWARD(REWARD_PERIOD, USER)
+    NICHE_OWNERSHIP_REWARD(REWARD_PERIOD, USER)
+    NICHE_MODERATION_REWARD(REWARD_PERIOD, USER)
+    ACTIVITY_REWARD(REWARD_PERIOD, USER)
+    TRIBUNAL_REWARD(REWARD_PERIOD, USER)
+    NARRATIVE_COMPANY_REWARD(REWARD_PERIOD, null)
+    ELECTORATE_REWARD(REWARD_PERIOD, USER)
+
+    USER_TIP(USER, USER)
+
+    USER_REDEMPTION(USER, null)
+
+    INITIAL_TOKEN_MINT(null, TOKEN_MINT)
+
+    -WalletType fromWalletType
+    -WalletType toWalletType
+  }
+
+  enum WalletType {
+    USER(false, false, null)
+    REWARD_PERIOD(true, false, null)
+    TOKEN_MINT(false, true, TOKEN_MINT)
+    NICHE_MONTH_REVENUE(true, false, PRORATED_NICHE_REVENUE)
+    PUBLICATION_MONTH_REVENUE(true, false, PRORATED_PUBLICATION_REVENUE)
+
+    -boolean supportsNegativeBalances
+    -boolean singleton
+    -boolean allowsSharedNeoWallets
+    -NeoWalletType neoWalletType
+  }
+  
+  enum TokenMintYear {
+    YEAR_1(12,000,000)
+    YEAR_2(11,000,000)
+    YEAR_3(10,000,000)
+    YEAR_4(9,000,000)
+    YEAR_5(8,000,000)
+    YEAR_6(7,000,000)
+    YEAR_7(6,000,000)
+    YEAR_8(5,000,000)
+    YEAR_9(3,500,000)
+    YEAR_10(2,500,000)
+    YEAR_11(1,500,000)
+    YEAR_12(900,000)
+    YEAR_13(700,000)
+    YEAR_14(500,000)
+    YEAR_15(400,000)
+    
+    -NrveValue totalTokens
+  }
+
+  class Wallet {
+    -OID oid
+    -WalletType type
+    -Boolean singleton
+    -Boolean allowsSharedNeoWallets
+    -NrveValue balance
+    -NeoWallet neoWallet
+  }
+
+  enum NeoWalletType {
+    NICHE_PAYMENT(true)
+    CHANNEL_FIAT_HOLDING(true)
+    PUBLICATION_PAYMENT(true)
+    NARRATIVE_COMPANY(true)
+    TOKEN_MINT(true)
+    REFERRALS_AND_INCENTIVES(true)
+    TEAM_TOKEN(true)
+    MONTHLY_REWARDS(true)
+    MEMBER_CREDITS(true)
+    PRORATED_NICHE_REVENUE(false)
+    PRORATED_PUBLICATION_REVENUE(false)
+    NRVE_SMART_CONTRACT(true)
+    ADVERTISING_PAYMENT(true)
+    USER(false)
+    REDEMPTION_TEMP(false)
+
+    -boolean singleton
+  }
+
+  class NeoWallet {
+    -OID oid
+    -NeoWalletType type
+    -Boolean singleton
+    -String neoAddress
+  }
+
+  class WalletTransaction {
+    -OID oid
+    -WalletTransactionType type
+    -WalletTransactionStatus status
+    -Instant datetime
+    -Wallet fromWallet
+    -Wallet toWallet
+    -NrveValue amount
+    -BigDecimal usdAmount
+    -NeoTransaction neoTransaction
+  }
+
+  enum NeoTransactionType {
+    REFERRAL_REWARDS(NARRATIVE_COMPANY, MEMBER_CREDITS)
+
+    MINT_TOKENS(NRVE_SMART_CONTRACT, TOKEN_MINT)
+
+    NICHE_NRVE_REVENUE(NICHE_PAYMENT, PRORATED_NICHE_REVENUE)
+    NICHE_FIAT_REVENUE(CHANNEL_FIAT_HOLDING, PRORATED_NICHE_REVENUE)
+
+    BULK_NICHE_REFUND(PRORATED_NICHE_REVENUE, MEMBER_CREDITS)
+    NICHE_FIAT_PAYMENT_REVERSAL(PRORATED_NICHE_REVENUE, CHANNEL_FIAT_HOLDING)
+    PRORATED_MONTH_NICHE_REVENUE(PRORATED_NICHE_REVENUE, MONTHLY_REWARDS)
+
+    PUBLICATION_NRVE_REVENUE(PUBLICATION_PAYMENT, PRORATED_PUBLICATION_REVENUE)
+    PUBLICATION_FIAT_REVENUE(CHANNEL_FIAT_HOLDING, PRORATED_PUBLICATION_REVENUE)
+
+    BULK_PUBLICATION_REFUND(PRORATED_PUBLICATION_REVENUE, MEMBER_CREDITS)
+    PUBLICATION_FIAT_PAYMENT_REVERSAL(PRORATED_PUBLICATION_REVENUE, CHANNEL_FIAT_HOLDING)
+    PRORATED_MONTH_PUBLICATION_REVENUE(PRORATED_PUBLICATION_REVENUE, MONTHLY_REWARDS)
+
+    TOKEN_MINT_REVENUE(TOKEN_MINT, MONTHLY_REWARDS)
+    ADVERTISING_REVENUE(ADVERTISING_PAYMENT, MONTHLY_REWARDS)
+    MISCELLANEOUS_REVENUE(MEMBER_CREDITS, MONTHLY_REWARDS)
+
+    NARRATIVE_COMPANY_MONTH_REVENUE(MONTHLY_REWARDS, NARRATIVE_COMPANY)
+    ALL_USERS_MONTH_CREDITS(MONTHLY_REWARDS, MEMBER_CREDITS)
+
+    MEMBER_CREDITS_BULK_REDEMPTION(MEMBER_CREDITS, REDEMPTION_TEMP)
+    MEMBER_CREDITS_REDEMPTION(REDEMPTION_TEMP, USER)
+
+    -WalletType fromWalletType
+    -WalletType toWalletType
+  }
+
+  class NeoTransaction {
+    -OID oid
+    -NeoTransactionType type
+    -NeoWallet fromNeoWallet
+    -NeoWallet toNeoWallet
+    -NrveValue nrveAmount
+  }
+
+  class NeoTransactionId {
+    -OID oid
+    -NeoTransaction neoTransaction
+    -NrveValue nrveAmount
+    -String transactionId
+    -Instant transactionDatetime
+    -Long blockNumber
+  }
+
+  WalletTransaction o-down-o Wallet :fromWallet
+  WalletTransaction o-down-o Wallet :toWallet
+  WalletTransaction -right-* WalletTransactionType
+  WalletTransaction --* WalletTransactionStatus
+  Wallet o-right-* WalletType
+
+  NeoWallet o-left-* NeoWalletType
+  Wallet o-left-o NeoWallet :neoWallet
+
+  NeoTransaction -left-* NeoTransactionType
+  NeoTransactionId -down-* NeoTransaction
+  NeoTransaction o-down-o NeoWallet :fromNeoWallet
+  NeoTransaction o-down-o NeoWallet :toNeoWallet
+  WalletTransaction o-left-o NeoTransaction :neoTransaction
+
+  class InvoicePaymentBase {
+    -WalletTransaction paymentWalletTransaction
+    -WalletTransaction refundWalletTransaction
+  }
+  WalletTransaction o--o InvoicePaymentBase
+
+  class FiatPayment {
+    -WalletTransaction reversalWalletTransaction
+  }
+  InvoicePaymentBase <|-- FiatPayment
+  WalletTransaction o--o FiatPayment
+}
+
+package Rewards {
+  enum ProratedRevenueType {
+    NICHE_REVENUE(NICHE_MONTH_REVENUE, PRORATED_NICHE_MONTH_REVENUE)
+    PUBLICATION_REVENUE(PUBLICATION_MONTH_REVENUE, PRORATED_PUBLICATION_MONTH_REVENUE)
+
+    -WalletType walletType
+    -WalletTransactionType transactionType
+  }
+
+  class ProratedMonthRevenue {
+    -ProratedRevenueType type
+    -YearMonth month
+    -NrveValue totalNrve
+    -int captures
+    -Wallet wallet
+  }
+  ProratedRevenueType --down-* ProratedMonthRevenue
+
+  ProratedMonthRevenue o-up-* Wallet
+
+  enum RewardPeriodStep {
+    SCHEDULE_PROCESSING_JOB
+    TRANSFER_MINTED_TOKENS
+    TRANSFER_PRORATED_REVENUE
+    POPULATE_CONTENT_ACTIVITY
+    POPULATE_USER_ACTIVITY
+    ISSUE_REWARDS
+    CLEANUP
+  }
+
+  enum RewardSlice {
+    CONTENT_CREATORS(60, 60)
+    NARRATIVE_COMPANY(15, 15)
+    NICHE_OWNERS(10, 10)
+    NICHE_MODERATORS(6, 6)
+    USER_ACTIVITY(9, 4)
+    ELECTORATE(0, 4)
+    TRIBUNAL(0, 1)
+    +RewardSlice(int currentPercentage, int futurePerecentage)
+  }
+
+  class RewardPeriod {
+    -OID oid
+    -YearMonth period
+    -Wallet wallet
+    -TokenMintYear mintYear
+    -Integer mintMonth
+    -Instant completedDatetime
+    -EnumSet<RewardPeriodStep> completedSteps
+
+    -NrveValue totalRewards;
+    -NrveValue totalRewardsDisbursed;
+  }
+  RewardPeriod --right-* RewardPeriodStep
+
+  class NarrativeCompanyReward {
+    -OID oid
+    -RewardPeriod period
+    -WalletTransaction transaction
+  }
+  RewardPeriod *-down-* NarrativeCompanyReward
+  WalletTransaction *-- NarrativeCompanyReward
+
+  class PublicationReward {
+    -OID oid autoincrement
+    -OID publicationOid
+    -RewardPeriod period
+    -PublicationContentRewardWriterShare writerShare
+    -PublicationContentRewardRecipientType recipient
+  }
+  RewardPeriod *-down-* PublicationReward
+  Publication *-down-o PublicationReward
+
+  class NicheReward {
+    -OID oid autoincrement
+    -Niche niche
+    -RewardPeriod period
+  }
+  RewardPeriod *-down-* NicheReward
+  Niche *--o NicheReward
+
+  class NicheOwnerReward {
+    -OID oid autoincrement
+    -NicheReward nicheReward
+    -User user
+    -WalletTransaction transaction
+  }
+  WalletTransaction *-- NicheOwnerReward
+  NicheReward *-left-* NicheOwnerReward
+  User *--o NicheOwnerReward
+
+  class NicheModeratorReward {
+    -OID oid autoincrement
+    -NicheReward nicheReward
+    -User user
+    -WalletTransaction transaction
+  }
+  NicheReward *-up-* NicheModeratorReward
+  WalletTransaction *-- NicheModeratorReward
+  User *--o NicheModeratorReward
+
+  enum UserActivityBonus {
+    TIER_1(96, 100)
+    TIER_2(90, 95)
+    TIER_3(85, 89)
+  }
+
+  class UserActivityReward {
+    -OID oid autoincrement
+    -User user
+    -RewardPeriod period
+    -long points
+    -UserActivityBonus bonus
+    -WalletTransaction transaction
+  }
+  RewardPeriod *-up-* UserActivityReward
+  WalletTransaction *-left-o UserActivityReward
+  UserActivityBonus *-left- UserActivityReward
+  User *--o UserActivityReward
+
+  class ContentReward {
+    -OID oid autoincrement
+    -OID contentOid
+    -RewardPeriod period
+    -long points
+    -PublicationReward publicationReward
+  }
+  PublicationReward *-down-o ContentReward
+  RewardPeriod *-left-* ContentReward
+
+  enum ContentCreatorRewardRole {
+    WRITER(0)
+    PUBLICATION_OWNER(1)
+    PUBLICATION_ADMIN(2)
+    PUBLICATION_EDITOR(3)
+  }
+
+  class RoleContentReward {
+    -OID oid
+    -ContentReward contentReward
+    -ContentCreatorRewardRole role
+    -User user
+    -WalletTransaction transaction
+  }
+  ContentReward *-up-* RoleContentReward
+  ContentCreatorRewardRole *-left- RoleContentReward
+  WalletTransaction *-left-o RoleContentReward
+  User *--o RoleContentReward
+
+  class NicheContentReward {
+    -OID oid autoincrement
+    -ContentReward contentReward
+    -NicheReward nicheReward
+    -NrveValue reward
+  }
+  RewardPeriod *--* NicheContentReward
+  ContentReward *-left-* NicheContentReward
+  NicheReward *-left-* NicheContentReward
+
+  class UserElectorateReward {
+    -OID oid autoincrement
+    -User user
+    -RewardPeriod period
+    -long points
+    -WalletTransaction transaction
+  }
+  RewardPeriod *-up-* UserElectorateReward
+  WalletTransaction *-left-o UserElectorateReward
+  User *--o UserElectorateReward
+
+  class UserTribunalReward {
+    -OID oid autoincrement
+    -User user
+    -RewardPeriod period
+    -WalletTransaction transaction
+  }
+  RewardPeriod *-up-* UserTribunalReward
+  WalletTransaction *-left-o UserTribunalReward
+  User *--o UserTribunalReward
+}
+
+@enduml

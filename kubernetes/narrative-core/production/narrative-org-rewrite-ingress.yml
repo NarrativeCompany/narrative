@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+  name: narrative-org-rewrite
+  namespace: production
+spec:
+  rules:
+  - host: narrative.org
+    http:
+      paths:
+      - backend:
+          serviceName: narrative-core
+          servicePort: 8080
+        path: /
+  tls:
+  - secretName: namecheap-narrative-org
+    hosts:
+      - narrative.org
+      - www.narrative.org

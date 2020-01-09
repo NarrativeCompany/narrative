@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ${WEB}
+  name: ${WEB}
+  namespace: ${K8S_ENV}
+spec:
+  replicas: ${REPLICAS}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ${WEB}
+      name: narrative-web-front-end
+    spec:
+      containers:
+      - name: narrative-web-front-end
+        image: narrativecompany/narrative-web-front-end:${DOCKER_TAG}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: nwfe
+          protocol: TCP
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          requests:
+            cpu: .25
+            memory: 128M
+          limits:
+            cpu: 1
+            memory: 1024M
+      imagePullSecrets:
+        - name: narrativecompany-docker

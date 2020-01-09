@@ -1,0 +1,42 @@
+# jw: Note: We have a lot more SearchTypes defined in the java, I am only defining the types we expect to use here.
+enum SearchType {
+  everything
+  niches
+  publications
+  members
+  posts
+}
+
+type SearchResult {
+  oid: String!
+
+  userDetail: UserDetail
+  niche: Niche
+  publication: Publication
+  post: Post
+}
+
+type SearchPayload {
+  items: [SearchResult!]
+  hasMoreItems: Boolean!
+  lastResultIndex: Int
+}
+
+input SearchQueryInput {
+  keyword: String!
+  filter: SearchType!
+  channel: String
+  count: Int
+  startIndex: Int
+}
+
+input FindActiveNichesInput {
+  name: String!
+  count: Int
+  startIndex: Int
+}
+
+type Query {
+  getSearchResults (input: SearchQueryInput): SearchPayload!
+  findActiveNiches (input: FindActiveNichesInput!): [Niche]!
+}

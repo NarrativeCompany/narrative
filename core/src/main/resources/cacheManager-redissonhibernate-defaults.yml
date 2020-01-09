@@ -1,0 +1,129 @@
+############################################################################################################
+# Redisson Hibernate cache options:
+#
+#   eviction:
+#     max_entries:   max size of cache. Superfluous entries in Redis are evicted using LRU algorithm. 0 value means
+#                    unbounded cache. Default value: 0
+#   expiration:
+#     time_to_live:  time to live per cache entry in Redis. Defined in milliseconds. 0 value means this setting
+#                    doesn't affect expiration. Default value: 0
+#     max_idle_time: max idle time per cache entry in Redis. Defined in milliseconds. 0 value means this setting
+#                    doesn't affect expiration. Default value: 0
+#
+############################################################################################################
+
+############################################################################################################
+# Redisson Hibernate local cache options:
+#
+#   localcache:
+#     size:             max size of local cache. Superfluous entries in Redis are evicted using defined eviction
+#                       policy. 0 value means unbounded cache. Default value: 0
+#     time_to_live:     time to live per entry in local cache. Defined in milliseconds. 0 value means this setting
+#                       doesn't affect expiration. Default value: 0
+#     max_idle_time:    max idle time per entry in local cache. Defined in milliseconds. 0 value means this setting
+#                       doesn't affect expiration. Default value: 0
+#     eviction_policy:
+#         NONE          - Cache without eviction.
+#         LRU           - Least Recently Used cache.
+#         LFU           - Least Frequently Used cache.
+#         SOFT          - Cache with Soft Reference used for values. All references will be collected by GC
+#         WEAK          - Cache with Weak Reference used for values. All references will be collected by GC
+#     reconnection_strategy:  Default value: NONE
+#         NONE          - No reconnect handling
+#         CLEAR         - Clear local cache if map instance has been disconnected for a while
+#         LOAD          - Store invalidated entry hash in invalidation log for 10 minutes. Cache keys
+#                         for stored invalidated entry hashes will be removed if LocalCachedMap instance
+#                         has been disconnected less than 10 minutes or whole cache will be cleaned otherwise.
+#     sync_strategy:    Default value: INVALIDATE
+#         NONE          - No synchronizations on map changes.
+#         INVALIDATE    - Invalidate cache entry across all LocalCachedMap instances on map entry
+#                         change. Broadcasts map entry hash (16 bytes) to all instances.
+#         UPDATE        - Update cache entry across all LocalCachedMap instances on map entry change.
+#                         Broadcasts full map entry state (Key and Value objects) to all instances.
+#     eviction_policy:  Default value: NONE
+#         NONE          - Cache without eviction.
+#         LRU           - Least Recently Used cache.
+#         LFU           - Least Frequently Used cache.
+#         SOFT          - Cache with Soft Reference used for values. All references will be collected by GC
+#         WEAK          - Cache with Weak Reference used for values. All references will be collected by GC
+#
+############################################################################################################
+
+hibernate:
+  cache:
+    redisson:
+
+      # Default cache definition applied to all caches in entity region unless overridden
+      entity:
+        eviction:
+          max_entries: 0
+        expiration:
+          max_idle_time: 0
+          time_to_live: 0
+        localcache:
+          eviction_policy: LRU
+          max_idle_time: 0
+          reconnection_strategy: CLEAR
+          size: 0
+          sync_strategy: INVALIDATE
+          time_to_live: 0
+
+      # Default definition applied to all caches in collection region unless overridden
+      collection:
+        eviction:
+          max_entries: 0
+        expiration:
+          max_idle_time: 0
+          time_to_live: 0
+        localcache:
+          eviction_policy: LRU
+          max_idle_time: 0
+          reconnection_strategy: CLEAR
+          size: 0
+          sync_strategy: INVALIDATE
+          time_to_live: 0
+
+      # Default definition applied to all caches in query region unless overridden
+      query:
+        eviction:
+          max_entries: 0
+        expiration:
+          max_idle_time: 0
+          time_to_live: 0
+        localcache:
+          eviction_policy: LRU
+          max_idle_time: 0
+          reconnection_strategy: CLEAR
+          size: 0
+          sync_strategy: INVALIDATE
+          time_to_live: 0
+
+      # Default definition applied to all caches in naturalid region unless overridden
+      naturalid:
+        eviction:
+          max_entries: 0
+        expiration:
+          max_idle_time: 0
+          time_to_live: 0
+        localcache:
+          eviction_policy: LRU
+          max_idle_time: 0
+          reconnection_strategy: CLEAR
+          size: 0
+          sync_strategy: INVALIDATE
+          time_to_live: 0
+
+      # Default definition for timestamps region unless overridden
+      timestamps:
+        eviction:
+          max_entries: 0
+        expiration:
+          max_idle_time: 0
+          time_to_live: 0
+        localcache:
+          eviction_policy: LRU
+          max_idle_time: 0
+          reconnection_strategy: CLEAR
+          size: 0
+          sync_strategy: INVALIDATE
+          time_to_live: 0

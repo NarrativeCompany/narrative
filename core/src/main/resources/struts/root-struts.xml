@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <!-- Configuration for the default package. -->
+	<package name="root" extends="struts-default">
+
+        <result-types>
+            <result-type name="redirect" class="org.narrative.network.shared.services.NetworkServletRedirectResult"/>
+            <result-type name="network-stream" class="org.narrative.network.shared.struts.NetworkStreamResult"/>
+            <result-type name="stringResultType" class="org.narrative.network.shared.struts.NetworkStringResult" />
+            <result-type name="doNothingResultType" class="org.narrative.network.shared.struts.NetworkDoNothingResult" />
+            <result-type name="networkDispatcher" class="org.narrative.network.shared.services.NetworkServletDispatcherResult" default="true"/>
+            <result-type name="networkDelayedJspResponse" class="org.narrative.network.shared.services.NetworkDelayedJspResponse" />
+        </result-types>
+
+        <interceptors>
+            <interceptor name="networkException" class="org.narrative.network.shared.interceptors.NetworkExceptionInterceptor"/>
+
+            <interceptor name="networkContext" class="org.narrative.network.shared.interceptors.NetworkContextInterceptor" />
+            <interceptor name="httpServlet" class="org.narrative.network.shared.interceptors.HttpServletInterceptor" />
+            <interceptor name="actionProcess" class="org.narrative.network.shared.interceptors.ActionProcessInterceptor"/>
+            <interceptor name="actionSetup" class="org.narrative.network.shared.interceptors.ActionSetupInterceptor"/>
+            <interceptor name="readOnlyEnforcer" class="org.narrative.network.shared.interceptors.ReadOnlyEnforcerInterceptor" />
+            <interceptor name="security" class="org.narrative.network.shared.interceptors.SecurityInterceptor"/>
+            <interceptor name="clusterSecurity" class="org.narrative.network.shared.interceptors.ClusterSecurityInterceptor"/>
+            <interceptor name="clusterPostParamsSecurity" class="org.narrative.network.shared.interceptors.ClusterPostParamsSecurityInterceptor"/>
+            <interceptor name="networkCommonPostParameters" class="org.narrative.network.shared.interceptors.NetworkCommonPostParametersInterceptor"/>
+
+            <interceptor name="transactionAndSession" class="org.narrative.network.shared.interceptors.TransactionAndSessionInterceptor"/>
+
+            <interceptor name="modelDriven" class="com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor"/>
+            <interceptor name="networkPreParameters" class="org.narrative.network.shared.interceptors.NetworkPreParametersInterceptor">
+                <!-- jw: The default for this is 100, but with some of our nested map post parameters we can easily exceed that.  This should provide a buffer -->
+                <param name="paramNameMaxLength">200</param>
+            </interceptor>
+            <interceptor name="networkPostParameters" class="org.narrative.network.shared.interceptors.NetworkPostParametersInterceptor">
+                <!-- jw: The default for this is 100, but with some of our nested map post parameters we can easily exceed that.  This should provide a buffer -->
+                <param name="paramNameMaxLength">200</param>
+            </interceptor>
+
+            <interceptor name="narrativeWorkflow" class="org.narrative.network.shared.interceptors.NarrativeWorkflowInterceptor" />
+            <interceptor name="sslenforcer" class="org.narrative.network.shared.interceptors.SSLEnforcerInterceptor" />
+
+            <interceptor-stack name="commonStackPre">
+                <interceptor-ref name="sslenforcer"/>
+                <!-- bl: need to have the action setup interceptor first so that the action
+                     is still set when rendering exception pages.-->
+                <interceptor-ref name="actionSetup"/>
+                <interceptor-ref name="actionProcess"/>
+                <interceptor-ref name="networkContext"/>
+                <interceptor-ref name="networkException"/>
+                <!--interceptor-ref name="servlet-config"/-->
+                <!-- don't need i18n since we set the Locale in our own interceptor -->
+                <!--<interceptor-ref name="i18n"/>-->
+                <interceptor-ref name="chain"/>
+            </interceptor-stack>
+
+            <interceptor-stack name="commonStackPost">
+                <interceptor-ref name="networkCommonPostParameters" />
+                <!-- bl: the pre/post networkParameters interceptors now replace the following four interceptors.
+                     we are no longer setting parameters twice and we are no longer utilizing the ModelDriven
+                     interface.  instead, we will use the AfterPrepare annotation to indicate which methods/properties
+                     should be set only after the prepare method has been called. -->
+                <!-- bl: have the prepare interceptor here so that the user session and
+                     NetworkContext has been fully set up prior to prepare() being called. -->
+                <!-- run the params through a second time after prepare and model-driven
+                     in order to allow parameters on the model to be set -->
+                <!--<interceptor-ref name="params"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="model-driven"/>
+                <interceptor-ref name="params"/>-->
+                <!-- bl: commenting out the conversion error interceptor.  we don't actually want
+                     to report conversion errors to users.  instead, we'll just use null values
+                     when an error occurs and we can report the conversion error as a null
+                     value error instead.
+                <interceptor-ref name="conversionError"/>-->
+                <!-- bl: commenting this out for now since we aren't using it.
+                     this validation interceptor is for doing parameter validation
+                     via xml configuration files.  paul and i aren't terribly excited
+                     about this idea, so we haven't used it yet.  if we decide we want
+                     to start using this, then we can uncomment at that time.
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>-->
+                <interceptor-ref name="narrativeWorkflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor-stack name="network-base">
+                <interceptor-ref name="httpServlet"/>
+                <interceptor-ref name="readOnlyEnforcer" />
+                <interceptor-ref name="transactionAndSession" />
+
+                <interceptor-ref name="security" />
+
+                <interceptor-ref name="modelDriven" />
+                <interceptor-ref name="networkPreParameters" />
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="networkPostParameters" />
+
+            </interceptor-stack>
+
+            <interceptor-stack name="network">
+                <interceptor-ref name="commonStackPre"/>
+                <interceptor-ref name="network-base"/>
+                <interceptor-ref name="commonStackPost"/>
+            </interceptor-stack>
+
+            <interceptor-stack name="noauth-base">
+                <interceptor-ref name="httpServlet"/>
+                <interceptor-ref name="readOnlyEnforcer" />
+                <interceptor-ref name="transactionAndSession" />
+                <interceptor-ref name="modelDriven" />
+                <interceptor-ref name="networkPreParameters" />
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="networkPostParameters" />
+            </interceptor-stack>
+
+            <interceptor-stack name="network-noauth">
+                <interceptor-ref name="commonStackPre"/>
+                <interceptor-ref name="noauth-base"/>
+                <interceptor-ref name="commonStackPost"/>
+            </interceptor-stack>
+
+            <interceptor-stack name="cluster-admin">
+                <interceptor-ref name="commonStackPre"/>
+                <interceptor-ref name="clusterSecurity"/>
+                <interceptor-ref name="noauth-base"/>
+                <interceptor-ref name="clusterPostParamsSecurity"/>
+                <interceptor-ref name="commonStackPost"/>
+            </interceptor-stack>
+
+            <interceptor-stack name="cluster-file-upload">
+                <interceptor-ref name="commonStackPre"/>
+                <interceptor-ref name="clusterSecurity"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="noauth-base"/>
+                <interceptor-ref name="commonStackPost"/>
+            </interceptor-stack>
+
+        </interceptors>
+
+        <default-interceptor-ref name="network"/>
+
+        <global-results>
+            <result name="exception">/WEB-INF/jsp/common/s_exception.jsp</result>
+            <result name="redirect" type="redirect"/>
+            <result name="empty" type="stringResultType">
+                <param name="stringResultValue">NetworkStringResultEmptyResponse</param>
+                <param name="contentType">text/html;charset=UTF-8</param>
+            </result>
+            <result name="legacy_ajaxErrorsResult">/WEB-INF/jsp/legacy/shared/ajaxErrorResponse.jsp</result>
+            <result name="legacy_ajaxErrorMessageResult">/WEB-INF/jsp/legacy/shared/ajaxErrorMessageResponse.jsp</result>
+            <result name="legacyAjaxReloadResponse" type="networkDelayedJspResponse">/WEB-INF/jsp/legacy/shared/ajaxReloadResponse.jsp</result>
+            
+            <result name="doNothingResult" type="doNothingResultType" />
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Throwable" result="exception"/>
+        </global-exception-mappings>
+        
+    </package>
+
+    <package name="global" extends="root">
+
+        <action name="w3c" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/html/p3p.xml</result>
+        </action>
+
+        <action name="favicon.ico" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/favicons/narrative.ico</result>
+        </action>
+
+        <action name="report-ajax-error" class="org.narrative.network.core.cluster.actions.server.ReportAjaxErrorAction" />
+
+        <!--
+            jw:iphone-icons: All of these icons are noted in StaticImageTag due to how their names are derived variably
+               which prevents us from being able to detect them being used in the audit code.  If these images are removed
+               please also remove the debug code from StaticImageTag as well.
+        -->
+        <action name="apple-touch-icon.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-144px.png</result>
+        </action>
+
+        <action name="apple-touch-icon-57x57.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-57px.png</result>
+        </action>
+
+        <action name="apple-touch-icon-72x72.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-72px.png</result>
+        </action>
+
+        <action name="apple-touch-icon-76x76.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-76px.png</result>
+        </action>
+
+        <action name="apple-touch-icon-114x114.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-114px.png</result>
+        </action>
+
+        <action name="apple-touch-icon-120x120.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-120px.png</result>
+        </action>
+
+        <action name="apple-touch-icon-144x144.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-144px.png</result>
+        </action>
+
+        <!-- bl: we don't want to use a precomposed version, so just redirect to a precomposed file that doesn't exist. -->
+        <action name="apple-touch-icon-precomposed.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-precomposed.png</result>
+        </action>
+        <action name="apple-touch-icon-76x76-precomposed.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-76x76-precomposed.png</result>
+        </action>
+        <action name="apple-touch-icon-120x120-precomposed.png" class="org.narrative.network.shared.actions.StaticFileAction">
+            <interceptor-ref name="network-noauth"/>
+            <result name="input" type="redirect">${#application.networkRegistry.currentAuthRealm.staticBaseUrl}/images/apple-icons/narrative-apple-touch-icon-120x120-precomposed.png</result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kyc-queue
+  namespace: production
+  annotations:
+    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start
+    nginx.ingress.kubernetes.io/auth-url: http://oauth.default.svc.cluster.local:4180/oauth2/auth
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: kyc-queue.narrative.cloud
+    http:
+      paths:
+      - backend:
+          serviceName: narrative-core
+          servicePort: 8083
+  tls:
+  - secretName: cloudflare-wildcard-narrative-cloud
+    hosts:
+      - kyc-queue.narrative.cloud
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: oauth-kyc-queue
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: kyc-queue.narrative.cloud
+    http:
+      paths:
+      - backend:
+          serviceName: oauth
+          servicePort: 4180
+        path: /oauth2
+  tls:
+  - secretName: cloudflare-wildcard-narrative-cloud
+    hosts:
+      - kyc-queue.narrative.cloud

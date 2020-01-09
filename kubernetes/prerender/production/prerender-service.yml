@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prerender
+  name: prerender
+  namespace: production
+spec:
+  ports:
+  - name: prerender
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: prerender

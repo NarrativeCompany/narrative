@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="reputation - Execute integ Junit and Spock tests" type="JUnit" factoryName="JUnit">
+    <module name="reputation" />
+    <option name="PACKAGE_NAME" value="org.narrative" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="package" />
+    <option name="VM_PARAMETERS" value="-ea -DenabledTestCategories=integ" />
+    <option name="PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+    <dir value="./src/test" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

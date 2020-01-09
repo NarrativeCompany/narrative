@@ -1,0 +1,44 @@
+enum AgeRating {
+  GENERAL
+  RESTRICTED
+}
+
+enum QualityRating {
+  LIKE
+  DISLIKE_CONTENT_VIOLATES_AUP
+  DISLIKE_LOW_QUALITY_CONTENT
+  DISLIKE_DISAGREE_WITH_VIEWPOINT
+}
+
+enum QualityLevel {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+interface RatingFields {
+  totalVoteCount: Int!
+  score: Int
+}
+
+type QualityRatingFields implements RatingFields {
+  totalVoteCount: Int!
+  score: Int
+  qualityLevel: QualityLevel
+}
+
+type AgeRatingFields implements RatingFields {
+  totalVoteCount: Int!
+  score: Int
+  ageRating: AgeRating!
+}
+
+input QualityRatingInput {
+  rating: QualityRating
+  reason: String
+}
+
+input AgeRatingInput {
+  rating: AgeRating
+}
+

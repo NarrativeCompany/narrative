@@ -1,0 +1,27 @@
+enum NeoWalletType {
+  NRVE_SMART_CONTRACT
+  NARRATIVE_COMPANY
+  TEAM_TOKEN
+  REFERRALS_AND_INCENTIVES
+  TOKEN_MINT
+  NICHE_PAYMENT
+  PUBLICATION_PAYMENT
+  CHANNEL_FIAT_HOLDING
+  MONTHLY_REWARDS
+  MEMBER_CREDITS
+  PRORATED_NICHE_REVENUE
+  PRORATED_PUBLICATION_REVENUE
+}
+
+type NeoWallet {
+  oid: String!
+  type: NeoWalletType!
+  neoAddress: String!
+  extraNeoAddress: String
+  scriptHash: String
+  monthForDisplay: String
+}
+
+type Query {
+  getNeoWallets: [NeoWallet!]!
+}

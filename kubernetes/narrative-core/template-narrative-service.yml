@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: ${APP}
+  name: narrative-core
+  namespace: ${K8S_ENV}
+spec:
+  ports:
+  - name: nc
+    port: 8080
+    targetPort: 8080
+  - name: kyc
+    port: 8083
+    targetPort: 8083
+  selector:
+    app: ${APP}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: ${WEB}
+  name: narrative-web-front-end
+  namespace: ${K8S_ENV}
+spec:
+  ports:
+  - name: nwfe
+    port: 80
+    targetPort: 80
+  selector:
+    app: ${WEB}
+

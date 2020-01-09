@@ -1,0 +1,27 @@
+{
+  "name": "narrative-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/expo",
+      "**/expo/**",
+      "**/react-native",
+      "**/react-native/**",
+      "**/antd-mobile-rn",
+      "**/antd-mobile-rn/**",
+      "**/react-native-typescript-transformer",
+      "**/react-native-typescript-transformer/**",
+      "**/metro-bundler-config-yarn-workspaces",
+      "**/metro-bundler-config-yarn-workspaces/**"
+    ]
+  },
+  "scripts": {
+    "clean": "npx rimraf node_modules/ **/**/node_modules",
+    "start": "npx concurrently \"cd packages/server && yarn start\" \"cd packages/web && yarn start\"  \"cd packages/app && yarn start\""
+  },
+  "author": "Frank Cooke"
+}

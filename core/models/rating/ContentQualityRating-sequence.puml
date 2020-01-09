@@ -1,0 +1,11 @@
+@startuml
+
+actor Rest
+Rest -> PostController: /posts/{postOid}/qualityRating
+PostController -> PostService: qualityRatePost (OID postOid, QualityRatingEnum rating)
+PostService -> PostService: getContentforPostOid (OID postOid)
+PostService -> RatingServiceImpl: setRating (Content, User, QualityRatingEnum)
+
+
+
+@enduml

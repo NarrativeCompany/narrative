@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <!-- Anything here will run as the reputation user before "normal" Liquibase scripts execute -->
+        <changeSet id="test-1" author="test">
+                <sql dbms="mysql">
+                        create database global;
+                </sql>
+
+                <sql dbms="h2">
+                        create schema if not exists global;
+                </sql>
+
+                <createTable schemaName="global" tableName="WatchedUser">
+                        <column name="watchedUser_oid" type="number"/>
+                        <column name="watcherUser_oid" type="number"/>
+                        <column name="blocked" type="boolean"/>
+                </createTable>
+        </changeSet>
+
+        <changeSet author="test" id="test-2">
+                <sql>
+                        CREATE USER 'reputation_user'@'%' IDENTIFIED BY 'reputation_user';
+                        GRANT ALL ON reputation.* to reputation_user;
+                </sql>
+        </changeSet>
+
+</databaseChangeLog>

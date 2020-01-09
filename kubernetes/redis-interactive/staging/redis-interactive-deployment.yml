@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: redis-interactive
+  name: redis-interactive
+  namespace: staging
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-interactive
+      name: redis-interactive
+    spec:
+      containers:
+      - name: redis-interactive
+        image: redis:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: .15
+            memory: 64M
+          limits:
+            cpu: .25
+            memory: 128M

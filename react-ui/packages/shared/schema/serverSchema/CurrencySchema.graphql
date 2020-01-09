@@ -1,0 +1,21 @@
+type NrveUsdPrice {
+  nrveUsdPrice: String!
+  expirationDatetime: String!
+  securityToken: String!
+}
+
+input NrveUsdPriceInput {
+  nrveUsdPrice: String!
+  expirationDatetime: String!
+  securityToken: String!
+}
+
+input UsdFromNrveInput {
+  nrveAmount: String!
+  nrveUsdPrice: String!
+}
+
+type Query {
+  getNrveUsdPrice: NrveUsdPrice!
+  getUsdFromNrve (input: UsdFromNrveInput!): StringScalar
+}

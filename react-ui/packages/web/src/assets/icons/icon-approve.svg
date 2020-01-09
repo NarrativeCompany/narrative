@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/icoin-approve</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0.423385745,15.657099 C0.138756673,15.3724699 0,14.9401895 0,14.6555604 C0,14.3709314 0.138756673,13.9475456 0.423385745,13.6629165 L2.41756818,11.6687341 C2.98860526,11.097697 3.84249248,11.097697 4.41175062,11.6687341 L4.55228623,11.8146065 L12.3831436,20.2076063 C12.6677727,20.4940143 13.0911584,20.4940143 13.3775664,20.2076063 L32.4441564,0.424106813 L32.5900288,0.424106813 C33.1610659,-0.138035604 34.0149531,-0.138035604 34.5842112,0.424106813 L36.5730569,2.41828925 C37.142315,2.98932633 37.142315,3.84321355 36.5730569,4.41247169 L13.8080679,28.0402426 C13.5234388,28.3248716 13.2370308,28.4636283 12.8065293,28.4636283 C12.3831436,28.4636283 12.0985145,28.3248716 11.8138854,28.0402426 L0.708014818,16.0804847 L0.423385745,15.657099 Z" id="path-1"></path>
+    </defs>
+    <g id="V2-KYC" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="KYC-email-verified" transform="translate(-482.000000, -133.000000)">
+            <g id="Group-7" transform="translate(294.000000, 133.000000)">
+                <g id="Group-5">
+                    <g id="Icons/icoin-approve" transform="translate(188.000000, 0.000000)">
+                        <g id="Group-36">
+                            <circle id="Oval-5" fill="#05CDA4" cx="30" cy="30" r="30"></circle>
+                            <g id="Icon/checked" transform="translate(12.000000, 15.000000)">
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <use id="check" fill="#000000" xlink:href="#path-1"></use>
+                                <g id="🖍-Color" mask="url(#mask-2)" fill="#FFFFFF">
+                                    <rect id="Color" x="0" y="0" width="37.5" height="30"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+package Core {
+  class User {
+    -OID oid
+  }
+
+  class Content {
+    -OID oid
+  }
+
+  class Niche {
+    -OID oid
+  }
+
+  class Publication {
+    -OID oid
+  }
+}

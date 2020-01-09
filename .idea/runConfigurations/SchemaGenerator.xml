@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SchemaGenerator" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.narrative.common.persistence.hibernate.SchemaGenerator" />
+    <module name="narrative-core" />
+    <option name="PROGRAM_PARAMETERS" value="schema" />
+    <option name="VM_PARAMETERS" value="-Dlogback.configurationFile=src/main/config/logback.xml -Djava.io.tmpdir=/tmp -Xmx512m -ea" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/core" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,79 @@
+@startuml
+package "Events"{
+  class ReputationEvent{
+        eventTimestamp: Instant
+        eventId: UUID
+      }
+
+  class UserEvent extends ReputationEvent {
+    userOid: Long
+  }
+
+  enum ReputationEventType {
+        LIKE,
+        DISLIKE,
+        DISLIKE_VIEWPOINT
+        +getEventImpactRating()
+      }
+
+  enum RatingType {
+    AGE
+    QUALITY
+    }
+
+  class ConductStatusEvent extends UserEvent {
+    reputationPoints: integer
+    altNegativePointMult: double
+  }
+
+  enum DecisionEnum {
+    ACCEPTED,
+    REJECTED
+  }
+
+  class VoteEndedEvent extends ReputationEvent {
+    referendumId: Long
+    decision: DecisionEnum
+    userVotesMap: Map<Long, DecisionEnum>
+  }
+  VoteEndedEvent --> DecisionEnum
+
+  class RatingEvent extends UserEvent {
+    referendumId: Long
+    ratingType: RatingType
+    ratedWithConsensus: bool
+    isRevote: bool
+  }
+
+  RatingEvent --> RatingType
+
+  class RatingConsensusChangedEvent extends ReputationEvent {
+       referendumId: Long
+       ratingType: RatingType
+       usersConsensusChangedMap: Map<Long, bool>
+  }
+
+RatingConsensusChangedEvent --> RatingType
+
+  class LikeEvent extends ReputationEvent {
+    eventType: ReputationEventType
+    likePoints: double
+  }
+    LikeEvent --> ReputationEventType
+
+    class ContentLikeEvent extends LikeEvent {
+    }
+
+    class CommentLikeEvent extends LikeEvent {
+    }
+
+note bottom of ReputationEventType : getEventImpactRating is negative\nfor negative actions
+
+
+    class KYCVerificationEvent extends UserEvent {
+      isVerified: boolean
+    }
+
+}
+
+@enduml

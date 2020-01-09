@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        context="install">
+
+    <!-- #####################################################################################
+         ### No need to set storage engine in DDL as the default as of MySQL 5.5 is InnoDB ###
+         ##################################################################################### -->
+
+    <changeSet author="palessi" id="create-tables-1">
+        <createTable tableName="ContentQuality">
+            <column name="userOid" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastUpdated" type="datetime(6)"/>
+            <column name="lastEventId" type="BINARY(16)"/>
+            <column name="lastEventTimestamp" type="datetime(6)"/>
+            <column name="commentDislikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentLikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentDislikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentLikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentRatingsReceivedCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="palessi" id="create-tables-2">
+        <createTable tableName="CurrentQualityMembers">
+            <column name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastUpdated" type="datetime(6)"/>
+            <column name="meanReputationScore" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalQualityMembers" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="palessi" id="create-tables-3">
+        <createTable tableName="CurrentReputation">
+            <column name="userOid" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastUpdated" type="datetime(6)"/>
+            <column name="lastEventId" type="BINARY(16)"/>
+            <column name="lastEventTimestamp" type="datetime(6)"/>
+            <column name="kycVerified" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kycVerifiedTimestamp" type="datetime(6)"/>
+            <column name="negativeConductExpirationTimestamp" type="datetime(6)"/>
+            <column name="qualityAnalysis" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalScore" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="palessi" id="create-tables-4">
+        <createTable tableName="EventDedup">
+            <column name="uuid" type="BINARY(16)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lockTimestamp" type="datetime(6)"/>
+            <column name="processed" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="processedTimestamp" type="datetime(6)"/>
+            <column name="retryAttempt" type="INT"/>
+            <column name="version" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="palessi" id="create-tables-5">
+        <createTable tableName="FollowerQuality">
+            <column name="userOid" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastUpdated" type="datetime(6)"/>
+            <column name="userQualityFollowerPctRank" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userQualityFollowerRatio" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="batchJobId" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="bsantare" id="create-tables-6">
+        <createIndex indexName="si_FollowerQualityEntity_jobId_UserOid"
+                     tableName="FollowerQuality">
+            <column name="batchJobId"/>
+            <column name="userOid"/>
+        </createIndex>
+    </changeSet>
+
+
+    <changeSet author="palessi" id="create-tables-7">
+        <createTable tableName="RatingCorrelation">
+            <column name="userOid" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastUpdated" type="datetime(6)"/>
+            <column name="lastEventId" type="BINARY(16)"/>
+            <column name="lastEventTimestamp" type="datetime(6)"/>
+            <column name="majorityVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    
+    <changeSet author="palessi" id="create-tables-8">
+        <createTable tableName="ReputationHistory">
+            <column name="userOid" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="snapshotDate" type="datetime(6)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="period" type="smallint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="qualityAnalysis" type="INT"/>
+            <column name="userQualityFollowerRatio" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userQualityFollowerPctRank" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentLikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentDislikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentLikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentDislikePoints" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentRatingsReceivedCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="corrMajorityVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="corrTotalVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ratingMajorityVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ratingTotalVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kycVerified" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="conductStatus" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalScore" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+     </changeSet>
+
+
+    <changeSet author="palessi" id="create-tables-9">
+        <createTable tableName="ConductStatus">
+            <column name="eventId" type="BINARY(16)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="userOid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="eventTimestamp" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="severity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="palessi" id="create-tables-10">
+        <createIndex indexName="conductStatus_userOid_idx"
+                     tableName="ConductStatus">
+            <column name="userOid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="palessi" id="create-tables-11">
+        <createIndex indexName="conductStatus_eventTimestamp_idx"
+                     tableName="ConductStatus">
+            <column name="eventTimestamp"/>
+        </createIndex>
+    </changeSet>
+
+
+    <changeSet author="palessi" id="create-tables-12">
+        <createTable tableName="VoteCorrelation">
+            <column name="userOid" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastUpdated" type="datetime(6)"/>
+            <column name="lastEventId" type="BINARY(16)"/>
+            <column name="lastEventTimestamp" type="datetime(6)"/>
+            <column name="majorityVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalVoteCount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="bsantare" id="create-tables-13">
+        <createTable tableName="BatchJobControl">
+            <column name="jobName" type="VARCHAR(255)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="endTime" type="datetime"/>
+            <column name="host" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jobExecutionId" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jobId" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jobInstanceId" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="startTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="bsantare" id="create-tables-14">
+        <createTable tableName="BatchJobCtlHist">
+            <column name="jobExecutionId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="jobId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="jobInstanceId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="jobName" type="VARCHAR(255)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="endTime" type="datetime"/>
+            <column name="host" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="startTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" engine innodb"/>
+        </modifySql>
+    </changeSet>
+
+</databaseChangeLog>

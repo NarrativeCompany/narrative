@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+scriptDir=$(cd "$(dirname "$0")"; pwd)
+pushd $scriptDir/..
+
+. $scriptDir/setEnv
+
+res="$( which mvn )"
+if [  -z  "$res" ]; then
+    echo Error - you must have Maven on your path
+    exit -1
+fi
+
+echo -e
+url=$(askForValue 'MySQL URL to compare to' 'jdbc:mysql://127.0.0.1:3306')
+pass=$(askForValue 'reputation_user password' 'password' 'true')
+echo -e
+
+args="-Dliquibase.username=reputation_user \
+-Dliquibase.changelogfile=db/changelog/db.changelog-master.xml"
+
+mvn clean process-resources compile liquibase:diff@diff -Dliquibase.url="${url}" -Dliquibase.password="${pass}" ${args} -Dmaven.test.skip
+
+popd

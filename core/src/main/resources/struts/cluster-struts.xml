@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+
+    <package name="cluster-admin" extends="global, kyc-queue-cluster-admin-base" namespace="/cluster-cp">
+        <default-interceptor-ref name="cluster-admin" />
+        <default-action-ref name="manage-user-kyc-status"/>
+
+        <action name="apply-fiat-adjustment" class="org.narrative.network.core.master.admin.actions.ApplyFiatAdjustmentAction">
+            <result name="input">/WEB-INF/jsp/legacy/eve/master/admin/applyFiatAdjustment.jsp</result>
+        </action>
+
+        <action name="neo-wallets" class="org.narrative.network.core.master.admin.actions.NeoWalletsAction">
+            <result name="input">/WEB-INF/jsp/legacy/eve/master/admin/neoWallets.jsp</result>
+        </action>
+
+        <action name="neo-transactions" class="org.narrative.network.core.master.admin.actions.NeoTransactionsAction">
+            <result name="input">/WEB-INF/jsp/legacy/eve/master/admin/neoTransactions.jsp</result>
+        </action>
+
+        <action name="completed-neo-transactions" class="org.narrative.network.core.master.admin.actions.CompletedNeoTransactionsAction">
+            <result name="input">/WEB-INF/jsp/legacy/eve/master/admin/completedNeoTransactions.jsp</result>
+        </action>
+
+        <action name="rewards-redemptions" class="org.narrative.network.core.master.admin.actions.rewards.RewardsRedemptionsAction">
+            <result name="input">/WEB-INF/jsp/legacy/eve/master/admin/rewardsRedemptions.jsp</result>
+        </action>
+
+        <action name="process-rewards-redemptions" class="org.narrative.network.core.master.admin.actions.rewards.ProcessRewardsRedemptionsAction" />
+
+        <action name="processing-rewards-redemptions-json" class="org.narrative.network.core.master.admin.actions.rewards.ProcessingRewardsRedemptionsJsonAction">
+            <result name="input" type="stringResultType">
+                <param name="contentType">application/json</param>
+                <param name="contentDisposition">${contentDisposition}</param>
+            </result>
+        </action>
+
+        <action name="narrative-settings" class="org.narrative.network.core.cluster.actions.NarrativeSettingsAction">
+            <result name="input">/WEB-INF/jsp/legacy/eve/master/admin/narrativeSettings.jsp</result>
+        </action>
+
+        <action name="circle-members" class="org.narrative.network.core.cluster.actions.ManageCircleMembersAction">
+            <result name="input">/WEB-INF/jsp/legacy/eve/master/admin/circleMembers.jsp</result>
+        </action>
+
+        <action name="add-circle-member" class="org.narrative.network.core.cluster.actions.AddCircleMemberAction" />
+        <action name="remove-circle-member" class="org.narrative.network.core.cluster.actions.RemoveCircleMemberAction" />
+
+        <action name="mark-processing-rewards-redemptions-complete" class="org.narrative.network.core.master.admin.actions.rewards.MarkProcessingRewardsRedemptionsCompleteAction">
+            <interceptor-ref name="cluster-file-upload"/>
+        </action>
+
+        <action name="processes" class="org.narrative.network.core.cluster.actions.server.ProcessStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/process.jsp</result>
+        </action>
+
+
+        <action name="servers" class="org.narrative.network.core.cluster.actions.ServersAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/servers.jsp</result>
+        </action>
+
+
+        <action name="errors" class="org.narrative.network.core.cluster.actions.server.ErrorStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/errors.jsp</result>
+        </action>
+
+        <action name="clear-error" class="org.narrative.network.core.cluster.actions.server.ClearErrorStatusAction" />
+
+        <action name="databaseConnections" class="org.narrative.network.core.cluster.actions.server.DatabaseConnectionStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/databaseConnections.jsp</result>
+        </action>
+
+        <action name="threadBucketStatus" class="org.narrative.network.core.cluster.actions.server.ThreadBucketStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/threadBucketStatus.jsp</result>
+        </action>
+
+        <action name="quartzJobs" class="org.narrative.network.core.cluster.actions.server.QuartzJobStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/quartzJobStatusAction.jsp</result>
+        </action>
+
+        <action name="loggingInfo" class="org.narrative.network.core.cluster.actions.server.LoggingInfoAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/logging.jsp</result>
+        </action>
+
+        <!--<action name="interruptThread" class="org.narrative.network.core.actions.InterruptThreadAction">
+            <result name="success" type="redirect">/admin/systemStatus</result>
+        </action>-->
+
+        <action name="hqlQuery"  class="org.narrative.network.core.cluster.actions.CreateHQLQueryResultsAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/hqlQuery.jsp</result>
+        </action>
+
+        <action name="triggerTask" class="org.narrative.network.core.cluster.actions.TriggerTaskAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/triggerTasks.jsp</result>
+        </action>
+
+        <action name="recentProcessOutliers" class="org.narrative.network.core.cluster.actions.server.RecentProcessOutliersAjaxAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/recentProcessOutliers.jsp</result>
+        </action>
+
+        <action name="toggleHeartbeatServer" class="org.narrative.network.core.cluster.actions.server.ToggleHeartbeatServerAction"/>
+
+        <action name="serverStatusXml" class="org.narrative.network.core.cluster.actions.server.ServerStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/serverStatusXml.jsp</result>
+            <result name="success" type="stringResultType">
+                <param name="contentType">${contentType}</param>
+                <!-- bl: the value is provided via the stringInput getter on ServerStatusAction. -->
+            </result>
+        </action>
+
+        <action name="serverStatus" class="org.narrative.network.core.cluster.actions.server.ServerStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/core/hoodo/serverStatus.jsp</result>
+            <result name="success" type="stringResultType">
+                <param name="contentType">${contentType}</param>
+                <!-- bl: the value is provided via the stringInput getter on ServerStatusAction. -->
+            </result>
+        </action>
+
+    </package>
+
+    <package name="kyc-queue-cluster-admin-base" extends="root">
+        <action name="manage-user-kyc-status" class="org.narrative.network.core.cluster.actions.ManageUserKycStatusAction">
+            <result name="input">/WEB-INF/jsp/legacy/base/admin/userKycStatusManagement.jsp</result>
+        </action>
+
+        <action name="user-kyc-status-details" class="org.narrative.network.core.cluster.actions.UserKycStatusDetailsAction">
+            <result name="input">/WEB-INF/jsp/legacy/base/admin/userKycStatusDetails.jsp</result>
+        </action>
+
+        <action name="update-user-kyc-metadata" class="org.narrative.network.core.cluster.actions.UpdateUserKycMetadataAction"/>
+        <action name="reject-user-kyc-document" class="org.narrative.network.core.cluster.actions.RejectUserKycDocumentAction"/>
+        <action name="update-user-kyc-status" class="org.narrative.network.core.cluster.actions.UpdateUserKycStatusAction"/>
+        <action name="kyc-image" class="org.narrative.network.core.cluster.actions.SendUserKycImageAction">
+            <result name="input" type="network-stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="contentLengthForStream">${contentLength}</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="kyc-queue-cluster-admin" extends="global, kyc-queue-cluster-admin-base" namespace="/kyc-queue">
+        <default-interceptor-ref name="cluster-admin" />
+        <default-action-ref name="manage-user-kyc-status"/>
+    </package>
+</struts>

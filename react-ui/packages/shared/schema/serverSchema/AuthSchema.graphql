@@ -1,0 +1,64 @@
+input RegisterUserInput {
+  emailAddress: String!
+  password: String!
+  displayName: String!
+  username: String!
+  hasAgreedToTos: Boolean!
+  recaptchaResponse: String!
+  recaptchaToken: String!
+  timeZone: String!
+  nichesToFollow: [String!]!
+}
+
+input LoginInput {
+  emailAddress: String!
+  password: String!
+  rememberMe: Boolean
+  recaptchaResponse: String!
+}
+
+input TwoFactorLoginInput {
+  verificationCode: String!
+  rememberMe: Boolean
+}
+
+input DisableTwoFactorAuthInput {
+  currentPassword: String!
+  twoFactorAuthCode: String!
+}
+
+input EnableTwoFactorAuthInput {
+  currentPassword: String!
+  twoFactorAuthCode: String!
+  rememberMe: Boolean!
+  secret: String!
+}
+
+type AuthPayload {
+  token: String
+  twoFactorAuthExpired: Boolean
+}
+
+type TwoFactorSecretPayload {
+  secret: String!
+  qrCodeImage: String!
+  backupCodes: [Int!]!
+}
+
+type RecaptchaPublicKey {
+  value: String!
+}
+
+type Query {
+  getGeneratedTwoFactorSecret: TwoFactorSecretPayload!
+  getRecaptchaPublicKey: RecaptchaPublicKey!
+}
+
+type Mutation {
+  validateRegisterUser (input: RegisterUserInput!): StringScalar
+  registerUser (input: RegisterUserInput!): User!
+  login (input: LoginInput!): AuthPayload!
+  twoFactorLogin (input: TwoFactorLoginInput!): AuthPayload!
+  enableTwoFactorAuth (input: EnableTwoFactorAuthInput!): AuthPayload!
+  disableTwoFactorAuth (input: DisableTwoFactorAuthInput!): VoidResult
+}

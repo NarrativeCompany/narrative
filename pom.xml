@@ -1,0 +1,339 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.narrative</groupId>
+    <artifactId>narrative-platform</artifactId>
+    <packaging>pom</packaging>
+    <version>1.5.4</version>
+
+    <name>Narrative Platform</name>
+    <description>Narrative Platform parent pom</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <tomcat.version>8.5.31</tomcat.version>
+        <sonar.exclusions>**/*.js</sonar.exclusions>
+        <!-- Library versions for dependencies not in the Spring Boot BOM -->
+        <mapstruct.version>1.3.0.Beta1</mapstruct.version>
+        <lombok.version>1.18.6</lombok.version>
+        <spock.version>1.1-groovy-2.4</spock.version>
+        <jmockit.version>1.42</jmockit.version>
+        <powermock.version>1.7.1</powermock.version>
+        <junit.jupiter.version>5.3.1</junit.jupiter.version>
+        <junit.surefire-provider.version>1.3.1</junit.surefire-provider.version>
+        <surefire.junit47.version>2.22.0</surefire.junit47.version>
+        <spring.session.version>2.0.5.RELEASE</spring.session.version>
+        <jool.version>0.9.13</jool.version>
+        <!-- Keep Redisson version and Netty version in sync -->
+        <redisson.version>3.10.0-3</redisson.version>
+        <!-- bl: 4.1.27.Final is the netty version that netty-socketio uses, so this has to stay in sync with that. -->
+        <netty.version>4.1.27.Final</netty.version>
+        <findbugs.version>3.0.1</findbugs.version>
+    </properties>
+
+    <modules>
+        <module>core</module>
+        <module>shared</module>
+        <module>reputation</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.4.0.905</version>
+                </plugin>
+                <!-- Mandatory plugins for using Spock -->
+                <plugin>
+                    <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin,
+                    visit https://github.com/groovy/GMavenPlus/wiki -->
+                    <groupId>org.codehaus.gmavenplus</groupId>
+                    <artifactId>gmavenplus-plugin</artifactId>
+                    <version>1.6</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>addTestSources</goal>
+                                <goal>compileTests</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <fork>true</fork>
+                        <!-- bw: Necessary for meminitial/maxmem to take effect -->
+                        <meminitial>256m</meminitial>
+                        <!-- Crank up max heap to accomodate large spikes during Lombok AST processing -->
+                        <maxmem>2048m</maxmem>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <compilerArguments>
+                            <Xmaxerrs>2500</Xmaxerrs>
+                        </compilerArguments>
+                        <!-- bl: maven detects changes every time you run package instead of supporting incremental compiles.
+                             it's counter-intuitive, but you have to set userIncrementalCompilation to false in order for
+                             incremental compiles to work. refer: https://issues.apache.org/jira/browse/MCOMPILER-209 -->
+                        <useIncrementalCompilation>false</useIncrementalCompilation>
+                        <!-- Since we have multiple annotation processors, define order of init/processing here.
+                             ### For some reason, Mapstruct must occur *before* Lombok which is counter-intuitive.
+                             ### Please do not change annotation processor order unless you know what you are doing. -->
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.hibernate</groupId>
+                                <artifactId>hibernate-jpamodelgen</artifactId>
+                                <version>${hibernate.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <!-- Enable generation of custom configuration property metadata so Intellij can resolve custom properties -->
+                            <path>
+                                <groupId>org.springframework.boot</groupId>
+                                <artifactId>spring-boot-configuration-processor</artifactId>
+                                <version>${spring.boot.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+                <!-- Copy the spring-configuration-metadata.json to the location expected by IntelliJ -->
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>copy-spring-configuration-metadata</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/target/classes/META-INF</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>exploded/WEB-INF/classes/META-INF</directory>
+                                        <includes>
+                                            <include>spring-configuration-metadata.json</include>
+                                        </includes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo.jspc</groupId>
+                    <artifactId>jspc-maven-plugin</artifactId>
+                    <version>2.0-alpha-3-groupee-2</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <trimSpaces>true</trimSpaces>
+                        <enablePooling>false</enablePooling>
+                        <!-- bl: the default package name is "jsp" but we want to customize it so that the package name
+                             matches up with the package name used by our InternalJspRunner so that it doesn't have to
+                             compile JSPs, as well. we'll be able to use pre-compiled JSPs for email JSPs, -->
+                        <packageName>org.apache.jsp</packageName>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>jspc</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.mojo.jspc</groupId>
+                            <artifactId>jspc-compiler-tomcat8</artifactId>
+                            <version>2.0-alpha-3-groupee-2</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>commons-el</groupId>
+                            <artifactId>commons-el</artifactId>
+                            <version>1.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>commons-logging</groupId>
+                            <artifactId>commons-logging</artifactId>
+                            <version>1.1.1</version>
+                        </dependency>
+                        <!-- bl: we need this to compile with tomcat-jasper, not tomcat-embed-jasper.
+                             tomcat-embed-jasper apparently uses a version of jasper that is incompatible
+                             with the actual JSP runtime. don't ask me how or why that makes sense. -->
+                        <dependency>
+                            <groupId>org.apache.tomcat</groupId>
+                            <artifactId>tomcat-jasper</artifactId>
+                            <version>${tomcat.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>javax.servlet</groupId>
+                            <artifactId>javax.servlet-api</artifactId>
+                            <version>3.1.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.groupee</groupId>
+                            <artifactId>tagPlugins</artifactId>
+                            <version>1.1.1</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                            <version>1.7.21</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>ant</groupId>
+                            <artifactId>ant</artifactId>
+                            <version>1.6.5</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>xerces</groupId>
+                            <artifactId>xercesImpl</artifactId>
+                            <version>2.6.1</version>
+                            <!-- bw: A newer version is available -->
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <webXml>${project.basedir}/target/jspweb.xml</webXml>
+                        <webappDirectory>exploded</webappDirectory>
+                        <archive>
+                            <manifestEntries>
+                                <!-- This is the version of the build. -->
+                                <Implementation-Version>${project.version}${env.BUILD_SUFFIX}</Implementation-Version>
+                                <!-- This is the build number passed in from Jenkins. This should also correspond to a Docker image ID. -->
+                                <Implementation-JenkinsBuild>${env.JENKINS_BUILD_ID}</Implementation-JenkinsBuild>
+                                <!-- This is the git branch the build is from. -->
+                                <Implementation-Branch>${env.GIT_BRANCH}</Implementation-Branch>
+                                <!-- This is the Git Commit ID (full 40-character SHA-1). -->
+                                <Implementation-Revision>${env.GIT_SHA}</Implementation-Revision>
+                                <!-- This is the date/time the build was made, in an epoch second value -->
+                                <Implementation-Date>${env.BUILD_DATE}</Implementation-Date>
+                            </manifestEntries>
+                        </archive>
+                        <webResources>
+                            <resource>
+                                <directory>${project.basedir}/src/main/resources</directory>
+                                <targetPath>/WEB-INF/classes</targetPath>
+                            </resource>
+                        </webResources>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <executions>
+                        <execution>
+                            <id>tagPlugins</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <!-- bl: upgraded bamboo to use Maven 3, which caused this plugin to stop working. trying to change this from fullName to classifier to see if that works. -->
+                                <classifier>tagPlugins</classifier>
+                                <includes>
+                                    <include>**/org/narrative/common/util/tags/plugins/*.class</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.4.1</version>
+                    <configuration>
+                        <filesets>
+                            <fileset>
+                                <directory>${project.basedir}/exploded</directory>
+                                <followSymlinks>false</followSymlinks>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.0</version>
+                    <configuration>
+                        <!-- bl: this is an attempt to fix broken builds due to error:
+                             Error: Could not find or load main class org.apache.maven.surefire.booter.ForkedBooter
+                             refer: https://stackoverflow.com/a/50661649 -->
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                        <useFile>false</useFile>
+                        <trimStackTrace>false</trimStackTrace>
+                        <!-- This is needed to make JMockit play nice with Spock since there is no init hook for JMockit -->
+                        <argLine>
+                            -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+                        </argLine>
+                        <includes>
+                            <include>**/*Test.java</include>
+                            <include>**/*Spec.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.0.0-M2</version>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <configuration>
+                                <rules>
+                                    <dependencyConvergence/>
+                                </rules>
+                            </configuration>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

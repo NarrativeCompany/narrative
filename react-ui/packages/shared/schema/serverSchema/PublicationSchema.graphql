@@ -1,0 +1,262 @@
+enum PublicationPlanType {
+  BASIC
+  BUSINESS
+}
+
+enum PublicationRole {
+  ADMIN
+  EDITOR
+  WRITER
+}
+
+enum PublicationStatus {
+  ACTIVE
+  EXPIRED
+}
+
+enum PublicationPaymentType {
+  INITIAL
+  RENEWAL
+  UPGRADE
+}
+
+# jw: currently this is not used by any schema objects, which means that apollo is not exporting it. Once its referenced
+#     we should remove the duplicate instance exported from publicationUrlType.tsx
+enum PublicationUrlType {
+  WEBSITE
+  TWITTER
+  FACEBOOK
+  INSTAGRAM
+  YOUTUBE
+  SNAPCHAT
+  PINTEREST
+  LINKED_IN
+}
+
+type Publication implements Channel {
+  oid: String!
+  type: ChannelType!
+  name: String!
+  description: String!
+  prettyUrlString: String!
+  logoUrl: String
+  status: PublicationStatus!
+  currentUserFollowedItem: CurrentUserFollowedItem!
+}
+
+type PublicationDiscount {
+  oid: String!
+  eligibleForDiscount: Boolean!
+}
+
+input CreatePublicationInput {
+  name: String!
+  description: String!
+  agreedToAup: Boolean!
+  logo: FileUploadInput
+}
+
+type PublicationUrls {
+  websiteUrl: String
+  twitterUrl: String
+  facebookUrl: String
+  instagramUrl: String
+  youtubeUrl: String
+  snapchatUrl: String
+  pinterestUrl: String
+  linkedInUrl: String
+}
+
+input PublicationUrlsInput {
+  websiteUrl: String
+  twitterUrl: String
+  facebookUrl: String
+  instagramUrl: String
+  youtubeUrl: String
+  snapchatUrl: String
+  pinterestUrl: String
+  linkedInUrl: String
+}
+
+type PublicationDetail {
+  oid: String!
+  publication: Publication!
+  fathomSiteId: String
+  deletionDatetime: String
+
+  headerImageUrl: String
+  headerImageAlignment: HorizontalAlignment!
+
+  owner: User
+  currentUserRoles: [PublicationRole!]!
+
+  urls: PublicationUrls!
+}
+
+enum PublicationContentRewardWriterShare {
+  ONE_HUNDRED_PERCENT
+  NINETY_PERCENT
+  SEVENTY_FIVE_PERCENT
+  FIFTY_PERCENT
+  TWENTY_FIVE_PERCENT
+  TEN_PERCENT
+  ZERO_PERCENT
+}
+
+enum PublicationContentRewardRecipientType {
+  OWNER
+  ADMINS
+  EDITORS
+}
+
+type PublicationProfile {
+  oid: String!
+
+  creationDatetime: String!
+  followerCount: Int!
+  canCurrentUserAppeal: Boolean!
+
+  admins: [User!]!
+  editors: [User!]!
+  writers: [User!]!
+
+  contentRewardWriterShare: PublicationContentRewardWriterShare!
+  contentRewardRecipient: PublicationContentRewardRecipientType
+}
+
+type PublicationInvoice {
+  oid: String!
+
+  plan: PublicationPlanType!
+  newEndDatetime: String!
+  estimatedRefundAmount: NrveValueDetailImpl
+  invoiceDetail: InvoiceDetail!
+}
+
+type PublicationPlanDetail {
+  oid: String!
+  plan: PublicationPlanType!
+  withinTrialPeriod: Boolean!
+  withinRenewalPeriod: Boolean!
+  eligibleForDiscount: Boolean!
+  endDatetime: String!
+  deletionDatetime: String!
+  admins: Int!
+  editors: Int!
+  writers: Int!
+  renewalPlans: [PublicationPlanType!]!
+  upgradePlans: [PublicationPlanType!]!
+}
+
+input PublicationPlanInput {
+  plan: PublicationPlanType!
+}
+
+type PublicationSettings {
+  oid: String!
+
+  # jw: this is here purely for apollo cache updating when settings changes are posted
+  publicationDetail: PublicationDetail!
+
+  contentRewardWriterShare: PublicationContentRewardWriterShare!
+  contentRewardRecipient: PublicationContentRewardRecipientType
+}
+
+input PublicationSettingsInput {
+  logo: FileUploadInput
+  headerImage: FileUploadInput
+  headerImageAlignment: HorizontalAlignment!
+  fathomSiteId: String
+
+  urls: PublicationUrlsInput!
+
+  contentRewardWriterShare: PublicationContentRewardWriterShare
+  contentRewardRecipient: PublicationContentRewardRecipientType
+}
+
+type PublicationPowerUsers {
+  oid: String!
+
+  currentUserCanManageRoles: [PublicationRole!]!
+  currentUserAllowedInviteRoles: [PublicationRole!]!
+
+  editorLimit: Int!
+  writerLimit: Int!
+
+  admins: [User!]!
+  editors: [User!]!
+  writers: [User!]!
+
+  invitedAdmins: [User!]!
+  invitedEditors: [User!]!
+  invitedWriters: [User!]!
+
+  publicationDetail: PublicationDetail!
+}
+
+type PublicationPowerUser {
+  oid: String!
+
+  roles: [PublicationRole!]!
+}
+
+type PublicationPowerUserInvitation {
+  oid: String!
+
+  invitedRoles: [PublicationRole!]!
+}
+
+input InvitePublicationPowerUserInput {
+  roles: [PublicationRole!]!
+}
+
+input DeletePublicationPowerUserInput {
+  publicationOid: String!
+  userOid: String!
+  role: PublicationRole!
+}
+
+# jw: apollo requires at least one input objects for mutations, so I am going to define this for use below.
+input PublicationInvitationResponseInput {
+  publicationOid: String!
+}
+
+input ChangePublicationOwnerInput {
+  currentPassword: String!
+  twoFactorAuthCode: String
+  userOid: String!
+}
+
+type ModeratedPublicationPostsPayload {
+  items: [Post!]!
+  info: PageInfo!
+}
+
+input ModeratedPublicationPostsPageableInput {
+  size: Int
+  page: Int
+}
+
+type Query {
+  getCurrentUserPublicationDiscount: PublicationDiscount!
+  getPublicationDetail (publicationId: String!): PublicationDetail!
+  getPublicationProfile (publicationOid: String!): PublicationProfile!
+  getPublicationPlanDetail (publicationOid: String!): PublicationPlanDetail!
+  getPublicationSettings (publicationOid: String!): PublicationSettings!
+  getPublicationTopNiches (publicationOid: String!): [TopNiche!]!
+  getPublicationPowerUsers (publicationOid: String!): PublicationPowerUsers!
+  getPublicationPowerUser (publicationOid: String!, userOid: String!): PublicationPowerUser!
+  getPublicationPowerUserInvitation (publicationOid: String!): PublicationPowerUserInvitation!
+  getModeratedPublicationPosts (input: ModeratedPublicationPostsPageableInput!, publicationOid: String!): ModeratedPublicationPostsPayload!
+}
+
+type Mutation {
+  createPublicationInvoice (input: PublicationPlanInput!, publicationOid: String!): PublicationInvoice!
+  createPublication (input: CreatePublicationInput!): Publication!
+  updatePublicationSettings (input: PublicationSettingsInput!, publicationOid: String!): PublicationSettings!
+  invitePublicationPowerUser (input: InvitePublicationPowerUserInput!, publicationOid: String!, userOid: String!): PublicationPowerUsers!
+  deletePublicationPowerUser (input: DeletePublicationPowerUserInput!): PublicationPowerUsers!
+  acceptPublicationPowerUserInvite (input: PublicationInvitationResponseInput!): VoidResult
+  declinePublicationPowerUserInvite (input: PublicationInvitationResponseInput!): VoidResult
+  changePublicationOwner (input: ChangePublicationOwnerInput!, publicationOid: String!): PublicationPowerUsers!
+}

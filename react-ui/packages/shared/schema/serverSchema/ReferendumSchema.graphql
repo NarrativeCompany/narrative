@@ -1,0 +1,92 @@
+enum ReferendumType {
+  APPROVE_SUGGESTED_NICHE
+  APPROVE_REJECTED_NICHE
+  RATIFY_NICHE
+  TRIBUNAL_APPROVE_REJECTED_NICHE
+  TRIBUNAL_RATIFY_NICHE
+  TRIBUNAL_APPROVE_NICHE_DETAIL_CHANGE
+  TRIBUNAL_RATIFY_PUBLICATION
+}
+
+enum ReferendumVoteReason {
+  REDUNDANT
+  CONTAINS_PROFANITY
+  VIOLATES_TOS
+  SPELLING_ISSUE_IN_NAME
+  UNCLEAR_NAME_OR_DESCRIPTION
+  WRONG_LANGUAGE
+}
+
+type ReferendumVote {
+  oid: String!
+  voter: User!
+  voteDatetime: String!
+  votedFor: Boolean!
+  votePoints: String!
+  reason: ReferendumVoteReason
+  commentOid: String
+  comment: String
+}
+
+type Referendum {
+  oid: String!
+  type: ReferendumType!
+  startDatetime: String!
+  endDatetime: String!
+  votePointsFor: String!
+  votePointsAgainst: String!
+  commentCount: Int!
+  open: Boolean!
+  currentUserVote: ReferendumVote
+  niche: Niche
+  publication: Publication
+  deletedChannel: DeletedChannel
+}
+
+type ReferendumVoteGrouping {
+  votedFor: Boolean
+  hasMoreItems: Boolean!
+  lastVoterDisplayName: String
+  lastVoterUsername: String
+  items: [ReferendumVote!]
+}
+
+type ReferendumVotes {
+  totalVotes: Int!
+  votePointsFor: String!
+  votePointsAgainst: String!
+  recentVotesFor: ReferendumVoteGrouping!
+  recentVotesAgainst: ReferendumVoteGrouping!
+  tribunalMembersYetToVote: ReferendumVoteGrouping
+}
+
+type BallotBoxReferendumsPayload {
+  items: [Referendum!]!
+  info: PageInfo!
+}
+
+type VoteOnReferendumPayload {
+  referendum: Referendum
+}
+
+input VoteOnReferendumInput {
+  votedFor: Boolean!
+  reason: ReferendumVoteReason
+  comment: String
+}
+
+input ReferendumVotesByTypeQueryInput {
+  lastVoterDisplayName: String!
+  lastVoterUsername: String!
+}
+
+type Query {
+  getAllBallotBoxReferendums (size: Int, page: Int): BallotBoxReferendumsPayload!
+  getReferendum (referendumOid: String!): Referendum!
+  getReferendumVotes (referendumOid: String!, uniqueQueryStrValue: Int): ReferendumVotes!
+  getReferendumVotesByType (input: ReferendumVotesByTypeQueryInput!, referendumOid: String!, votedFor: Boolean!): ReferendumVoteGrouping!
+}
+
+type Mutation {
+  voteOnReferendum (input: VoteOnReferendumInput!, referendumId: String!): Referendum!
+}
