@@ -44,8 +44,8 @@
           <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.0.4.RELEASE/spring-boot-configuration-processor-2.0.4.RELEASE.jar" />
         </processorPath>
         <module name="reputation" />
-        <module name="narrative-core" />
         <module name="shared" />
+        <module name="narrative-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">

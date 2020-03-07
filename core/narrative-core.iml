@@ -237,7 +237,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.jdt:ecj:3.12.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-tribes:8.5.31" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.5.31" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.groupee:intellijtei:1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.subethamail:subethasmtp:3.1.7" level="project" />
     <orderEntry type="library" name="Maven: org.twitter4j:twitter4j-core:3.0.5" level="project" />
@@ -339,11 +338,10 @@
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-client:1.19.1" level="project" />
     <orderEntry type="library" name="Maven: org.mindrot:jbcrypt:0.3m" level="project" />
     <orderEntry type="library" name="Maven: rome:rome:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.rometools:rome-fetcher:1.2" level="project" />
     <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.rometools:rome-fetcher:1.2" level="project" />
     <orderEntry type="library" name="Maven: commons-httpclient:commons-httpclient:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging-api:1.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.qmino:miredot-annotations:1.4.0" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.27.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.27.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-transport-native-unix-common:4.1.27.Final" level="project" />
